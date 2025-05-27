@@ -1,7 +1,7 @@
 # Combinatorial Mesh Calculus (CMC)
 
 ## About
-This repository contains software implementation (written in C and build with
+This repository contains software implementation (written in C and built with
 GNU Make) and mathematical notes (written in LaTeX) related to the research done
 by me, Kiprian Berbatov, at the University of Manchester.
 My research is focused on the development of calculus on discrete
