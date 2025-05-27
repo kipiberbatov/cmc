@@ -1,0 +1,29 @@
+\begin{definition}
+  Let $\mathcal{K}$ be a quasi-cubical mesh,
+    $\varepsilon$ be relative orientations on $\mathcal{K}$,
+    $X, Y \in \mathcal{X} K$.
+  Define the commutator $[X, Y] \in \mathcal{X} K$ as follows:
+  for any edge $\mathcal{E}$ and node $\mathcal{N} \prec \mathcal{E}$,
+  \begin{equation}
+    [X, Y]^{\mathcal{E}}_{\mathcal{N}}
+    := 2 \varepsilon(\mathcal{E}, \mathcal{N})
+      (   X^{\mathcal{E}}_{\mathcal{E} \setminus \mathcal{N}}
+          Y^{\mathcal{E}}_{\mathcal{N}}
+        - X^{\mathcal{E}}_{\mathcal{N}}
+          Y^{\mathcal{E}}_{\mathcal{E} \setminus \mathcal{N}}
+      )
+      + \sum_{\mathcal{F} \in \partial_0^{-1} \mathcal{N}}
+        \sum_{\mathcal{E}' \perp_{\mathcal{F}},\ \mathcal{N} \in \mathcal{E}'}
+        \varepsilon(\mathcal{E}', \mathcal{N})
+        ( X^{\mathcal{E}'}_{\mathcal{N}}
+          (Y^{\mathcal{E}}_{\mathcal{N}}
+           - Y^{\mathcal{F} \setminus \mathcal{E}}
+            _{\mathcal{E}' \setminus \mathcal{N}})
+          +
+          Y^{\mathcal{E}'}_{\mathcal{N}}
+          (X^{\mathcal{E}}_{\mathcal{N}}
+           - X^{\mathcal{F} \setminus \mathcal{E}}
+            _{\mathcal{E}' \setminus \mathcal{N}})
+        ).
+  \end{equation}
+\end{definition}

@@ -1,0 +1,21 @@
+\begin{definition}
+  Let $M$ be a smooth manifold.
+  A \textbf{vector field} on $M$ is a \textbf{derivation} on the $\R$-algebra
+  $\mathcal{F} M$ of smooth functions.
+  In other words, a vector field is an $\R$-linear map
+  $X \colon \mathcal{F} M \to \mathcal{F} M$ such that for any
+  $f, g \in \mathcal{F} M$ the \textbf{Leibniz rule} is satisfied:
+  \begin{equation}
+    X(f g) = f \cdot (X g) + (X f) \cdot g
+  \end{equation}
+  (here $\cdot$ is multiplication of functions).
+
+  The space of all vector fields on $M$ is denoted by $\mathfrak{X} M$.
+  It is an $\R$-algebra under pointwise addition and multiplication with scalar.
+  It is also an $(\mathcal{F} M)$-algebra with the following multiplication with
+  a function: for any $f \in \mathfrak{X} M$ and $X \in \mathcal{F} M$,
+  $f X \in \mathcal{F} M$ is defined to act on $g \in \mathcal{F} M$ by
+  \begin{equation}
+    (f X) g := f \cdot (X g).
+  \end{equation}
+\end{definition}

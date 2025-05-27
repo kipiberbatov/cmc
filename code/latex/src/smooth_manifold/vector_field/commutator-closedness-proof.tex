@@ -1,0 +1,24 @@
+\begin{proof}
+  We will show that $[X, Y]$ satisfies the Leibniz rule.
+  Let $f, g \in \mathcal{F} M$.
+  Then
+  \begin{equation}
+    X(Y(f g))
+    = X(Y f \cdot g + f \cdot Y g)
+    = X (Y f) \cdot g + Y f \cdot X g + X f \cdot Y g + f \cdot X (Y g).
+  \end{equation}
+  Analogously,
+  \begin{equation}
+    Y(X(f g))
+    = Y (X f) \cdot g + X f \cdot Y g + Y f \cdot X g + f \cdot Y (X g).
+  \end{equation}
+  Hence,
+  \begin{equation}
+    [X, Y] (f g)
+    = X(Y(f g)) - Y(X(f g))
+    = X (Y f) \cdot g + f \cdot X (Y g) - Y (X f) \cdot g - f \cdot Y (X g)
+    = [X, Y] f \cdot g + f \cdot [X, Y] g.
+  \end{equation}
+  Linearity of $[X, Y]$ is obvious.
+  Hence, $[X, Y]$ is a vector field.
+\end{proof}

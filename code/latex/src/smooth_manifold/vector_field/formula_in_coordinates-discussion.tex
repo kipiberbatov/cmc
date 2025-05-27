@@ -1,0 +1,41 @@
+\begin{discussion}
+  Let $M$ be a smooth manifold of dimension $D$,
+  $X, Y \in \mathfrak{X} M$,
+  $(U, \varphi)$ be a chart on $M$ with local coordinates $x^1, ..., x^D$.
+  Let $X$ and $Y$ be represented in local coordinates as
+  \begin{equation}
+    X = \sum_{p = 1}^D f^p \frac{\partial}{\partial x^p},\
+    Y = \sum_{p = 1}^D g^p \frac{\partial}{\partial x^p}.
+  \end{equation}
+  We are going to derive expressions for $[X, Y]$.
+  We have
+  \begin{equation}
+    X \circ Y
+    = \sum_{p, q = 1}^D f^p \frac{\partial}{\partial x^p} \circ
+      (g^q \frac{\partial}{\partial x^q})
+    = \sum_{p, q = 1}^D f^p \frac{\partial g^q}{\partial x^p}
+        \frac{\partial}{\partial x^q}
+      + \sum_{p, q = 1}^D f^p g^q \frac{\partial^2}{\partial x^p \partial x^q}.
+  \end{equation}
+  Analogously,
+  \begin{equation}
+    Y \circ X
+    = \sum_{p, q = 1}^D g^p \frac{\partial f^q}{\partial x^p}
+        \frac{\partial}{\partial x^q}
+      + \sum_{p, q = 1}^D f^p g^q \frac{\partial^2}{\partial x^q \partial x^p}.
+  \end{equation}
+  Because of the symmetry of second derivatives, the second order terms in
+  $[X, Y]$ cancel.
+  Hence,
+  \begin{equation}
+    [X, Y]
+    = \sum_{p, q = 1}^D
+        (f^p \frac{\partial g^q}{\partial x^p}
+         - g^p \frac{\partial f^q}{\partial x^p})
+        \frac{\partial}{\partial x^q}.
+  \end{equation}
+  This can also be written as
+  \begin{equation}
+    [X, Y] = \sum_{q = 1}^D (X g^q - Y f^q) \frac{\partial}{\partial x^q}.
+  \end{equation}
+\end{discussion}
