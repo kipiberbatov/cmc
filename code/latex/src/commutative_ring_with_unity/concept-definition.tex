@@ -1,0 +1,42 @@
+\begin{definition}
+  Let
+    $R$ be a set,
+    $0, 1 \in R$,
+    $- \colon R \to R$
+    $+, * \colon R \times R \to R$.
+  We say that $(R, 0, 1, -, +, *)$ is a \textbf{commutative ring with unity}
+  (we will simply say that $R$ is commutative ring with unity when operations
+  are clear from the context) if the following equalities are satisfied
+  for all $a, b, c \in R$:
+  \begin{subequations}
+    \begin{alignat}{2}
+      & a + (b + c) = (a + b) + c \qquad
+      && (\text{addition is associative}), \\
+      %
+      & a + 0 = 0 + a = a \qquad
+      && (\text{$0$ is neutral with respect to addition}), \\
+      %
+      & a + (- a) = (- a) + a = 0 \qquad
+      && (\text{negation is the inverse of addition}), \\
+      %
+      & a + b = b + a \qquad
+      && (\text{addition is commutative}), \\
+      %
+      & a * (b + c) = a * b + a * c \qquad
+      && (\text{multiplication is left-distributive over addition}), \\
+      %
+      & (a + b) * c = a * c + b * c \qquad
+      && (\text{multiplication is right-distributive over addition}), \\
+      %
+      & a * (b * c) = (a * b) * c \qquad
+      && (\text{multiplication is associative}), \\
+      %
+      & a * 1 = 1 * a = a \qquad
+      && (\text{$1$ is neutral with respect to multiplication}), \\
+      %
+      & a * b = b * a \qquad
+      && (\text{multiplication is commutative}).
+    \end{alignat}
+  \end{subequations}
+  We will often omit multiplication sign and write $a b$ instead of $a * b$.
+\end{definition}

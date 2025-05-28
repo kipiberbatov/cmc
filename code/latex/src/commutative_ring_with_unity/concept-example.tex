@@ -1,0 +1,32 @@
+\begin{example}
+  The following are examples and counterexamples of commutative rings with
+  unity.
+  \begin{enumerate}
+    \item
+      The number sets $\Z$, $\Q$, $\R$, $\C$ of respectively integers,
+      rationals, reals, and complex numbers are commutative rings with unity
+      with respect to the standard arithmetic operations.
+      The set $\N$ of natural numbers is not a ring since it lacks negation.
+    \item
+      For any positive integer $n$, the set $\Z_n$ of integers modulo $n$ is a
+      commutative ring with unity with respect to addition and multiplication
+      modulo $n$.
+      (This is the original inspiration behind the word ``ring'' as its elements
+      can be arranged in a loop, like the hours on a clock.)
+    \item
+      Let $X$ be a set, $R$ be a commmutative ring with unity.
+      Then the set of functions $R^X := \set{f}{f \colon X \to R}$ is a
+      commutative ring with unity ring with respect to pointwise operations:
+      if $f, g \colon X \to R$, $x \in X$, we define
+      \begin{subequations}
+        \begin{alignat}{3}
+          & 0_{R^X}(x) && := && 0_R, \\
+          & 1_{R^X}(x) && := && 1_R, \\
+          & (-_{R^X} f)(x) && := && -_R(f(x)), \\
+          & (f +_{R^X} g)(x) && := && f(x) +_R g(x), \\
+          & (f *_{R^X} g)(x) && := && f(x) *_R g(x).
+        \end{alignat}
+      \end{subequations}
+      We will drop subscripts and overload ring operations on $R^X$.
+  \end{enumerate}
+\end{example}
