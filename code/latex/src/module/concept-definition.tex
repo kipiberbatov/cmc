@@ -1,0 +1,43 @@
+\begin{definition}
+  Let
+    $(R, 0_R, 1_R, -_R, +_R, *_R)$ be a commutative ring with unity,
+    $V$ be a set,
+    $0 \in V$,
+    $- \colon V \to V$,
+    $+ \colon V \times V \to V$,
+    $* \colon R \times V \to V$.
+  We say that $(V, 0, -, + , *)$ is a \textbf{module} over $R$
+  if the following equalities are satisfied
+  for all $u, v, w \in V$, $\lambda, \mu \in R$:
+  \begin{subequations}
+    \begin{alignat}{2}
+      & u + (v + w) = (u + v) + w \qquad
+      && (\text{addition is associative}), \\
+      %
+      & v + 0 = 0 + v = v \qquad
+      && (\text{$0$ is neutral with respect to addition}), \\
+      %
+      & v + (- v) = (- v) + v = 0 \qquad
+      && (\text{negation is the inverse of addition}), \\
+      %
+      & u + v = v + u \qquad
+      && (\text{addition is commutative}), \\
+      %
+      & \lambda * (u + v) = \lambda * u + \lambda * v \qquad
+      && (\text{scalar multiplication is distributive over vector addition}), \\
+      %
+      & (\lambda +_R \mu) * v = \lambda * v + \mu * v \qquad
+      && (\text{scalar multiplication is distributive over scalar addition}), \\
+      %
+      & \lambda * (\mu * v) = (\lambda *_R \mu) * v \qquad
+      && (\text{scalar multiplication is ``associative''}), \\
+      %
+      & 1_R * v = v \qquad
+      && (\text{$1_R$ is neutral with respect to scalar multiplication}).
+    \end{alignat}
+  \end{subequations}
+  We will often omit multiplication sign and write $\lambda v$ instead of
+  $\lambda * v$.
+  The elements of $V$ are called \textit{vectors}, while those of $R$ are called
+  \textit{scalars}.
+\end{definition}
