@@ -177,6 +177,8 @@
 
 \bookmarksetup{startatroot}
 
+\part{Algebra}
+
 \section{Exterior algebra}
 \label{section:exterior_algebra}
 \input{exterior_algebra/concept-definition.tex}
@@ -208,12 +210,28 @@
 \input{hodge_star/unorthodox_sign_convention_wrong_reason-remark.tex}
 \input{hodge_star/duality_up_to_sign-proposition.tex}
 
+\section{Chain complexes}
+\label{section:chain_complexes}
+\input{chain_complex/concept-definition.tex}
+\input{chain_complex/tensor_product-definition.tex}
+\input{chain_complex/tensor_product_is_chain_complex-proposition.tex}
+
+\section{Differential graded algebras}
+\label{section:differential_graded_algebras}
+\input{differential_graded_algebra/concept-definition.tex}
+\input{differential_graded_algebra/tensor_product-definition.tex}
+\input{differential_graded_algebra/tensor_product_is_differential_graded_algebra-proposition.tex}
+
+\part{Smooth manifolds}
+
 \section{Vector fields on manifolds}
 \label{section:vector_fields_on_manifolds}
 \input{smooth_manifold/vector_field/concept-definition.tex}
 \input{smooth_manifold/vector_field/commutator-closedness-proposition.tex}
 \input{smooth_manifold/vector_field/commutator-closedness-proof.tex}
 \input{smooth_manifold/vector_field/formula_in_coordinates-discussion.tex}
+
+\part{Meshes}
 
 \section{Meshes}
 \label{section:meshes}
@@ -225,12 +243,6 @@
 \input{mesh/relative_orientation/concept-definition.tex}
 \input{mesh/relative_orientation/concept-remark.tex}
 \input{mesh/relative_orientation/existence-theorem.tex}
-
-\section{Chain complexes}
-\label{section:chain_complexes}
-\input{chain_complex/concept-definition.tex}
-\input{chain_complex/tensor_product-definition.tex}
-\input{chain_complex/tensor_product_is_chain_complex-proposition.tex}
 
 \section{Chains and boundary operator on meshes}
 \label{section:chains_and_boundary_operator_on_meshes}
@@ -248,12 +260,6 @@
 \input{mesh/coboundary_operator/concept-definition.tex}
 \input{mesh/coboundary_operator/is_cochain_complex-proposition.tex}
 \input{mesh/coboundary_operator/is_cochain_complex-proof.tex}
-
-\section{Differential graded algebras}
-\label{section:differential_graded_algebras}
-\input{differential_graded_algebra/concept-definition.tex}
-\input{differential_graded_algebra/tensor_product-definition.tex}
-\input{differential_graded_algebra/tensor_product_is_differential_graded_algebra-proposition.tex}
 
 \section{Combinatorial differential forms and Forman subdivision}
 \label{section:combinatorial_differential_forms_and_forman_subdivision}
@@ -281,7 +287,6 @@
 \section{Metric-dependent calculus on quasi-cubical meshes}
 \label{section:metric_dependent_calculus_on_quasi_cubical_meshes}
 \input{mesh/interval_simplicial_are_not_uncommon-discussion.tex}
-
 \input{mesh/quasi_cubical/topological_orthogonality-definition.tex}
 \input{euclidean_measure-notation.tex}
 \input{mesh/quasi_cubical/inner_product/concept-definition.tex}
@@ -306,6 +311,26 @@
 \input{mesh/flat/approximation_of_vector_field-definition.tex}
 \input{mesh/flat/approximation_of_vector_field-example.tex}
 \input{mesh/flat/summary_of_operators-discussion.tex}
+
+\section{Vector fields on combinatorial meshes}
+\phantom{T}
+\label{section:vector_fields_on_combinatorial_meshes}
+\input{mesh/quasi_cubical/vector_field/concept-definition.tex}
+\input{mesh/quasi_cubical/vector_field/commutator-definition.tex}
+
+\section{Discrete vector bundles and covariant exterior derivative}
+\phantom{T}
+\label{section:discrete_vector_bundles_and_covariant_exterior_derivative}
+\input{mesh/quasi_cubical/bundle_valued_chain/concept-definition.tex}
+\input{mesh/quasi_cubical/bundle_valued_chain/cup_product-definition.tex}
+\input{mesh/quasi_cubical/bundle_valued_chain/cup_product-remark.tex}
+\input{mesh/quasi_cubical/covariant_exterior_derivative/concept-definition.tex}
+\input{mesh/quasi_cubical/covariant_exterior_derivative/leibniz_rule-proposition.tex}
+\input{mesh/quasi_cubical/covariant_exterior_derivative/leibniz_rule-proof.tex}
+\input{mesh/quasi_cubical/covariant_exterior_derivative/graded_leibniz_rule-proposition.tex}
+\input{mesh/quasi_cubical/covariant_exterior_derivative/graded_leibniz_rule-proof.tex}
+
+\part{Physics}
 
 \section{Continuous heat transport}
 \label{section:continuous_diffusion}
@@ -433,23 +458,5 @@
 \phantom{T}
 \input{elasticity/discrete/model-discussion.tex}
 \input{elasticity/discrete/model-example.tex}
-
-\section{Vector fields on combinatorial meshes}
-\phantom{T}
-\label{section:vector_fields_on_combinatorial_meshes}
-\input{mesh/quasi_cubical/vector_field/concept-definition.tex}
-\input{mesh/quasi_cubical/vector_field/commutator-definition.tex}
-
-\section{Discrete vector bundles and covariant exterior derivative}
-\phantom{T}
-\label{section:discrete_vector_bundles_and_covariant_exterior_derivative}
-\input{mesh/quasi_cubical/bundle_valued_chain/concept-definition.tex}
-\input{mesh/quasi_cubical/bundle_valued_chain/cup_product-definition.tex}
-\input{mesh/quasi_cubical/bundle_valued_chain/cup_product-remark.tex}
-\input{mesh/quasi_cubical/covariant_exterior_derivative/concept-definition.tex}
-\input{mesh/quasi_cubical/covariant_exterior_derivative/leibniz_rule-proposition.tex}
-\input{mesh/quasi_cubical/covariant_exterior_derivative/leibniz_rule-proof.tex}
-\input{mesh/quasi_cubical/covariant_exterior_derivative/graded_leibniz_rule-proposition.tex}
-\input{mesh/quasi_cubical/covariant_exterior_derivative/graded_leibniz_rule-proof.tex}
 
 \end{document}
