@@ -1,0 +1,80 @@
+\begin{definition}
+  Let
+    $R$ be a commutative ring with unity,
+    $A$ be an $R$-module,
+    $\mu \colon R \times R \to R$.
+  We say that $(A, \mu)$ is an $R$-\textbf{algebra}
+  (or \textbf{algebra over} $R$) if
+  for all $a, b, c \in A$, $\lambda \in R$:
+  \begin{subequations}
+    \begin{alignat}{2}
+      & \mu(a + b, c) = \mu(a, c) + \mu(b, c)
+      && (\text{multiplication on $A$ is left-distributive}), \\
+      %
+      & \mu(a, b + c) = \mu(a, b) + \mu(a, c)
+      && (\text{multiplication on $A$ is right-distributive}), \\
+      %
+      & \mu(\lambda * a, b) = \lambda * \mu(a, b)\qquad
+      && (\text{$\mu$ respects multiplication of scalar on the left}), \\
+      %
+      & \mu(a, \lambda * b) = \lambda * \mu(a, b)\qquad
+      && (\text{$\mu$ respects multiplication of scalar on the right}).
+    \end{alignat}
+  \end{subequations}
+\end{definition}
+\begin{definition}
+  Let $R$ be a commutative ring with unity, $(A, \mu)$ be an $R$-algebra.
+  \begin{enumerate}
+    \item
+      We say that $(A, \mu)$ is \textbf{associative algebra} if
+      for any $a, b, c \in A$, $\mu(a, \mu(b, c)) = \mu(\mu(a, b), c)$.
+      In other words, $(A, \mu)$ is a ring.
+    \item
+      We say that $(A, \mu)$ is \textbf{commutative algebra} if
+      for any $a, b, c \in A$, $\mu(a, b) = \mu(b, a)$.
+    \item
+      Let $1 \in R$.
+      We say that $(A, \mu, 1)$ is \textbf{unital algebra} if
+      for any $a, \in A$, $\mu(a, 1) = \mu(1, a) = a$.
+      ($1$ is the \textbf{unit element} or \textbf{unity}.)
+    \item
+      We say that $(A, \mu)$ is \textbf{alternating algebra} if
+      for any $a \in A$, $\mu(a, a) = 0$.
+    \item
+      We say that $(A, \mu)$ is \textbf{anti-commutative algebra} if
+      for any $a, b \in A$, $\mu(a, b) = - \mu(b, a)$.
+  \end{enumerate}
+\end{definition}
+\begin{proposition}
+  Let $R$ be a commutative ring with unity,
+  Let $(A, \mu)$ be an algebra.
+  \begin{itemize}
+    \item
+      If $A$ is alternating, then $A$ is anti-commutative.
+    \item
+      If $A$ is anti-commutative and the ring $R$ has the property
+      \begin{equation}
+        \label{equation:ring/characteristics_is_not_divisible_by_2}
+        \forall x \in R,\ x + x = 0 \Rightarrow x = 0,
+      \end{equation}
+      then $A$ is alternating.
+  \end{itemize}
+\end{proposition}
+\begin{proof}
+  First, let $A$ be alternating.
+  Then for any $a, b \in A$,
+  \begin{equation}
+    0 = \mu(a + b, a + b)
+    = \mu(a, a) + \mu(a, b) + \mu(b, a) + \mu(b, b)
+    = \mu(a, b) + \mu(b, a)
+    \Rightarrow \mu(b, a) = - \mu(a, b).
+  \end{equation}
+  Conversely, let $A$ be anti-commutative. Taking $b = a$ in the definition
+  leads to
+  \begin{equation}
+    \mu(a, a) = - \mu(a, a) \Rightarrow \mu(a, a) + \mu(a, a) = 0.
+  \end{equation}
+  Under the assumption of
+  \Cref{equation:ring/characteristics_is_not_divisible_by_2},
+  we conclude that $\mu(a, a) = 0$.
+\end{proof}
