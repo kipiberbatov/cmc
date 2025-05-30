@@ -1,0 +1,17 @@
+\begin{proof}
+  Let $x, y, z \in A$.
+  $[\cdot, \cdot]$ is alternating since $[x, x] = x x - x x = 0$.
+  Next, we calculate
+  \begin{equation}
+    [x, [y, z]]
+    = [x, y z - z y]
+    = x (y z - z y) - (y z - z y) x
+    = x y z - x z y - y z x + z y x.
+  \end{equation}
+  Similarly,
+  $[y, [z, x]] = y z x - y x z - z x y + x z y$ and
+  $[z, [x, y]] = z x y - z y x - x y z + y x z$.
+  We can see that each of the six permutations of $(x, y, z)$ in products occurs
+  twice with opposite signs, which means that their sum is zero.
+  Hence, the Jacobi identity is also satisfied.
+\end{proof}

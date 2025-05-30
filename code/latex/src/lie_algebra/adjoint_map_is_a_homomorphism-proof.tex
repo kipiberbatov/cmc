@@ -1,0 +1,16 @@
+\begin{proof}
+  Let $x, y, z \in V$.
+  Then
+  \begin{equation}
+    \begin{split}
+      [{\rm adj}_x, {\rm adj}_y] z
+      & = ({\rm adj}_x \circ {\rm adj}_y - {\rm adj}_y \circ {\rm adj}_x) z
+      = [x, [y, z]] - [y, [x, z]] \\
+      & = [x, [y, z]] + [y, [z, x]]
+      = - [z, [x, y]]
+      = [[x, y], z]
+      = {\rm adj}_{[x, y]} z.
+      \qedhere
+    \end{split}
+  \end{equation}
+\end{proof}

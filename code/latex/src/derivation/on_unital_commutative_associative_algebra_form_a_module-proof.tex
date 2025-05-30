@@ -1,0 +1,25 @@
+\begin{proof}
+  Let $D, D_1, D_2 \in {\rm Der}_A$.
+  Then $D_1 + D_2$ is a homomorphism from module theory.
+  To prove it satisfies the Leibniz rule, let $a, b \in A$.
+  Then
+  \begin{equation}
+    (D_1 + D_2)(a * b)
+    = D_1(a * b) + D_2(a * b)
+    = D_1 a * b + a * D_1 b + D_2 a * b + a * D_2 b
+    = (D_1 + D_2) a * b + a * (D_1 + D_2) b.
+  \end{equation}
+  Further, let $a \in A$.
+  Then $(a \cdot D)(b) := a * D b$ for any $b \in B$.
+  It is trivial to check it it is a homomorphism.
+  To check it is a derivation, let $b, c \in A$.
+  Then
+  \begin{equation}
+    (a \cdot D)(b * c)
+    = a * D(b * c)
+    = a * (D b * c + b * D c)
+    = (a * D b) * c + b * (a * D c)
+    = (a \cdot D) b * c + b * (a \cdot D) c. 
+  \end{equation}
+  Hence, ${\rm Der}_A$ is an $A$-module.
+\end{proof}

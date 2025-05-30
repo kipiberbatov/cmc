@@ -1,0 +1,18 @@
+\begin{proof}
+  First, let $A$ be alternating.
+  Then for any $a, b \in A$,
+  \begin{equation}
+    0 = \mu(a + b, a + b)
+    = \mu(a, a) + \mu(a, b) + \mu(b, a) + \mu(b, b)
+    = \mu(a, b) + \mu(b, a)
+    \Rightarrow \mu(b, a) = - \mu(a, b).
+  \end{equation}
+  Conversely, let $A$ be anti-commutative. Taking $b = a$ in the definition
+  leads to
+  \begin{equation}
+    \mu(a, a) = - \mu(a, a) \Rightarrow \mu(a, a) + \mu(a, a) = 0.
+  \end{equation}
+  Under the assumption of
+  \Cref{equation:ring/characteristics_is_not_divisible_by_2},
+  we conclude that $\mu(a, a) = 0$.
+\end{proof}
