@@ -1,0 +1,25 @@
+\begin{proof}
+  Linearity of $[X, Y]$ follows from module theory.
+  Hence, we only need to show it satisfies the Leibniz rule.
+  Let $f, g \in A$.
+  Then
+  \begin{equation}
+    X(Y(f g))
+    = X((Y f) * g + f * (Y g))
+    = (X(Y f)) * g + (Y f) * (X g) + (X f) * (Y g) + f * (X (Y g)).
+  \end{equation}
+  Analogously,
+  \begin{equation}
+    Y(X(f g)) = (Y(X f)) * g + (X f) * (Y g) + (Y f) * (X g) + f * (Y (X g)).
+  \end{equation}
+  Hence,
+  \begin{equation}
+    [X, Y](f g)
+    = {\color{red} (X(Y f)) * g}\,
+      {\color{blue} + f * (X (Y g))}\,
+      {\color{red} - (Y(X f)) * g}\,
+      {\color{blue}- f * (Y (X g))}
+    = {\color{red}([X, Y] f) * g} + {\color{blue} f * ([X, Y] g)}.
+    \qedhere
+  \end{equation}
+\end{proof}
