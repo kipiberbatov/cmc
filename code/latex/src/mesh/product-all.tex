@@ -1,0 +1,178 @@
+\begin{definition}
+  Let $\mathcal{K}$ and $\mathcal{L}$ be meshes.
+  The \textbf{product mesh} $\mathcal{K} \times \mathcal{L}$ is defined as the
+  poset product of $\mathcal{K}$ and $\mathcal{L}$.
+\end{definition}
+\begin{proposition}
+  Let $\mathcal{K}$ and $\mathcal{L}$ be meshes.
+  Then $\mathcal{K} \times \mathcal{L}$ is also a mesh.
+\end{proposition}
+\begin{proposition}
+  Let $\mathcal{K}$ and $\mathcal{L}$ be quasi-cubical meshes.
+  Then $\mathcal{K} \times \mathcal{L}$ is also a quasi-cubical mesh.
+\end{proposition}
+\begin{definition}
+  Let $\varphi \colon \mathcal{K} \to \mathcal{P} K$ and
+    $\psi \colon \mathcal{L} \to \mathcal{P} L$ be
+  mesh embeddings.
+  Define the \textbf{product embedding}
+  \begin{equation}
+    \varphi \times \psi \colon
+    \mathcal{K} \times \mathcal{L} \to \mathcal{P} (K \times L)
+  \end{equation}
+  as follows: for any $(a, \alpha) \in \mathcal{K} \times \mathcal{L}$,
+  \begin{equation}
+    (\varphi \times \psi)(a, \alpha) = (\varphi a) \times (\psi \alpha).
+  \end{equation}
+\end{definition}
+\begin{proposition}
+  Let
+    $(\mathcal{K}, \varepsilon^{\mathcal{K}})$ and
+      $(\mathcal{K}, \varepsilon^{\mathcal{K}})$
+      be meshes with relative orientations,
+    $C_\bullet(\mathcal{K}, \partial^{\mathcal{K}})$ and
+      $C_\bullet(\mathcal{L}, \partial^{\mathcal{L}})$
+    be the corresponding chain complexes (of boundary operators).
+  Then the chain complex
+  \begin{equation}
+    C_\bullet(\mathcal{K}, \partial^{\mathcal{K}}) \otimes
+    C_\bullet(\mathcal{L}, \partial^{\mathcal{L}})
+  \end{equation}
+  induces a relative orientations on $\mathcal{K} \times \mathcal{L}$.
+  Precisely, if $0, \leq p \leq \dim \mathcal{K}$,
+  $0, \leq q \leq \dim \mathcal{L}$,
+  $a \in \mathcal{K}_p, \alpha \in \mathcal{L}_{q}$,
+  $(b, \beta) \in \partial_{p + q}(a, \alpha)$,
+  \begin{equation}
+    \varepsilon^{\mathcal{K} \times \mathcal{L}}_{p + q}(
+      (a, \alpha), (b, \beta)) =
+    \begin{cases}
+      \varepsilon_p^{\mathcal{K}}(a, b),\ & \alpha = \beta \\
+      (-1)^p \varepsilon_q^{\mathcal{L}}(\alpha, \beta),\ & a = b
+    \end{cases}.
+  \end{equation}
+\end{proposition}
+\begin{definition}
+  Let $\mathcal{K}, \mu^{\mathcal{K}}$ and $\mathcal{L}, \mu^{\mathcal{L}}$ be
+  Riemannian meshes.
+  Define the \textbf{product measures}
+  $\mu^{\mathcal{K}} \times \mu^{\mathcal{L}}$
+  on $\mathcal{K} \times \mathcal{L}$ as follows:
+  for any $a \in \mathcal{K},\ \alpha \in \mathcal{L}$,
+  \begin{equation}
+    (\mu^{\mathcal{K}} \times \mu^{\mathcal{L}})(a, \alpha)
+    := \mu^{\mathcal{K}}(a)\, \mu^{\mathcal{L}}(\alpha).
+  \end{equation}
+\end{definition}
+\begin{proposition}
+  Let
+    $\mathcal{K}$ and $\mathcal{L}$ be combinatorial meshes,
+    $(K, g^K)$ and $(L, g^L)$ be Riemannian manifolds,
+    $\varphi^{\mathcal{K}} \colon \mathcal{K} \to K$ and
+      $\varphi^{\mathcal{L}} \colon \mathcal{L} \to L$
+      be mesh embeddings,
+    $\mu^{\mathcal{K}}$ and $\mu^{\mathcal{L}}$ be the induced measures.
+  Then $\mu^{\mathcal{K}} \times \mu^{\mathcal{L}}$ is the measure induced by
+  the embedding $\varphi^{\mathcal{K}} \times \varphi^{\mathcal{L}}$ of the mesh
+  $\mathcal{K} \times \mathcal{L}$
+  in the Riemannian manifold $(K \times L, g^K \times g^L)$.
+\end{proposition}
+\begin{proposition}
+  Let
+    $(\mathcal{K}, \mu^{\mathcal{K}})$ and $(\mathcal{L}, \mu^{\mathcal{L}})$
+      be Riemannian meshes,
+    $\inner{\cdot}{\cdot}_{\mathcal{K}}$ and
+      $\inner{\cdot}{\cdot}_{\mathcal{L}}$
+      be the respective induced inner products,
+    $\inner{\cdot}{\cdot}_{\mathcal{K} \times \mathcal{L}}$
+      be the inner product induced by
+      $\mu^{\mathcal{L}} \times \mu^{\mathcal{L}}$,
+    $(a, \alpha) \in \mathcal{K} \times \mathcal{L}$.
+  Then
+  \begin{equation}
+    \inner{(a, \alpha)^\bullet, (a, \alpha)^\bullet}
+    _{\mathcal{K} \times \mathcal{L}}
+    = \inner{a^\bullet}{a^\bullet}_\mathcal{K}\, 
+      \inner{\alpha^\bullet}{\alpha^\bullet}_\mathcal{L}.
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  Let $D = \dim \mathcal{K}$, $d = \dim \mathcal{L}$.
+  Then $\dim (\mathcal{K} \times \mathcal{L}) =  D + d$.
+  Hence,
+  \begin{equation}
+    \begin{split}
+      \inner{(a, \alpha)^\bullet}{(a, \alpha)^\bullet}
+      _{\mathcal{K} \times \mathcal{L}}
+      & = \frac{1}{2^{D + d} \mu^{\mathcal{K} \times \mathcal{L}}(a, \alpha)}
+          \sum_{(b, \beta) \perp (a, \alpha)}
+            \mu^{\mathcal{K} \times \mathcal{L}}(b, \beta) \\
+      & = \frac{1}{2^D \mu^{\mathcal{K}}(a)}
+          \frac{1}{2^d \mu^{\mathcal{L}}(\alpha)}
+          \sum_{b \perp a,\ \beta \perp \alpha}
+            \mu^{\mathcal{K}}(b)\, \mu^{\mathcal{L}}(\beta) \\
+      & = \left(
+            \frac{1}{2^D \mu^{\mathcal{K}}(a)}
+            \sum_{b \perp a} \mu^{\mathcal{K}}(b)
+          \right)\,
+          \left(
+            \frac{1}{2^d \mu^{\mathcal{L}}(\alpha)}
+            \sum_{\beta \perp \alpha} \mu^{\mathcal{L}}(\beta)
+          \right) \\
+      & = \inner{a^\bullet}{a^\bullet}_{\mathcal{K}}\,
+          \inner{\alpha^\bullet}{\alpha^\bullet}_{\mathcal{L}}.
+    \end{split}
+  \end{equation}
+\end{proof}
+\begin{proposition}
+  Let
+    $\mathcal{K}$ and $\mathcal{L}$ be combinatorial meshes,
+    $(K, g^K)$ and $(L, g^L)$ be smooth Riemannian manifolds that realise them,
+    $\inner{\cdot}{\cdot}_K$ and $\inner{\cdot}{\cdot}_L$ be the induced
+      inner products of differential forms,
+    $W^\mathcal{K} \colon C^\bullet \mathcal{K} \to H \Omega^\bullet K$ and
+      $W^\mathcal{L} \colon C^\bullet \mathcal{L} \to H \Omega^\bullet L$
+      be Whitney maps,
+    $\inner{\cdot}{\cdot}_{\mathcal{K}}$, $\inner{\cdot}{\cdot}_{\mathcal{L}}$,
+      and $\inner{\cdot}{\cdot}_{\mathcal{K} \times \mathcal{L}}$
+      be the induced Whitney inner products
+      (the last one is induced by $W^\mathcal{K} \otimes W^\mathcal{L}$),
+    $\sigma, \tau \in C^\bullet \mathcal{K}$,
+    $\omega, \eta \in C^\bullet \mathcal{L}$.
+  Then
+  \begin{equation}
+    \inner{\sigma \otimes \omega}{\tau \otimes \eta}
+    _{\mathcal{K} \times \mathcal{L}}
+    = \inner{\sigma}{\tau}_{\mathcal{K}}\, \inner{\omega}{\eta}_{\mathcal{L}}.
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  A direct computation:
+  \begin{equation}
+    \begin{split}
+      \inner{\sigma \otimes \omega}{\tau \otimes \eta}
+      _{\mathcal{K} \times \mathcal{L}}
+      & = \inner{W^{\mathcal{K} \times \mathcal{L}}(\sigma \otimes \omega)}
+          {W^{\mathcal{K} \times \mathcal{L}}(\tau \otimes \eta)}
+          _{K \times L} \\
+      & = \inner{W^{\mathcal{K}} \sigma \boxtimes W^{\mathcal{L}} \omega}
+          {W^{\mathcal{K}} \tau \boxtimes W^{\mathcal{L}} \eta}
+          _{K \times L} \\
+      & = \int_{K \times L}
+          g^{K \times L}(
+            W^{\mathcal{K}} \sigma \boxtimes W^{\mathcal{L}} \omega,
+            W^{\mathcal{K}} \tau \boxtimes W^{\mathcal{L}} \eta)\,
+          \vol_{K \times L} \\
+      & = \left(
+            \int_K g^K(W^{\mathcal{K}} \sigma, W^{\mathcal{K}} \tau) \vol_K
+          \right)\,
+          \left(
+            \int_L g^L(W^{\mathcal{L}} \omega, W^{\mathcal{L}} \eta) \vol_L
+          \right) \\
+      & = \inner{W^{\mathcal{K}} \sigma}{W^{\mathcal{K}} \tau}_K\,
+          \inner{W^{\mathcal{L}} \omega}{W^{\mathcal{L}} \eta}_L \\
+      & = \inner{\sigma}{\tau}_{\mathcal{K}}\,
+          \inner{\omega}{\eta}_{\mathcal{L}}.
+    \end{split}
+  \end{equation}
+\end{proof}
