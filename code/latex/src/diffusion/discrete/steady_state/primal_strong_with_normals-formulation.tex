@@ -1,0 +1,57 @@
+\begin{formulation}
+  \label{cmc/diffusion/discrete/steady_state/primal_strong_with_normals-discussion}
+  [Primal strong formulation for the steady-state discrete heat equation
+    with discrete differential forms]
+  Let:
+  \begin{itemize}
+    \item
+      $d \in \N$;
+    \item
+      $M$ be a manifold-like flat mesh of dimension $d$;
+    \item
+      $K$ be the Forman subdivision of $M$;
+    \item
+      $K' := K \setminus \partial K$ be the interior of $K$;
+    \item
+      $f \in C^0 K'$ be the external heat source, $f\ [E L^{-3} T^{-1}]$;
+    \item
+      $\Gamma_D, \Gamma_N$ form a partition of $(\partial K)_0$;
+    \item
+      ${\bf n} [L^{-1}] \colon \Gamma_N \to \R^d$
+      be the generalized exterior unit normal;
+    \item
+      $g_D [\Theta] \in ({\rm Free}_\R(\Gamma_D))^*$
+      be the Dirichlet boundary condition;
+    \item
+      $g_N [E L^{-D} T^{-1}] \in ({\rm Free}_\R(\Gamma_N))^*$
+      be the Neumann boundary condition;
+    \item
+      $\pi_0 [E L^{-D} \Theta^{-1}] \colon C^0 K \to C^0 K$ be a material
+      property (heat capacity) of the nodes of $K$
+      (its matrix in the standard basis is diagonal);
+    \item
+      $\kappa_1 [E L^{-D} T^{-1} \Theta^{-1}] \colon C^1 K \to C^1 K$ be a
+      material property (thermal conductivity) of the edges of $K$
+      (its matrix in the standard basis is diagonal).
+  \end{itemize}
+  We are solving the following problem for $u [\Theta] \in \to C^0 K$:
+  \begin{subequations}
+    \begin{alignat}{4}
+      & \restrict{((\delta_1^\star \circ \kappa_1 \circ \delta_0) u)}{K'_0}
+      && = f \quad
+      && (\text{balance of heat energy}) \quad
+      && [E L^{-D} T^{-1}], \\
+      %
+      & \restrict{u}{\Gamma_D}
+      && = g_D \quad
+      && (\text{Dirichlet boundary condition}) \quad
+      && [\Theta], \\
+      %
+      & - \restrict{\overline{(\kappa_1 \circ \delta_0) u}}{\Gamma_N}
+        \cdot {\bf n}
+      && = g_N \quad
+      && (\text{Neumann boundary condition}) \quad
+      && [E L^{2 - D} T^{-1}].
+    \end{alignat}
+  \end{subequations}
+\end{formulation}

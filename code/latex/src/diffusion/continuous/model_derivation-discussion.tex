@@ -39,7 +39,7 @@
        Let $U_D$ and $V_D$ be adjacent regions having $S_{D - 1}$ as a common
        boundary, such that $\varepsilon(U_D, S_{D - 1}) = -1$,
        $\varepsilon(V_D, S_{D - 1}) = 1$.
-       Then the above equation measures the total flow from $U_D$ to $V_D$.)
+       Then the above equation measures the total flow from $V_D$ to $U_D$.)
   \end{itemize}
   We will also need the dual variables of heat energy, temperature, and
   flow rate.
@@ -59,13 +59,13 @@
       \begin{equation}
         \tilde{Q}^0 := \star_D Q^D;
       \end{equation}
-    \item
-      dual flow rate
-      $\tilde{q}^1 [E T L^{2 - D}] \colon I \to \Omega^1 X$
-      defined by
-      \begin{equation}
-        \tilde{q} := \star_{D - 1} q^{D - 1};
-      \end{equation}
+    % \item
+    %   dual flow rate
+    %   $\tilde{q}^1 [E T L^{2 - D}] \colon I \to \Omega^1 X$
+    %   defined by
+    %   \begin{equation}
+    %     \tilde{q} := \star_{D - 1} q^{D - 1};
+    %   \end{equation}
   \end{itemize}
   The governing laws are formulated as follows.
   \begin{itemize}
@@ -82,9 +82,8 @@
       and any volume $V_D \subseteq X$,
       \begin{equation}
         \begin{split}
-        \text{``heat difference on $V_D$ between moments $t_2$ and $t_1$''}
-        & =
-          \text{``heat inflow through the boundary of $V_D$
+        \text{``heat difference on $V_D$ between moments $t_2$ and $t_1$''} =
+        & - \text{``heat outflow through the boundary of $V_D$
           in $[t_1, t_2]$''} \\
         & +
           \text{``heat production inside $V_D$ in $[t_1, t_2]$''}.
@@ -93,7 +92,7 @@
       In symbolic terms, the last equation is written as
       \begin{equation}
         \int_{V_D} (Q^D(t_2) - Q^D(t_1))
-        = \int_{t_1}^{t_2}
+        = - \int_{t_1}^{t_2}
           \left(\int_{\partial V_D} q^{D - 1}(t) \right)\, d t
         + \int_{t_1}^{t_2} \left(\int_{V_D} f^D(t) \right)\, d t.
       \end{equation}
@@ -101,13 +100,13 @@
       \begin{equation}
         \int_{t_1}^{t_2}
           \left(\int_{V_D} \frac{\partial Q^D}{\partial t}\right)\, d t =
-          \int_{t_1}^{t_2} \left(\int_{V_D} d_{D - 1} q^{D - 1} \right)\, d t
+        - \int_{t_1}^{t_2} \left(\int_{V_D} d_{D - 1} q^{D - 1} \right)\, d t
         + \int_{t_1}^{t_2} \left(\int_{V_D} f^D \right)\, d t.
       \end{equation}
       Since the time interval $[t_1, t_2]$ and the volume $V_D$ are arbitrary,
       we can drop integrals and arrive at the differential form
       \begin{equation}
-        \frac{\partial Q^D}{\partial t} = d_{D - 1} q^{D - 1} + f^D.
+        \frac{\partial Q^D}{\partial t} = - d_{D - 1} q^{D - 1} + f^D.
       \end{equation}
     \item
       Let
@@ -145,10 +144,10 @@
       as a proportionality factor:
       \begin{equation}
         q^{D - 1}
-        = - \kappa_{D - 1} d_D^\star \tilde{u}^D
-        = - \kappa_{D - 1} d_D^\star \star_0 u^0
-        = (-1)^{D - 1} \kappa_{D - 1} \star_1 d_0 u^0
-        = (-1)^{D - 1} \star_1 \tilde{\kappa}_1 d_0 u^0,
+        = \kappa_{D - 1} d_D^\star \tilde{u}^D
+        = \kappa_{D - 1} d_D^\star \star_0 u^0
+        = - \kappa_{D - 1} \star_1 d_0 u^0
+        = - \star_1 \tilde{\kappa}_1 d_0 u^0,
       \end{equation}
       where we have denoted
       \begin{equation}
@@ -156,20 +155,20 @@
         :=\star_1^{-1} \kappa_{D - 1} \star_1 [E L^{2 - D} T^{-1} \Theta^{-1}]
         \colon \Omega^1 X \to \Omega^1 X.
       \end{equation}
-      This leads to
-      \begin{equation}
-        \tilde{q}^1
-        = \star_{D - 1} q^{D - 1}
-        = (-1)^{D - 1} \star_{D - 1} \star_1 \tilde{\kappa}_1 d_0 u^0
-        = (-1)^{D - 1} (-1)^{D - 1} \tilde{\kappa}_1 d_0 u^0
-        = \tilde{\kappa}_1 d_0 u^0.
-      \end{equation}
-      This leads to
-      \begin{equation}
-        \star_D d_{D - 1} q^{D - 1}
-        = (-1)^{D - 1} \star_D d_{D - 1} \star_1 \tilde{\kappa}_1 d_0 u^0
-        = - d^\star_1 \tilde{\kappa}_1 d_0 u^0.
-      \end{equation}
+      % This leads to
+      % \begin{equation}
+      %   \tilde{q}^1
+      %   = \star_{D - 1} q^{D - 1}
+      %   = - \star_{D - 1} \star_1 \tilde{\kappa}_1 d_0 u^0
+      %   = (-1)^{D - 1} \tilde{\kappa}_1 d_0 u^0
+      %   %= \tilde{\kappa}_1 d_0 u^0.
+      % \end{equation}
+      % Hence,
+      % \begin{equation}
+      %   \star_D d_{D - 1} q^{D - 1}
+      %   = (-1)^{D - 1} \star_D d_{D - 1} \star_1 \tilde{\kappa}_1 d_0 u^0
+      %   = - d^\star_1 \tilde{\kappa}_1 d_0 u^0.
+      % \end{equation}
   \end{itemize}
   We complete our model with boundary conditions.
   Let $\Gamma_D, \Gamma_N$ form a partition of $\partial X$

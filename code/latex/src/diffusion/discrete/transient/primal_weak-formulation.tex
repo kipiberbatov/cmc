@@ -50,15 +50,15 @@
       && A(v^0, w^0)
         := \inner{\delta_0 v^0}{\tilde{\kappa}_1 \delta_0 w^0}_{K, 0} \qquad
       && [E T^{-1} \Theta^{-1}], \\
-%
+      %
       & B \colon C^0 K \times (I \to C^0 K) \to \R, \quad
       && B(v^0, w^0) := \inner{v^0}{\pi_0 w^0}_{K, 0} \qquad
       && [E \Theta^{-1}], \\
-%
+      %
       & G \colon C^0 K \to \R, \quad
       && G(v^0) := (\tr_{\Gamma_N} v^0 \smile g_N^{d - 1})[\Gamma_N] \qquad
       && [E T^{-1}], \\
-%
+      %
       & F \colon C^0 K \to \R, \quad
       && F(v^0) := (v^0 \smile f^d)[K] \qquad
       && [E T^{-1}].
@@ -70,14 +70,14 @@
     \begin{alignat}{4}
       & \forall v^0 [\Theta] \in \Ker \tr_{\Gamma_D, 0}, \quad
       && B(v^0, \frac{\partial u^0} {\partial t}) + A(v^0, u^0)
-      && = G(v^0) + F(v^0) \qquad
+      && = F(v^0) - G(v^0) \qquad
       && [E T^{-1} \Theta], \\
-%
+      %
       &
       && \tr_{\Gamma_D, 0} u^0
       && = g_D^0 \qquad
       && [\Theta], \\
-%
+      %
       &
       && u^0(t_0)
       && = u_0 \qquad
@@ -89,7 +89,7 @@
   \begin{equation}
     q^{d - 1}(t, c_{d - 1}) =
     \begin{cases}
-      ((-1)^{d - 1} \star_1 \tilde{\kappa}_1 \delta_0 u^0)(t, c_{d - 1}),
+      (- \star_1 \tilde{\kappa}_1 \delta_0 u^0)(t, c_{d - 1}),
         & c_{d - 1} \in K_{d - 1} \setminus (\Gamma_N)_{d - 1} \\
       g_N^{d - 1}(t, c_{d - 1}), & c_{d - 1} \in (\Gamma_N)_{d - 1}
     \end{cases},\ t \in I.

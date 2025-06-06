@@ -13,13 +13,13 @@
   source, thermal conductivity, boundary conditions) are also time-independent.
   We can then integrate the equation
   \begin{equation}
-    B(v^d, q^{d - 1}) - \frac{d}{d t} C(v^d, \tilde{u}^d) = -F(v^d)
+    - B(v^d, q^{d - 1}) + \frac{d}{d t} C(v^d, \tilde{u}^d) = F(v^d)
   \end{equation}
   with respect to $t$ in the interval $[\alpha, \beta] \subset I$ to get
   \begin{equation}
-    B(v^d, \int_\alpha^\beta q^{d - 1}\, d t)
-    - (C(v^d, \tilde{u}^d(\beta)) - C(v^d, \tilde{u}^d(\alpha)))
-    = - (\beta - \alpha) F(v^d).
+    - B(v^d, \int_\alpha^\beta q^{d - 1}\, d t)
+    + (C(v^d, \tilde{u}^d(\beta)) - C(v^d, \tilde{u}^d(\alpha)))
+    = (\beta - \alpha) F(v^d).
   \end{equation}
   If we partition $I$ into segements with size $\tau$ with moments of
   time $\{t_s := t_0 + \tau s\}_{s \geq 0}$, and if we denote
@@ -36,14 +36,14 @@
   \end{subequations}
   we get
   \begin{equation}
-    \frac{\tau}{2} (B(v^d, Q^s) + B(v^d, Q^{s + 1}))
-    - (C(v^d, U^{s + 1}) - C(v^d, U^s))
-    = - \tau F(v^d).
+    - \frac{\tau}{2} (B(v^d, Q^s) + B(v^d, Q^{s + 1}))
+    + (C(v^d, U^{s + 1}) - C(v^d, U^s))
+    = \tau F(v^d).
   \end{equation}
   By multiplying the above equation with $2 / \tau$ and rearranging we get:
   \begin{equation}
-    B(v^d, Q^{s + 1}) - \frac{2}{\tau} C(v^d, U^{s + 1})
-    = - B(v^d, Q^s) - \frac{2}{\tau} C(v^d, U^s) - 2 F(v^d).
+    - B(v^d, Q^{s + 1}) + \frac{2}{\tau} C(v^d, U^{s + 1})
+    = B(v^d, Q^s) + \frac{2}{\tau} C(v^d, U^s) + 2 F(v^d).
   \end{equation}
   Define $H^s(v^d) := B(v^d, Q^s) + \frac{2}{\tau} C(v^d, U^s)$.
   We arrive at the following problem: find
@@ -52,26 +52,25 @@
   \begin{subequations}
     \begin{alignat}{4}
       & \forall r^{d - 1} [E T^{-1}] \in \Ker \tr_{\Gamma_N, D - 1}, \:
-      && A(r^{d - 1}, Q^{s + 1}) + B^T(r^{d - 1}, U^{s + 1})
-      && = G(r^{d - 1}), \:
+      && A(r^{d - 1}, Q^{s + 1}) - B^T(r^{d - 1}, U^{s + 1})
+      && = - G(r^{d - 1}), \:
       && s \geq 0, \\
-%
+      %
       & \forall v^d [\Theta L^d] \in C^d K, \:
-      && B(v^d, Q^{s + 1}) - \frac{2}{\tau} C(v^d, U^{s + 1})
-      && = - H^s(v^d) - 2 F(v^d), \:
+      && - B(v^d, Q^{s + 1}) + \frac{2}{\tau} C(v^d, U^{s + 1})
+      && = H^s(v^d) + 2 F(v^d), \:
       && s \geq 0, \\
-%
+      %
       &
       && \tr_{\Gamma_N, d - 1} Q^s
       && = g_N^{d - 1}, \:
       && s > 0, \\
-%
+      %
       &
       && Q^0
-      % && = ((-1)^{d - 1} \kappa_{d - 1} \star_1 \delta_0)(u_0),
       && = {\rm flow\_rate}(u_0),
       && \\
-%
+      %
       &
       && U^0
       && = \star_0 u_0,
@@ -80,7 +79,8 @@
   \end{subequations}
   where
   \begin{equation}
-    {\rm flow\_rate}(y^0) := ((-1)^{d - 1} \kappa_{d - 1} \star_1 \delta_0)(y^0),\
+    {\rm flow\_rate}(y^0)
+    := ((-1)^{d - 1} \kappa_{d - 1} \star_1 \delta_0)(y^0),\
     y^0 \in C^0 K.
   \end{equation}
   Let
@@ -89,7 +89,7 @@
       & J
       && := \set{i \in \{0, ..., n_{d - 1}\}}
         {c_{d - 1, i} \in (\Gamma_N)_{d - 1}}, \\
-%
+      %
       & \overline{J}
       && := \{0, ..., n_{d - 1}\} \setminus J.
     \end{alignat}
@@ -103,15 +103,15 @@
     \begin{alignat}{3}
       & \sum_{j = 0}^{n_{d - 1} - 1} {\bf A}_{i, j} {\bf Q}^{s + 1}_j
         - \sum_{k = 0}^{n_d - 1} ({\bf B}^T)_{i, k} {\bf U}^{s + 1}_k
-      && = {\bf G}_i, \:
+      && = - {\bf G}_i, \:
       && i \in \overline{J}, \\
-%
-      & \sum_{i = 0}^{n_{d - 1} - 1} {\bf B}_{k, i} {\bf Q}^{s +1}
-        -\frac{2}{\tau} {\bf C} {\bf U}^{s + 1}
-      && = (- {\bf B} {\bf Q}^s - \frac{2}{\tau} {\bf C} {\bf U}^s)_k
-        - 2 {\bf F}_k, \:
+      %
+      & - \sum_{i = 0}^{n_{d - 1} - 1} {\bf B}_{k, i} {\bf Q}^{s +1}
+        + \frac{2}{\tau} {\bf C} {\bf U}^{s + 1}
+      && = ({\bf B} {\bf Q}^s + \frac{2}{\tau} {\bf C} {\bf U}^s)_k
+        + 2 {\bf F}_k, \:
       && k \in \{0, ..., n_d - 1\}, \\
-%
+      %
       & x_i
       && = g_N^{d - 1}(c_{d - 1, i}), \:
       && i \in J.
@@ -122,25 +122,25 @@
     \begin{alignat}{3}
       & \sum_{j \in \overline{J}} {\bf A}_{i, j} {\bf Q}^{s + 1}_j
         - \sum_{k = 0}^{n_d - 1} ({\bf B}^T)_{i, k} {\bf U}^{s + 1}_k
-      && = {\bf G}_i -
+      && = - {\bf G}_i -
         \sum_{j \in J} {\bf A}_{i, j} g_N^{d - 1}(c_{d - 1, j}), \:
       && i \in \overline{J}, \\
-%
-      & \sum_{i \in J} {\bf B}_{k, i} {\bf Q}^{s + 1}_i
-        - \sum_{l = 0}^{n_d - 1}
+      %
+      & - \sum_{i \in J} {\bf B}_{k, i} {\bf Q}^{s + 1}_i
+        + \sum_{l = 0}^{n_d - 1}
           \frac{2}{\tau}{\bf C}_{k, l} {\bf U}^{s + 1}_l
-      && = (- {\bf B} {\bf Q}^s - \frac{2}{\tau} {\bf C} {\bf U}^s)_k
-        - 2 {\bf F}_k - \sum_{i \in J} {\bf B}_{k, i} g_N^{d - 1}(c_{d - 1, i}),
+      && = ({\bf B} {\bf Q}^s + \frac{2}{\tau} {\bf C} {\bf U}^s)_k
+        + 2 {\bf F}_k + \sum_{i \in J} {\bf B}_{k, i} g_N^{d - 1}(c_{d - 1, i}),
         \:
       && i \in \overline{J}.
     \end{alignat}
   \end{subequations}
-  Let $\overline{\bf A}$ be the restriction of ${\bf A}$ to the rows and colums in
-  $\overline{J}$,
+  Let $\overline{\bf A}$ be the restriction of ${\bf A}$ to the rows and colums
+  in $\overline{J}$,
   $\overline{\bf B}$ be the restristion of ${\bf B}$ to the colums in
   $\overline{J}$,
-  $\overline{\bf Q}^{s + 1}$ be the restriction of ${\bf Q}^{s}$ to the
-  indices in $\overline{J}$,
+  $\overline{\bf Q}^{s + 1}$ be the restriction of ${\bf Q}^{s}$ to the indices
+  in $\overline{J}$,
   $\widetilde{\bf F} \in \R^{n_d}$ be defined as,
   \begin{equation}
     \widetilde{\bf F}_k
@@ -152,56 +152,81 @@
   restriction).
   For any $s \in \N$ we get the mixed system
   \begin{subequations}
-    \begin{alignat}{2}
+    \begin{alignat}{3}
       & \overline{\bf A}\, \overline{\bf Q}^{s + 1}
-        + \overline{\bf B}^T {\bf U}^{s + 1}
-      && = \overline{\bf G}, \\
-%
-      & \overline{\bf B}\, \overline{\bf Q}^{s + 1}
-        - \frac{2}{\tau} {\bf C} {\bf U}^{s + 1}
-      && = - {\bf B} {\bf Q}^s - \frac{2}{\tau} {\bf C} {\bf U}^s
-        - \widetilde{\bf F}.
+      &&  - \overline{\bf B}^T {\bf U}^{s + 1}
+      && = - \overline{\bf G}, \\
+      %
+      & - \overline{\bf B}\, \overline{\bf Q}^{s + 1}
+      && + \frac{2}{\tau} {\bf C} {\bf U}^{s + 1}
+      && = {\bf B} {\bf Q}^s + \frac{2}{\tau} {\bf C} {\bf U}^s
+        + \widetilde{\bf F}.
     \end{alignat}
   \end{subequations}
   We can solve for $\overline{\bf Q}^{s + 1}$, $s \in \N$ as follows:
   \begin{equation}
     \overline{\bf Q}^{s + 1}
     = \overline{\bf A}^{-1}
-      (\overline{\bf G} - \overline{\bf B}^T {\bf U}^{s + 1}).
+      (- \overline{\bf G} + \overline{\bf B}^T {\bf U}^{s + 1})
+    = - \overline{\bf P}
+    + \overline{\bf R} {\bf U}^{s + 1},
   \end{equation}
+  where we have denoted
+  \begin{align}
+    \overline{\bf P} & := \overline{\bf A}^{-1} \overline{\bf G}, \\
+    \overline{\bf R} & := \overline{\bf A}^{-1} \overline{\bf B}^T.
+  \end{align}
   Hence,
   \begin{equation}
-    - {\bf B} {\bf Q}^s - \frac{2}{\tau} {\bf C} {\bf U}^s - \widetilde{\bf F}
-    = \overline{\bf B}\, \overline{\bf Q}^{s + 1}
-      - \frac{2}{\tau} {\bf C} {\bf U}^{s + 1}
-    = \overline{\bf B}\, \overline{\bf A}^{-1}
-      (\overline{\bf G} - \overline{\bf B}^T {\bf U}^{s + 1})
-      - \frac{2}{\tau} {\bf C} {\bf U}^{s + 1},
+    {\bf B} {\bf Q}^s + \frac{2}{\tau} {\bf C} {\bf U}^s + \widetilde{\bf F}
+    = - \overline{\bf B}\, \overline{\bf Q}^{s + 1}
+      + \frac{2}{\tau} {\bf C} {\bf U}^{s + 1}
+    = - \overline{\bf B}\, \overline{\bf A}^{-1}
+      (- \overline{\bf G} + \overline{\bf B}^T {\bf U}^{s + 1})
+      + \frac{2}{\tau} {\bf C} {\bf U}^{s + 1}.
   \end{equation}
-  which translates to
+  This translates to
   \begin{equation}
     (\overline{\bf B}\, \overline{\bf A}^{-1} \overline{\bf B}^T
-      + \frac{2}{\tau} {\bf C}) {\bf U}^{s + 1}
+    - \frac{2}{\tau} {\bf C}) {\bf U}^{s + 1}
     = \overline{\bf B} \overline{\bf A}^{-1} \overline{\bf G}
-      + \widetilde{\bf F} + {\bf B} {\bf Q}^s + \frac{2}{\tau} {\bf C} {\bf U}^s.
+    - \widetilde{\bf F} - {\bf B} {\bf Q}^s - \frac{2}{\tau} {\bf C} {\bf U}^s.
   \end{equation}
   Define the left-hand side matrix ${\bf N}_\tau \in M_{n_d \times n_d}(\R)$,
   \begin{equation}
     {\bf N}_\tau
     := \overline{\bf B}\, \overline{\bf A}^{-1} \overline{\bf B}^T
-      + \frac{2}{\tau} {\bf C},
+      - \frac{2}{\tau} {\bf C},
   \end{equation}
   and the constant right-hand side vector ${\bf Z} \in \R^{n_d}$,
   \begin{equation}
     {\bf Z}
     := \overline{\bf B} \overline{\bf A}^{-1} \overline{\bf G}
-      + \widetilde{\bf F}.
+      - \widetilde{\bf F}
+    = \overline{\bf B} \overline{\bf P} - \widetilde{\bf F}.
   \end{equation}
   This leads to the following linear $n_d \times n_d$ system:
   \begin{equation}
     {\bf N}_\tau {\bf U}^{s + 1}
-    = {\bf Z} + {\bf B} {\bf Q}^s + \frac{2}{\tau} {\bf C} {\bf U}^s.
+    = {\bf Z} - {\bf B} {\bf Q}^s - \frac{2}{\tau} {\bf C} {\bf U}^s.
   \end{equation}
-  We can apply the Cholesky decomposition to the left-hand side to arrive at
-  the following algorithm.
+  Define 
+  \begin{align}
+    {\bf V}_\tau   & := {\bf N}_\tau^{-1} {\bf Z}, \\
+    {\bf Y}_\tau^s & := {\bf B} {\bf Q}^s + \frac{2}{\tau} {\bf C} {\bf U}^s, \\
+    {\bf W}_\tau^s & := {\bf N}_\tau^{-1} {\bf Y}_\tau^s.
+  \end{align}
+  To find ${\bf V}_\tau$ and ${\bf W}_\tau^s$ we first find the Cholesky
+  decomposition of ${\bf N}_\tau$:
+  \begin{equation}
+    {\bf N}_\tau = {\bf L}_\tau {\bf L}_\tau^T.
+  \end{equation}
+  Hence,
+  \begin{equation}
+    {\bf U}^{s + 1}
+    = {\bf N}_\tau^{-1}
+      ({\bf Z} - {\bf B} {\bf Q}^s - \frac{2}{\tau} {\bf C} {\bf U}^s)
+    = {\bf V}_\tau - {\bf W}_\tau^s.
+  \end{equation}
+  Summarasing, we get the following algorithmic procedure.
 \end{discussion}

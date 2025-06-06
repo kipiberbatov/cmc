@@ -39,16 +39,16 @@
       & A \colon \Omega^{0} X \times (I \to \Omega^{0} X) \to \R, \quad
       && A(v^0, w^0) := \inner{d_0 v^0}{\tilde{\kappa}_1 d_0 w^0}_{X, 0} \qquad
       && [E T^{-1} \Theta^{-1}], \\
-%
+      %
       & B \colon \Omega^0 X \times (I \to \Omega^0 X) \to \R, \quad
       && B(v^0, w^0) := \inner{v^0}{\pi_0 w^0}_{X, 0} \qquad
       && [E \Theta^{-1}], \\
-%
+      %
       & G \colon \Omega^0 X \to \R, \quad
       && G(v^0)
         := \int_{\Gamma_N} (\tr_{\Gamma_N} v^0 \wedge g_N^{D - 1}) \qquad
       && [E T^{-1}], \\
-%
+      %
       & F \colon \Omega^0 X \to \R, \quad
       && F(v^0) := \int_X (v^0 \wedge f^D) \qquad
       && [E T^{-1}].
@@ -60,14 +60,14 @@
     \begin{alignat}{4}
       & \forall v^0 [\Theta] \in \Ker \tr_{\Gamma_D, 0}, \quad
       && B(v^0, \frac{\partial u^0} {\partial t}) + A(v^0, u^0)
-      && = G(v^0) + F(v^0) \qquad
+      && = F(v^0) - G(v^0) \qquad
       && [E T^{-1} \Theta], \\
-%
+      %
       &
       && \tr_{\Gamma_D, 0} u^0
       && = g_D^0 \qquad
       && [\Theta], \\
-%
+      %
       &
       && u^0(t_0)
       && = u_0 \qquad
@@ -79,8 +79,7 @@
   \begin{equation}
     q^{D - 1}(t, x) =
     \begin{cases}
-      ((-1)^{D - 1} \star_1 \tilde{\kappa}_1 d_0 u^0)(t, x),
-        & x \notin \Gamma_N \\
+      (- \star_1 \tilde{\kappa}_1 d_0 u^0)(t, x), & x \notin \Gamma_N \\
       g_N^{D - 1}(t, x), & x \in \Gamma_N
     \end{cases},\ t \in I.
   \end{equation}

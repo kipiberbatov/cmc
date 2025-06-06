@@ -8,23 +8,22 @@
   \begin{equation}
     \begin{split}
       \int_X v^0 \wedge \frac{\partial Q^D}{\partial t}
-      & = \int_X (v^0 \wedge d_{D - 1} q^{D - 1}) + \int_X (v^0 \wedge f^D) \\
-      & = \int_{\partial X} \tr_{\partial X, D - 1} (v^0 \wedge q^{D - 1})
-        - \int_X (d_0 v^0 \wedge q^{D - 1})
+      & = - \int_X (v^0 \wedge d_{D - 1} q^{D - 1}) + \int_X (v^0 \wedge f^D) \\
+      & = - \int_{\partial X} \tr_{\partial X, D - 1} (v^0 \wedge q^{D - 1})
+        + \int_X (d_0 v^0 \wedge q^{D - 1})
         + \int_X (v^0 \wedge f^D) \\
       & =
-        \int_{\Gamma_N}
+        - \int_{\Gamma_N}
           (\tr_{\Gamma_N, 0} v^0 \wedge \tr_{\Gamma_N, D - 1} q^{D - 1})
         - \int_X (d_0 v^0 \wedge \star_1 \tilde{\kappa}_1 d_0 u^0)
         + \int_X (v^0 \wedge f^D) \\
-      & = \int_{\Gamma_N} (\tr_{\Gamma_N, 0} v^0 \wedge g_N^{D - 1})
-        - \int_X (d_0 v^0 \wedge (-1)^{D - 1} \star_1 \tilde{\kappa}_1 d_0 u^0)
+      & = - \int_{\Gamma_N} (\tr_{\Gamma_N, 0} v^0 \wedge g_N^{D - 1})
+        - \int_X (d_0 v^0 \wedge \star_1 \tilde{\kappa}_1 d_0 u^0)
         + \int_X (v^0 \wedge f^D) \\
-      & = \int_{\Gamma_N} (\tr_{\Gamma_N, 0} v^0 \wedge g_N^{D - 1})
-        - \inner{d_0 v^0}
-          {(-1)^{D - 1} \star_{D - 1} \star_1 \tilde{\kappa}_1 d_0 u^0}_{X, 1}
+      & = - \int_{\Gamma_N} (\tr_{\Gamma_N, 0} v^0 \wedge g_N^{D - 1})
+        - \inner{d_0 v^0}{\star_{D - 1} \star_1 \tilde{\kappa}_1 d_0 u^0}_{X, 1}
         + \int_X (v^0 \wedge f^D) \\
-      & = \int_{\Gamma_N} (\tr_{\Gamma_N, 0} v^0 \wedge g_N^{D - 1})
+      & = - \int_{\Gamma_N} (\tr_{\Gamma_N, 0} v^0 \wedge g_N^{D - 1})
         - \inner{d_0 v^0}{\tilde{\kappa}_1 d_0 u^0}_{X, 1}
         + \int_X (v^0 \wedge f^D).
     \end{split}

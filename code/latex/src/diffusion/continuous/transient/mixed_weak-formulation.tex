@@ -41,22 +41,22 @@
       && A(r^{D - 1}, s^{D - 1})
         := \inner{r^{D - 1}}{\kappa_{D - 1}^{-1} s^{D - 1}}_{X, D - 1} \;
       && [E^{-1} T \Theta], \\
-%
+      %
       & B \colon \Omega^D X \times (I \to \Omega^{D - 1} X) \to \R, \;
       && B(v^D, r^{D - 1})
         := \inner{d_{D - 1} r^{D - 1}}{v^D}_{X, D} \;
       && [L^{-D}], \\
-%
+      %
       & C \colon \Omega^D X \times (I \to \Omega^D X) \to \R, \;
       && C(v^D, w^D) := \inner{\tilde{\pi}_D w^D}{v^D}_{X, D} \;
       && [E L^{-2D} \Theta^{-1}], \\
-%
+      %
       & G \colon \Omega^{D - 1} X \to \R, \;
       && G(r^{D - 1})
         := \int_{\Gamma_D} (\tr_{\Gamma_D, D - 1} r^{D - 1} \wedge g_D^0)
         \;
       && [\Theta], \\
-%
+      %
       & F \colon \Omega^D X \to \R, \;
       && F(v^D) := \inner{f^D}{v^D}_{X, D} \;
       && [E T^{-1} L^{-D}].
@@ -73,20 +73,20 @@
   \begin{subequations}
     \begin{alignat}{4}
       & \forall r^{D - 1} [E T^{-1}] \in \Ker \tr_{\Gamma_N, D - 1}, \;
-      && A(r^{D - 1}, q^{D - 1}) + B^T(r^{D - 1}, \tilde{u}^D)
-      && = G(r^{D - 1}) \;
+      && A(r^{D - 1}, q^{D - 1}) - B^T(r^{D - 1}, \tilde{u}^D)
+      && = - G(r^{D - 1}) \;
       && [E T^{-1} \Theta], \\
-%
+      %
       & \forall v^D [\Theta L^D] \in \Omega^D X, \;
-      && B(v^D, q^{D - 1}) - C(v^D, \frac{\partial \tilde{u}^D}{\partial t})
-      && = - F(v^D) \;
+      && - B(v^D, q^{D - 1}) + C(v^D, \frac{\partial \tilde{u}^D}{\partial t})
+      && = F(v^D) \;
       && [E T^{-1} \Theta], \\
-%
+      %
       &
       && \tr_{\Gamma_N, D - 1} q^{D - 1}
       && = g_N^{D - 1} \;
       && [E T^{-1}], \\
-%
+      %
       &
       && \tilde{u}^D(t_0)
       && = \star_{X, 0} u_0 \;

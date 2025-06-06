@@ -112,6 +112,9 @@ also use the sign conventions of the notes.
 I plan at some point to change everything in the codebase, in order to align
 with the preprint (and the standard sign conventions).
 
+**News (6 June 2025):** currently the notes have been updated and now follow the
+standard sign conventions; the code remains to be updated as well.
+
 ## Modules
 - array: functions working on integers and floating point numbers and
 arrays structures of those types;

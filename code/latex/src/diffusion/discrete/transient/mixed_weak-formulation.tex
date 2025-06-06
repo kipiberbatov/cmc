@@ -48,21 +48,21 @@
       && A(r^{d - 1}, s^{d - 1})
         := \inner{r^{d - 1}}{\kappa_{d - 1}^{-1} s^{d - 1}}_{K, d - 1} \enspace
       && [E^{-1} T \Theta], \\
-%
+      %
       & B \colon C^d K \times (I \to C^{d - 1} K) \to \R, \enspace
       && B(v^d, r^{d - 1})
         := \inner{\delta_{d - 1} r^{d - 1}}{v^d}_{K, d} \enspace
       && [L^{-d}], \\
-%
+      %
       & C \colon C^d K \times (I \to C^d K) \to \R, \enspace
       && C(v^d, w^d) := \inner{\tilde{\pi}_d w^d}{v^d}_{K, d} \enspace
       && [E L^{-2 d} \Theta^{-1}], \\
-%
+      %
       & G \colon C^{d - 1} K \to \R, \enspace
       && G(r^{d - 1}) :=(\tr_{\Gamma_D, d - 1} r^{d - 1} \smile g_D^0)[\Gamma_D]
         \enspace
       && [\Theta], \\
-%
+      %
       & F \colon C^d K \to \R, \enspace
       && F(v^d) := \inner{f^d}{v^d}_{K, d} \enspace
       && [E T^{-1} L^{-d}].
@@ -79,20 +79,20 @@
   \begin{subequations}
     \begin{alignat}{4}
       & \forall r^{d - 1} [E T^{-1}] \in \Ker \tr_{\Gamma_N, d - 1}, \enspace
-      && A(r^{d - 1}, q^{d - 1}) + B^T(r^{d - 1}, \tilde{u}^d)
-      && = G(r^{d - 1}) \enspace
+      && A(r^{d - 1}, q^{d - 1}) - B^T(r^{d - 1}, \tilde{u}^d)
+      && = - G(r^{d - 1}) \enspace
       && [E T^{-1} \Theta], \\
-%
+      %
       & \forall v^d [\Theta L^d] \in C^d K, \enspace
-      && B(v^d, q^{d - 1}) - C(v^d, \frac{\partial \tilde{u}^d}{\partial t})
-      && = - F(v^d) \enspace
+      && - B(v^d, q^{d - 1}) + C(v^d, \frac{\partial \tilde{u}^d}{\partial t})
+      && = F(v^d) \enspace
       && [E T^{-1} \Theta], \\
-%
+      %
       &
       && \tr_{\Gamma_N, d - 1} q^{d - 1}
       && = g_N^{d - 1} \enspace
       && [E T^{-1}], \\
-%
+      %
       &
       && \tilde{u}^d(t_0)
       && = \star_{K, 0} u_0 \enspace

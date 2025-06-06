@@ -7,34 +7,28 @@
   Let $r^{D - 1} [E T^{-1}] \in \Ker \left(\tr_{\Gamma_N, D - 1}\right)$.
   Then
   \begin{equation}
-    \kappa_{D - 1}^{-1} q^{D - 1}
-    = - d_\star^D \tilde{u}^D
-    = (-1)^{D - 1} \star_1 d_0 u^0,
+    \kappa_{D - 1}^{-1} q^{D - 1} = d_\star^D \tilde{u}^D = - \star_1 d_0 u^0.
   \end{equation}
-  and therefore
+  Hence,
   \begin{equation}
     \begin{split}
       \inner{r^{D - 1}}{\kappa_{D - 1}^{-1} q^{D - 1}}_{X, D - 1}
-      & = \inner{r^{D - 1}}{(-1)^{D - 1} \star_1 d_0 u^0}_{X, D - 1} \\
-      & = (-1)^{D - 1} \int_X (r^{D - 1} \wedge d_0 u^0) \\
-      & = \int_X
-        (d_{D - 1}(r^{D - 1} \wedge u^0) - d_{D - 1} r^{D - 1} \wedge u^0) \\
-      & = \int_{\partial X}
-        (\tr_{\partial X, D - 1} r^{D - 1} \wedge \tr_{\partial X, 0} u^0)
-        - \int_{X} (d_{D - 1} r^{D - 1} \wedge u^0) \\
-      & = \int_{\Gamma_D} (\tr_{\Gamma_D, D - 1} r^{D - 1} \wedge g_D^0)
-        - \int_{X} (d_{D - 1} r^{D - 1} \wedge u^0) \\
-      & = \int_{\Gamma_D} (\tr_{\Gamma_D, D - 1} r^{D - 1} \wedge g_D^0)
-        - \inner{d_{D - 1} r^{D - 1}}{\star_0 u^0} \\
-      & = \int_{\Gamma_D} (\tr_{\Gamma_D, D - 1} r^{D - 1} \wedge g_D^0)
-        - \inner{d_{D - 1} r^{D - 1}}{\tilde{u}^D}.
+      & = \inner{r^{D - 1}}{- \star_1 d_0 u^0}_{X, D - 1} \\
+      & = - \int_X d_0 u^0 \wedge r^{D - 1} \\
+      & = - \int_{\partial X}
+        \tr_{\partial X, 0} u^0 \wedge \tr_{\partial X, D - 1} r^{D - 1}
+        + \int_{X} (u^0 \wedge d_{D - 1} r^{D - 1}) \\
+      & = - \int_{\Gamma_D} g_D^0 \wedge \tr_{\Gamma_D, D - 1} r^{D - 1}
+        + \inner{\star_0 u^0}{d_{D - 1} r^{D - 1}} \\
+      & = - \int_{\Gamma_D} g_D^0 \wedge \tr_{\Gamma_D, D - 1} r^{D - 1}
+        + \inner{\tilde{u}^D}{d_{D - 1} r^{D - 1}}.
     \end{split}
   \end{equation}
   Let $v^D [\Theta] \in \Omega^D X$.
   Taking the inner product of the conservation law with $v^D$ gives
   \begin{equation}
    \inner{\tilde{\pi}_D \frac{\partial \tilde{u}^D}{\partial t}}{v^D}_{X, D}
-    = \inner{d_{D - 1} q^{D - 1}}{v^D}_{X, D} + \inner{f^D}{v^D}.
+    = - \inner{d_{D - 1} q^{D - 1}}{v^D}_{X, D} + \inner{f^D}{v^D}.
   \end{equation}
   This leads to the following (mixed weak) formulation.
 \end{discussion}

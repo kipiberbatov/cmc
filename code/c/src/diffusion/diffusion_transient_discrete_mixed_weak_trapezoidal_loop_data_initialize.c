@@ -322,7 +322,6 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
 
   matrix_sparse_vector_multiply_add(z, b_bar, p_bar);
   matrix_sparse_multiply_with_diagonal_matrix(b_bar, a_bar_inverse);
-  free(a_bar_inverse);
 
 #if progress
   fputs("\n" color_red "z:" color_none "\n", stderr);
@@ -403,6 +402,9 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
 #endif
 
   matrix_sparse_scalar_multiply(b_bar_transpose, -1);
+  matrix_sparse_multiply_with_diagonal_matrix_on_the_left(
+    b_bar_transpose, a_bar_inverse);
+  free(a_bar_inverse);
 
 #if progress
   fputs("\n" color_red "-b_bar^T:" color_none "\n", stderr);
@@ -411,8 +413,8 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
 
   input->boundary_neumann_dm1_bar = boundary_neumann_dm1_bar;
   input->b = b;
-  input->negative_b_bar_transpose = b_bar_transpose;
-  // input->l_tau = l_tau;
+  input->negative_r_bar = b_bar_transpose;
+  /* input->l_tau = l_tau; */
   input->l_tau = n_tau;
   input->c_tau = c_tau;
   input->v_tau = v_tau;

@@ -16,49 +16,51 @@
     \item
       $t_0 \in \R$ be the initial time, $t_0\ [T]$;
     \item
-      $u_0 \in C^0 K$ be the initial temperature, $u_0\ [\Theta]$;
+      $u_0 [\Theta] \in C^0 K$ be the initial temperature;
     \item
-      $f \in C^0 K'$ be the external heat source, $f\ [E L^{-3} T^{-1}]$;
+      $f [E L^{-D} T^{-1}] \in C^0 K'$ be the external heat source;
     \item
       $\Gamma_D, \Gamma_N$ form a partition of $(\partial K)_0$;
     \item
-      ${\bf n} \colon \Gamma_N \to \R^d$
-      be the generalized exterior unit normal, ${\bf n}\ [1]$;
+      ${\bf n} [L^{-1}] \colon \Gamma_N \to \R^d$
+      be the generalized exterior unit normal;
     \item
-      $g_D \colon [t_0, \infty) \to ({\rm Free}_\R(\Gamma_D))^*$
-      be the Dirichlet boundary condition, $g_D\ [\Theta]$;
+      $g_D [\Theta] \colon [t_0, \infty) \to ({\rm Free}_\R(\Gamma_D))^*$
+      be the Dirichlet boundary condition, $g_D$;
     \item
-      $g_N \colon [t_0, \infty) \to ({\rm Free}_\R(\Gamma_N))^*$
-      be the Neumann boundary condition, $g_N\ [E L^{-1} T^{-1}]$;
+      $g_N [E L^{1 - D} T^{-1}] \colon
+       [t_0, \infty) \to ({\rm Free}_\R(\Gamma_N))^*$
+      be the Neumann boundary condition;
     \item
-      $\pi_0 \colon C^0 K \to C^0 K$ be a material property of the nodes of $K$
-      (its matrix in the standard basis is diagonal),
-      $\pi_0\ [E L^{-3} \Theta^{-1}]$;
+      $\pi_0 [E L^{-D} \Theta^{-1}] \colon C^0 K \to C^0 K$
+      be a material property (heat capacity) of the nodes of $K$
+      (its matrix in the standard basis is diagonal);
     \item
-      $\kappa_1 \colon C^1 K \to C^1 K$ be a material property of the edges of
-      $K$ (its matrix in the standard basis is diagonal),
-      $\kappa_1\ [E L^{-1} T^{-1} \Theta^{-1}]$.
+      $\kappa_1 [E L^{2 - D} T^{-1} \Theta^{-1}] \colon C^1 K \to C^1 K$
+      be a material property (thermal conductivity) of the edges of $K$
+      (its matrix in the standard basis is diagonal).
   \end{itemize}
-  We are solving the following problem.
-  \begin{equation}
-    \begin{split}
-      & \text{Find $u \in [t_0, \infty) \to C^0 K$, $u\ [\Theta]$, such that} \\
-      &
-      \begin{cases}
-        \restrict{\frac{\partial (\pi_0 u)}{\partial t}}{K'_0} =
-        \restrict{((\delta_1^\star \circ \kappa_1 \circ \delta_0) u)}{K'_0} + f
-        & (\text{conservation of heat energy},\ [E L^{-3} T^{-1}]), \\
-%
-        u(t_0, \cdot) = u_0
-        & (\text{initial condition},\ [\Theta]), \\
-%
-        \restrict{u}{\Gamma_D} = g_D
-        & (\text{Dirichlet boundary condition},\ [\Theta]), \\
-%
-        \restrict{\overline{(\kappa_1 \circ \delta_0) u}}{\Gamma_N}
-        \cdot {\bf n} = g_N
-        & (\text{Neumann boundary condition},\ [E L^{-1} T^{-1}]).
-      \end{cases}
-    \end{split}
-  \end{equation}
+  We are solving the following problem for
+  $u [\Theta] \colon [t_0, \infty) \to C^0 K$:
+  \begin{subequations}
+    \begin{alignat}{4}
+      & \restrict{\frac{\partial (\pi_0 u)}{\partial t}}{K'_0}
+      && = f
+         - \restrict{((\delta_1^\star \circ \kappa_1 \circ \delta_0) u)}{K'_0}
+         \;
+      && (\text{conservation of heat energy}) \quad
+      && [E L^{-D} T^{-1}], \\
+      %
+      & \restrict{u}{\Gamma_D}
+      && = g_D \;
+      && (\text{Dirichlet boundary condition}) \quad
+      && [\Theta], \\
+      %
+      & - \restrict{\overline{(\kappa_1 \circ \delta_0) u}}{\Gamma_N}
+        \cdot {\bf n}
+      && = g_N \;
+      && (\text{Neumann boundary condition}) \quad
+      && [E L^{1 - D} T^{-1}].
+    \end{alignat}
+  \end{subequations}
 \end{formulation}

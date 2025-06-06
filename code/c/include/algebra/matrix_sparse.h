@@ -92,8 +92,13 @@ void matrix_sparse_vector_multiply_add(
   const matrix_sparse * a,
   const double * x);
 
-/* Find the a . diagonal(d[0], ..., d[a->cols - 1]) . */
+/* Find the a . diagonal(d[0], ..., d[a->cols - 1]) */
 void matrix_sparse_multiply_with_diagonal_matrix(
+  matrix_sparse * a,
+  const double * d);
+
+/* Find the diagonal(d[0], ..., d[a->cols - 1]) . a */
+void matrix_sparse_multiply_with_diagonal_matrix_on_the_left(
   matrix_sparse * a,
   const double * d);
 

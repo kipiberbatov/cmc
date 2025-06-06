@@ -4,7 +4,8 @@
 
   Let:
   \begin{itemize}
-    \item $M$ be a manifold-like flat mesh of dimension $3$;
+    \item $D$ be a positive integer (physical dimension);
+    \item $M$ be a manifold-like flat mesh of dimension $D$;
     \item $K$ be the Forman subdivision of $M$;
     \item $t_0 \in \R$ be the initial time, $I = [t_0, \infty)$.
   \end{itemize}
@@ -14,10 +15,10 @@
       temperature $u \colon I \to C^0 K$ of physical dimension $[\Theta]$;
     \item
       heat energy density $Q \colon I \to C^0 K$ of physical dimension
-      $[E L^{-3}]$;
+      $[E L^{-D}]$;
     \item
       heat flux $q \colon I \to C^1 K$ of physical dimension
-      $[E L^{-1} T^{-1}]$.
+      $[E L^{2 - D} T^{-1}]$.
   \end{itemize}
   The governing laws are the following.
   \begin{itemize}
@@ -25,7 +26,7 @@
       Let
         $K' := K \setminus \partial K$ be the interior of $K$,
         $f \in C^0 K'$ be the external heat source of physical dimension
-          $[E L^{-3} T^{-1}]$.
+          $[E L^{-D} T^{-1}]$.
       \textbf{Conservation of heat energy} is modeled by the equation
       \begin{equation}
         \restrict{\frac{\partial Q}{\partial t}}{K'_0} =
@@ -40,7 +41,7 @@
       \end{equation}
     \item
       Let $\pi_0 \colon C^0 K \to C^0 K$
-      of physical dimension $[E L^{-3} \Theta^{-1}]$
+      of physical dimension $[E L^{-D} \Theta^{-1}]$
       be a material property of the nodes of $K$,
       playing the role of volumetric heat capacity
       (its matrix in the standard basis is diagonal).
@@ -50,13 +51,13 @@
       \end{equation}
     \item
       Let $\kappa_1 \colon C^1 K \to C^1 K$
-      of physical dimension $[E L^{-1} T^{-1} \Theta^{-1}]$
+      of physical dimension $[E L^{2 - D} T^{-1} \Theta^{-1}]$
       be a material property of the edges of $K$,
       playing the role of thermal conductivity
       (its matrix in the standard basis is diagonal).
       The \textbf{Fourier's constitutive relation} is given by
       \begin{equation}
-        q = \kappa_1 (\delta_0 u).
+        q = - \kappa_1 (\delta_0 u).
       \end{equation}
   \end{itemize}
   We complete our model with boundary conditions.
@@ -74,9 +75,10 @@
     \item
       Let
         ${\bf n} \colon \Gamma_N \to \R^d$
-          be the dimensionless generalized exterior unit normal,
+          of physical dimension $[L^{-1}]$
+          be the generalized exterior unit normal,
         $g_N \colon [t_0, \infty) \to ({\rm Free}_\R(\Gamma_N))^*$
-          of physical dimension $[E L^{-1} T^{-1}]$
+          of physical dimension $[E L^{1 - D} T^{-1}]$
           be the prescribed flux on the Neumann boundary $\Gamma_N$.
       The \textbf{Neumann boundary condition} is given by
       \begin{equation}

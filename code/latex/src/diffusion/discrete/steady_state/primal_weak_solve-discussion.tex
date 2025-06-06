@@ -15,16 +15,16 @@
   and the vectors $b, b^N, b^f \in \R^{n_0}$ by
   \begin{subequations}
     \begin{alignat}{3}
-      & b_i
+      & b^N_i
       && := (\tr_{\Gamma_N, 0} N^i \smile g_N^{d - 1})[\Gamma_N], \enspace
       && i = 0, ..., n_0 - 1, \\
-%
+      %
       & b^f_i
       && := (N^i \smile f^d)[K], \enspace
       && i = 0, ..., n_0 - 1, \\
-%
+      %
       & b
-      && := b^N + b^f.
+      && := b^f - b^N.
       &&
     \end{alignat}
   \end{subequations}
@@ -40,7 +40,7 @@
       & \sum_{j = 0}^{n_0 - 1} A_{i, j} x_j
       && = b_i, \enspace
       && i \in J, \\
-%
+      %
       & x_i
       && = g_D^0(N_i), \enspace
       && i \in I.

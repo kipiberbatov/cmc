@@ -106,7 +106,7 @@
           \begin{equation}
             \overline{\bf G}_i :=
             {\bf G}_i
-            - \sum_{j \in J} {\bf A}_{i, j} g_N^{d - 1}(c_{d - 1, j}),\
+            + \sum_{j \in J} {\bf A}_{i, j} g_N^{d - 1}(c_{d - 1, j}),\
             i \in \overline{J}
           \end{equation}
           (in our case  $A$ is diagonal and so for all $i \in \overline{J}$
@@ -127,24 +127,28 @@
               + \frac{2}{\tau} {\bf C};
           \end{equation}
         \item
-          the lower-triangular positive-diagonal sparse matrix
+          the lower-triangular positive definite sparse matrix
           ${\bf L}_\tau \in M_{n_d \times n_d}(\R)$
           realising the Cholesky decomposition
           \begin{equation}
             {\bf N}_\tau = {\bf L}_\tau {\bf L}^T_\tau;
           \end{equation}
         \item
-          the constant right-hand side vector ${\bf Z} \in \R^{n_d}$,
-          \begin{equation}
-            {\bf Z}
-            := \overline{\bf B}\, \overline{\bf A}^{-1} \overline{\bf G}
-              + \widetilde{\bf F};
-          \end{equation}
-        \item
           the time-independent part of the heat flow rate
           $\overline{\bf P} \in \R^{\abs{\overline{J}}}$,
           \begin{equation}
             \overline{\bf P} := \overline{\bf A}^{-1} \overline{\bf G};
+          \end{equation}
+        \item
+          the time-independent matrix multiplier
+          $\overline{\bf R} \in M_{\abs{\overline{J}} \times n_d}(\R)$,
+          \begin{equation}
+            \overline{\bf R} := \overline{\bf A}^{-1} \overline{\bf B}^T;
+          \end{equation}
+        \item
+          the constant right-hand side vector ${\bf Z} \in \R^{n_d}$,
+          \begin{equation}
+            {\bf Z} := \overline{\bf B} \overline{\bf P} - \widetilde{\bf F};
           \end{equation}
         \item
           the time-independent part of the dual temperature
@@ -156,7 +160,7 @@
           \end{equation}
           (calculated with forward and back substitution);
         \item
-          the initial coordinates
+          the initial cooefficients
           ${\bf U}^0 \in \R^{n_d}$ of the dual temperature,
           and ${\bf Q}^0 \in \R^{n_{d - 1}}$ of the heat flow rate:
           \begin{subequations}
@@ -203,29 +207,31 @@
       condition for small error is fulfilled), calculate:
       \begin{itemize}
         \item
-          \qquad\;
-          $ {\bf Y}_\tau^s
-            := {\bf B} {\bf Q}^s + \frac{2}{\tau} {\bf C} {\bf U}^s$;
-          \hfill\refstepcounter{equation}\textup{(\theequation)}
-        \item
-          \qquad\;
-          $ {\bf W}_\tau^s
-            := {\bf N}_\tau^{-1} {\bf Y}_\tau^s
-            = {\bf L}_\tau^{-T} {\bf L}_\tau^{-1} {\bf Y}_\tau^s$
-          \hfill\refstepcounter{equation}\textup{(\theequation)}
-          \newline
-          (calculated with forward and back substitution);
-        \item
-          the coordinates of the dual temperature ${\bf U}^{s + 1}$
-          (stored for all $s$),
+          RHS term ${\bf Y}_\tau^s$:
           \begin{equation}
-            {\bf U}^{s + 1} := {\bf V}_\tau + {\bf W}_\tau^s;
+            {\bf Y}_\tau^s
+            := {\bf B} {\bf Q}^s + \frac{2}{\tau} {\bf C} {\bf U}^s;
           \end{equation}
         \item
-          \qquad\;
-          $ \overline{\bf Q}^{s + 1}
-            := \overline{\bf P} - \overline{\bf B}^T {\bf U}^{s + 1}$;
-          \hfill\refstepcounter{equation}\textup{(\theequation)}
+          solution term ${\bf W}_\tau^s$:
+          \begin{equation}
+          {\bf W}_\tau^s
+            := {\bf N}_\tau^{-1} {\bf Y}_\tau^s
+            = {\bf L}_\tau^{-T} {\bf L}_\tau^{-1} {\bf Y}_\tau^s;
+          \end{equation}
+          (calculated with forward and back substitution);
+        \item
+          the coefficients of the dual temperature ${\bf U}^{s + 1}$
+          (stored for all $s$),
+          \begin{equation}
+            {\bf U}^{s + 1} := {\bf V}_\tau - {\bf W}_\tau^s;
+          \end{equation}
+        \item
+          the non-Neumann coefficients of the heat flow rate ${\bf Q}^{s + 1}$,
+          \begin{equation}
+            \overline{\bf Q}^{s + 1}
+            := - \overline{\bf P} + \overline{\bf R} {\bf U}^{s + 1};
+         \end{equation}
         \item
           the heat flow rate ${\bf Q}^{s + 1} \in \R^{n_{d - 1}}$
           (stored for all $s$),

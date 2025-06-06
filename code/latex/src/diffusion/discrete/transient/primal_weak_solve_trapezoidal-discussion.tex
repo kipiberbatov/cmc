@@ -10,7 +10,7 @@
   \end{equation}
   For further simplicity we will also assume that all the rest input data (heat
   source, thermal conductivity, boundary conditions) are also time-independent.
-  Denote $H := F + G$. We can then integrate the equation
+  Denote $H := F - G$. We can then integrate the equation
   \begin{equation}
     \frac{d}{d t} B(v^0, u^0) + A(v^0, u^0) = H(v^0)
   \end{equation}
@@ -23,7 +23,7 @@
   For an interval $[\alpha, \beta]$ the trapezoidal rule gives the approximation
   \begin{equation}
     A(v^0, \int_\alpha^\beta u^0\, d t)
-    \approx A(v^0, \frac{\beta - \alpha}{2} (u^0(\alpha) + u^0(\beta)))
+    \approx A(v^0, \frac{\beta - \alpha}{2} (u^0(\alpha) + u^0(\beta))).
   \end{equation}
   Hence, if we partition $I$ into segements with size $\tau$ with moments of
   time $\{t_i := t_0 + \tau i\}_{i \geq 0}$, and if we denote
@@ -53,12 +53,12 @@
       && L_\tau(v^0, y^{i + 1})
       && = R_\tau(v^0, y^i) + \tau H(v^0), \enspace
       && i \geq 0, \\
-%
+      %
       &
       && \tr_{\Gamma_D, 0} y^i
       && = g_D^0, \enspace
       && i > 0, \\
-%
+      %
       &
       && y^0
       && = u_0.

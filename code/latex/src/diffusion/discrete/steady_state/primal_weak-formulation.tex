@@ -40,10 +40,10 @@
     \begin{alignat}{4}
       & \forall v^0 \in \Ker \tr_{\Gamma_D, 0}, \enspace
       && \inner{\delta_0 v^0}{\tilde{\kappa}_1 \delta_0 u^0}_{K, 1}
-      && = (\tr_{\Gamma_N, 0} v^0 \smile g_N^{d - 1})[\Gamma_N]
-        +(v^0 \smile f^d)[K] \qquad
+      && = (v^0 \smile f^d)[K]
+         - (\tr_{\Gamma_N, 0} v^0 \smile g_N^{d - 1})[\Gamma_N] \qquad
       && [E T^{-1} \Theta], \\
-%
+      %
       &
       && \tr_{\Gamma_D, 0} u^0
       && = g_D^0 \qquad
@@ -55,7 +55,7 @@
   \begin{equation}
     q^{d - 1}(c_{d - 1}) :=
     \begin{cases}
-      ((-1)^{d - 1} \star_1 \tilde{\kappa}_1 \delta_0 u^0)(c_{d - 1}),
+      (- \star_1 \tilde{\kappa}_1 \delta_0 u^0)(c_{d - 1}),
         & c_{d - 1} \in K_{d - 1} \setminus (\Gamma_N)_{d - 1} \\
       g_N^{d - 1}(c_{d - 1}), & c_{d - 1} \in (\Gamma_N)_{d - 1}
     \end{cases}.

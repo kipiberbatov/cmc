@@ -5,51 +5,55 @@
   We will use the trapezoidal (Crank-Nicolson) method.
 
   Let
-    $\tau \in \R^+$ of physical dimension $[T]$ be the time step,
+    $\tau [T] \in \R^+$ be the time step,
     $i \in \N$,
     $t_i := t_0 + i \tau$,
-    $y_i := u(t_i, \cdot) \in C^0 K$ of physical dimension $[\Theta]$,
-    $\rho_0 := \delta_1^\star \circ \kappa_1 \circ \delta_0$
-      of physical dimension $[E L^{-3} T^{-1} \Theta^{-1}]$.
+    $y_i [\Theta] := u(t_i, \cdot) \in C^0 K$,
+    $\rho_0 [E L^{-D} T^{-1} \Theta^{-1}]
+      := \delta_1^\star \circ \kappa_1 \circ \delta_0$.
   Integrating the conservation of heat energy in $[t_i, t_{i + 1}]$, we get
   \begin{equation}
     \restrict{(\pi_0 y_{i + 1} - \pi_0 y_i)}{K'_0}
-    =   \int_{t_i}^{t_{i + 1}} \restrict{(\rho_0 u(t, \cdot))}{K'_0}\, d t
-      + \int_{t_i}^{t_{i + 1}} f\, d t
+    = - \int_{t_i}^{t_{i + 1}} \restrict{(\rho_0 u(t, \cdot))}{K'_0}\, d t
+    + \int_{t_i}^{t_{i + 1}} f\, d t
     \approx
-    \frac{\tau}{2} \restrict{(\rho_0 y_i + \rho_0 y_{i + 1})}{K'_0} + \tau f.
+    - \frac{\tau}{2} \restrict{(\rho_0 y_i + \rho_0 y_{i + 1})}{K'_0} + \tau f.
   \end{equation}
   Rearranging, we get the discretized equation
   \begin{equation}
-    \restrict{((\pi_0 - \frac{\tau}{2} \rho_0) y_{i + 1})}{K'_0}
-    = \restrict{((\pi_0 + \frac{\tau}{2} \rho_0) y_i)}{K'_0} + \tau f.
+    \restrict{((\pi_0 + \frac{\tau}{2} \rho_0) y_{i + 1})}{K'_0}
+    = \restrict{((\pi_0 - \frac{\tau}{2} \rho_0) y_i)}{K'_0} + \tau f.
   \end{equation}
   Define the $\dim C^0 K \times \dim C^0 K$ matrices of physical dimension
-  $[E L^{-3} \Theta^{-1}]$
+  $[E L^{-D} \Theta^{-1}]$
   \begin{equation}
-    A := \pi_0 - \frac{\tau}{2} \rho_0,\ B := \pi_0 + \frac{\tau}{2} \rho_0.
+    A := \pi_0 + \frac{\tau}{2} \rho_0,\ B := \pi_0 - \frac{\tau}{2} \rho_0.
   \end{equation}
-  The discretized in time (space is already discrete) formulation reads as
-  follows.
-  \begin{equation}
-    \begin{split}
-      & \text{Find $y \colon \N \to C^0 K$ such that} \\
-      &
-      \begin{cases}
-        y_0 = u_0 \\
-        \text{for any $i \in \N^+$, $y_i$ solves the system} \\
-        \begin{cases}
-          \restrict{(A y_i)}{K'_0} = \restrict{(B y_{i - 1})}{K'_0} + \tau f, \\
-          \restrict{y_i}{\Gamma_D} = g_D, \\
-          \restrict{\overline{(\kappa_1 \circ \delta_0) y_i}}{\Gamma_N}
-            \cdot {\bf n} = g_N.
-        \end{cases}
-      \end{cases}
-    \end{split}
-  \end{equation}
+  The discretized in time (space is already discrete) temperature
+  $y [\Theta] \colon \N \to C^0 K$ is find iteratively as follows.
+  $y_0 = u_0$ and for any $i > 0$, $y_i$ is solution to the following problem:
+  \begin{subequations}
+    \begin{alignat}{4}
+      & \restrict{(A y_i)}{K'_0}
+      && = \restrict{(B y_{i - 1})}{K'_0} + \tau f \quad
+      && (\text{balance of heat energy}) \quad
+      && [E L^{-D}], \\
+      %
+      & \restrict{y_i}{\Gamma_D}
+      && = g_D \quad
+      && (\text{Dirichlet boundary condition}) \quad
+      && [\Theta], \\
+      %
+      & - \restrict{\overline{(\kappa_1 \circ \delta_0) y_i}}{\Gamma_N}
+        \cdot {\bf n}
+      && = g_N \quad
+      && (\text{Neumann boundary condition}) \quad
+      && [E L^{1 - D} T^{-1}].
+    \end{alignat}
+  \end{subequations}
   Of course, in practice we solve it for a finite number of time steps.
   Usually, we compare tho adjacent solutions $y_i$ and $y_{i + 1}$ and stop when
-  the relative error is sufficiently small (we have reached a steady state).
+  the relative error is sufficiently small, i.e., until we reach a steady state.
   % Moreover, if $\pi_0$ and $\kappa_1$ are constants, and $K$ has mesh size
   % $h$, then $h^2 / \tau$ should be close to the thermal diffusivity
   % $\kappa_1 / \pi_0$ (both of physical dimension $[L^2 T^{-1}]$).

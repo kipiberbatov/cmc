@@ -15,7 +15,7 @@
       & A_{i, j}
       && := \inner{c^{d - 1, j}}{\kappa_{d - 1}^{-1} c^{d - 1, i}}, \enspace
       && i, j = 0, ..., n_{d - 1} - 1, \\
-%
+      %
       & B_{k, i}
       && := \inner{\delta_{d - 1} c^{d - 1, i}}{c^{d, k}}, \enspace
       && k = 0, ..., n_d - 1,\ i = 0, ..., n_{d - 1} - 1.
@@ -28,7 +28,7 @@
       & F_k
       && := \inner{f^d}{c^{d, k}}, \enspace
       && k = 0, ..., n_d - 1, \\
-%
+      %
       & G_i
       && := (\tr_{\Gamma_D, d - 1} c^{d - 1, i} \smile g_D^0)[\Gamma_D],
         \enspace
@@ -52,13 +52,13 @@
     \begin{alignat}{3}
       & \sum_{j = 0}^{n_{d - 1} - 1} A_{i, j} x_j
         - \sum_{k = 0}^{n_d - 1} (B^T)_{i, k} y_k
-      && = G_i, \enspace
+      && = - G_i, \enspace
       && i \in \overline{J}, \\
-%
-      & \sum_{i = 0}^{n_{d - 1} - 1} B_{k, i} x_i
-      && = - F_k, \enspace
+      %
+      & \sum_{i = 0}^{n_{d - 1} - 1} - B_{k, i} x_i
+      && = F_k, \enspace
       && i \in \overline{J}, \\
-%
+      %
       & x_i
       && = g_N^{d - 1}(c{d - 1, i}), \enspace
       && i \in J.
@@ -69,26 +69,26 @@
     \begin{alignat}{3}
       & \sum_{j \in \overline{J}} A_{i, j} x_j
         - \sum_{k = 0}^{n_d - 1} (B^T)_{i, k} y_k
-      && = G_i - \sum_{j \in J} A_{i, j} g_N^{d - 1}(c_{d - 1, j}), \enspace
+      && = - G_i - \sum_{j \in J} A_{i, j} g_N^{d - 1}(c_{d - 1, j}), \enspace
       && i \in \overline{J}, \\
-%
-      & \sum_{i \in J} B_{k, i} x_i
-      && = - F_k - \sum_{i \in J} B_{k, i} g_N^{d - 1}(c_{d - 1, i}), \enspace
+      %
+      & \sum_{i \in J} - B_{k, i} x_i
+      && = F_k + \sum_{i \in J} B_{k, i} g_N^{d - 1}(c_{d - 1, i}), \enspace
       && i \in \overline{J}.
     \end{alignat}
   \end{subequations}
   (Note that since $A$ is diagonal, $A_{i, j} = 0$ when $i \in \overline{J}$ and
   $j \in J$.)
   Denote by $\overline{A},\ \overline{B},\ \overline{F},\ \overline{G},\
-  \overline{x}$ the espective restricted matrices and vectors.
+  \overline{x}$ the respective restricted matrices and vectors.
   We get the system of equations
   \begin{subequations}
     \begin{alignat}{2}
-      & \overline{A} \overline{x} + \overline{B}^T y
-      && = \overline{G}, \\
-%
-      & \overline{B} \overline{x}
-      && = - \overline{F}.
+      & \overline{A} \overline{x} - \overline{B}^T y
+      && = - \overline{G}, \\
+      %
+      & - \overline{B} \overline{x}
+      && = \overline{F}.
     \end{alignat}
   \end{subequations}
   In general, when $A$ is sparse but not diagonal, it is not beneficial to use
@@ -98,18 +98,18 @@
   computationally.
   We can solve for $\overline{x}$ by
   \begin{equation}
-    \overline{x} = \overline{A}^{-1} (\overline{G} - \overline{B}^T y).
+    \overline{x} = \overline{A}^{-1} (- \overline{G} + \overline{B}^T y).
   \end{equation}
   Hence,
   \begin{equation}
-    - \overline{F}
-    = \overline{B} \overline{x}
-    = \overline{B} \overline{A}^{-1} (\overline{G} - \overline{B}^T y),
+    \overline{F}
+    = - \overline{B} \overline{x}
+    = - \overline{B} \overline{A}^{-1} (- \overline{G} + \overline{B}^T y).
   \end{equation}
-  which translates to
+  This translates to
   \begin{equation}
     \overline{B} \overline{A}^{-1} \overline{B}^T y
-    = \overline{B} \overline{A}^{-1} \overline{G} + \overline{F}.
+    = \overline{B} \overline{A}^{-1} \overline{G} - \overline{F}.
   \end{equation}
   Using the Cholesky decomposition, we can solve for $y$ and then substitute to
   find $\overline{x}$.

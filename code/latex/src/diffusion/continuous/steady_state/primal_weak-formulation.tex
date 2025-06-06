@@ -5,7 +5,7 @@
   Let:
   \begin{itemize}
     \item
-      Let $D$ be a positive integer (space dimension);
+      $D$ be a positive integer (space dimension);
     \item
       $X$ be an open region in $\R^D$, representing a material body;
     \item
@@ -30,10 +30,10 @@
     \begin{alignat}{4}
       & \forall v^0 \in \Ker \tr_{\Gamma_D, 0}, \quad
       && \inner{d_0 v^0}{\tilde{\kappa}_1 d_0 u^0}_{X, 1}
-      && = \int_{\Gamma_N} (\tr_{\Gamma_N, 0} v^0 \wedge g_N^{D - 1})
-        + \int_X (v^0 \wedge f^D) \qquad
+      && = \int_X (v^0 \wedge f^D)
+        - \int_{\Gamma_N} (\tr_{\Gamma_N, 0} v^0 \wedge g_N^{D - 1}) \qquad
       && [E T^{-1} \Theta], \\
-%
+      %
       &
       && \tr_{\Gamma_D, 0} u^0
       && = g_D^0 \qquad
@@ -45,7 +45,7 @@
   \begin{equation}
     q^{D - 1}(x) :=
     \begin{cases}
-      ((-1)^{D - 1} \star_1 \tilde{\kappa}_1 d_0 u^0)(x), & x \notin \Gamma_N \\
+      (- \star_1 \tilde{\kappa}_1 d_0 u^0)(x), & x \notin \Gamma_N \\
       g_N^{D - 1}(x), & x \in \Gamma_N
     \end{cases}.
   \end{equation}

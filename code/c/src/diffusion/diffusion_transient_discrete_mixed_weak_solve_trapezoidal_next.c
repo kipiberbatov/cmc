@@ -84,10 +84,10 @@ void diffusion_transient_discrete_mixed_weak_solve_trapezoidal_next(
   double_array_file_print(stderr, m_cn_d, dual_potential_next, "--raw");
 #endif
 
-  /* calculate q_bar^s := p_bar - b_bar^T u^{s + 1} */
+  /* calculate q_bar^s := p_bar - a_bar^{-1} b_bar^T u^{s + 1} */
   memcpy(flow_rate_reduced, input->p_bar, sizeof(double) * m_cn_dm1_bar);
   matrix_sparse_vector_multiply_add(
-    flow_rate_reduced, input->negative_b_bar_transpose, dual_potential_next);
+    flow_rate_reduced, input->negative_r_bar, dual_potential_next);
 
 #if progress
   fputs("\n" color_red "q_bar^s := p_bar - b_bar^T u^{s + 1}:" color_none "\n",
