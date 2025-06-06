@@ -107,12 +107,6 @@ static void set_g_bar(
     g, m, m_cbd_dm1, data->boundary_dirichlet_dm1, g_dirichlet_0_big);
   free(g_dirichlet_0_big);
 
-#if progress
-  fputs("\n" color_red "g_i := (c^{d - 1, i} \\/ g_D)[Gamma_D]" color_none "\n",
-    stderr);
-  double_array_file_print(stderr, m_cn_dm1, g, "--raw");
-#endif
-
   double_array_compress_to_sparse_array(g_bar, boundary_neumann_dm1_bar, g);
   free(g);
 }
@@ -149,8 +143,6 @@ return
 delete everything else:
   (A, g_d_big, g, f, A_bar, B_bar, g_new_bar, B_neumann, f_new, S_bar, N, z)
 */
-
-#define progress 0
 
 struct diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data *
 diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
@@ -196,11 +188,6 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
     goto input_free;
   }
 
-#if progress
-  fputs("\n" color_red "boundary_neumann_dm1_bar:" color_none "\n", stderr);
-  jagged1_file_print(stderr, boundary_neumann_dm1_bar, "--raw");
-#endif
-
   b = mesh_qc_matrix_sparse_from_inner_of_basis_d_cup_delta_basis_dm1(
     m_cbd_dm1, m_inner_d);
   if (b == NULL)
@@ -209,11 +196,6 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
     fputs("cannot calculate b\n", stderr);
     goto boundary_neumann_dm1_bar_free;
   }
-
-#if progress
-  fputs("\n" color_red "b:" color_none "\n", stderr);
-  matrix_sparse_file_print(stderr, b, "--matrix-form-raw");
-#endif
 
   c_tau = (double *) malloc(sizeof(double) * m_cn_dm1_bar);
   if (c_tau == NULL)
@@ -244,11 +226,6 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
   double_array_pointwise_multiply(c, m_cn_d, data->pi_d);
   double_array_multiply_with(c_tau, m_cn_d, 2. / time_step);
 
-#if progress
-  fputs("\n" color_red "diagonal_values(c_tau):" color_none "\n", stderr);
-  double_array_file_print(stderr, m_cn_d, c_tau, "--raw");
-#endif
-
   a_bar_inverse = (double *) malloc(sizeof(double) * m_cn_dm1_bar);
   if (a_bar_inverse == NULL)
   {
@@ -260,11 +237,6 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
   set_a_bar_inverse(a_bar_inverse,
     boundary_neumann_dm1_bar, m_inner_dm1, data->kappa_dm1);
 
-#if progress
-  fputs("\n" color_red "a_bar^{-1}:" color_none "\n", stderr);
-  double_array_file_print(stderr, m_cn_dm1_bar, a_bar_inverse, "--raw");
-#endif
-
   g_bar = p_bar; /* share memory */
   set_g_bar(g_bar, m, m_cbd_dm1, boundary_neumann_dm1_bar, data);
   if (errno)
@@ -275,18 +247,8 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
     goto p_bar_free;
   }
 
-#if progress
-  fputs("\n" color_red "g_bar:" color_none "\n", stderr);
-  double_array_file_print(stderr, m_cn_dm1_bar, g_bar, "--raw");
-#endif
-
   /* now p_bar = g_bar -> we update to p_bar = a_bar^{-1} g_bar */
   double_array_pointwise_multiply(p_bar, m_cn_dm1_bar, a_bar_inverse);
-
-#if progress
-  fputs("\n" color_red "p_bar:" color_none "\n", stderr);
-  double_array_file_print(stderr, m_cn_dm1_bar, p_bar, "--raw");
-#endif
 
   f = v_tau; /* share memory */
   mesh_qc_vector_from_inner_of_basis_d_cup_d_cochain(
@@ -294,11 +256,6 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
   f_tilde = f;
   double_array_multiply_with(f_tilde, m_cn_d, 2.);
   set_f_tilde(f_tilde, b, data->boundary_neumann_dm1, data->g_neumann_dm1);
-
-#if progress
-  fputs("\n" color_red "~f:" color_none "\n", stderr);
-  double_array_file_print(stderr, m_cn_d, f_tilde, "--raw");
-#endif
 
   z = f_tilde;
   b_bar = matrix_sparse_columns_restrict(b, boundary_neumann_dm1_bar);
@@ -323,11 +280,6 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
   matrix_sparse_vector_multiply_add(z, b_bar, p_bar);
   matrix_sparse_multiply_with_diagonal_matrix(b_bar, a_bar_inverse);
 
-#if progress
-  fputs("\n" color_red "z:" color_none "\n", stderr);
-  double_array_file_print(stderr, m_cn_d, z, "--raw");
-#endif
-
   n_tau = matrix_sparse_product(b_bar, b_bar_transpose);
   if (n_tau == NULL)
   {
@@ -338,51 +290,12 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
   }
   matrix_sparse_free(b_bar);
 
-#if progress
-  fputs("\n" color_red "b_bar a_bar^{-1} b_bar^T:" color_none "\n", stderr);
-  matrix_sparse_file_print(stderr, n_tau, "--matrix-form-raw");
-#endif
-
   matrix_sparse_add_with_diagonal_matrix(n_tau, c_tau);
-
-#if progress
-  {
-    struct matrix_sparse * l_tau, * l_tau_transpose, * n_tau_1;
-
-    fputs("\n# n_tau:\n", stderr);
-    matrix_sparse_file_print(stderr, n_tau, "--matrix-form-curly");
-
-    l_tau = matrix_sparse_cholesky_decomposition(n_tau);
-    fputs("\n# l_tau:\n", stderr);
-    matrix_sparse_file_print(stderr, l_tau, "--matrix-form-curly");
-
-    l_tau_transpose = matrix_sparse_transpose(l_tau);
-    fputs("\n# l_tau^T:\n", stderr);
-    matrix_sparse_file_print(stderr, l_tau_transpose, "--matrix-form-curly");
-
-    n_tau_1 = matrix_sparse_product(l_tau, l_tau_transpose);
-    fputs("\n# l_tau l_tau^T:\n", stderr);
-    matrix_sparse_file_print(stderr, n_tau_1, "--matrix-form-curly");
-
-    matrix_sparse_free(n_tau_1);
-    matrix_sparse_free(l_tau_transpose);
-    matrix_sparse_free(l_tau);
-  }
-#endif
-
-  /* error check */
-  //matrix_sparse_free(n_tau);
-
-#if progress
-  fputs("\n" color_red "n_tau = b_bar a_bar^{-1} b_bar^T + (2 / tau) c:"
-    color_none "\n", stderr);
-  matrix_sparse_file_print(stderr, n_tau, "--matrix-form-raw");
-#endif
 
   /* v_tau = n_tau^{-1} z = l_tau^{-T} l_tau^{-1} z */
   v_tau = z;
-  // matrix_sparse_lower_triangular_linear_solve(v_tau, l_tau);
-  // matrix_sparse_lower_triangular_transpose_linear_solve(v_tau, l_tau);
+  /* matrix_sparse_lower_triangular_linear_solve(v_tau, l_tau); */
+  /* matrix_sparse_lower_triangular_transpose_linear_solve(v_tau, l_tau); */
   matrix_sparse_linear_solve(n_tau, v_tau, "--cholesky");
   if (errno)
   {
@@ -391,25 +304,10 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
     goto n_tau_free;
   }
 
-#if progress
-  fputs("\n" color_red "v_tau:" color_none "\n", stderr);
-  double_array_file_print(stderr, m_cn_d, v_tau, "--raw");
-#endif
-
-#if progress
-  fputs("\n" color_red "b_bar^T:" color_none "\n", stderr);
-  matrix_sparse_file_print(stderr, b_bar_transpose, "--matrix-form-raw");
-#endif
-
   matrix_sparse_scalar_multiply(b_bar_transpose, -1);
   matrix_sparse_multiply_with_diagonal_matrix_on_the_left(
     b_bar_transpose, a_bar_inverse);
   free(a_bar_inverse);
-
-#if progress
-  fputs("\n" color_red "-b_bar^T:" color_none "\n", stderr);
-  matrix_sparse_file_print(stderr, b_bar_transpose, "--matrix-form-raw");
-#endif
 
   input->boundary_neumann_dm1_bar = boundary_neumann_dm1_bar;
   input->b = b;
@@ -420,29 +318,6 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
   input->v_tau = v_tau;
   input->p_bar = p_bar;
   input->data = data;
-
-#if progress
-  fputs("\n" color_red "boundary_neumann_dm1_bar:" color_none "\n", stderr);
-  jagged1_file_print(stderr, boundary_neumann_dm1_bar, "--raw");
-
-  fputs("\n" color_red "b:" color_none "\n", stderr);
-  matrix_sparse_file_print(stderr, b, "--matrix-form-raw");
-
-  fputs("\n" color_red "-b_bar^T:" color_none "\n", stderr);
-  matrix_sparse_file_print(stderr, b_bar_transpose, "--matrix-form-raw");
-
-  fputs("\n" color_red "n_tau:" color_none "\n", stderr);
-  matrix_sparse_file_print(stderr, n_tau, "--matrix-form-raw");
-
-  fputs("\n" color_red "diagonal_values(c_tau):" color_none "\n", stderr);
-  double_array_file_print(stderr, m_cn_d, c_tau, "--raw");
-
-  fputs("\n" color_red "v_tau:" color_none "\n", stderr);
-  double_array_file_print(stderr, m_cn_d, v_tau, "--raw");
-
-  fputs("\n" color_red "p_bar:" color_none "\n", stderr);
-  double_array_file_print(stderr, m_cn_dm1_bar, p_bar, "--raw");
-#endif
 
   return input;
 
