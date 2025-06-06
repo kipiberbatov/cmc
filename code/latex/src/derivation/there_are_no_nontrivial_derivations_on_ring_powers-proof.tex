@@ -1,0 +1,23 @@
+\begin{proof}
+  Let $D \in {\rm Der}_R(R^n)$.
+  Consider the standard basis $(e_1, ..., e_n)$ of $R^n$ and let the matrix of
+  $D$ in the basis be $A$, i.e., for $1 \leq i, j \leq n$,
+  \begin{equation}
+    D e_i = \sum_{j = 1}^n A_{j, i} e_j.
+  \end{equation}
+  Let $1 \leq i \leq n$.
+  Then, since mltiplication in $R^n$ is commutative,
+  \begin{equation}
+    D e_i = D(e_i * e_i) = D e_i * e_i + e_i * D e_i = 2 D e_i * e_i,
+  \end{equation}
+  which translates to
+  \begin{equation}
+    \sum_{j = 1}^n A_{j, i} e_j
+    = 2 \sum_{j = 1}^n A_{j, i} e_j * e_i
+    = 2 A_{i, i} e_i.
+  \end{equation}
+  For $j \neq i$ this leads to $A_{j, i} = 0$, while for $j = i$ it leads to
+  $A_{i, i} = 2 A_{i, i} \Rightarrow A_{i, i} = 0$.
+  Therefore, for all $i, j \in \{1, ..., n\}$, $A_{i, j} = 0$.
+  Hence, $A = 0$, which means that $D = 0$.
+\end{proof}
