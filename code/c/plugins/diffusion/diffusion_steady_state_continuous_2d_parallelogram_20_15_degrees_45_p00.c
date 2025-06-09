@@ -12,8 +12,8 @@ Let
     M is a parallelogram with sides (20, 15), and angle 45 degrees between them
   . kappa_1 = 1
   . f = 0
-  . G_D = Line((0, 0), (a, a)) U Line((20, 0) (20 + a, a))
-  . G_N = Line((0, 0), (20, 0)) U Line((a, a) (20 + a, a))
+  . G_D = Line((0, 0), (a, a)) U Line((20, 0) (20 + a, a)) => x - y in {0, 20}
+  . G_N = Line((0, 0), (20, 0)) U Line((a, a) (20 + a, a)) => y in {0, 20}
   . g_D = {Line((0, 0), (a, a)) |-> 20, Line((20, 0) (20 + a, a)) |-> 0}
   . g_N = - dx
 
@@ -25,7 +25,7 @@ The potential 0-form u and flow rate 1-form q are solutions to the problem
 
 This problem has exact solution
   . u(x, y) = 20 - (x - y)
-  . q(x, y) = - dx
+  . q(x, y) = - dx - dy
 */
 
 #define EPSILON 0.0001
@@ -117,7 +117,7 @@ void diffusion_steady_state_continuous_2d_parallelogram_20_15_degrees_45_p00_flo
 {
   int i, j0, j1, m_cn_1;
   int * m_cf_1_0;
-  double sign, value;
+  double value, x0, x1, y0, y1;
   double * m_bd_1_values, * m_coord;
 
   m_cf_1_0 = m->cf->a4;
@@ -127,10 +127,13 @@ void diffusion_steady_state_continuous_2d_parallelogram_20_15_degrees_45_p00_flo
 
   for (i = 0; i < m_cn_1; ++i)
   {
-    sign = m_bd_1_values[2 * i + 1];
     j0 = m_cf_1_0[2 * i];
     j1 = m_cf_1_0[2 * i + 1];
-    value = m_coord[2 * j0] - m_coord[2 * j1];
-    flow_rate[i] = sign * value;
+    x0 = m_coord[2 * j0];
+    y0 = m_coord[2 * j0 + 1];
+    x1 = m_coord[2 * j1];
+    y1 = m_coord[2 * j1 + 1];
+    value = - (x1 - x0) - (y1 - y0);
+    flow_rate[i] = value * m_bd_1_values[2 * i + 1];
   }
 }
