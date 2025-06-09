@@ -15,13 +15,18 @@
     $G_D = \{0, 1\} \times [0, 1]$,
     $G_N = [0, 1] \times \{0, 1\}$,
     $g_D(x, y) = y (y - 1)$,
-    $g_N(x, y) = (1 - 2 x)\, d x$.
+    $g_N(x, y) = (2 y - 1) \, d x =
+      \begin{cases}
+        - d x, & y = 0 \\
+          d x, & y = 1
+      \end{cases}
+    $.
 
   This problem has the following exact solution in steady-state:
   \begin{subequations}
     \begin{alignat}{3}
       & u(x, y) && = && x (x - 1) + y ( y - 1), \\
-      & q(x, y) && = && (2 y - 1)\, d x - 2 (x - 1)\, d y.
+      & q(x, y) && = && (2 y - 1)\, d x - (2 x - 1)\, d y.
     \end{alignat}
   \end{subequations}
   Consider a mesh $M$ for $X$ consisting of $5 \times 5$ squares (each axis is

@@ -9,11 +9,16 @@
   Concretely,
     $X = [0, 1]^2$,
     $\kappa_1 \equiv 1$,
-    $f = -4 \, d x \wedge d y$,
+    $f = - 4 \, d x \wedge d y$,
     $G_D = \{0, 1\} \times [0, 1]$,
     $G_N = [0, 1] \times \{0, 1\}$,
     $g_D(x, y) = y (y - 1)$,
-    $g_N(x, y) = (1 - 2 x) \, d x$.
+    $g_N(x, y) = (2 y - 1) \, d x =
+      \begin{cases}
+        - d x, & y = 0 \\
+          d x, & y = 1
+      \end{cases}
+    $.
 
   This problem has the following exact solution:
   \begin{subequations}
