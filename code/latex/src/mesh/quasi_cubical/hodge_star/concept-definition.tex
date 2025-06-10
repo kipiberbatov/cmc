@@ -1,19 +1,19 @@
 \begin{definition}
   \label{cmc/mesh/quasi_cubical/hodge_star/concept-definition}
   Let
-    $d \in \N$,
+    $D \in \N$,
     $K$ be a compatibly oriented quasi-cubical
-    \hyperref[cmc:mesh:definition]{mesh} of dimension $d$,
-    $[K] := \sum_{c_d \in K_d} c^d$ be the fundamental class of $K$
+    \hyperref[cmc:mesh:definition]{mesh} of dimension $D$,
+    $[K] := \sum_{c_D \in K_D} c^D$ be the fundamental class of $K$
     $\inner{\cdot}{\cdot}$ be an inner product on $K$,
-    $p \in \{0, ..., d\}$.
+    $p \in \{0, ..., D\}$.
   The \textbf{Hodge star operator on $p$-cochains}
-  $\star_p \colon C^p K \to C^{d - p} K$
+  $\star_p \colon C^p K \to C^{D - p} K$
   is defined as the unique map satisfying the following equation:
-  for any $\pi^p \in C^p K$ and $\rho^{d - p} \in C^{d - p} K$,
+  for any $\pi^p \in C^p K$ and $\rho^{D - p} \in C^{D - p} K$,
   \begin{equation}
-    \inner{\star_p \pi^p}{\rho^{d - p}}_{d - p}
-    = (\pi^p \smile \rho^{d - p})[K].
+    \inner{\star_p \pi^p}{\rho^{D - p}}_{D - p}
+    = (\pi^p \smile \rho^{D - p})[K].
   \end{equation}
-  The operator $\star_p$ has physical dimension $[L^{d - 2 p}]$.
+  The operator $\star_p$ has physical dimension $[L^{D - 2 p}]$.
 \end{definition}

@@ -19,7 +19,7 @@ Let
 
 The potential 0-form u and flow rate 1-form q are solutions to the problem
   . q = - *_1 kappa_1 d_0 u
-  . D_t Q = d q + f
+  . D_t Q = - d q + f
   . D_t Q = *_0 (D_t (pi_0 u))
   . tr_{G_D, 0} u = g_D
   . tr_{G_N, 1} q = g_N
@@ -27,7 +27,7 @@ The potential 0-form u and flow rate 1-form q are solutions to the problem
 
 This problem has the following exact steady-state solution
   . u(x, y) = 50 (1 - (x + y) / A)
-  . q(x, y) = (300 / A) (dx - dy)
+  . q(x, y) = (300 / A) (- dx + dy)
 */
 
 #define A 5.

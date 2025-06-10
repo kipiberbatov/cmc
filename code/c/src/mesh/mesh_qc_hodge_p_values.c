@@ -84,7 +84,7 @@ static void mesh_qc_hodge_p_values_nontrivial(
       {
         j = perp[j_loc];
         node = nodes[j_loc];
-        sign = mesh_qc_cup_product_sign(m_bd, node, p, i, q, j, d, k);
+        sign = mesh_qc_cup_product_sign(m_bd, node, q, j, p, i, d, k);
         m_hodge_p_values[ind] = (sign / d_exp) * (m_coeff_q[j] / m_inner_q[j]);
         ++ind;
       }

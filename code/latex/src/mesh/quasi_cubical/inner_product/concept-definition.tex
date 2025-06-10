@@ -1,15 +1,15 @@
 \begin{definition}
   Let
-    $d \in \N$,
-    $K$ be a quasi-cubical mesh of dimension $d$,
-    $p \in \{0, ..., d\}$.
+    $D \in \N$,
+    $K$ be a quasi-cubical mesh of dimension $D$,
+    $p \in \{0, ..., D\}$.
   The \textbf{inner product of $p$-cochains}
   $\inner{\cdot}{\cdot}_p \colon C^p K \times C^p K \to C^p K$
   is defined as follows.
   If $b_p \in K_p$, then
   \begin{equation}
     \inner{b^p}{b^p}_p :=
-    \frac{1}{2^d \mu(b_p)} \sum_{c_{d - p} \perp b_p} \mu(c_{d - p}).
+    \frac{1}{2^D \mu(b_p)} \sum_{c_{D - p} \perp b_p} \mu(c_{D - p}).
   \end{equation}
   The inner product between two different $p$-cochains in the standard basis is
   defined to be zero
@@ -18,5 +18,5 @@
   Extending by bilinearity, we define the inner product of arbitrary
   $p$-cochains (since we already have it for pairs of basis $p$-cochains).
 
-  The operator $\inner{\cdot}{\cdot}_p$ has physical dimension $[L^{d - 2 p}]$.
+  The operator $\inner{\cdot}{\cdot}_p$ has physical dimension $[L^{D - 2 p}]$.
 \end{definition}

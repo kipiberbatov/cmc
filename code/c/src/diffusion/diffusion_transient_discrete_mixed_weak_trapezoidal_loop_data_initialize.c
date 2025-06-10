@@ -33,7 +33,7 @@ static void set_f_tilde(
     for (k_local = b_cols_total[i]; k_local < b_cols_total[i + 1]; ++k_local)
     {
       k = b_row_indices[k_local];
-      f_tilde[k] += b_values[k_local] * lambda_i;
+      f_tilde[k] -= b_values[k_local] * lambda_i;
     }
   }
 }
@@ -157,7 +157,7 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
   double * a_bar_inverse, * c, * c_tau, * f, * f_tilde, * g_bar, * p_bar,
          * v_tau, * z;
   struct jagged1 * boundary_neumann_dm1_bar;
-  struct matrix_sparse * b, * b_bar, * b_bar_transpose, /* * l_tau, */ * n_tau;
+  struct matrix_sparse * b, * b_bar, * n_tau, * r_bar;
   struct diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data * input;
 
   /* temporary hack to patch the wrong orientation coming from discretizing
@@ -266,36 +266,34 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
     free(a_bar_inverse);
     goto p_bar_free;
   }
+  matrix_sparse_vector_multiply_add(z, b_bar, p_bar);
 
-  b_bar_transpose = matrix_sparse_transpose(b_bar);
-  if (b_bar_transpose == NULL)
+  r_bar = matrix_sparse_transpose(b_bar);
+  if (r_bar == NULL)
   {
     color_error_position(__FILE__, __LINE__);
-    fputs("cannot calculate b_bar_transpose\n", stderr);
+    fputs("cannot calculate r_bar\n", stderr);
     matrix_sparse_free(b_bar);
     free(a_bar_inverse);
     goto p_bar_free;
   }
+  matrix_sparse_multiply_with_diagonal_matrix_on_the_left(r_bar, a_bar_inverse);
+  free(a_bar_inverse);
 
-  matrix_sparse_vector_multiply_add(z, b_bar, p_bar);
-  matrix_sparse_multiply_with_diagonal_matrix(b_bar, a_bar_inverse);
-
-  n_tau = matrix_sparse_product(b_bar, b_bar_transpose);
+  n_tau = matrix_sparse_product(b_bar, r_bar);
   if (n_tau == NULL)
   {
     color_error_position(__FILE__, __LINE__);
     fputs("cannot calculate n_tau\n", stderr);
     matrix_sparse_free(b_bar);
-    goto b_bar_transpose_free;
+    goto r_bar_free;
   }
   matrix_sparse_free(b_bar);
-
   matrix_sparse_add_with_diagonal_matrix(n_tau, c_tau);
 
-  /* v_tau = n_tau^{-1} z = l_tau^{-T} l_tau^{-1} z */
+  /* share memory */
   v_tau = z;
-  /* matrix_sparse_lower_triangular_linear_solve(v_tau, l_tau); */
-  /* matrix_sparse_lower_triangular_transpose_linear_solve(v_tau, l_tau); */
+  /* v_tau = n_tau^{-1} z = */
   matrix_sparse_linear_solve(n_tau, v_tau, "--cholesky");
   if (errno)
   {
@@ -304,16 +302,21 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
     goto n_tau_free;
   }
 
-  matrix_sparse_scalar_multiply(b_bar_transpose, -1);
-  matrix_sparse_multiply_with_diagonal_matrix_on_the_left(
-    b_bar_transpose, a_bar_inverse);
-  free(a_bar_inverse);
+  /*
+  It is better to use explicitly the Cholesky decomposition:
+    n_tau = l_tau l_tau^T
+  for a lower triangular positive-diagonal matrix $l_tau$.
+  Then we can find v_tau as follows:
+  ```
+  matrix_sparse_lower_triangular_linear_solve(v_tau, l_tau);
+  matrix_sparse_lower_triangular_transpose_linear_solve(v_tau, l_tau);
+  ```
+  */
 
   input->boundary_neumann_dm1_bar = boundary_neumann_dm1_bar;
   input->b = b;
-  input->negative_r_bar = b_bar_transpose;
-  /* input->l_tau = l_tau; */
-  input->l_tau = n_tau;
+  input->r_bar = r_bar;
+  input->n_tau = n_tau;
   input->c_tau = c_tau;
   input->v_tau = v_tau;
   input->p_bar = p_bar;
@@ -324,8 +327,8 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
   /* cleaning if an error occurs */
 n_tau_free:
   matrix_sparse_free(n_tau);
-b_bar_transpose_free:
-  matrix_sparse_free(b_bar_transpose);
+r_bar_free:
+  matrix_sparse_free(r_bar);
 p_bar_free:
   free(p_bar);
 v_tau_free:

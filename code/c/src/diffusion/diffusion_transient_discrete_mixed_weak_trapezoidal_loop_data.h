@@ -10,8 +10,8 @@ struct diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data
 {
   struct jagged1 * boundary_neumann_dm1_bar;
   struct matrix_sparse * b;
-  struct matrix_sparse * negative_r_bar; /* - a_bar^{-1} b_bar^T */
-  struct matrix_sparse * l_tau; /* cholesky_decomposition(n_tau) */
+  struct matrix_sparse * r_bar; /* a_bar^{-1} b_bar^T */
+  struct matrix_sparse * n_tau; /* b_bar a_bar^{-1} b_bar^T - (2 / tau) * c */
   double * c_tau; /* (2 / tau) * c */
   double * v_tau; /* b_bar a_bar^{-1} g_bar + tilde{f} */
   double * p_bar; /* a_bar^{-1} g_bar */

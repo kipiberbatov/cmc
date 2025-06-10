@@ -2,68 +2,73 @@
   \label{cmc/diffusion/discrete/steady_state/primal_weak_solve-discussion}
   We are going to derive a solution to
   \Cref{cmc/diffusion/discrete/steady_state/primal_weak-formulation}.
-  For any $p \in \{0, ..., d\}$ denote
+  For any $p \in \{0, ..., D\}$ denote
   \begin{equation}
     n_p := \abs{K_p} = \dim(C_p K) = \dim(C^p K).
   \end{equation}
   The cochains $(N^0, ..., N^{n_0 - 1})$ form the standard basis of $C^0 K$.
-  Define the matrix $A \in M_{n_0 \times n_0}(\R)$ by
+  Define the matrix ${\bf A} \in M_{n_0 \times n_0}(\R)$ by
   \begin{equation}
-    A_{i, j} := \inner{\delta N^i}{\tilde{\kappa}_1 \delta_0 N^i}_{K, 1}, \
+    {\bf A}_{i, j} := \inner{\delta N^i}{\tilde{\kappa} \delta_0 N^i}_{K, 1}, \
     i, j = 0, ..., n_0 - 1,
   \end{equation}
-  and the vectors $b, b^N, b^f \in \R^{n_0}$ by
+  and the vectors ${\bf F}, {\bf G}, {\bf H} \in \R^{n_0}$ by
   \begin{subequations}
     \begin{alignat}{3}
-      & b^N_i
-      && := (\tr_{\Gamma_N, 0} N^i \smile g_N^{d - 1})[\Gamma_N], \enspace
+      & {\bf F}_i
+      && := (N^i \smile f)[K], \enspace
       && i = 0, ..., n_0 - 1, \\
       %
-      & b^f_i
-      && := (N^i \smile f^d)[K], \enspace
+      & {\bf G}_i
+      && := (\tr_{\Gamma_N, 0} N^i \smile g_N)[\Gamma_N], \enspace
       && i = 0, ..., n_0 - 1, \\
       %
-      & b
-      && := b^f - b^N.
+      & {\bf H}
+      && := {\bf F} - {\bf G}.
       &&
     \end{alignat}
   \end{subequations}
-  Denote the unknown coefficients of $u^0$ as $\{x_j\}_{j = 0}^{n_0 - 1}$, i.e.,
+  Denote the unknown coefficients of $u$ as
+  $\{{\bf U}_j\}_{j = 0}^{n_0 - 1}$,
+  i.e.,
   \begin{equation}
-    u^0 = \sum_{j = 0}^{n_0 - 1} x_j N^j
+    u = \sum_{j = 0}^{n_0 - 1} {\bf U}_j N^j
   \end{equation}
-  Finally, let $I$ be the set of nodes on the Dirichlet boundary $\Gamma_D$, and
-  $J := \{0, ..., n_0 - 1\} \setminus I$.
+  Finally, let $J$ be the set of nodes on the Dirichlet boundary $\Gamma_D$,
+  and $\overline{J} := \{0, ..., n_0 - 1\} \setminus J$.
   We get the system
   \begin{subequations}
     \begin{alignat}{3}
-      & \sum_{j = 0}^{n_0 - 1} A_{i, j} x_j
-      && = b_i, \enspace
-      && i \in J, \\
+      & \sum_{j = 0}^{n_0 - 1} {\bf A}_{i, j} {\bf U}_j
+      && = {\bf H}_i, \enspace
+      && i \in \overline{J}, \\
       %
-      & x_i
-      && = g_D^0(N_i), \enspace
-      && i \in I.
+      & {\bf U}_i
+      && = g_D(N_i), \enspace
+      && i \in J.
     \end{alignat}
   \end{subequations}
   This leads to the system of equations
   \begin{equation}
-    \sum_{j \in J} A_{i, j} x_j = b_i - \sum_{j \in I} A_{i, j} g_D^0(N_j),\
-    i \in J.
+    \sum_{j \in \overline{J}} {\bf A}_{i, j} x_j
+    = {\bf H}_i - \sum_{j \in J} {\bf A}_{i, j} g_D(N_j),\ i \in \overline{J}.
   \end{equation}
-  If we denote by $A^J$ the restriction of $A$ to the rows and columns in $J$,
-  by $b^J$ the right-hand side of the above equation (again only for the
-  indices in J), and by $x^J$ the restriction of $x$ on indices in $J$,
-  we arrive at the final linear system with positive-definite matrix $A^J$:
+  Denote by ${\bf A}$ the restriction of $A$ to the rows and columns in
+  $\overline{J}$, by $\overline{\bf H}$ the right-hand side of the above
+  equation (again only for the indices in $\overline{J}$),
+  and by $\overline{\bf U}$ the restriction of ${\bf U}$ on the indices
+  in $\overline{J}$.
+  We arrive at the final linear system with positive-definite matrix
+  $\overline{\bf A}$:
   \begin{equation}
-    A^J x^J = b^J.
+    \overline{\bf A} \overline{\bf U} = \overline{\bf H}.
   \end{equation}
   After solving it, we get the final solution
   \begin{equation}
-    x_i =
+    \overline{\bf U}_i =
     \begin{cases}
-      x^J_i, & i \in J \\
-      g_D^0(N_i), & i \in I
+      \overline{\bf U}_i, & i \in \overline{J} \\
+      g_D(N_i), & i \in J
     \end{cases}.
   \end{equation}
 \end{discussion}

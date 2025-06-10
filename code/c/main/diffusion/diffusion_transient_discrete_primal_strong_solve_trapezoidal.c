@@ -158,6 +158,8 @@ int main(int argc, char ** argv)
 
   potential = diffusion_transient_discrete_primal_strong_solve_trapezoidal(
     m, m_cbd_0, m_cbd_star_1, data, time_step, number_of_steps);
+  // potential = (double *) calloc(
+  //   (number_of_steps + 1) * m->cn[0], sizeof(double));
   if (potential == NULL)
   {
     color_error_position(__FILE__, __LINE__);

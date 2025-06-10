@@ -37,6 +37,13 @@ static void set_f_new(
   }
 }
 
+/*
+Solve the following mixed problem for q = flow_rate and u = potential:
+    (a q)[i] - (b^T u)[i] = - g[i], text{for $i$ not in $boundary_neumann$},
+  - (b q)[k]              = - f[k], text{for all $k$},
+  q[boundary_neumann->a1[i_local]] = g_neumann[i_local].
+*/
+
 void matrix_sparse_mixed_constrained_linear_solve_with_diagonal_top_left_matrix(
   double * flow_rate,
   double * dual_potential,

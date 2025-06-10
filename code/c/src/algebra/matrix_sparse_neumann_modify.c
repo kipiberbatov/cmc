@@ -16,10 +16,10 @@ void matrix_sparse_neumann_modify(
   {
     i0 = neighbors[j_local];
     position = matrix_sparse_part_pointer(lhs, i, i0);
-    *position = -coefficients[j_local];
+    *position = coefficients[j_local];
   }
 
   /* diagonal element */
   position = matrix_sparse_part_pointer(lhs, i, i);
-  *position = double_array_total_sum(size_i, coefficients);
+  *position = - double_array_total_sum(size_i, coefficients);
 }

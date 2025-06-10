@@ -14,26 +14,28 @@
   The main physical quantities in our model are:
   \begin{itemize}
     \item
-      temperature $u^0 [\Theta] \colon I \to \Omega^0 X$:
+      \textbf{temperature}
+      $u [\Theta] \colon I \to \Omega^0 X$ characterised as follows:
       for any moment $t \in I$ and any point $x \in X$,
       \begin{equation}
         \text{``temperature $[\Theta]$ on $x$ at time $t$''}
-        = u^0(t)(x) := u^0(t, x);
+        = u(t)(x) := u(t, x);
       \end{equation}
     \item
-      heat energy $Q^D [E] \colon I \to \Omega^D X$:
+      heat energy $Q [E] \colon I \to \Omega^D X$:
       for any moment $t \in I$ and any volume $V_D \subseteq X$,
       \begin{equation}
         \text{``total heat energy $[E]$ of the system on $V$ at time $t$''}
-        = \int_{V_D} Q^D(t);
+        = \int_{V_D} Q(t);
       \end{equation}
     \item
-      heat flow rate $q^{D - 1} [E T^{-1}] \colon I \to \Omega^{D - 1} X$:
+      \textbf{heat flow rate}
+      $q [E T^{-1}] \colon I \to \Omega^{D - 1} X$ characterised as follows:
       for any time interval $[t_1, t_2] \subset I$
       and any hypersurface $S_{D - 1} \subset X$,
       \begin{equation}
         \text{``total flow $[E]$ through $S_{D - 1}$ in $[t_1, t_2]$''}
-        = \int_{t_1}^{t_2}\left(\int_{S_{D - 1}} q^{D - 1}(t)\right)\, d t.
+        = \int_{t_1}^{t_2}\left(\int_{S_{D - 1}} q(t)\right)\, d t.
       \end{equation}
       (Here we assume that $S_{D - 1}$ is oriented.
        Let $U_D$ and $V_D$ be adjacent regions having $S_{D - 1}$ as a common
@@ -45,31 +47,44 @@
   flow rate.
   \begin{itemize}
     \item
-      dual temperature $\tilde{u}^D [\Theta L^D] \colon I \to \Omega^D X$
-      defined by
+      \textbf{dual temperature}
+      $\tilde{u} [\Theta L^D] \colon I \to \Omega^D X$ defined by
       \begin{equation}
-        \tilde{u}^D := \star_0 u^0
+        \tilde{u} := \star_0 u
       \end{equation}
       (althiugh using non-zero based temperature scale might make $\star_0$ not
       well defined, this will not cause problems as we will always take
       temperature differences when substituting in equations);
     \item
-      heat energy density $\tilde{Q}^0 [E L^{-D}] \colon I \to \Omega^0 X$
-      defined by
+      \textbf{heat energy density}
+      $\tilde{Q} [E L^{-D}] \colon I \to \Omega^0 X$ defined by
       \begin{equation}
-        \tilde{Q}^0 := \star_D Q^D;
+        \tilde{Q} := \star_D Q;
+      \end{equation}
+    \item
+      \textbf{dual flow rate}
+      $\tilde{q} [E L^{1 - D}] \colon I \to \Omega^1 X$ defined by
+      \begin{equation}
+        \tilde{q} := \star_1^{-1} q = (-1)^{D - 1} q;
       \end{equation}
   \end{itemize}
   The governing laws are formulated as follows.
   \begin{itemize}
     \item
-      Let $f^D [E T^{-1}] \colon I \to \Omega^D X$ be an external heat source:
+      Let $f [E T^{-1}] \colon I \to \Omega^D X$ be the
+      \textbf{internal production rate}, characterised as follows:
       for any time interval $[t_1, t_2] \subset I$
       and any volume $V_D \subseteq X$,
       \begin{equation}
         \text{``total net heat production $[E]$ in $V_D$ in $[t_1, t_2]$''}
-        = \int_{t_1}^{t_2} \left(\int_{V_D} f^D(t) \right)\, d t.
+        = \int_{t_1}^{t_2} \left(\int_{V_D} f(t) \right)\, d t.
       \end{equation}
+      Its dual is the \textbf{internal production rate density}
+      $\tilde{f} [E L^{-D} T^{-1}] \colon I \to \Omega^0 X$ defined by
+      \begin{equation}
+        \tilde{f} = \star_D f.
+      \end{equation}
+    \item
       \textbf{Conservation of heat energy} is given by the following relation:
       for any time interval $[t_1, t_2] \subset I$
       and any volume $V_D \subseteq X$,
@@ -84,39 +99,46 @@
       \end{equation}
       In symbolic terms, the last equation is written as
       \begin{equation}
-        \int_{V_D} (Q^D(t_2) - Q^D(t_1))
+        \int_{V_D} (Q(t_2) - Q(t_1))
         = - \int_{t_1}^{t_2}
-          \left(\int_{\partial V_D} q^{D - 1}(t) \right)\, d t
-        + \int_{t_1}^{t_2} \left(\int_{V_D} f^D(t) \right)\, d t.
+          \left(\int_{\partial V_D} q(t) \right)\, d t
+        + \int_{t_1}^{t_2} \left(\int_{V_D} f(t) \right)\, d t.
       \end{equation}
       Using Stokes' theorem twice, we get the equation
       \begin{equation}
         \int_{t_1}^{t_2}
-          \left(\int_{V_D} \frac{\partial Q^D}{\partial t}\right)\, d t =
-        - \int_{t_1}^{t_2} \left(\int_{V_D} d_{D - 1} q^{D - 1} \right)\, d t
-        + \int_{t_1}^{t_2} \left(\int_{V_D} f^D \right)\, d t.
+          \left(\int_{V_D} \frac{\partial Q}{\partial t}\right)\, d t =
+        - \int_{t_1}^{t_2} \left(\int_{V_D} d_{D - 1} q \right)\, d t
+        + \int_{t_1}^{t_2} \left(\int_{V_D} f \right)\, d t.
       \end{equation}
       Since the time interval $[t_1, t_2]$ and the volume $V_D$ are arbitrary,
       we can drop integrals and arrive at the differential form
       \begin{equation}
-        \frac{\partial Q^D}{\partial t} = - d_{D - 1} q^{D - 1} + f^D.
+        \frac{\partial Q}{\partial t} = - d_{D - 1} q + f.
       \end{equation}
     \item
-      Let
-        $u_0 [\Theta] \in \Omega^0 X$ be the initial temperature.
+      Let $u_0 [\Theta] \in \Omega^0 X$ be the initial temperature.
       The \textbf{initial condition} is the prescribed initial temperature:
       \begin{equation}
-        u^0(t_0) = u_0.
+        u(t_0) = u_0.
       \end{equation}
     \item
-      Let $\pi_0 [E L^{-D} \Theta^{-1}] \colon \Omega^0 X \to \Omega^0 X$
-      be the volumetric heat capacity.
+      Let $\tilde{\pi} [E L^{-D} \Theta^{-1}] \colon \Omega^0 X \to \Omega^0 X$
+      be the \textbf{dual volumetric heat capacity}.
       The \textbf{relation between temperature change and heat energy change}
       is given by
       \begin{equation}
-        \frac{\partial Q^D}{\partial t}
-        = \star_0 \left(\frac{\partial \tilde{Q}^0}{\partial t}\right)
-        = \star_0 \left(\pi_0 \frac{\partial u^0}{\partial t}\right).
+        \frac{\partial Q}{\partial t}
+        = \star_0 \left(\frac{\partial \tilde{Q}}{\partial t}\right)
+        = \star_0 \left(\tilde{\pi} \frac{\partial u}{\partial t}\right).
+      \end{equation}
+      The \textbf{volumetric heat capacity}
+      $\pi [E L^{-D} \Theta^{-1}] \colon \Omega^D X \to \Omega^D X$
+      is related to $\tilde{\pi}$ by
+      \begin{equation}
+        \pi
+        = \star_0 \circ \tilde{\pi} \circ \star_0^{-1}
+        = \star_0 \circ \tilde{\pi} \circ \star_D.
       \end{equation}
     \item
       Consider two adjacent volumes $U_D$ and $V_D$
@@ -129,23 +151,23 @@
       of the temperature difference between $U_D$ and $V_D$.
 
       Let
-      $\kappa_{D - 1} [E L^{2 - D} T^{-1} \Theta^{-1}]
+      $\kappa [E L^{2 - D} T^{-1} \Theta^{-1}]
       \colon \Omega^{D - 1} X \to \Omega^{D - 1} X$
-      be the thermal conductivity.
+      be the \textbf{thermal conductivity}.
       The \textbf{Fourier's constitutive relation}
-      quantifies the above relation by using $\kappa_{D - 1}$
+      quantifies the above relation by using $\kappa$
       as a proportionality factor:
       \begin{equation}
-        q^{D - 1}
-        = \kappa_{D - 1} d_D^\star \tilde{u}^D
-        = \kappa_{D - 1} d_D^\star \star_0 u^0
-        = - \kappa_{D - 1} \star_1 d_0 u^0
-        = - \star_1 \tilde{\kappa}_1 d_0 u^0,
+        q
+        = \kappa d_D^\star \tilde{u}
+        = \kappa d_D^\star \star_0 u
+        = - \kappa \star_1 d_0 u
+        = - \star_1 \tilde{\kappa} d_0 u,
       \end{equation}
-      where we have denoted
+      where we have denoted the \textbf{dual conductivity}
       \begin{equation}
-        \tilde{\kappa}_1
-        :=\star_1^{-1} \kappa_{D - 1} \star_1 [E L^{2 - D} T^{-1} \Theta^{-1}]
+        \tilde{\kappa}
+        :=\star_1^{-1} \kappa \star_1 [E L^{2 - D} T^{-1} \Theta^{-1}]
         \colon \Omega^1 X \to \Omega^1 X.
       \end{equation}
   \end{itemize}
@@ -154,18 +176,23 @@
   into Dirichlet and Neumann boundary.
   \begin{itemize}
     \item
-      Let $g_D^0 [\Theta] \colon I \to \Omega^0 \Gamma_D$
+      Let $g_D [\Theta] \colon I \to \Omega^0 \Gamma_D$
       be the prescribed temperature on the Dirichlet boundary $\Gamma_D$.
       The \textbf{Dirichlet boundary condition} is given by
       \begin{equation}
-        \tr_{\Gamma_D, 0} u^0 := \restrict{u}{\Gamma_D} = g_D^0.
+        \tr_{\Gamma_D, 0} u := \restrict{u}{\Gamma_D} = g_D.
       \end{equation}
     \item
-      Let $g_N^{D - 1} [E T^{-1}] \colon I \to \Omega^2 \Gamma_N$
+      Let $g_N [E T^{-1}] \colon I \to \Omega^{D - 1} \Gamma_N$
       be the prescribed flow rate on the Neumann boundary $\Gamma_N$.
       The \textbf{Neumann boundary condition} is given by
       \begin{equation}
-        \tr_{\Gamma_N, D - 1} q^{D - 1} = g_N^{D - 1}.
+        \tr_{\Gamma_N, D - 1} q = g_N.
+      \end{equation}
+      Its dual is the \textbf{density of flow rate}
+      $\widetilde{g_N} [E L^{1 - D} T^{-1}] \colon I \to \Omega^0 \Gamma_N$,
+      \begin{equation}
+        \widetilde{g_N} = \star_{\Gamma_N, D - 1} g_N
       \end{equation}
   \end{itemize}
 \end{discussion}

@@ -7,20 +7,20 @@
 Let
   . M = [0, 1]^2
   . kappa_1 = 1
-  . f = -4 dx /\ dy
+  . f = - 4 dx /\ dy
   . G_D be the boundary of M
   . G_N = {}
   . g_D(x, y) = x^2 + y^2
 
 The potential 0-form u and flow rate 1-form q are solutions to the problem
   . q = - *_1 kappa_1 d_0 u
-  . d q = -f
+  . d q = f
   . tr_{G_D, 0} u = g_D
   . tr_{G_N, 1} q = g_N
 
 This problem has exact solution
   . u(x, y) = x^2 + y^2
-  . q(x, y) = - 2 y dx + 2 x dy
+  . q(x, y) = 2 y dx - 2 x dy
 */
 
 static double kappa_1(const double * x)
@@ -95,6 +95,6 @@ void diffusion_steady_state_continuous_2d_d00_p02_flow_rate(
     y0 = m_coord[2 * j0 + 1];
     x1 = m_coord[2 * j1];
     y1 = m_coord[2 * j1 + 1];
-    flow_rate[i] = 2. * (x0 * y1 - x1 * y0) * m_bd_1_values[2 * i + 1];
+    flow_rate[i] = 2. * (x1 * y0 - x0 * y1) * m_bd_1_values[2 * i + 1];
   }
 }

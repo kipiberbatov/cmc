@@ -5,10 +5,10 @@
   Let:
   \begin{itemize}
     \item
-      Let $d$ be a positive integer (space dimension);
+      Let $D$ be a positive integer (space dimension);
     \item
       $K$ be an oriented quasi-cubical \hyperref[cmc:mesh:definition]{mesh} of
-      dimension $d$ representing the material body;
+      dimension $D$ representing the material body;
     \item
       $[K]$ be the fundamental class of $K$;
     \item
@@ -16,14 +16,14 @@
     \item
       $\tau [T] \in \R^+$ be the time step;
     \item
-      $f^d [E T^{-1}] \in C^d K$ be the heat source;
+      $f [E T^{-1}] \in C^D K$ be the internal production rate;
     \item
       $u_0 [\Theta] \in C^0 K$ be the initial temperature;
     \item
-      $\pi_0 [E L^{-d} \Theta^{-1}] \colon I \times C^0 K \to C^0 K$
+      $\tilde{\pi} [E L^{-D} \Theta^{-1}] \colon I \times C^0 K \to C^0 K$
       be the heat capacity of the material;
     \item
-      $\tilde{\kappa}_1 [E L^{2 - d} T^{-1} \Theta^{-1}] \colon C^1 K \to C^1 K$
+      $\tilde{\kappa} [E L^{2 - D} T^{-1} \Theta^{-1}] \colon C^1 K \to C^1 K$
       be the thermal conductivity of the material;
     \item
       $\partial K = \Gamma_D \cup \Gamma_N$ be the partition of the boundary of
@@ -32,10 +32,10 @@
       $[\Gamma_N]$ be the fundamental class of $\Gamma_N$, where $\Gamma_N$
       has the boundary orientation induced from $K$;
     \item
-      $g_D^0 [\Theta] \in C^0 \Gamma_D$
+      $g_D [\Theta] \in C^0 \Gamma_D$
       be the prescribed temperature on the Dirichlet boundary;
     \item
-      $g_N^{d - 1} [E T^{-1}] \in C^{d - 1} \Gamma_N$
+      $g_N [E T^{-1}] \in C^{D - 1} \Gamma_N$
       be the prescribed flow rate on the Neumann boundary.
   \end{itemize}
   Our algorithm has $3$ phases.
@@ -47,114 +47,130 @@
         \item
           $n_0 := \abs{K_0}$;
         \item
-          the sparse matrix $A \in M_{n_0 \times n_0}(\R)$,
+          the sparse matrix ${\bf A} \in M_{n_0 \times n_0}(\R)$,
           \begin{equation}
-            A_{i, j}
-            := \inner{\delta_0 N^j}{\tilde{\kappa}_1 \delta_0 N^i}_{K, 1},\
+            {\bf A}_{i, j}
+            := \inner{\delta_0 N^j}{\tilde{\kappa} \delta_0 N^i}_{K, 1},\
             i, j = 0, ..., n_0 - 1;
           \end{equation}
         \item
-          the diagonal matrix $B \in M_{n_0 \times n_0}(\R)$,
+          the diagonal matrix ${\bf B} \in M_{n_0 \times n_0}(\R)$,
           \begin{equation}
-            B_{i, j} := \inner{N^j}{\pi_0 N^i}_{K, 0},\ i, j = 0, ..., n_0 - 1;
+            {\bf B}_{i, j} := \inner{N^j}{\tilde{\pi} N^i}_{K, 0},\
+            i, j = 0, ..., n_0 - 1;
           \end{equation}
         \item
-          the right-hand side vectors $F, G, H \in \R^{n_0}$,
+          the right-hand side vectors ${\bf F}, {\bf G}, {\bf H} \in \R^{n_0}$,
           \begin{subequations}
             \begin{alignat}{1}
-              & F_i := (v^0 \smile f^d)[K], i = 0, ..., n_0 - 1, \\
-              & G_i := (\tr_{\Gamma_N, 0} N^i \smile g_N^{d - 1})[\Gamma_N],
+              & {\bf F}_i := (N^i \smile f)[K], i = 0, ..., n_0 - 1, \\
+              & {\bf G}_i := (\tr_{\Gamma_N, 0} N^i \smile g_N)[\Gamma_N],
                 i = 0, ..., n_0 - 1, \\
-              & H := F - G;
+              & {\bf H} := {\bf F} - {\bf G};
             \end{alignat}
           \end{subequations}
         \item
-          the sparse matrices (having the same stencil as $A$)
-          $L_\tau, R_\tau \in M_{n_0 \times n_0}(\R)$,
+          the sparse matrices (having the same stencil as ${\bf A}$)
+          ${\bf L}_\tau, {\bf R}_\tau \in M_{n_0 \times n_0}(\R)$,
           \begin{subequations}
             \begin{alignat}{1}
-              & L_\tau := B - \frac{\tau}{2} A, \\
-              & R_\tau := B + \frac{\tau}{2} A;
+              & {\bf L}_\tau := {\bf B} - \frac{\tau}{2} {\bf A}, \\
+              & {\bf R}_\tau := {\bf B} + \frac{\tau}{2} {\bf A};
             \end{alignat}
           \end{subequations}
         \item
-          the sets $I_D := (\Gamma_D)_0$ and
-          $\overline{I_D} := \{0, ..., n_0 - 1\} \setminus I_D$;
+          the sets $J := (\Gamma_D)_0$ and
+          $\overline{J} := \{0, ..., n_0 - 1\} \setminus J$;
         \item
-          the restricted matrix $\overline{L_\tau}$, constructed out of $L_\tau$
-          with rows and columns in $I_D$ removed, and the restricted vector
-          $\overline{c_\tau} \in \R^{\abs{\overline{I_D}}}$
+          the vector $\widehat{\bf U} \in \R^{\abs{J}}$
+          of the prescribed temperature on the Dirichlet boundary:
           \begin{equation}
-            \overline{c_\tau}_j
-            := \tau H_j - \sum_{k \in I_D} (R_\tau)_{j, k} g_D^0(N_k),\
-            j \in \overline{I};
+            \widehat{\bf U}_i = g_D(N_i),\ i \in J;
+          \end{equation}
+        \item
+          the restricted matrix $\overline{{\bf L}_\tau}$, constructed out of
+          ${\bf L}_\tau$ with rows and columns in $J$ removed,
+          and the restricted vector
+          $\overline{\bf H}_\tau \in \R^{\abs{\overline{J}}}$
+          \begin{equation}
+            ({\overline{\bf H}_\tau})_i
+            := \tau {\bf H}_j
+            - \sum_{j \in J} ({\bf L}_\tau)_{i, j} \widehat{\bf U}_j,\
+            i \in \overline{J};
           \end{equation}
         \item
           the Cholesky decomposition
           \begin{equation}
-            \overline{L_\tau} = \overline{S_\tau} \overline{S_\tau}^T,
+            \overline{{\bf L}_\tau}
+            = \overline{{\bf S}_\tau} \overline{{\bf S}_\tau}^T,
           \end{equation}
-          where $\overline{S_\tau}$ is lower-triangular sparse matrix;
+          where $\overline{{\bf S}_\tau}$ is a lower-triangular sparse matrix
+          with positive diagonal;
         \item
           the time independent part of the restricted solution
           \begin{equation}
-            \overline{z_\tau}
-            := \overline{L_\tau}^{-1} \overline{c_\tau}
-            = \overline{S_\tau}^{-T} \overline{S_\tau}^{-1} \overline{c_\tau}
+            \overline{{\bf Z}_\tau}
+            := \overline{{\bf L}_\tau}^{-1} \overline{{\bf H}_\tau}
+            = \overline{{\bf S}_\tau}^{-T} \overline{{\bf S}_\tau}^{-1}
+            \overline{{\bf H}_\tau}
           \end{equation}
-          (of course, we do not find the inverses of $\overline{S_\tau}$ and its
-          transpose but apply forward and back substitution);
+          (of course, we do not find the inverses of $\overline{{\bf S}_\tau}$
+          and its transpose, but apply forward and back substitution);
         \item
-          the initial coordinates $x^0 \in \R^{n_0}$ of the temperature,
+          the initial coordinates ${\bf U}^0 \in \R^{n_0}$ of the temperature,
           \begin{equation}
-            x^0_j := u_0(N_i),\ j = 0, ..., n_0 - 1.
+            {\bf U}^0_i := u_0(N_i),\ i = 0, ..., n_0 - 1.
           \end{equation}
       \end{itemize}
     \item
       \textbf{Time-dependent (loop) phase.}
-      For any $i \geq 0$ (until some predefined final moment is reached or some
+      For any $s > 0$ (until some predefined final moment is reached or some
       condition for small error is fulfilled) calculate:
       \begin{itemize}
         \item
-          the time-dependent part $\overline{v_\tau}$ of the right-hand side
-          (allocated only once, there is no need to store it on every step),
+          the time-dependent part
+          $\overline{{\bf V}_\tau}^s$ of the right-hand side
+          (allocated only once, updated on every step),
           \begin{equation}
-            \overline{v_\tau}^i := \overline{(R_\tau x^i)};
+            \overline{{\bf V}_\tau}^s
+            := \overline{({\bf R}_\tau {\bf U}^{s - 1})};
           \end{equation}
         \item
-          the time-dependent part $\overline{v_\tau}$ of the solution
-          (allocated only once, there is no need to store it on every step),
+          the time-dependent part $\overline{{\bf W}_\tau}^s$ of the solution
+          (allocated only once, updated on every step),
           \begin{equation}
-            \overline{w_\tau}^i :=
-            \overline{S_\tau}^{-T} \overline{S_\tau}^{-1} \overline{v_\tau}
+            \overline{{\bf W}_\tau}^s
+            := \overline{{\bf S}_\tau}^{-T} \overline{{\bf S}_\tau}^{-1}
+            \overline{v_\tau}
           \end{equation}
           (with forward and back substitution);
         \item
-          the solution $\overline{x}^{i + 1}$ on the non-Dirichlet nodes
-          (allocated only once, there is no need to store it on every step),
+          the solution $\overline{\bf U}^s$ on the non-Dirichlet nodes
+          (allocated only once, updated on every step),
           \begin{equation}
-            \overline{x}^{i + 1} := \overline{w_\tau}^i + \overline{z_\tau};
+            \overline{\bf U}^s
+            := \overline{{\bf W}_\tau}^s + \overline{{\bf Z}_\tau};
           \end{equation}
         \item
           the final solution
           \begin{equation}
-            x^{i + 1}_j :=
+            {\bf U}^s_i :=
             \begin{cases}
-              \overline{x}^{i + 1}_j, & j \in J \\
-              g_D^0(N_j), & j \in I
+              \overline{\bf U}^s_i, & i \in \overline{J} \\
+              \widehat{\bf U}_i,  & i \in J
             \end{cases}.
           \end{equation}
       \end{itemize}
     \item
       \textbf{Post-processing.}
-      For each time moment $t_i$ the flow rate $(q^{d - 1})^i \in C^{d - 1} K$
-      is calculated by the formula
+      For each time moment $t_s$ the flow rate $q^s \in C^{D - 1} K$
+      is as follows: for any $c \in K_{D - 1}$,
       \begin{equation}
-        (q^{d - 1})^i(c_{d - 1}) :=
+        q^s(c_\bullet) :=
         \begin{cases}
-          (- \star_1 \tilde{\kappa}_1 \delta_0 u^{0,i})(c_{d - 1}),
-          & c_{d - 1} \in K_{d - 1} \setminus (\Gamma_N)_{d - 1} \\
-          g_N^{d - 1}(c_{d - 1}), & c_{d - 1} \in (\Gamma_N)_{d - 1}
+          (- \star_1 \circ \tilde{\kappa} \circ \delta_0\, u^s)(c_\bullet),
+          & c \in K_{D - 1} \setminus (\Gamma_N)_{D - 1} \\
+          g_N(c_\bullet), & c \in (\Gamma_N)_{D - 1}
         \end{cases}.
       \end{equation}
   \end{enumerate}

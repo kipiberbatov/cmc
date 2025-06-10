@@ -1,18 +1,18 @@
 \begin{remark}
    Let
     $R$ be a commutative ring with unity,
-    $d \in \N$,
-    $V$ be a free module over $R$ of dimension $d$,
-    $e_0, ..., e_{d - 1}$ be a basis of $V$.
+    $D \in \N$,
+    $V$ be a free module over $R$ of dimension $D$,
+    $e_0, ..., e_{D - 1}$ be a basis of $V$.
   The elements of $S(e)$ which are wedge products of $p$ vectors are called
   \textbf{$p$-vectors}.
-  Obviously, there are $\binom{n}{p}$ of them.
+  Obviously, there are $\binom{D}{p}$ of them.
   Denote by $\Lambda^p V$ the space spanned by those $p$ vectors
   (it does not depend on the basis of $e$ -- in fact $\Lambda^p V$ is the space
   spanned by linear combinations of wedge products of arbitrary vectors).
   Then we have the module decomposition
   \begin{equation}
-    \Lambda^\bullet V := \sum_{p = 0}^d \Lambda^p V.
+    \Lambda^\bullet V := \sum_{p = 0}^D \Lambda^p V.
   \end{equation}
   This decompositions turns $\Lambda^\bullet V$ into a graded algebra, that is
   for each $p, q \in \N$,
@@ -20,5 +20,5 @@
     \omega_p \in \Lambda^p V,\ \eta_q \in \Lambda^q V
     \Rightarrow \omega_p \wedge \eta_q \in \Lambda^{p + q} V
   \end{equation}
-  (here we define $\Lambda^r = 0$ for $r > d$).
+  (here we define $\Lambda^r = 0$ for $r > D$).
 \end{remark}

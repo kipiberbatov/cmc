@@ -21,12 +21,12 @@ Let
 
 The potential 0-form u and flow 1-form q are solutions to the problem
   . q = - *_1 kappa_1 d_0 u
-  . d q = -f
+  . d q = f
   . tr_{G_D, 0} u = g_D
 
 This problem has exact solution
   . ~u(theta, phi) = theta
-  . ~q(theta, phi) = KAPPA sin(theta) d phi
+  . ~q(theta, phi) = - KAPPA sin(theta) d phi
 */
 
 #define EPSILON 0.00001
@@ -71,7 +71,7 @@ static int boundary_neumann(const double * x)
 
 static double g_neumann(const double * x)
 {
-  return KAPPA;
+  return - KAPPA;
 }
 
 const struct diffusion_steady_state_continuous

@@ -16,13 +16,13 @@ Let
 
 The potential 0-form u and flow rate 1-form q are solutions to the problem
   . q = - *_1 kappa_1 d_0 u
-  . d q = -f
+  . d q = f
   . tr_{G_D, 0} u = g_D
   . tr_{G_N, 1} q = g_N
 
 This problem has exact solution
   . u(x, y) = sin (pi x) sin(pi y) / (2 pi^2)
-  . q(x, y) = (- sin(pi x) cos(pi y) dx + sin(pi y) cos(pi x) dy) / (2 pi)
+  . q(x, y) = (sin(pi x) cos(pi y) dx - sin(pi y) cos(pi x) dy) / (2 pi)
 */
 
 static double kappa_1(const double * x)
@@ -99,8 +99,8 @@ void diffusion_steady_state_continuous_2d_d00_p05_flow_rate(
     dy = y1 - y0;
     u = dy - dx;
     v = dx + dy;
-    z0 = u / v * (cos(M_PI * (x0 + y0)) - cos(M_PI * (x1 + y1)));
-    z1 = v / u * (cos(M_PI * (x0 - y0)) - cos(M_PI * (x1 - y1)));
+    z0 = u / v * (- cos(M_PI * (x0 + y0)) + cos(M_PI * (x1 + y1)));
+    z1 = v / u * (- cos(M_PI * (x0 - y0)) + cos(M_PI * (x1 - y1)));
     value = (z0 + z1) / (4 * M_PI * M_PI);
     flow_rate[i] = value * m_bd_1_values[2 * i + 1];
   }

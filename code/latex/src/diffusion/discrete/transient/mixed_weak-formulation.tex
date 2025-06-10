@@ -17,15 +17,15 @@
     \item
       $I = [t_0, \infty)$ be the time-interval where the process occurs;
     \item
-      $f [E T^{-1}] \colon I \to C^d K$ be the heat source;
+      $f [E T^{-1}] \colon I \to C^d K$ be the internal production rate;
     \item
       $u_0 [\Theta] \in C^0 K$ be the initial temperature;
     \item
-      $\kappa_{d - 1} [E L^{2 - d} T^{-1} \Theta^{-1}]
-      \colon C^{d - 1} K \to C^{d - 1} K$
+      $\kappa [E L^{2 - D} T^{-1} \Theta^{-1}]
+      \colon C^{D - 1} K \to C^{D - 1} K$
       be the thermal conductivity of the material;
     \item
-      $\tilde{\pi}_d [E L^{-d} \Theta^{-1}] \colon C^d K \to C^d K$
+      $\pi [E L^{-D} \Theta^{-1}] \colon C^d K \to C^d K$
       be the heat capacity of the material;
     \item
       $\partial K = \Gamma_D \cup \Gamma_N$ be the partition of the boundary of
@@ -34,80 +34,80 @@
       $[\Gamma_D]$ be the fundamental class of $\Gamma_D$, where $\Gamma_D$
       has the boundary orientation induced from $K$;
     \item
-      $g_D^0 [\Theta] \colon I \to C^0 \Gamma_D$
+      $g_D [\Theta] \colon I \to C^0 \Gamma_D$
       be the prescribed temperature on the Dirichlet boundary;
     \item
-      $g_N^{d - 1} [E T^{-1}] \colon I \to C^{d - 1} \Gamma_N$
+      $g_N [E T^{-1}] \colon I \to C^{D - 1} \Gamma_N$
       be the prescribed flow rate on the Neumann boundary.
   \end{itemize}
   define the following operators:
   \begin{subequations}
     \begin{alignat}{3}
-      & A \colon C^{d - 1} K \times (I \to C^{d - 1} K) \to \R,
+      & A \colon C^{D - 1} K \times (I \to C^{D - 1} K) \to \R,
         \enspace
-      && A(r^{d - 1}, s^{d - 1})
-        := \inner{r^{d - 1}}{\kappa_{d - 1}^{-1} s^{d - 1}}_{K, d - 1} \enspace
+      && A(r, s^{D - 1})
+        := \inner{r}{\kappa^{-1} s^{D - 1}}_{K, d - 1} \enspace
       && [E^{-1} T \Theta], \\
       %
-      & B \colon C^d K \times (I \to C^{d - 1} K) \to \R, \enspace
-      && B(v^d, r^{d - 1})
-        := \inner{\delta_{d - 1} r^{d - 1}}{v^d}_{K, d} \enspace
-      && [L^{-d}], \\
+      & B \colon C^d K \times (I \to C^{D - 1} K) \to \R, \enspace
+      && B(v^d, r)
+        := \inner{\delta_{D - 1} r}{v^d}_{K, d} \enspace
+      && [L^{-D}], \\
       %
       & C \colon C^d K \times (I \to C^d K) \to \R, \enspace
-      && C(v^d, w^d) := \inner{\tilde{\pi}_d w^d}{v^d}_{K, d} \enspace
+      && C(v^d, w^d) := \inner{\pi w^d}{v^d}_{K, d} \enspace
       && [E L^{-2 d} \Theta^{-1}], \\
       %
-      & G \colon C^{d - 1} K \to \R, \enspace
-      && G(r^{d - 1}) :=(\tr_{\Gamma_D, d - 1} r^{d - 1} \smile g_D^0)[\Gamma_D]
+      & G \colon C^{D - 1} K \to \R, \enspace
+      && G(r) :=(\tr_{\Gamma_D, d - 1} r \smile g_D)[\Gamma_D]
         \enspace
       && [\Theta], \\
       %
       & F \colon C^d K \to \R, \enspace
-      && F(v^d) := \inner{f^d}{v^d}_{K, d} \enspace
-      && [E T^{-1} L^{-d}].
+      && F(v^d) := \inner{f}{v^d}_{K, d} \enspace
+      && [E T^{-1} L^{-D}].
     \end{alignat}
   \end{subequations}
   Our unknowns are:
   \begin{itemize}
     \item
-      $q^{d - 1} [E T^{-1}] \colon I \to C^{d - 1} K$ (heat flow rate);
+      $q [E T^{-1}] \colon I \to C^{D - 1} K$ (heat flow rate);
     \item
-      $\tilde{u}^d [\Theta L^d] \colon I \to C^d K$ (dual temperature).
+      $\tilde{u} [\Theta L^d] \colon I \to C^d K$ (dual temperature).
   \end{itemize}
-  We are solving the following problem for $q^{d - 1}$ and $\tilde{u}^d$:
+  We are solving the following problem for $q$ and $\tilde{u}$:
   \begin{subequations}
     \begin{alignat}{4}
-      & \forall r^{d - 1} [E T^{-1}] \in \Ker \tr_{\Gamma_N, d - 1}, \enspace
-      && A(r^{d - 1}, q^{d - 1}) - B^T(r^{d - 1}, \tilde{u}^d)
-      && = - G(r^{d - 1}) \enspace
+      & \forall r [E T^{-1}] \in \Ker \tr_{\Gamma_N, d - 1}, \enspace
+      && A(r, q) - B^T(r, \tilde{u})
+      && = - G(r) \enspace
       && [E T^{-1} \Theta], \\
       %
       & \forall v^d [\Theta L^d] \in C^d K, \enspace
-      && - B(v^d, q^{d - 1}) + C(v^d, \frac{\partial \tilde{u}^d}{\partial t})
-      && = F(v^d) \enspace
+      && - B(v^d, q) - C(v^d, \frac{\partial \tilde{u}}{\partial t})
+      && = - F(v^d) \enspace
       && [E T^{-1} \Theta], \\
       %
       &
-      && \tr_{\Gamma_N, d - 1} q^{d - 1}
-      && = g_N^{d - 1} \enspace
+      && \tr_{\Gamma_N, d - 1} q
+      && = g_N \enspace
       && [E T^{-1}], \\
       %
       &
-      && \tilde{u}^d(t_0)
+      && \tilde{u}(t_0)
       && = \star_{K, 0} u_0 \enspace
       && [\Theta L^d].
     \end{alignat}
   \end{subequations}
-  The temperature $u^0 [\Theta] \colon I \to C^0 K$ is calculated in the
+  The temperature $u [\Theta] \colon I \to C^0 K$ is calculated in the
   post-processing phase by the formula
   \begin{equation}
-    u^0(t, c_0) :=
+    u(t, c_0) :=
     \begin{cases}
       u_0(c_0), & t = t_0 \\
-      (\star_d \tilde{u}^d)(t, x),
+      (\star_d \tilde{u})(t, x),
         & t > t_0\ \text{and}\ c_0 \notin (\Gamma_D)_0 \\
-      g_D^0(t, c_0), & t_0 > 0\ \text{and}\ c_0 \in (\Gamma_D)_0
+      g_D(t, c_0), & t_0 > 0\ \text{and}\ c_0 \in (\Gamma_D)_0
     \end{cases}.
   \end{equation}
 \end{formulation}

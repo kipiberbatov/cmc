@@ -5,10 +5,10 @@
   Let:
   \begin{itemize}
     \item
-      Let $d$ be a positive integer (space dimension);
+      Let $D$ be a positive integer (space dimension);
     \item
       $K$ be an oriented quasi-cubical \hyperref[cmc:mesh:definition]{mesh} of
-      dimension $d$ representing the material body;
+      dimension $D$ representing the material body;
     \item
       $[K]$ be the fundamental class of $K$;
     \item
@@ -16,15 +16,15 @@
     \item
       $\tau [T] \in \R^+$ be the time step;
     \item
-      $f^d [E T^{-1}] \in C^d K$ be the heat source;
+      $f [E T^{-1}] \in C^D K$ be the internal production rate;
     \item
       $u_0 [\Theta] \in C^0 K$ be the initial temperature;
     \item
-      $\tilde{\pi}_d [E L^{-d} \Theta^{-1}] \colon I \times C^d K \to C^d K$
+      $\pi [E L^{-D} \Theta^{-1}] \colon I \times C^D K \to C^D K$
       be the heat capacity of the material;
     \item
-      $\kappa_{d - 1} [E L^{2 - d} T^{-1} \Theta^{-1}]
-        \colon C^{d - 1} K \to C^{d - 1} K$
+      $\kappa [E L^{2 - D} T^{-1} \Theta^{-1}]
+        \colon C^{D - 1} K \to C^{D - 1} K$
       be the thermal conductivity of the material;
     \item
       $\partial K = \Gamma_D \cup \Gamma_N$ be the partition of the boundary of
@@ -33,10 +33,10 @@
       $[\Gamma_D]$ be the fundamental class of $\Gamma_D$, where $\Gamma_D$
       has the boundary orientation induced from $K$;
     \item
-      $g_D^0 [\Theta] \in C^0 \Gamma_D$
+      $g_D [\Theta] \in C^0 \Gamma_D$
       be the prescribed temperature on the Dirichlet boundary;
     \item
-      $g_N^{d - 1} [E T^{-1}] \in C^{d - 1} \Gamma_N$
+      $g_N [E T^{-1}] \in C^{D - 1} \Gamma_N$
       be the prescribed flow rate on the Neumann boundary.
   \end{itemize}
   Our algorithm has $3$ phases.
@@ -46,49 +46,50 @@
       Calculate:
       \begin{itemize}
         \item
-          $n_p := \abs{K_p}$, $p = d - 1$ and $p = d$;
+          $n_p := \abs{K_p}$, $p = D - 1$ and $p = D$;
         \item
-          the diagonal matrix ${\bf A} \in M_{n_{d - 1} \times n_{d - 1}}(\R)$,
+          the diagonal matrix ${\bf A} \in M_{n_{D - 1} \times n_{D - 1}}(\R)$,
           \begin{equation}
             {\bf A}_{i, j}
-            := \inner{c^{d - 1, j}}
-              {\kappa_{d - 1}^{-1} c^{d - 1, i}}_{K, d - 1},\
-            i, j = 0, ..., n_{d - 1} - 1;
+            := \inner{c^{D - 1, j}}
+              {\kappa^{-1} c^{D - 1, i}}_{K, D - 1},\
+            i, j = 0, ..., n_{D - 1} - 1;
           \end{equation}
         \item
-          the sparse matrix ${\bf B} \in M_{n_d \times n_{d - 1}}(\R)$,
+          the sparse matrix ${\bf B} \in M_{n_d \times n_{D - 1}}(\R)$,
           \begin{equation}
-            {\bf B}_{k, i} := \inner{\delta_{d - 1} c^{d - 1, i}}{c^{d, k}}_{K, d},\
-            i = 0, ..., n_{d - 1} - 1, k = 0, ..., n_d - 1;
+            {\bf B}_{k, i}
+            := \inner{\delta_{D - 1} c^{D - 1, i}}{c^{D, k}}_{K, D},\
+            i = 0, ..., n_{D - 1} - 1, k = 0, ..., n_d - 1;
           \end{equation}
         \item
           the diagonal matrix ${\bf C} \in M_{n_d \times n_d}(\R)$,
           \begin{equation}
-            {\bf C}_{k, l} := \inner{\tilde{\pi}_d c^{d, l}}{c^{d, k}}_{K, d},\
+            {\bf C}_{k, l} := \inner{\pi c^{D, l}}{c^{D, k}}_{K, D},\
             k, l = 0, ..., n_d - 1;
           \end{equation}
         \item
-          the (sparse) vector ${\bf G} \in \R^{n_{d - 1}}$,
+          the (sparse) vector ${\bf G} \in \R^{n_{D - 1}}$,
           \begin{equation}
             {\bf G}_i
-            :=(\tr_{\Gamma_D, d - 1} c^{d - 1, i} \smile g_D^0)[\Gamma_D],\
-            i = 0, ..., n_{d - 1} - 1;
+            :=(\tr_{\Gamma_D, D - 1} c^{D - 1, i} \smile g_D)[\Gamma_D],\
+            i = 0, ..., n_{D - 1} - 1;
           \end{equation}
         \item
           the vector ${\bf F} \in \R^{n_d}$,
           \begin{equation}
-            {\bf F}_k := \inner{f^d}{c^{d, k}}_{K, d},\ k = 0, ..., n_d - 1;
+            {\bf F}_k := \inner{f}{c^{D, k}}_{K, D},\ k = 0, ..., n_d - 1;
           \end{equation}
         \item
           the sets
           \begin{subequations}
             \begin{alignat}{2}
               & J
-              && := \set{i \in \{0, ..., n_{d - 1}\}}
-                {c_{d - 1, i} \in (\Gamma_N)_{d - 1}}, \\
+              && := \set{i \in \{0, ..., n_{D - 1}\}}
+                {c_{D - 1, i} \in (\Gamma_N)_{D - 1}}, \\
               %
               & \overline{J}
-              && := \{0, ..., n_{d - 1}\} \setminus J;
+              && := \{0, ..., n_{D - 1}\} \setminus J;
             \end{alignat}
           \end{subequations}
         \item
@@ -106,7 +107,7 @@
           \begin{equation}
             \overline{\bf G}_i :=
             {\bf G}_i
-            + \sum_{j \in J} {\bf A}_{i, j} g_N^{d - 1}(c_{d - 1, j}),\
+            + \sum_{j \in J} {\bf A}_{i, j} g_N(c_{D - 1, j}),\
             i \in \overline{J}
           \end{equation}
           (in our case  $A$ is diagonal and so for all $i \in \overline{J}$
@@ -116,7 +117,7 @@
           \begin{equation}
             \widetilde{\bf F}_k
             := 2 {\bf F}_k
-              + \sum_{i \in J} {\bf B}_{k, i} g_N^{d - 1}(c_{d - 1, i}),\
+              - \sum_{i \in J} {\bf B}_{k, i} g_N(c_{D - 1, i}),\
             k = 0, ..., n_d - 1;
           \end{equation}
         \item
@@ -148,7 +149,7 @@
         \item
           the constant right-hand side vector ${\bf Z} \in \R^{n_d}$,
           \begin{equation}
-            {\bf Z} := \overline{\bf B} \overline{\bf P} - \widetilde{\bf F};
+            {\bf Z} := \overline{\bf B} \overline{\bf P} + \widetilde{\bf F};
           \end{equation}
         \item
           the time-independent part of the dual temperature
@@ -162,11 +163,11 @@
         \item
           the initial cooefficients
           ${\bf U}^0 \in \R^{n_d}$ of the dual temperature,
-          and ${\bf Q}^0 \in \R^{n_{d - 1}}$ of the heat flow rate:
+          and ${\bf Q}^0 \in \R^{n_{D - 1}}$ of the heat flow rate:
           \begin{subequations}
             \begin{alignat}{2}
               & {\bf Q}^0_i := ({\bf {\rm flow\_rate}}({\bf u}_0))_i,\
-              && i = 0, ..., n_{d - 1} - 1, \\
+              && i = 0, ..., n_{D - 1} - 1, \\
               %
               & {\bf U}^0_k := ({\bf \star}_0 {\bf u}_0)_k,\
               && k = 0, ..., n_d - 1.
@@ -189,7 +190,7 @@
     \item
       \textbf{Time-dependent (loop) phase.}
       The constant input consists of
-      $g_N^{d - 1},\ {\bf B},\ \overline{\bf B},\ {\bf C},\ \tau,\
+      $g_N,\ {\bf B},\ \overline{\bf B},\ {\bf C},\ \tau,\
       {\bf L}_\tau,\ {\bf V}_\tau,\ \overline{\bf P}$.
       Temporary mutable variables include the vectors
       ${\bf Y}_\tau^s,\ {\bf W}_\tau^s,\ \overline{\bf Q}^{s + 1}$.
@@ -197,20 +198,21 @@
       and the coordinates ${\bf U}$ of dual temperature.
       ${\bf Q}$ and ${\bf U}$ are either pre-allocated as arrays of size
       $(\verb|number_of_time_steps| + 1) \times n_p$
-      (for $p = d - 1$ and $p = d$ respectively) and initialized,
+      (for $p = D - 1$ and $p = D$ respectively) and initialized,
       or are only initialized, and memory is allocated at each step until some
       error condition is satisfied
       (e.g., the relative error between two consecutive steps becomes below some
       $\varepsilon > 0$, in which case the system converges to steady-state).
 
-      For any $s \geq 0$ (until some predefined final moment is reached or some
+      For any $s > 0$ (until some predefined final moment is reached or some
       condition for small error is fulfilled), calculate:
       \begin{itemize}
         \item
           RHS term ${\bf Y}_\tau^s$:
           \begin{equation}
             {\bf Y}_\tau^s
-            := {\bf B} {\bf Q}^s + \frac{2}{\tau} {\bf C} {\bf U}^s;
+            := - {\bf B} {\bf Q}^{s - 1}
+            + \frac{2}{\tau} {\bf C} {\bf U}^{s - 1};
           \end{equation}
         \item
           solution term ${\bf W}_\tau^s$:
@@ -221,25 +223,25 @@
           \end{equation}
           (calculated with forward and back substitution);
         \item
-          the coefficients of the dual temperature ${\bf U}^{s + 1}$
+          the coefficients of the dual temperature ${\bf U}^s$
           (stored for all $s$),
           \begin{equation}
-            {\bf U}^{s + 1} := {\bf V}_\tau - {\bf W}_\tau^s;
+            {\bf U}^s := {\bf V}_\tau + {\bf W}_\tau^s;
           \end{equation}
         \item
-          the non-Neumann coefficients of the heat flow rate ${\bf Q}^{s + 1}$,
+          the non-Neumann coefficients of the heat flow rate ${\bf Q}^s$,
           \begin{equation}
-            \overline{\bf Q}^{s + 1}
-            := - \overline{\bf P} + \overline{\bf R} {\bf U}^{s + 1};
+            \overline{\bf Q}^s
+            := - \overline{\bf P} + \overline{\bf R} {\bf U}^s;
          \end{equation}
         \item
-          the heat flow rate ${\bf Q}^{s + 1} \in \R^{n_{d - 1}}$
+          the heat flow rate ${\bf Q}^s \in \R^{n_{D - 1}}$
           (stored for all $s$),
           \begin{equation}
-            {\bf Q}^{s + 1}_j :=
+            {\bf Q}^s_j :=
             \begin{cases}
-              \overline{\bf Q}^{s + 1}_j, & j \in \overline{J} \\
-              g_N^{d - 1}(c_{d - 1, j}), & j \in J
+              \overline{\bf Q}^s_j, & j \in \overline{J} \\
+              g_N(c_{D - 1, j}), & j \in J
             \end{cases}.
           \end{equation}
       \end{itemize}
@@ -248,21 +250,21 @@
       Define the sets
       \begin{subequations}
         \begin{alignat}{2}
-          & D_0
+          & J
           && := \set{i \in \{0, ..., n_0 - 1\}}{c_{0, i} \in (\Gamma_D)_0}, \\
           %
-          & \overline{D_0}
-          && := \{0, ..., n_0 - 1\} \setminus D_0.
+          & \overline{J}
+          && := \{0, ..., n_0 - 1\} \setminus J.
         \end{alignat}
       \end{subequations}
       For each time moment $t_s$ the coordinates of the temperature
-      ${\bf u}^{0, s} \in \R^{n_0}$
+      ${\bf u}^s \in \R^{n_0}$
       in the standard basis are calculated by the formula
       \begin{equation}
-        {\bf u}^{0, s}_i :=
+        {\bf u}^s_i :=
         \begin{cases}
-          ({\bf \star}_d {\bf U}^{d, s})_i, & i \in \overline{D_0} \\
-          g_D^0(c_{0, i}), & i \in D_0
+          ({\bf \star}_D {\bf U}^{D, s})_i, & i \in \overline{J} \\
+          g_D(c_{0, i}), & i \in J
         \end{cases}.
       \end{equation}
   \end{enumerate}

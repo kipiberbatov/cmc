@@ -3,40 +3,42 @@
   We are going to derive a solution to
   \Cref{cmc/diffusion/discrete/transient/primal_weak-formulation}
   using the trapezoidal rule for time integration.
-  We will assume that the heat capacity $\pi_0$ is time-independent which will
+  We will assume that the heat capacity $\tilde{\pi}$ is time-independent which will
   allow us to rearrange the time derivative:
   \begin{equation}
-    B(v^0, \frac{\partial u^0} {\partial t}) = \frac{d}{d t} B(v^0, u^0).
+    B(v, \frac{\partial u} {\partial t}) = \frac{d}{d t} B(v, u).
   \end{equation}
-  For further simplicity we will also assume that all the rest input data (heat
-  source, thermal conductivity, boundary conditions) are also time-independent.
-  Denote $H := F - G$. We can then integrate the equation
+  For further simplicity we will also assume that all the rest input data
+  internal production rate, thermal conductivity, boundary conditions)
+  are also time-independent.
+  Denote $H := F - G$.
+  We can then integrate the equation
   \begin{equation}
-    \frac{d}{d t} B(v^0, u^0) + A(v^0, u^0) = H(v^0)
+    \frac{d}{d t} B(v, u) + A(v, u) = H(v)
   \end{equation}
   with respect to $t$ in the interval $[\alpha, \beta] \subset I$ to get
   \begin{equation}
-    B(v^0, u^0(\beta)) - B(v^0, u^0(\alpha))
-    + A(v^0, \int_\alpha^\beta u^0\, d t)
-    = (\beta - \alpha) H(v^0).
+    B(v, u(\beta)) - B(v, u(\alpha))
+    + A(v, \int_\alpha^\beta u\, d t)
+    = (\beta - \alpha) H(v).
   \end{equation}
   For an interval $[\alpha, \beta]$ the trapezoidal rule gives the approximation
   \begin{equation}
-    A(v^0, \int_\alpha^\beta u^0\, d t)
-    \approx A(v^0, \frac{\beta - \alpha}{2} (u^0(\alpha) + u^0(\beta))).
+    A(v, \int_\alpha^\beta u\, d t)
+    \approx A(v, \frac{\beta - \alpha}{2} (u(\alpha) + u(\beta))).
   \end{equation}
   Hence, if we partition $I$ into segements with size $\tau$ with moments of
-  time $\{t_i := t_0 + \tau i\}_{i \geq 0}$, and if we denote
-  $\{y^i := u^0(t_i)\}_{i \geq 0}$, we get
+  time $\{t_s := t_0 + \tau s\}_{s \geq 0}$, and if we denote
+  $\{U^s := u(t_s)\}_{s \geq 0}$, we get
   \begin{equation}
-    B(v^0, y^{i + 1}) - B(v^0, y^i)
-    + \frac{\tau}{2} (A(v^0, y^i) + A(v^0, y^{i + 1}))
-    = \tau H(v^0).
+    B(v, U^s) - B(v, U^{s - 1})
+    + \frac{\tau}{2} (A(v, U^{s - 1}) + A(v, U^s))
+    = \tau H(v).
   \end{equation}
   The above equation is restated as
   \begin{equation}
-    (B - \frac{\tau}{2} A)(v^0, y^{i + 1})
-    = (B + \frac{\tau}{2} A)(v^0, y^i) + \tau H(v^0).
+    (B - \frac{\tau}{2} A)(v, U^s)
+    = (B + \frac{\tau}{2} A)(v, U^{s - 1}) + \tau H(v).
   \end{equation}
   Define the left-hand side and right-hand side operators
   \begin{subequations}
@@ -45,61 +47,65 @@
       & R_\tau := B + \frac{\tau}{2} A.
     \end{alignat}
   \end{subequations}
-  We arrive at the following problem: find $\{y^i \in C^0 K\}_{i \geq 0}$
-  such that
+  The initial condition corresponds to $U^0 = u_0(t_0, \cdot)$.
+  At any moment $s > 0$ we get the following problem for $U^s \in C^0 K$:
   \begin{subequations}
-    \begin{alignat}{4}
-      & \forall v^0 [\Theta] \in \Ker \tr_{\Gamma_D, 0}, \quad
-      && L_\tau(v^0, y^{i + 1})
-      && = R_\tau(v^0, y^i) + \tau H(v^0), \enspace
-      && i \geq 0, \\
+    \begin{alignat}{3}
+      & \forall v [\Theta] \in \Ker \tr_{\Gamma_D, 0}, \quad
+      && L_\tau(v, U^s)
+      && = R_\tau(v, U^{s - 1}) + \tau H(v), \\
       %
       &
-      && \tr_{\Gamma_D, 0} y^i
-      && = g_D^0, \enspace
-      && i > 0, \\
-      %
-      &
-      && y^0
-      && = u_0.
-      &&
+      && \tr_{\Gamma_D, 0} U^s
+      && = g_D.
     \end{alignat}
   \end{subequations}
   As in the steady-state case
   \Cref{cmc/diffusion/discrete/steady_state/primal_weak_solve-discussion},
-  let $I_D$ be the set of nodes on the Dirichlet
-  boundary $\Gamma_D$,
-  and $\overline{I_D} := \{0, ..., n_0 - 1\} \setminus I_D$.
-  Denote the unknown coefficients of $y^i$ as $\{x^i_j\}_{j = 0}^{n_0 - 1}$,
+  let $J$ be the set of nodes on the Dirichlet boundary $\Gamma_D$,
+  and $\overline{J} := \{0, ..., n_0 - 1\} \setminus J$.
+  Denote the unknown coefficients of $U^s$ as
+  $\{{\bf U}^s_j\}_{j = 0}^{n_0 - 1}$,
   i.e.,
   \begin{equation}
-    y^i = \sum_{j = 0}^{n_0 - 1} x^i_j N^j.
+    U^s = \sum_{j = 0}^{n_0 - 1} {\bf U}^s_j N^j.
   \end{equation}
   In an analogous derivation to the one in
   \Cref{cmc/diffusion/discrete/steady_state/primal_weak_solve-discussion},
-  let $R_\tau^{\overline{I_D}}$ be the matrix in the standard basis of the
-  restriction of $R_\tau$ to the rows and colums in $\overline{I_D}$,
-  $x^{\overline{I_D}, i}$ be the restriction of $x^i$ on $\overline{I_D}$,
-  and $b_\tau^{\overline{I_D}, i}$ be a vector with indices in $\overline{I_D}$,
-  defined by
+  let $\overline{{\bf L}_\tau}$ be the matrix in the standard basis of the
+  restriction of ${\bf L}_\tau$ to the rows and colums in $\overline{J}$,
+  $\overline{\bf U}^s$ be the restriction of ${\bf U}^s$ on $\overline{J}$,
+  and $\overline{{\bf H}_\tau} \in \R^{\abs{\overline{J}}}$
+  be the vector defined by
   \begin{equation}
-    {b_\tau^{\overline{I_D}, i}}_j := {(S_\tau y^i)}_j + \tau H_j -
-    \sum_{k \in I_D} (R_\tau)_{j, k} g_D^0(N_k).
+    \overline{{\bf H}_\tau}
+    := \tau {\bf H}_i - \sum_{j \in J} ({\bf L}_\tau)_{i, j} g_D(N_j),\
+    i \in \overline{J}.
   \end{equation}
-  This vector can also be written as
+  % where ${\bf S}_\tau$ realises the Cholesky decomposition of ${\bf R}_\tau$.
+  This leads to the system
   \begin{equation}
-    \overline{b}_\tau^i := \overline{(S_\tau y^i)} + \overline{c_\tau},
+    \overline{{\bf L}_\tau}\, \overline{{\bf U}}^s
+    = \overline{{\bf R}_\tau {\bf U}^{s - 1}}
+    + \overline{{\bf H}_\tau},
   \end{equation}
-  where $\overline{(S_\tau y^i)}$ is the restriction of $S_\tau y^i$ on
-  $\overline{I}$ and
-  \begin{equation}
-    \overline{c_\tau}
-    := \tau H_j - \sum_{k \in I_D} (R_\tau)_{j, k} g_D^0(N_k),\
-    j \in \overline{I}
-  \end{equation}
-  Hence, at each time step we get the equation
-  \begin{equation}
-    R_\tau^{\overline{I_D}} x^{\overline{I_D}, i} = b_\tau^{\overline{I_D}, i},
-  \end{equation}
+  where $\overline{{\bf R}_\tau {\bf U}^{s - 1}}$ is the restriction of
+  ${\bf R}_\tau {\bf U}^{s - 1}$ to $\overline{J}$. 
+  % This vector can also be written as
+  % \begin{equation}
+  %   \overline{{\bf H}_\tau}^s
+  %   := \overline{(S_\tau {\bf U}^s)} + \overline{{\bf C}_\tau},
+  % \end{equation}
+  % where $\overline{{\bf S}_\tau {\bf U}^s}$ is the restriction of
+  % ${\bf S}_\tau {\bf U}^s$ on $\overline{J}$ and
+  % \begin{equation}
+  %   \overline{{\bf C}_\tau}
+  %   := \tau {\bf H}_i - \sum_{j \in J} ({\bf R}_\tau)_{i, j} g_D(N_j),\
+  %   i \in \overline{J}
+  % \end{equation}
+  % Hence, at each time step we get the equation
+  % \begin{equation}
+  %   \overline{{\bf R}_\tau} \overline{\bf U}^s = \overline{{\bf H}_\tau}^s,
+  % \end{equation}
   This leads to the the following iterative process.
 \end{discussion}

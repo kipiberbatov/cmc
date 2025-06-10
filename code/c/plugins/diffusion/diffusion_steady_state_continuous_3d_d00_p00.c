@@ -15,14 +15,14 @@ Let
   . g_N = 0
 
 The potential 0-form u and flow rate 1-form q are solutions to the problem
-  . q = *_1 kappa_1 d_0 u
-  . d q = -f
+  . q = - *_1 kappa_1 d_0 u
+  . d q = f
   . tr_{G_D, 0} u = g_D
   . tr_{G_N, 2} q = g_N
 
 This problem has exact solution
   . u(x, y, z) = 100 (1 - x)
-  . q(x, y, z) = -100 dy /\ dz
+  . q(x, y, z) = 100 dy /\ dz
 */
 
 static double kappa_1(const double * x)

@@ -86,7 +86,7 @@ matrix_sparse * matrix_sparse_product(
 /* return b = a^T */
 matrix_sparse * matrix_sparse_transpose(const matrix_sparse * a);
 
-/* y := a . x + b */
+/* y += a . x */
 void matrix_sparse_vector_multiply_add(
   double * y,
   const matrix_sparse * a,
@@ -103,6 +103,10 @@ void matrix_sparse_multiply_with_diagonal_matrix_on_the_left(
   const double * d);
 
 void matrix_sparse_add_with_diagonal_matrix(
+  matrix_sparse * a,
+  const double * d);
+
+void matrix_sparse_subtract_diagonal_matrix(
   matrix_sparse * a,
   const double * d);
 
@@ -257,13 +261,12 @@ void matrix_sparse_multiply_with_inverse_of_diagonal(
   matrix_sparse * b,
   const double * a);
 
-/* q := q - b u*/
+/* q := q - b u */
 void matrix_sparse_vector_subtract_product(
   double * q,
   const matrix_sparse * b,
   const double * u);
 
-/* solve the mixed problem $a q + b^T u = g, b q = f$ for $q$ and $u$ */
 void matrix_sparse_mixed_linear_solve_with_diagonal_top_left_matrix(
   double * q,
   double * u,
@@ -299,14 +302,6 @@ matrix_sparse * matrix_sparse_columns_restrict(
   const matrix_sparse * a,
   const jagged1 * columns);
 
-/*
-solve the mixed problem
-$
-  (a q)[i] + (b^T u)[i] = g[i], text{for $i$ not in $boundary_neumann$};
-  (b q)[k] = f[k],              text{for all $k$};
-  q[boundary_neumann->a1[i_local]] = g_neumann[i_local]
-$
-for $q = flow_rate$ and $u = potential$ */
 void matrix_sparse_mixed_constrained_linear_solve_with_diagonal_top_left_matrix(
   double * flow_rate,
   double * dual_potential,

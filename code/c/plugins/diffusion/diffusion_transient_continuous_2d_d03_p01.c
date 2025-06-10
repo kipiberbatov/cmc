@@ -10,12 +10,12 @@ Let
   . pi_0 = 4
   . kappa_1 = 1
   . u_0(x, y) = 2 - (x^2 + y^2)
-  . f = -4 dx /\ dy
+  . f = - 4 dx /\ dy
   . G be the boundary of M, i.e., G = {(x, y) in R^2 | x^2 + y^2 = 1}
   . G_D = {(x, y) in G | x >= 0}
   . G_N = {(x, y) in G | x <= 0}
   . g_D = 1
-  . g_N = 2 t dt (with respect to the (x, y) = (cos(t), sin(t)) coordinates)
+  . g_N = 2 dt (with respect to the (x, y) = (cos(t), sin(t)) coordinates)
 
 
 The potential 0-form u and flow rate 1-form q are solutions to the problem
@@ -28,7 +28,7 @@ The potential 0-form u and flow rate 1-form q are solutions to the problem
 
 This problem has exact solution in steady-state
   . u(x, y) = x^2 + y^2
-  . q(x, y) = - 2 y dx + 2 x dy
+  . q(x, y) = 2 y dx - 2 x dy
 */
 
 #define EPSILON 0.00001
@@ -78,7 +78,7 @@ static int boundary_neumann(const double * x)
 
 static double g_neumann(const double * x)
 {
-  return 2.;
+  return -2.;
 }
 
 const struct diffusion_transient_continuous

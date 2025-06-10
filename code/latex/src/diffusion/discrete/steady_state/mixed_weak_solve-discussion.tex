@@ -8,109 +8,168 @@
   \end{equation}
   The cochains $(c^{p, 0}, ..., c^{p, n_0 - 1})$ form the standard basis of
   $C^p K$.
-  Define the diagonal matrix $A \in M_{n_{d - 1} \times n_{d - 1}}(\R)$,
-  and the sparse matrix $B \in M_{n_d \times n_{d - 1}}(\R)$ by
+  Define the diagonal matrix ${\bf A} \in M_{n_{D - 1} \times n_{D - 1}}(\R)$,
+  the sparse matrix ${\bf B} \in M_{n_d \times n_{D - 1}}(\R)$, and
+  the vectors ${\bf F} \in \R^{n_d}$, ${\bf G} \in \R^{n_{D - 1}}$ by
   \begin{subequations}
     \begin{alignat}{3}
-      & A_{i, j}
-      && := \inner{c^{d - 1, j}}{\kappa_{d - 1}^{-1} c^{d - 1, i}}, \enspace
-      && i, j = 0, ..., n_{d - 1} - 1, \\
+      & {\bf A}_{i, j}
+      && := \inner{c^{d - 1, j}}{\kappa^{-1} c^{d - 1, i}}, \enspace
+      && i, j = 0, ..., n_{D - 1} - 1, \\
       %
-      & B_{k, i}
-      && := \inner{\delta_{d - 1} c^{d - 1, i}}{c^{d, k}}, \enspace
-      && k = 0, ..., n_d - 1,\ i = 0, ..., n_{d - 1} - 1.
-    \end{alignat}
-  \end{subequations}
-  th
-  and the vectors $F \in \R^{n_d}$, $G \in \R^{n_{d - 1}}$ by
-  \begin{subequations}
-    \begin{alignat}{3}
-      & F_k
-      && := \inner{f^d}{c^{d, k}}, \enspace
+      & {\bf B}_{k, i}
+      && := \inner{\delta_{D - 1} c^{d - 1, i}}{c^{d, k}}, \enspace
+      && k = 0, ..., n_d - 1,\ i = 0, ..., n_{D - 1} - 1, \\
+      %
+      & {\bf F}_k
+      && := \inner{f}{c^{d, k}}, \enspace
       && k = 0, ..., n_d - 1, \\
       %
-      & G_i
-      && := (\tr_{\Gamma_D, d - 1} c^{d - 1, i} \smile g_D^0)[\Gamma_D],
+      & {\bf G}_i
+      && := (\tr_{\Gamma_D, d - 1} c^{d - 1, i} \smile g_D)[\Gamma_D],
         \enspace
-      && i = 0, ..., n_{d - 1} - 1.
+      && i = 0, ..., n_{D - 1} - 1.
     \end{alignat}
   \end{subequations}
-  Denote the unknown coefficients of $q^{d - 1}$ as
-  $\{x_j\}_{j = 0}^{n_{d - 1} - 1}$, i.e.,
+  Denote the unknown coefficients of $q$ as
+  $\{{\bf Q}_j\}_{j = 0}^{n_{D - 1} - 1}$, i.e.,
   \begin{equation}
-    q^{d - 1} = \sum_{j = 0}^{n_{s - 1} - 1} x_j c^{d - 1, j},
+    q = \sum_{j = 0}^{n_{s - 1} - 1} {\bf Q}_j c^{d - 1, j},
   \end{equation}
-  and the unknown coefficients of $\tilde{u}^d$ as
-  $\{y_k\}_{k = 0}^{n_d - 1}$, i.e.,
+  and the unknown coefficients of $\tilde{u}$ as
+  $\{\widetilde{\bf U}_k\}_{k = 0}^{n_d - 1}$, i.e.,
   \begin{equation}
-    \tilde{u}^d = \sum_{k = 0}^{n_d - 1} y_k c^{d, k}.
+    \tilde{u} = \sum_{k = 0}^{n_d - 1} \widetilde{\bf U}_k c^{d, k}.
   \end{equation}
   Finally, let $J$ be the set of $(d - 1)$-cells on the Neumann boundary
-  $\Gamma_N$, and $\overline{J} := \{0, ..., n_{d - 1} - 1\} \setminus I$.
+  $\Gamma_N$, and $\overline{J} := \{0, ..., n_{D - 1} - 1\} \setminus J$.
   We get the system
   \begin{subequations}
     \begin{alignat}{3}
-      & \sum_{j = 0}^{n_{d - 1} - 1} A_{i, j} x_j
-        - \sum_{k = 0}^{n_d - 1} (B^T)_{i, k} y_k
-      && = - G_i, \enspace
+      & \sum_{j = 0}^{n_{D - 1} - 1} {\bf A}_{i, j} {\bf Q}_j
+        - \sum_{k = 0}^{n_d - 1} ({\bf B}^T)_{i, k} y_k
+      && = - {\bf G}_i, \enspace
       && i \in \overline{J}, \\
       %
-      & \sum_{i = 0}^{n_{d - 1} - 1} - B_{k, i} x_i
-      && = F_k, \enspace
-      && i \in \overline{J}, \\
+      & - \sum_{i = 0}^{n_{D - 1} - 1} {\bf B}_{k, i} {\bf Q}_i
+      && = - {\bf F}_k, \enspace
+      && k = 0, ..., n_d - 1, \\
       %
-      & x_i
-      && = g_N^{d - 1}(c{d - 1, i}), \enspace
+      & {\bf Q}_i
+      && = g_N(c_{d - 1, i}), \enspace
       && i \in J.
     \end{alignat}
   \end{subequations}
   This leads to the system of equations
   \begin{subequations}
     \begin{alignat}{3}
-      & \sum_{j \in \overline{J}} A_{i, j} x_j
-        - \sum_{k = 0}^{n_d - 1} (B^T)_{i, k} y_k
-      && = - G_i - \sum_{j \in J} A_{i, j} g_N^{d - 1}(c_{d - 1, j}), \enspace
+      & \sum_{j \in \overline{J}} {\bf A}_{i, j} {\bf Q}_j
+        - \sum_{k = 0}^{n_d - 1} ({\bf B}^T)_{i, k} y_k
+      && = - {\bf G}_i
+        - \sum_{j \in J} {\bf A}_{i, j} g_N(c_{d - 1, j}), \enspace
       && i \in \overline{J}, \\
       %
-      & \sum_{i \in J} - B_{k, i} x_i
-      && = F_k + \sum_{i \in J} B_{k, i} g_N^{d - 1}(c_{d - 1, i}), \enspace
+      & - \sum_{i \in J} {\bf B}_{k, i} {\bf Q}_i
+      && = - {\bf F}_k
+        + \sum_{i \in J} {\bf B}_{k, i} g_N(c_{d - 1, i}), \enspace
+      && k = 0, ..., n_d - 1.
+    \end{alignat}
+  \end{subequations}
+  (Note that since ${\bf A}$ is diagonal, ${\bf A}_{i, j} = 0$
+  when $i \in \overline{J}$ and $j \in J$.)
+
+  Define the matrices
+  $\overline{\bf A} \in M_{\abs{\overline{J}} \times \abs{\overline{J}}}(\R)$,
+  $\overline{\bf B} \in M_{n_d \times \abs{\overline{J}}}(\R)$,
+  and vectors
+  $\widehat{\bf Q} \in \R^{\abs{J}}$,
+  $\widetilde{\bf F} \in \R^{n_d}$,
+  $\overline{\bf G} \in \R^{\abs{\overline{J}}}$,
+  $\overline{\bf Q} \in \R^{\abs{\overline{J}}}$
+  by
+  \begin{subequations}
+    \begin{alignat}{4}
+      & \overline{\bf A}_{i, j}
+      && =\
+      && {\bf A}_{i, j},\
+      && i, j \in \overline{J}, \\
+      %
+      & \overline{\bf B}_{k, i}
+      && =\
+      && {\bf B}_{k, i},\
+      && k = 0, ..., n_d - 1,\ i \in \overline{J}, \\
+      %
+      & \widehat{\bf Q}_i
+      && =\
+      && g_N(c_{d - 1, i}),\
+      && i \in J, \\
+      %
+      & \widetilde{\bf F}_k
+      && =\
+      && {\bf F}_k - \sum_{i \in J} {\bf B}_{k, i} \widehat{\bf Q}_i,\
+      && k = 0, ..., n_d - 1, \\
+      %
+      & \overline{\bf G}_{k, i}
+      && =\
+      && {\bf G}_i + \sum_{j \in J} {\bf A}_{i, j} \widehat{\bf Q}_i,\
+      && i \in \overline{J}, \\
+      %
+      & \overline{\bf Q}_i
+      && =\
+      && {\bf Q}_i,\
       && i \in \overline{J}.
     \end{alignat}
   \end{subequations}
-  (Note that since $A$ is diagonal, $A_{i, j} = 0$ when $i \in \overline{J}$ and
-  $j \in J$.)
-  Denote by $\overline{A},\ \overline{B},\ \overline{F},\ \overline{G},\
-  \overline{x}$ the respective restricted matrices and vectors.
-  We get the system of equations
+  Hence, we get the folloeing system of equations for
+  $\overline{\bf Q}$ and $\widetilde{\bf U}$:
   \begin{subequations}
-    \begin{alignat}{2}
-      & \overline{A} \overline{x} - \overline{B}^T y
-      && = - \overline{G}, \\
+    \begin{alignat}{4}
+      &
+      && \overline{\bf A}\; \overline{\bf Q}
+      && - \overline{\bf B}^T \widetilde{\bf U}
+      && = - \overline{\bf G}, \\
       %
-      & - \overline{B} \overline{x}
-      && = \overline{F}.
+      & - 
+      && \overline{\bf B}\; \overline{\bf Q}
+      &&
+      && = - \widetilde{\bf F}.
     \end{alignat}
   \end{subequations}
-  In general, when $A$ is sparse but not diagonal, it is not beneficial to use
-  the inverse of $A$ in calculations since it will be a dense matrix.
+  In general, when ${\bf A}$ is sparse but not diagonal, it is not beneficial to
+  use the inverse of ${\bf A}$ in calculations since it will be a dense matrix.
   (This is the case in mixed finite element methods.)
-  However, in our case $A$ is diagonal, so the following calculation makes sense
-  computationally.
-  We can solve for $\overline{x}$ by
+  However, in our case ${\bf A}$ is diagonal, so the following calculation makes
+  sense computationally.
+  We can solve for $\overline{\bf Q}$ by
   \begin{equation}
-    \overline{x} = \overline{A}^{-1} (- \overline{G} + \overline{B}^T y).
+    \label{eq:diffusion/discrete/steady_state/mixed_weak/flow_rate_from_potential}
+    \overline{\bf Q}
+    = \overline{\bf A}^{-1}
+      (- \overline{\bf G} + \overline{\bf B}^T \widetilde{\bf U}).
   \end{equation}
   Hence,
   \begin{equation}
-    \overline{F}
-    = - \overline{B} \overline{x}
-    = - \overline{B} \overline{A}^{-1} (- \overline{G} + \overline{B}^T y).
+    \widetilde{\bf F}
+    = \overline{\bf B}\; \overline{\bf Q}
+    = \overline{\bf B}\; \overline{\bf A}^{-1}
+        (- \overline{\bf G} + \overline{\bf B}^T \widetilde{\bf U}).
   \end{equation}
   This translates to
   \begin{equation}
-    \overline{B} \overline{A}^{-1} \overline{B}^T y
-    = \overline{B} \overline{A}^{-1} \overline{G} - \overline{F}.
+    \overline{\bf B}\; \overline{\bf A}^{-1} \overline{\bf B}^T 
+      \widetilde{\bf U}
+    = \overline{\bf B}\;
+      \overline{\bf A}^{-1} \overline{\bf G} + \widetilde{\bf F}.
   \end{equation}
-  Using the Cholesky decomposition, we can solve for $y$ and then substitute to
-  find $\overline{x}$.
+  Using the Cholesky decomposition, we can solve for $\widetilde{\bf U}$.
+  We then calculate $\overline{\bf Q}$ by substituting $\widetilde{\bf U}$ in
+  \Cref{eq:diffusion/discrete/steady_state/mixed_weak/flow_rate_from_potential}.
+  Finally,
+  \begin{equation}
+    {\bf Q}_i =
+    \begin{cases}
+      \widehat{\bf Q}_i, & i \in J \\
+      \overline{\bf Q}_i, & i \in \overline{J}
+    \end{cases}.
+  \end{equation}
 \end{discussion}

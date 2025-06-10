@@ -2,38 +2,35 @@
   Using the variables from
   \Cref{cmc/diffusion/continuous/transient/primal_strong-formulation}
   we are going to introduce an alternative (primal weak) formulation.
-  Let $v^0 \in \Ker \tr_{\Gamma_D, 0}$ be a test function
-  (later on the differentiablity assumptions on $v^0$ can be weakened).
-  Multiply the conservation of energy with $v^0$ and integrate over $X$:
+  Let $w \in \Ker \tr_{\Gamma_D, 0}$ be a test function
+  (later on the differentiablity assumptions on $w$ can be weakened).
+  Multiply the conservation of energy with $w$ and integrate over $X$:
   \begin{equation}
     \begin{split}
-      \int_X v^0 \wedge \frac{\partial Q^D}{\partial t}
-      & = - \int_X (v^0 \wedge d_{D - 1} q^{D - 1}) + \int_X (v^0 \wedge f^D) \\
-      & = - \int_{\partial X} \tr_{\partial X, D - 1} (v^0 \wedge q^{D - 1})
-        + \int_X (d_0 v^0 \wedge q^{D - 1})
-        + \int_X (v^0 \wedge f^D) \\
+      \int_X w \wedge \frac{\partial Q}{\partial t}
+      & = - \int_X (w \wedge d_{D - 1} q) + \int_X (w \wedge f) \\
+      & = - \int_{\partial X} \tr_{\partial X, D - 1} (w \wedge q)
+        + \int_X (d_0 w \wedge q)
+        + \int_X (w \wedge f) \\
       & =
         - \int_{\Gamma_N}
-          (\tr_{\Gamma_N, 0} v^0 \wedge \tr_{\Gamma_N, D - 1} q^{D - 1})
-        - \int_X (d_0 v^0 \wedge \star_1 \tilde{\kappa}_1 d_0 u^0)
-        + \int_X (v^0 \wedge f^D) \\
-      & = - \int_{\Gamma_N} (\tr_{\Gamma_N, 0} v^0 \wedge g_N^{D - 1})
-        - \int_X (d_0 v^0 \wedge \star_1 \tilde{\kappa}_1 d_0 u^0)
-        + \int_X (v^0 \wedge f^D) \\
-      & = - \int_{\Gamma_N} (\tr_{\Gamma_N, 0} v^0 \wedge g_N^{D - 1})
-        - \inner{d_0 v^0}{\star_{D - 1} \star_1 \tilde{\kappa}_1 d_0 u^0}_{X, 1}
-        + \int_X (v^0 \wedge f^D) \\
-      & = - \int_{\Gamma_N} (\tr_{\Gamma_N, 0} v^0 \wedge g_N^{D - 1})
-        - \inner{d_0 v^0}{\tilde{\kappa}_1 d_0 u^0}_{X, 1}
-        + \int_X (v^0 \wedge f^D).
+          (\tr_{\Gamma_N, 0} w \wedge \tr_{\Gamma_N, D - 1} q)
+        - \int_X (d_0 w \wedge \star_1 \tilde{\kappa} d_0 u)
+        + \int_X (w \wedge f) \\
+      & = - \int_{\Gamma_N} (\tr_{\Gamma_N, 0} w \wedge g_N)
+        - \int_X (d_0 w \wedge \star_1 \tilde{\kappa} d_0 u)
+        + \int_X (w \wedge f) \\
+      & = - \int_{\Gamma_N} (\tr_{\Gamma_N, 0} w \wedge g_N)
+        - \inner{d_0 w}{\tilde{\kappa} d_0 u}_{X, 1}
+        + \int_X (w \wedge f).
     \end{split}
   \end{equation}
   We also have:
   \begin{equation}
-    \int_X v^0 \wedge \frac{\partial Q^D}{\partial t}
-    = \int_X v^0 \wedge
-      \left(\star_0 \pi_0 \frac{\partial u^0}{\partial t}\right)
-    =  \inner{v^0}{\pi_0 \frac{\partial u^0}{\partial t}}_{X, 0}.
+    \int_X w \wedge \frac{\partial Q}{\partial t}
+    = \int_X w \wedge
+      \left(\star_0 \tilde{\pi} \frac{\partial u}{\partial t}\right)
+    =  \inner{w}{\tilde{\pi} \frac{\partial u}{\partial t}}_{X, 0}.
   \end{equation}
   Equating both equations leads to the following (primal weak) formulation.
 \end{discussion}

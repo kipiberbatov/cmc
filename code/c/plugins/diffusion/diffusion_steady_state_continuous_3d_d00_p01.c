@@ -7,7 +7,7 @@
 Let
   . M = [0, 1]^3
   . kappa_1 = 2
-  . f = 12 dx /\ dy /\ dz
+  . f = - 12 dx /\ dy /\ dz
   . G be the boundary of M
   . G_D = {(x, y, z) in G | y in {0, 1} or z in {0, 1}}
   . G_N = {(x, y, z) in G | x in {0, 1}}
@@ -15,14 +15,14 @@ Let
   . g_N = {(0, y, z) |-> 0, (1, y, z) |-> 4 d y /\ dz}
 
 The potential 0-form u and flow rate 1-form q are solutions to the problem
-  . q = *_1 kappa_1 d_0 u
-  . d q = -f
+  . q = - *_1 kappa_1 d_0 u
+  . d q = f
   . tr_{G_D, 0} u = g_D
   . tr_{G_N, 2} q = g_N
 
 This problem has exact solution
   . u(x, y, z) = x^2 + y^2 + z^2
-  . q(x, y, z) = 4 (x dy /\ dz + y dz /\ dx + z dx /\ dy)
+  . q(x, y, z) = - 4 (x dy /\ dz + y dz /\ dx + z dx /\ dy)
 */
 
 static double square(double x){return x * x;}
@@ -34,7 +34,7 @@ static double kappa_1(const double * x)
 
 static double source(const double * x)
 {
-  return -12;
+  return -12.;
 }
 
 static int boundary_dirichlet(const double * x)
@@ -152,7 +152,7 @@ void diffusion_steady_state_continuous_3d_d00_p01_flow_rate(
   {
     p = face_perpendicular_axis(&m_cf_2_0, m_coord, i);
     jagged2_part1(&m_cf_2_0_i, &m_cf_2_0, i);
-    value = 4 * face_area * m_coord[3 * m_cf_2_0_i.a1[0] + p];
+    value = - 4 * face_area * m_coord[3 * m_cf_2_0_i.a1[0] + p];
     flow_rate[i] = m_cbd_2_values[index] * value;
     index += m_cbd_2_cols_total[i + 1] - m_cbd_2_cols_total[i];
   }

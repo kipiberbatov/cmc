@@ -9,15 +9,15 @@ Let
   . pi_0 = 1
   . kappa_1 = 1
   . u_0(x, y) = y (y - 1)
-  . f = -4 dx /\ dy
+  . f = - 4 dx /\ dy
   . G_D = {0, 1} x [0, 1]
   . G_N = [0, 1] x {0, 1}
   . g_D = y (y - 1)
-  . g_N = (1 - 2 x) dx
+  . g_N = (2 y - 1) dx
 
 The potential 0-form u and flow rate 1-form q are solutions to the problem
   . q = - *_1 kappa_1 d_0 u
-  . D_t Q = d q + f
+  . D_t Q = - d q + f
   . D_t Q = *_0 (D_t (pi_0 u))
   . tr_{G_D, 0} u = g_D
   . tr_{G_N, 1} q = g_N
@@ -25,7 +25,7 @@ The potential 0-form u and flow rate 1-form q are solutions to the problem
 
 This problem has the following exact steady-state solution
   . u(x, y) = x (x - 1) + y (y - 1)
-  . q(x, y) = (1 - 2 y) dx + (2 x - 1) dy
+  . q(x, y) = (2 y - 1) dx - (2 x - 1) dy
 */
 
 static double pi_0(const double * x)
@@ -65,7 +65,7 @@ static int boundary_neumann(const double * x)
 
 static double g_neumann(const double * x)
 {
-  return 1.;
+  return -1.;
 }
 
 const struct diffusion_transient_continuous

@@ -15,8 +15,8 @@ Let
   . g_N = 0
 
 The potential 0-form u and flow rate 1-form q are solutions to the problem
-  . q = *_1 kappa_1 d_0 u
-  . D_t Q = d q + f
+  . q = - *_1 kappa_1 d_0 u
+  . D_t Q = - d q + f
   . D_t Q = *_0 (D_t (pi_0 u))
   . tr_{G_D, 0} u = g_D
   . tr_{G_N, 1} q = g_N
@@ -24,7 +24,7 @@ The potential 0-form u and flow rate 1-form q are solutions to the problem
 
 The steady-state version of this problem has exact solution
   . u(x, y, z) = 100 (1 - x)
-  . q(x, y, z) = -100 dy /\ dz
+  . q(x, y, z) = 100 dy /\ dz
 */
 
 static double pi_0(const double * x)

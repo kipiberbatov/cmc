@@ -4,31 +4,31 @@
   Consider the model
   \Cref{cmc/diffusion/continuous/model_with_differential_forms-discussion}
   with the same domains and variable names.
-  Let $r^{D - 1} [E T^{-1}] \in \Ker \left(\tr_{\Gamma_N, D - 1}\right)$.
+  Let $r [E T^{-1}] \in \Ker \left(\tr_{\Gamma_N, D - 1}\right)$.
   Then
   \begin{equation}
-    \kappa_{D - 1}^{-1} q^{D - 1} = d_\star^D \tilde{u}^D = - \star_1 d_0 u^0.
+    \kappa^{-1} q = d_\star^D \tilde{u} = - \star_1 d_0 u.
   \end{equation}
   Hence,
   \begin{equation}
     \begin{split}
-      \inner{r^{D - 1}}{\kappa_{D - 1}^{-1} q^{D - 1}}_{X, D - 1}
-      & = \inner{r^{D - 1}}{- \star_1 d_0 u^0}_{X, D - 1} \\
-      & = - \int_X d_0 u^0 \wedge r^{D - 1} \\
+      \inner{r}{\kappa^{-1} q}_{X, D - 1}
+      & = \inner{r}{- \star_1 d_0 u}_{X, D - 1} \\
+      & = - \int_X d_0 u \wedge r \\
       & = - \int_{\partial X}
-        \tr_{\partial X, 0} u^0 \wedge \tr_{\partial X, D - 1} r^{D - 1}
-        + \int_{X} (u^0 \wedge d_{D - 1} r^{D - 1}) \\
-      & = - \int_{\Gamma_D} g_D^0 \wedge \tr_{\Gamma_D, D - 1} r^{D - 1}
-        + \inner{\star_0 u^0}{d_{D - 1} r^{D - 1}} \\
-      & = - \int_{\Gamma_D} g_D^0 \wedge \tr_{\Gamma_D, D - 1} r^{D - 1}
-        + \inner{\tilde{u}^D}{d_{D - 1} r^{D - 1}}.
+        \tr_{\partial X, 0} u \wedge \tr_{\partial X, D - 1} r
+        + \int_{X} (u \wedge d_{D - 1} r) \\
+      & = - \int_{\Gamma_D} g_D \wedge \tr_{\Gamma_D, D - 1} r
+        + \inner{\star_0 u}{d_{D - 1} r} \\
+      & = - \int_{\Gamma_D} g_D \wedge \tr_{\Gamma_D, D - 1} r
+        + \inner{\tilde{u}}{d_{D - 1} r}.
     \end{split}
   \end{equation}
-  Let $v^D [\Theta] \in \Omega^D X$.
-  Taking the inner product of the conservation law with $v^D$ gives
+  Let $\tilde{w} [\Theta] \in \Omega^D X$.
+  Taking the inner product of the conservation law with $\tilde{w}$ gives
   \begin{equation}
-   \inner{\tilde{\pi}_D \frac{\partial \tilde{u}^D}{\partial t}}{v^D}_{X, D}
-    = - \inner{d_{D - 1} q^{D - 1}}{v^D}_{X, D} + \inner{f^D}{v^D}.
+   \inner{\pi \frac{\partial \tilde{u}}{\partial t}}{\tilde{w}}_{X, D}
+    = - \inner{d_{D - 1} q}{\tilde{w}}_{X, D} + \inner{f}{\tilde{w}}.
   \end{equation}
   This leads to the following (mixed weak) formulation.
 \end{discussion}

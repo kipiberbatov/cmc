@@ -6,6 +6,21 @@
 #include "double_array.h"
 #include "matrix_sparse.h"
 
+/*
+Let $a$ be a positive definite matrix, $b$ be a matrix, $g$ and $f$ be vectors.
+This function solves the following mixed problem for $q$ and $u$:
+    a q - b^T u = - g,
+  - b q         = - f.
+
+The implementation follows the following derivation:
+q = a^{-1}(b^T u - g)
+f = b q = b a^{-1}(b^T u - g) = b a^{-1} b^T u - b a^{-1} g
+b a^{-1} b^T u = b a^{-1} g + f
+
+Hence, we get:
+u = linear_solve_cholesky(b a^{-1} b^T, b a^{-1} g + f)
+q = a^{-1}(b^T u - g)
+*/
 void matrix_sparse_mixed_linear_solve_with_diagonal_top_left_matrix(
   double * q,
   double * u,
@@ -51,9 +66,11 @@ void matrix_sparse_mixed_linear_solve_with_diagonal_top_left_matrix(
     goto b_transpose_free;
   }
 
-  double_array_negate(u, n, f);
+  /* u = f */
+  memcpy(u, f, sizeof(double) * n);
+  /* u = b a^{-1} g + f */
   matrix_sparse_vector_multiply_add(u, &b_times_inverse_a, g);
-
+  /* u = linear_solve_cholesky(b a^{-1} b^T, b a^{-1} g + f) */
   matrix_sparse_linear_solve(c, u, "--cholesky");
   if (errno)
   {
@@ -61,9 +78,12 @@ void matrix_sparse_mixed_linear_solve_with_diagonal_top_left_matrix(
     fputs("cannot calculate variable u\n", stderr);
     goto c_free;
   }
-  memcpy(q, g, sizeof(double) * m);
-  matrix_sparse_vector_subtract_product(q, b_transpose, u);
 
+  /* q = - g */
+  double_array_negate(q, m, g);
+  /* q = b^T u - g */
+  matrix_sparse_vector_multiply_add(q, b_transpose, u);
+  /* q = a^{-1}(b^T u - g) */
   double_array_pointwise_divide(q, m, a);
 
 c_free:

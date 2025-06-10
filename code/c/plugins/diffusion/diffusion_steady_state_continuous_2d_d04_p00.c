@@ -21,14 +21,14 @@ Let
 
 The potential 0-form u and flow 1-form q are solutions to the problem
   . q = - *_1 kappa_1 d_0 u
-  . d q = -f
+  . d q = f
   . tr_{G_D, 0} u = g_D
 
 This problem has exact solution
   . ~u(theta, phi) = sin^2(theta) cos(2 phi), i.e.,
     u(x, y, z) = x^2 - y^2
-  . ~q(theta, phi) = KAPPA (2 sin(theta) sin(2 phi) d theta
-                            + sin(theta) sin(2 theta) cos(2 phi) d phi)
+  . ~q(theta, phi) = - KAPPA (2 sin(theta) sin(2 phi) d theta
+                              + sin(theta) sin(2 theta) cos(2 phi) d phi)
 */
 
 #define EPSILON 0.00001
@@ -104,14 +104,14 @@ The flow rate through edge E is represented by int_E q
 Let K := KAPPA
 
 On a meridian M = [theta_a, theta_b] * {phi_0}, theta_b - theta_a = theta_1,
-  int_M q = int_{theta_a}^{theta_b} K (2 sin(theta) sin(2 phi_0) d theta
-          = 2 K sin(2 phi_0) (cos(theta_a) - cos(theta_b))
-          = 4 K sin(theta_1 / 2) sin((theta_a + theta_b) / 2) sin(2 phi_0)
+  int_M q = - int_{theta_a}^{theta_b} K (2 sin(theta) sin(2 phi_0) d theta
+          = - 2 K sin(2 phi_0) (cos(theta_a) - cos(theta_b))
+          = - 4 K sin(theta_1 / 2) sin((theta_a + theta_b) / 2) sin(2 phi_0)
 
 On a parallel P = {theta_0} * [phi_a, phi_b], phi_b - phi_a = phi_1,
-  int_P q = int_{phi_a}^{phi_b} K (sin(theta_0) sin(2 theta_0) cos(2 phi) d phi
-          = (K / 2) sin(theta_0) sin(2 theta_0) (sin(2 phi_b) - sin(2 phi_a))
-          = K sin(phi_1) sin(theta_0) sin(2 theta_0) cos(phi_a + phi_b)
+  int_P q = -int_{phi_a}^{phi_b} K (sin(theta_0) sin(2 theta_0) cos(2 phi) d phi
+          = - (K / 2) sin(theta_0) sin(2 theta_0) (sin(2 phi_b) - sin(2 phi_a))
+          = - K sin(phi_1) sin(theta_0) sin(2 theta_0) cos(phi_a + phi_b)
 
 */
 void
@@ -151,8 +151,8 @@ diffusion_steady_state_continuous_2d_d04_p00_exact_flow_rate_hemisphere_polar(
     for (j = 0; j < na / 2; ++j)
     {
       s0 = sin(4 * j * phi);
-      flow_rate[index + 0] = - signs[2 * index + 0] * m0 * s0;
-      flow_rate[index + 1] = + signs[2 * index + 2] * m1 * s0;
+      flow_rate[index + 0] = + signs[2 * index + 0] * m0 * s0;
+      flow_rate[index + 1] = - signs[2 * index + 2] * m1 * s0;
       index += 2;
     }
 
@@ -162,8 +162,8 @@ diffusion_steady_state_continuous_2d_d04_p00_exact_flow_rate_hemisphere_polar(
     {
       d0 = cos((4 * j + 1) * phi);
       d1 = cos((4 * j + 3) * phi);
-      flow_rate[index + 0] = - signs[2 * index + 0] * p0 * d0;
-      flow_rate[index + 1] = + signs[2 * index + 2] * p0 * d1;
+      flow_rate[index + 0] = + signs[2 * index + 0] * p0 * d0;
+      flow_rate[index + 1] = - signs[2 * index + 2] * p0 * d1;
       index += 2;
     }
   }
@@ -178,9 +178,9 @@ diffusion_steady_state_continuous_2d_d04_p00_exact_flow_rate_hemisphere_polar(
     d0 = cos((4 * j + 1) * phi);
     d1 = cos((4 * j + 3) * phi);
     s1 = sin(2 * (2 * j + 1) * phi);
-    flow_rate[index + 0] = - signs[2 * index + 0] * p1 * d0; /* parallel */
-    flow_rate[index + 1] =   signs[2 * index + 2] * m1 * s1; /* meridian */
-    flow_rate[index + 2] = + signs[2 * index + 4] * p1 * d1; /* parallel */
+    flow_rate[index + 0] = + signs[2 * index + 0] * p1 * d0; /* parallel */
+    flow_rate[index + 1] = - signs[2 * index + 2] * m1 * s1; /* meridian */
+    flow_rate[index + 2] = - signs[2 * index + 4] * p1 * d1; /* parallel */
     index += 3;
   }
 
@@ -195,10 +195,10 @@ diffusion_steady_state_continuous_2d_d04_p00_exact_flow_rate_hemisphere_polar(
       d0 = cos((4 * j + 1) * phi);
       d1 = cos((4 * j + 3) * phi);
       s1 = sin(2 * (2 * j + 1) * phi);
-      flow_rate[index + 0] = - signs[2 * index + 0] * m0 * s1; /* meridian */
-      flow_rate[index + 1] = - signs[2 * index + 2] * p1 * d0; /* parallel */
-      flow_rate[index + 2] = + signs[2 * index + 4] * m1 * s1; /* meridian */
-      flow_rate[index + 3] = + signs[2 * index + 6] * p1 * d1; /* parallel */
+      flow_rate[index + 0] = + signs[2 * index + 0] * m0 * s1; /* meridian */
+      flow_rate[index + 1] = + signs[2 * index + 2] * p1 * d0; /* parallel */
+      flow_rate[index + 2] = - signs[2 * index + 4] * m1 * s1; /* meridian */
+      flow_rate[index + 3] = - signs[2 * index + 6] * p1 * d1; /* parallel */
       index += 4;
     }
   }

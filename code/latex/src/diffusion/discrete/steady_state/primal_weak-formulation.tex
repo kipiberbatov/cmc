@@ -7,20 +7,20 @@
   Let:
   \begin{itemize}
     \item
-      Let $d$ be a positive integer (space dimension);
+      Let $D$ be a positive integer (space dimension);
     \item
       $K$ be an oriented quasi-cubical \hyperref[cmc:mesh:definition]{mesh} of
-      dimension $d$ representing the material body;
+      dimension $D$ representing the material body;
     \item
       $[K]$ be the fundamental class of $K$;
     \item
-      $\tilde{\kappa}_1 [E L^{2 - d} T^{-1} \Theta^{-1}]
+      $\tilde{\kappa} [E L^{2 - D} T^{-1} \Theta^{-1}]
       \colon C^1 K \to C^1 K$
       be the thermal conductivity of the material, such that for any edge
       $c_1 \in K_1$, there exists some $\lambda > 0$ such that
-      $\tilde{\kappa}_1(c^1) = \lambda c^1$;
+      $\tilde{\kappa}(c^1) = \lambda c^1$;
     \item
-      $f^d [E T^{-1}] \in C^d K$ be the heat source;
+      $f [E T^{-1}] \in C^D K$ be the internal production rate;
     \item
       $\partial K = \Gamma_D \cup \Gamma_N$ be the partition of the boundary of
       $K$ into Dirichlet ($\Gamma_D$) and Neumann ($\Gamma_N$) regions;
@@ -28,36 +28,36 @@
       $[\Gamma_N]$ be the fundamental class of $\Gamma_N$, where $\Gamma_N$
       has the boundary orientation induced from $K$;
     \item
-      $g_D^0 [\Theta] \in C^0 \Gamma_D$
+      $g_D [\Theta] \in C^0 \Gamma_D$
       be the prescribed temperature on the Dirichlet boundary;
     \item
-      $g_N^{d - 1} [E T^{-1}] \in C^{d - 1} \Gamma_N$
+      $g_N [E T^{-1}] \in C^{D - 1} \Gamma_N$
       be the prescribed flow rate on the Neumann boundary.
   \end{itemize}
-  Our unknown is temperature $u^0 [\Theta] \in C^0 K$.
-  We are solving the following problem for $u^0$:
+  Our unknown is temperature $u [\Theta] \in C^0 K$.
+  We are solving the following problem for $u$:
   \begin{subequations}
     \begin{alignat}{4}
-      & \forall v^0 \in \Ker \tr_{\Gamma_D, 0}, \enspace
-      && \inner{\delta_0 v^0}{\tilde{\kappa}_1 \delta_0 u^0}_{K, 1}
-      && = (v^0 \smile f^d)[K]
-         - (\tr_{\Gamma_N, 0} v^0 \smile g_N^{d - 1})[\Gamma_N] \qquad
+      & \forall v \in \Ker \tr_{\Gamma_D, 0}, \enspace
+      && \inner{\delta_0 v}{\tilde{\kappa} \delta_0 u}_{K, 1}
+      && = (v \smile f)[K]
+         - (\tr_{\Gamma_N, 0} v \smile g_N)[\Gamma_N] \qquad
       && [E T^{-1} \Theta], \\
       %
       &
-      && \tr_{\Gamma_D, 0} u^0
-      && = g_D^0 \qquad
+      && \tr_{\Gamma_D, 0} u
+      && = g_D \qquad
       && [\Theta].
     \end{alignat}
   \end{subequations}
-  The flow rate $q^{d - 1} [E T^{-1}] \in C^{d - 1} K$
+  The flow rate $q [E T^{-1}] \in C^{D - 1} K$
   is calculated in the post-processing phase by the formula
   \begin{equation}
-    q^{d - 1}(c_{d - 1}) :=
+    q(c_{D - 1}) :=
     \begin{cases}
-      (- \star_1 \tilde{\kappa}_1 \delta_0 u^0)(c_{d - 1}),
-        & c_{d - 1} \in K_{d - 1} \setminus (\Gamma_N)_{d - 1} \\
-      g_N^{d - 1}(c_{d - 1}), & c_{d - 1} \in (\Gamma_N)_{d - 1}
+      (- \star_1 \tilde{\kappa} \delta_0 u)(c_{D - 1}),
+        & c_{D - 1} \in K_{D - 1} \setminus (\Gamma_N)_{D - 1} \\
+      g_N(c_{D - 1}), & c_{D - 1} \in (\Gamma_N)_{D - 1}
     \end{cases}.
   \end{equation}
 \end{formulation}

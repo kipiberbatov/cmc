@@ -15,13 +15,13 @@ Let
 
 The potential 0-form u and flow rate 1-form q are solutions to the problem
   . q = - *_1 kappa_1 d_0 u
-  . d q = -f
+  . d q = f
   . tr_{G_D, 0} u = g_D
   . tr_{G_N, 1} q = g_N
 
 This problem has exact solution
   . u(x, y) = 100 (2 x - 1)
-  . q(x, y) = 200 dy
+  . q(x, y) = - 200 dy
 */
 
 static double kappa_1(const double * x)
@@ -100,6 +100,6 @@ void diffusion_steady_state_continuous_2d_d00_p01_flow_rate(
     j1 = m_cf_1_0[2 * i + 1];
     y0 = m_coord[2 * j0 + 1];
     y1 = m_coord[2 * j1 + 1];
-    flow_rate[i] = 200. * (y1 - y0) * m_bd_1_values[2 * i + 1];
+    flow_rate[i] = - 200. * (y1 - y0) * m_bd_1_values[2 * i + 1];
   }
 }

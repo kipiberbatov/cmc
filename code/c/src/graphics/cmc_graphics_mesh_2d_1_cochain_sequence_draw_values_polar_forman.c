@@ -96,7 +96,7 @@ void cmc_graphics_mesh_2d_1_cochain_sequence_draw_values_polar_forman(
       if (color_index)
       {
         set_color(edge.color, color_index, total_colors);
-        sign = boundary_1[2 * index + 1] * values_i[index] > 0. ? 1. : -1.;
+        sign = boundary_1[2 * index + 1] * values_i[index] > 0. ? -1. : 1.;
         memcpy(line.x0, coordinates + 2 * cf_1_0_index[0], sizeof(double) * 2);
         memcpy(line.x1, coordinates + 2 * cf_1_0_index[1], sizeof(double) * 2);
         line_2d_set_flow_rate_direction(&flow_rate_direction, &line, sign,size);
@@ -123,7 +123,7 @@ void cmc_graphics_mesh_2d_1_cochain_sequence_draw_values_polar_forman(
       if (color_index)
       {
         set_color(edge.color, color_index, total_colors);
-        sign = boundary_1[2 * index + 1] * values_i[index] > 0. ? 1. : -1.;
+        sign = boundary_1[2 * index + 1] * values_i[index] > 0. ? -1. : 1.;
         if (j % 2 == 0)
           sign = -sign;
         arc.alpha = j * phi_1;
@@ -155,7 +155,7 @@ void cmc_graphics_mesh_2d_1_cochain_sequence_draw_values_polar_forman(
     if (color_index)
     {
       set_color(edge.color, color_index, total_colors);
-      sign = boundary_1[2 * index + 1] * values_i[index] < 0. ? 1. : -1.;
+      sign = boundary_1[2 * index + 1] * values_i[index] < 0. ? -1. : 1.;
       arc.alpha = 2 * j * phi_1;
       arc.beta = (2 * j + 1) * phi_1;
       arc_2d_set_flow_rate_direction(&flow_rate_direction, &arc, sign, size);
@@ -174,7 +174,7 @@ void cmc_graphics_mesh_2d_1_cochain_sequence_draw_values_polar_forman(
     if (color_index)
     {
       set_color(edge.color, color_index, total_colors);
-      sign = boundary_1[2 * index + 1] * values_i[index] > 0. ? 1. : -1.;
+      sign = boundary_1[2 * index + 1] * values_i[index] > 0. ? -1. : 1.;
       memcpy(line.x0, coordinates + 2 * cf_1_0_index[0], sizeof(double) * 2);
       memcpy(line.x1, coordinates + 2 * cf_1_0_index[1], sizeof(double) * 2);
       line_2d_set_flow_rate_direction(&flow_rate_direction, &line, sign, size);
@@ -193,7 +193,7 @@ void cmc_graphics_mesh_2d_1_cochain_sequence_draw_values_polar_forman(
     if (color_index)
     {
       set_color(edge.color, color_index, total_colors);
-      sign = boundary_1[2 * index + 1] * values_i[index] > 0. ? 1. : -1.;
+      sign = boundary_1[2 * index + 1] * values_i[index] > 0. ? -1. : 1.;
       arc.alpha = (2 * j + 1) * phi_1;
       arc.beta = (2 * j + 2) * phi_1;
       arc_2d_set_flow_rate_direction(&flow_rate_direction, &arc, sign, size);
@@ -209,7 +209,6 @@ void cmc_graphics_mesh_2d_1_cochain_sequence_draw_values_polar_forman(
     cf_1_0_index += 2;
   }
 
-
   /* outer circles: ray-arc-ray-arc */
   for (i = 1; i < nd / 2; ++i)
   {
@@ -223,7 +222,7 @@ void cmc_graphics_mesh_2d_1_cochain_sequence_draw_values_polar_forman(
       if (color_index)
       {
         set_color(edge.color, color_index, total_colors);
-        sign = boundary_1[2 * index + 1] * values_i[index] > 0. ? 1. : -1.;
+        sign = boundary_1[2 * index + 1] * values_i[index] > 0. ? -1. : 1.;
         memcpy(line.x0, coordinates + 2 * cf_1_0_index[0], sizeof(double) * 2);
         memcpy(line.x1, coordinates + 2 * cf_1_0_index[1], sizeof(double) * 2);
         line_2d_set_flow_rate_direction(&flow_rate_direction, &line, sign,size);
@@ -242,7 +241,7 @@ void cmc_graphics_mesh_2d_1_cochain_sequence_draw_values_polar_forman(
       if (color_index)
       {
         set_color(edge.color, color_index, total_colors);
-        sign = boundary_1[2 * index + 1] * values_i[index] < 0. ? 1. : -1.;
+        sign = boundary_1[2 * index + 1] * values_i[index] < 0. ? -1. : 1.;
         arc.alpha = 2 * j * phi_1;
         arc.beta = (2 * j + 1) * phi_1;
         arc_2d_set_flow_rate_direction(&flow_rate_direction, &arc, sign, size);
@@ -261,7 +260,7 @@ void cmc_graphics_mesh_2d_1_cochain_sequence_draw_values_polar_forman(
       if (color_index)
       {
         set_color(edge.color, color_index, total_colors);
-        sign = boundary_1[2 * index + 1] * values_i[index] < 0. ? 1. : -1.;
+        sign = boundary_1[2 * index + 1] * values_i[index] < 0. ? -1. : 1.;
         memcpy(line.x0, coordinates + 2 * cf_1_0_index[0], sizeof(double) * 2);
         memcpy(line.x1, coordinates + 2 * cf_1_0_index[1], sizeof(double) * 2);
         line_2d_set_flow_rate_direction(&flow_rate_direction, &line, sign,size);
@@ -280,7 +279,7 @@ void cmc_graphics_mesh_2d_1_cochain_sequence_draw_values_polar_forman(
       if (color_index)
       {
         set_color(edge.color, color_index, total_colors);
-        sign = boundary_1[2 * index + 1] * values_i[index] > 0. ? 1. : -1.;
+        sign = boundary_1[2 * index + 1] * values_i[index] > 0. ? -1. : 1.;
         arc.alpha = (2 * j + 1) * phi_1;
         arc.beta = (2 * j + 2) * phi_1;
         arc_2d_set_flow_rate_direction(&flow_rate_direction, &arc, sign, size);

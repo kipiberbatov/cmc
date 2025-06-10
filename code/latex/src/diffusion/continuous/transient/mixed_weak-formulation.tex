@@ -13,24 +13,24 @@
     \item
       $I = [t_0, \infty)$ be the time-interval where the process occurs;
     \item
-      $f [E T^{-1}] \colon I \to \Omega^D X$ be the heat source;
+      $f [E T^{-1}] \colon I \to \Omega^D X$ be the internal production rate;
     \item
       $u_0 [\Theta] \in \Omega^0 X$ be the initial temperature;
     \item
-      $\kappa_{D - 1} [E L^{2 - D} T^{-1} \Theta^{-1}]
+      $\kappa [E L^{2 - D} T^{-1} \Theta^{-1}]
       \colon \Omega^{D - 1} X \to \Omega^{D - 1} X$
       be the thermal conductivity of the material;
     \item
-      $\tilde{\pi}_D [E L^{-D} \Theta^{-1}] \colon \Omega^D X \to \Omega^D X$
+      $\pi [E L^{-D} \Theta^{-1}] \colon \Omega^D X \to \Omega^D X$
       be the heat capacity of the material;
     \item
       $\partial X = \Gamma_D \cup \Gamma_N$ be the partition of the boundary of
       $X$ into Dirichlet ($\Gamma_D$) and Neumann ($\Gamma_N$) regions;
     \item
-      $g_D^0 [\Theta] \colon I \to \Omega^0 \Gamma_D$
+      $g_D [\Theta] \colon I \to \Omega^0 \Gamma_D$
       be the prescribed temperature on the Dirichlet boundary;
     \item
-      $g_N^{D - 1} [E T^{-1}] \colon I \to \Omega^{D - 1} \Gamma_N$
+      $g_N [E T^{-1}] \colon I \to \Omega^{D - 1} \Gamma_N$
       be the prescribed flow rate on the Neumann boundary.
   \end{itemize}
   Define the following operators:
@@ -38,69 +38,69 @@
     \begin{alignat}{3}
       & A \colon \Omega^{D - 1} X \times (I \to \Omega^{D - 1} X) \to \R,
         \;
-      && A(r^{D - 1}, s^{D - 1})
-        := \inner{r^{D - 1}}{\kappa_{D - 1}^{-1} s^{D - 1}}_{X, D - 1} \;
+      && A(r, s)
+        := \inner{r}{\kappa^{-1} s}_{X, D - 1} \;
       && [E^{-1} T \Theta], \\
       %
       & B \colon \Omega^D X \times (I \to \Omega^{D - 1} X) \to \R, \;
-      && B(v^D, r^{D - 1})
-        := \inner{d_{D - 1} r^{D - 1}}{v^D}_{X, D} \;
+      && B(\tilde{w}, r)
+        := \inner{d_{D - 1} r}{\tilde{w}}_{X, D} \;
       && [L^{-D}], \\
       %
       & C \colon \Omega^D X \times (I \to \Omega^D X) \to \R, \;
-      && C(v^D, w^D) := \inner{\tilde{\pi}_D w^D}{v^D}_{X, D} \;
+      && C(\tilde{w}, w^D) := \inner{\pi w^D}{\tilde{w}}_{X, D} \;
       && [E L^{-2D} \Theta^{-1}], \\
       %
       & G \colon \Omega^{D - 1} X \to \R, \;
-      && G(r^{D - 1})
-        := \int_{\Gamma_D} (\tr_{\Gamma_D, D - 1} r^{D - 1} \wedge g_D^0)
+      && G(r)
+        := \int_{\Gamma_D} (\tr_{\Gamma_D, D - 1} r \wedge g_D)
         \;
       && [\Theta], \\
       %
       & F \colon \Omega^D X \to \R, \;
-      && F(v^D) := \inner{f^D}{v^D}_{X, D} \;
+      && F(\tilde{w}) := \inner{f}{\tilde{w}}_{X, D} \;
       && [E T^{-1} L^{-D}].
     \end{alignat}
   \end{subequations}
   Our unknowns are:
   \begin{itemize}
     \item
-      $q^{D - 1} [E T^{-1}] \colon I \to \Omega^{D - 1} X$ (heat flow rate);
+      $q [E T^{-1}] \colon I \to \Omega^{D - 1} X$ (heat flow rate);
     \item
-      $\tilde{u}^D [\Theta L^D] \colon I \to \Omega^D X$ (dual temperature).
+      $\tilde{u} [\Theta L^D] \colon I \to \Omega^D X$ (dual temperature).
   \end{itemize}
-  We are solving the following problem for $q^{D - 1}$ and $\tilde{u}^D$:
+  We are solving the following problem for $q$ and $\tilde{u}$:
   \begin{subequations}
     \begin{alignat}{4}
-      & \forall r^{D - 1} [E T^{-1}] \in \Ker \tr_{\Gamma_N, D - 1}, \;
-      && A(r^{D - 1}, q^{D - 1}) - B^T(r^{D - 1}, \tilde{u}^D)
-      && = - G(r^{D - 1}) \;
+      & \forall r [E T^{-1}] \in \Ker \tr_{\Gamma_N, D - 1}, \;
+      && A(r, q) - B^T(r, \tilde{u})
+      && = - G(r) \;
       && [E T^{-1} \Theta], \\
       %
-      & \forall v^D [\Theta L^D] \in \Omega^D X, \;
-      && - B(v^D, q^{D - 1}) + C(v^D, \frac{\partial \tilde{u}^D}{\partial t})
-      && = F(v^D) \;
+      & \forall \tilde{w} [\Theta L^D] \in \Omega^D X, \;
+      && - B(\tilde{w}, q) - C(\tilde{w}, \frac{\partial \tilde{u}}{\partial t})
+      && = - F(\tilde{w}) \;
       && [E T^{-1} \Theta], \\
       %
       &
-      && \tr_{\Gamma_N, D - 1} q^{D - 1}
-      && = g_N^{D - 1} \;
+      && \tr_{\Gamma_N, D - 1} q
+      && = g_N \;
       && [E T^{-1}], \\
       %
       &
-      && \tilde{u}^D(t_0)
+      && \tilde{u}(t_0)
       && = \star_{X, 0} u_0 \;
       && [\Theta L^D].
     \end{alignat}
   \end{subequations}
-  The temperature $u^0 [\Theta] \colon I \to \Omega^0 X$ is calculated in the
+  The temperature $u [\Theta] \colon I \to \Omega^0 X$ is calculated in the
   post-processing phase by the formula
   \begin{equation}
-    u^0(t, x) :=
+    u(t, x) :=
     \begin{cases}
       u_0(x), & t = t_0 \\
-      (\star_D \tilde{u}^D)(t, x), & t > t_0\ \text{and}\ x \notin \Gamma_D \\
-      g_D^0(t, x), & t_0 > 0\ \text{and}\ x \in \Gamma_D
+      (\star_D \tilde{u})(t, x), & t > t_0\ \text{and}\ x \notin \Gamma_D \\
+      g_D(t, x), & t_0 > 0\ \text{and}\ x \in \Gamma_D
     \end{cases}.
   \end{equation}
 \end{formulation}

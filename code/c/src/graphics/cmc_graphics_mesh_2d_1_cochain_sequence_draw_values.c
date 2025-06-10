@@ -79,7 +79,7 @@ void cmc_graphics_mesh_2d_1_cochain_sequence_draw_values(
       set_color(edge.color, color_index, total_colors);
       memcpy(line.x0, coordinates + 2 * cf_1_0_j[0], sizeof(double) * 2);
       memcpy(line.x1, coordinates + 2 * cf_1_0_j[1], sizeof(double) * 2);
-      sign = boundary_1[2 * j + 1] * values_i[j] > 0. ? 1. : -1.;
+      sign = boundary_1[2 * j + 1] * values_i[j] > 0. ? -1. : 1.;
       line_2d_set_flow_rate_direction(&flow_rate_direction, &line, sign, size);
       draw_oriented_edge(canvas, status, &edge, get_color);
       if (*status)

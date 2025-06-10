@@ -90,31 +90,6 @@ once.
 There are many things to be improved: naming conventions, data structures,
 replacing/removing old functionality, improving the building process, etc.
 
-Importantly, I want to warn anybody who is reading both the notes
-<https://kipiberbatov.github.io/cmc/main.pdf>
-and the preprint of my latest article <https://arxiv.org/abs/2505.09443>.
-There are two discrepancies related to sign conventions that may be misleading.
-1. In the notes I use a discrete Hodge star with unorthodox sign convention,
-that was also used in my previous articles and my PhD thesis.
-It does not lead to wrong mathematics but is strange and was caused by me
-incorrectly copying definition from another article.
-It diverges from the standard one for odd-dimensional forms on even-dimensional
-domains.
-In my last preprint I decided to switch back to the standard one, and at the
-moment it differs from the notes.
-2. In the notes I define flow rates through hypersurfaces as representing
-inflows, although the standard is to use outflows.
-In the preprint I use the outflow convention.
-
-The diffusion solvers, found at [code/c/src/diffusion](/code/c/src/diffusion),
-and examples, found at [code/c/plugins/diffusion](/code/c/plugins/diffusion),
-also use the sign conventions of the notes.
-I plan at some point to change everything in the codebase, in order to align
-with the preprint (and the standard sign conventions).
-
-**News (6 June 2025):** currently the notes have been updated and now follow the
-standard sign conventions; the code remains to be updated as well.
-
 ## Modules
 - array: functions working on integers and floating point numbers and
 arrays structures of those types;

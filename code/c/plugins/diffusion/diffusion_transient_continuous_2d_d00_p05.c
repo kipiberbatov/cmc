@@ -17,7 +17,7 @@ Let
 
 The potential 0-form u and flow rate 1-form q are solutions to the problem
   . q = - *_1 kappa_1 d_0 u
-  . D_t Q = d q + f
+  . D_t Q = - d q + f
   . D_t Q = *_0 (D_t (pi_0 u))
   . tr_{G_D, 0} u = g_D
   . tr_{G_N, 1} q = g_N
@@ -26,7 +26,7 @@ The potential 0-form u and flow rate 1-form q are solutions to the problem
 This problem has the following exact solution
   . u(t, x, y) = exp(-2 pi^2 t) sin(pi x) sin(pi y)
   . q(t, x, y) = pi exp(-2 pi^2 t)
-                 (-sin(pi x) cos(pi y) dx + cos(pi x) sin(pi y) dy)
+                 (sin(pi x) cos(pi y) dx - cos(pi x) sin(pi y) dy)
 */
 
 static double pi_0(const double * x)

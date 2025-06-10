@@ -18,13 +18,13 @@ Let
 
 The potential 0-form u and flow rate 1-form q are solutions to the problem
   . q = - *_1 kappa_1 d_0 u
-  . d q = -f
+  . d q = f
   . tr_{G_D, 0} u = g_D
   . tr_{G_N, 1} q = g_N
 
 This problem has exact solution
   . u(x, y) = 50 (1 - (x + y) / A)
-  . q(x, y) = (300 / A) (dx - dy)
+  . q(x, y) = (300 / A) (- dx + dy)
 */
 
 #define A 5.
@@ -109,7 +109,7 @@ void diffusion_steady_state_continuous_2d_d01_p00_flow_rate(
     y0 = m_coord[2 * j0 + 1];
     x1 = m_coord[2 * j1];
     y1 = m_coord[2 * j1 + 1];
-    value = (300 / A) * ((x1 - x0) - (y1 - y0));
+    value = (300 / A) * ((y1 - y0) - (x1 - x0));
     flow_rate[i] = value * m_bd_1_values[2 * i + 1];
   }
 }

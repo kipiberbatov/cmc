@@ -9,44 +9,44 @@
     \item
       $X$ be an open region in $\R^D$, representing a material body;
     \item
-      $\tilde{\kappa}_1 [E L^{-1} T^{-1} \Theta^{-1}]
+      $\tilde{\kappa} [E L^{-1} T^{-1} \Theta^{-1}]
       \colon \Omega^1 X \to \Omega^1 X$
       be the thermal conductivity of the material;
     \item
-      $f^D [E T^{-1}] \in \Omega^D X$ be the heat source;
+      $f [E T^{-1}] \in \Omega^D X$ be the internal production rate;
     \item
       $\partial X = \Gamma_D \cup \Gamma_N$ be the partition of the boundary of
       $X$ into Dirichlet ($\Gamma_D$) and Neumann ($\Gamma_N$) regions;
     \item
-      $g_D^0 [\Theta] \in \Omega^0 \Gamma_D$
+      $g_D [\Theta] \in \Omega^0 \Gamma_D$
       be the prescribed temperature on the Dirichlet boundary;
     \item
-      $g_N^{D - 1} [E T^{-1}] \in \Omega^{D - 1} \Gamma_N$
+      $g_N [E T^{-1}] \in \Omega^{D - 1} \Gamma_N$
       be the prescribed flow rate on the Neumann boundary.
   \end{itemize}
-  Our unknowns is temperature $u^0 [\Theta] \in \Omega^0 X$.
-  We are solving the following problem for $u^0$:
+  Our unknowns is temperature $u [\Theta] \in \Omega^0 X$.
+  We are solving the following problem for $u$:
   \begin{subequations}
     \begin{alignat}{4}
-      & \forall v^0 \in \Ker \tr_{\Gamma_D, 0}, \quad
-      && \inner{d_0 v^0}{\tilde{\kappa}_1 d_0 u^0}_{X, 1}
-      && = \int_X (v^0 \wedge f^D)
-        - \int_{\Gamma_N} (\tr_{\Gamma_N, 0} v^0 \wedge g_N^{D - 1}) \qquad
+      & \forall v \in \Ker \tr_{\Gamma_D, 0}, \quad
+      && \inner{d_0 v}{\tilde{\kappa} d_0 u}_{X, 1}
+      && = \int_X (v \wedge f)
+        - \int_{\Gamma_N} (\tr_{\Gamma_N, 0} v \wedge g_N) \qquad
       && [E T^{-1} \Theta], \\
       %
       &
-      && \tr_{\Gamma_D, 0} u^0
-      && = g_D^0 \qquad
+      && \tr_{\Gamma_D, 0} u
+      && = g_D \qquad
       && [\Theta].
     \end{alignat}
   \end{subequations}
-  The flow rate $q^{D - 1} [E T^{-1}] \in \Omega^{D - 1} X$
+  The flow rate $q [E T^{-1}] \in \Omega^{D - 1} X$
   is calculated by the formula
   \begin{equation}
-    q^{D - 1}(x) :=
+    q(x) :=
     \begin{cases}
-      (- \star_1 \tilde{\kappa}_1 d_0 u^0)(x), & x \notin \Gamma_N \\
-      g_N^{D - 1}(x), & x \in \Gamma_N
+      (- \star_1 \tilde{\kappa} d_0 u)(x), & x \notin \Gamma_N \\
+      g_N(x), & x \in \Gamma_N
     \end{cases}.
   \end{equation}
 \end{formulation}

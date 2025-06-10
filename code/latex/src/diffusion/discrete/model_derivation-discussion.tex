@@ -1,6 +1,6 @@
 \begin{discussion}
   We are going to state the governing laws for the discrete heat transport
-  phenomenon.
+  phenomenon in the strong formulation.
 
   Let:
   \begin{itemize}
@@ -12,61 +12,56 @@
   Physical quantities in our model are:
   \begin{itemize}
     \item
-      temperature $u \colon I \to C^0 K$ of physical dimension $[\Theta]$;
+      temperature $u [\Theta] \colon I \to C^0 K$;
     \item
-      heat energy density $Q \colon I \to C^0 K$ of physical dimension
-      $[E L^{-D}]$;
+      heat energy density $\tilde{Q} [E L^{-D}] \colon I \to C^0 K$;
     \item
-      heat flux $q \colon I \to C^1 K$ of physical dimension
-      $[E L^{2 - D} T^{-1}]$.
+      dual heat flow rate $\tilde{q} [E L^{1 - D} T^{-1}] \colon I \to C^1 K$;
   \end{itemize}
   The governing laws are the following.
   \begin{itemize}
     \item
       Let
         $K' := K \setminus \partial K$ be the interior of $K$,
-        $f \in C^0 K'$ be the external heat source of physical dimension
-          $[E L^{-D} T^{-1}]$.
+        $\tilde{f} [E L^{-D} T^{-1}]\in C^0 K'$
+        be the dual internal production rate;
       \textbf{Conservation of heat energy} is modeled by the equation
       \begin{equation}
-        \restrict{\frac{\partial Q}{\partial t}}{K'_0} =
-        \restrict{(\delta_1^\star q)}{K'_0} + f.
+        \restrict{\frac{\partial \tilde{Q}}{\partial t}}{K'_0} =
+        \restrict{(\delta_1^\star \tilde{q})}{K'_0} + \tilde{f}.
       \end{equation}
     \item
-      Let
-        $u_0 \in C^0 K$ be the initial temperature, $u_0\ [\Theta]$.
-      The \textbf{initial condition} is prescribed initial temperature:
+      Let $u_0 [\Theta] \in C^0 K$ be the initial temperature.
+      The \textbf{initial condition} is given by prescribed initial temperature:
       \begin{equation}
         u(t_0, \cdot) = u_0.
       \end{equation}
     \item
-      Let $\pi_0 \colon C^0 K \to C^0 K$
-      of physical dimension $[E L^{-D} \Theta^{-1}]$
-      be a material property of the nodes of $K$,
-      playing the role of volumetric heat capacity
+      Let $\tilde{\pi} [E L^{-D} \Theta^{-1}] \colon C^0 K \to C^0 K$
+      be the dual volumetric heat capacity
       (its matrix in the standard basis is diagonal).
-      The \textbf{relation between temperature and heat energy} is given by
+      The \textbf{relation between temperature change and heat energy change}
+      is given by
       \begin{equation}
-        Q = \pi_0 u.
+        \frac{\partial \tilde{Q}}{\partial t}
+        = \tilde{\pi} \frac{\partial u}{\partial t}.
       \end{equation}
     \item
-      Let $\kappa_1 \colon C^1 K \to C^1 K$
-      of physical dimension $[E L^{2 - D} T^{-1} \Theta^{-1}]$
-      be a material property of the edges of $K$,
-      playing the role of thermal conductivity
+      Let
+      $\tilde{\kappa} [E L^{2 - D} T^{-1} \Theta^{-1}] \colon C^1 K \to C^1 K$
+      be the dual thermal conductivity
       (its matrix in the standard basis is diagonal).
       The \textbf{Fourier's constitutive relation} is given by
       \begin{equation}
-        q = - \kappa_1 (\delta_0 u).
+        \tilde{q} = - \tilde{\kappa} (\delta_0 u).
       \end{equation}
   \end{itemize}
   We complete our model with boundary conditions.
-  Let $\Gamma_D, \Gamma_N$ form a partition of $(\partial K)_0$
+  Let $\Gamma_D, \Gamma_N$ form a partition of $\partial K$
   into Dirichlet and Neumann boundary.
   \begin{itemize}
     \item
-      Let $g_D \colon [t_0, \infty) \to ({\rm Free}_\R(\Gamma_D))^*$
-      of physical dimension $[\Theta]$
+      Let $g_D [\Theta] \colon I \to C^0 \Gamma_D$
       be the prescribed temperature on the Dirichlet boundary $\Gamma_D$.
       The \textbf{Dirichlet boundary condition} is given by
       \begin{equation}
@@ -74,15 +69,15 @@
       \end{equation}
     \item
       Let
-        ${\bf n} \colon \Gamma_N \to \R^d$
-          of physical dimension $[L^{-1}]$
+        ${\bf n} [L^{-1}] \colon \Gamma_N \to \R^d$
           be the generalized exterior unit normal,
-        $g_N \colon [t_0, \infty) \to ({\rm Free}_\R(\Gamma_N))^*$
+        $\widetilde{g_N} [E L^{1 - D} T^{-1}] \colon I \to C^0 \Gamma_N$
           of physical dimension $[E L^{1 - D} T^{-1}]$
-          be the prescribed flux on the Neumann boundary $\Gamma_N$.
+          be the prescribed dual flow rate through the Neumann boundary.
       The \textbf{Neumann boundary condition} is given by
       \begin{equation}
-        \restrict{\overline{q}}{\Gamma_N} \cdot {\bf n} = g_N.
+        \restrict{\overline{\tilde{q}}}{\Gamma_N} \cdot {\bf n}
+        = \widetilde{g_N}.
       \end{equation}
   \end{itemize}
 \end{discussion}

@@ -4,7 +4,7 @@
 #include "mesh_qc.h"
 
 /*
-add to vector g,
+subtract from vector g,
 $(N^i \_/ g_{gamma}^{d - 1})[gamma]$,
 for $N_i$ on the Neumann boundary
 */
@@ -34,7 +34,7 @@ void mesh_qc_vector_from_boundary_integral_of_basis_0_cup_dm1_cochain(
     for (i_local = 0; i_local < m_cf_dm1_0_j.a0; ++i_local)
     {
       i = m_cf_dm1_0_j.a1[i_local];
-      g[i] += coefficients_dm1_j / pow_2_dm1;
+      g[i] -= coefficients_dm1_j / pow_2_dm1;
     }
   }
 }

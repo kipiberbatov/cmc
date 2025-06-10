@@ -6,55 +6,60 @@
 
   Let
     $\tau [T] \in \R^+$ be the time step,
-    $i \in \N$,
-    $t_i := t_0 + i \tau$,
-    $y_i [\Theta] := u(t_i, \cdot) \in C^0 K$,
-    $\rho_0 [E L^{-D} T^{-1} \Theta^{-1}]
-      := \delta_1^\star \circ \kappa_1 \circ \delta_0$.
-  Integrating the conservation of heat energy in $[t_i, t_{i + 1}]$, we get
+    $s \in \N$,
+    $t_s := t_0 + s \tau$,
+    $u^s [\Theta] := u(t_s, \cdot) \in C^0 K$,
+    $B [E L^{-D} T^{-1} \Theta^{-1}]
+      := \delta_1^\star \circ \tilde{\kappa} \circ \delta_0$.
+  Integrating the conservation of heat energy in $[t_s, t_{s + 1}]$, we get
   \begin{equation}
-    \restrict{(\pi_0 y_{i + 1} - \pi_0 y_i)}{K'_0}
-    = - \int_{t_i}^{t_{i + 1}} \restrict{(\rho_0 u(t, \cdot))}{K'_0}\, d t
-    + \int_{t_i}^{t_{i + 1}} f\, d t
+    \restrict{(\tilde{\pi} u^{s + 1} - \tilde{\pi} u^s)}{K'_0}
+    = - \int_{t_s}^{t_{s + 1}} \restrict{(B u(t, \cdot))}{K'_0}\, d t
+    + \int_{t_s}^{t_{s + 1}} \tilde{f}\, d t
     \approx
-    - \frac{\tau}{2} \restrict{(\rho_0 y_i + \rho_0 y_{i + 1})}{K'_0} + \tau f.
+    - \frac{\tau}{2} \restrict{(B u^s + B u^{s + 1})}{K'_0}
+    + \tau \tilde{f}.
   \end{equation}
   Rearranging, we get the discretized equation
   \begin{equation}
-    \restrict{((\pi_0 + \frac{\tau}{2} \rho_0) y_{i + 1})}{K'_0}
-    = \restrict{((\pi_0 - \frac{\tau}{2} \rho_0) y_i)}{K'_0} + \tau f.
+    \restrict{((\tilde{\pi} + \frac{\tau}{2} B) u^{s + 1})}{K'_0}
+    = \restrict{((\tilde{\pi} - \frac{\tau}{2} B) u^s)}{K'_0}
+    + \tau \tilde{f}.
   \end{equation}
-  Define the $\dim C^0 K \times \dim C^0 K$ matrices of physical dimension
-  $[E L^{-D} \Theta^{-1}]$
-  \begin{equation}
-    A := \pi_0 + \frac{\tau}{2} \rho_0,\ B := \pi_0 - \frac{\tau}{2} \rho_0.
-  \end{equation}
+  Define the operators $L_\tau, R_\tau [E L^{-D} \Theta^{-1}] \in \Hom(C^0 K, C^0 K)$ by
+  \begin{subequations}
+    \begin{alignat}{2}
+      & L_\tau && := \tilde{\pi} + \frac{\tau}{2} B, \\
+      & R_\tau && := \tilde{\pi} - \frac{\tau}{2} B.
+    \end{alignat}
+  \end{subequations}
   The discretized in time (space is already discrete) temperature
-  $y [\Theta] \colon \N \to C^0 K$ is find iteratively as follows.
-  $y_0 = u_0$ and for any $i > 0$, $y_i$ is solution to the following problem:
+  $\{u^s [\Theta] \in C^0 K\}_{s = 0}^\infty$ is find iteratively as follows.
+  $u^0 = u_0$ and for any $s > 0$, $u^s$ is solution to the following problem:
   \begin{subequations}
     \begin{alignat}{4}
-      & \restrict{(A y_i)}{K'_0}
-      && = \restrict{(B y_{i - 1})}{K'_0} + \tau f \quad
+      & \restrict{(L_\tau u^s)}{K'_0}
+      && = \restrict{(R_\tau y_{s - 1})}{K'_0} + \tau \tilde{f} \quad
       && (\text{balance of heat energy}) \quad
       && [E L^{-D}], \\
       %
-      & \restrict{y_i}{\Gamma_D}
+      & \restrict{u^s}{\Gamma_D}
       && = g_D \quad
       && (\text{Dirichlet boundary condition}) \quad
       && [\Theta], \\
       %
-      & - \restrict{\overline{(\kappa_1 \circ \delta_0) y_i}}{\Gamma_N}
+      & - \restrict{\overline{(\tilde{\kappa} \circ \delta_0) u^s}}{\Gamma_N}
         \cdot {\bf n}
-      && = g_N \quad
+      && = \widetilde{g_N} \quad
       && (\text{Neumann boundary condition}) \quad
       && [E L^{1 - D} T^{-1}].
     \end{alignat}
   \end{subequations}
   Of course, in practice we solve it for a finite number of time steps.
-  Usually, we compare tho adjacent solutions $y_i$ and $y_{i + 1}$ and stop when
+  Usually, we compare tho adjacent solutions $u^s$ and $u^{s + 1}$ and stop when
   the relative error is sufficiently small, i.e., until we reach a steady state.
-  % Moreover, if $\pi_0$ and $\kappa_1$ are constants, and $K$ has mesh size
+  % Moreover, if $\tilde{\pi}$ and $\tilde{\kappa}$ are constants,
+  % and $K$ has mesh size
   % $h$, then $h^2 / \tau$ should be close to the thermal diffusivity
-  % $\kappa_1 / \pi_0$ (both of physical dimension $[L^2 T^{-1}]$).
+  % $\tilde{\kappa} / \tilde{\pi}$ (both of physical dimension $[L^2 T^{-1}]$).
 \end{discussion}
