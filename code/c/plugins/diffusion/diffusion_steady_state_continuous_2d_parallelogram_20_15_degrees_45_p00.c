@@ -68,14 +68,13 @@ static double g_dirichlet(const double * x)
 
 static int on_bottom_boundary(const double * x)
 {
-  double x0 = x[0];
-  return x0 > -EPSILON && x0 < 20. + EPSILON;
+  return fabs(x[1]) < EPSILON;
 }
 
 static int on_top_boundary(const double * x)
 {
-  double a = 15. / sqrt(2.), x0 = x[0];
-  return x0 - a > -EPSILON && x0 - a < 20. + EPSILON;
+  double a = 15. / sqrt(2.);
+  return fabs(x[1] - a) < EPSILON;
 }
 
 static int boundary_neumann(const double * x)
@@ -85,7 +84,10 @@ static int boundary_neumann(const double * x)
 
 static double g_neumann(const double * x)
 {
-  return -1.;
+  if (on_bottom_boundary(x))
+    return 1.;
+  else /* on_top_boundary(x) */
+    return -1.;
 }
 
 const struct diffusion_steady_state_continuous
