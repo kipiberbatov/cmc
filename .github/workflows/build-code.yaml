@@ -1,17 +1,11 @@
-# Compile, archive, link, and run the C codebase
-name: release
+name: Compile, archive, link, and run the C code
 
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  workflow_call:
 
 jobs:
-  build:
+  build-code:
+    name: Compile, archive, link, and run the C code
     runs-on: ubuntu-latest
     steps:
       - name: Update apt-get

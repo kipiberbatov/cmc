@@ -1,0 +1,37 @@
+name: Compile LaTeX document and upload the project's website
+
+on:
+  workflow_call:
+
+jobs:
+  build-website:
+    name: Compile LaTeX document and upload the project's website
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update apt-get
+        run: sudo apt-get update
+
+      - name: Set up Git repository
+        uses: actions/checkout@v4
+
+      - name: Prepare directory for downloading
+        run: mkdir -p build/release
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: linux-release
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: build/release
+
+      - name: Install TeX Live and most used packages
+        run: sudo apt-get install -y texlive-latex-extra
+
+      - name: Build website (do not build already downloaded PDF images)
+        run: make website -o build/.pdf
+
+      - name: Upload website
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/website
+          retention-days: 7

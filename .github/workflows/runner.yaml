@@ -1,0 +1,26 @@
+name: Run all jobs
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  build-code:
+    name: Build code
+    uses: ./.github/workflows/build-code.yaml
+
+  build-website:
+    needs: build-code
+    name: Build website
+    uses: ./.github/workflows/build-website.yaml
+
+  deploy-website:
+    needs: build-website
+    name: Deploy website
+    uses: ./.github/workflows/deploy-website.yaml
