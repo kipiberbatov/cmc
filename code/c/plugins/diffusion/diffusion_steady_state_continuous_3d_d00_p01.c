@@ -64,7 +64,7 @@ static double g_neumann(const double * x)
   if (x[0] == 0.)
     return 0;
   else
-    return 4;
+    return -4.;
 }
 
 const struct diffusion_steady_state_continuous
