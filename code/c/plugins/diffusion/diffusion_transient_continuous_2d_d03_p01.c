@@ -15,7 +15,7 @@ Let
   . G_D = {(x, y) in G | x >= 0}
   . G_N = {(x, y) in G | x <= 0}
   . g_D = 1
-  . g_N = 2 dt (with respect to the (x, y) = (cos(t), sin(t)) coordinates)
+  . g_N = - 2 dt (with respect to the (x, y) = (cos(t), sin(t)) coordinates)
 
 
 The potential 0-form u and flow rate 1-form q are solutions to the problem
