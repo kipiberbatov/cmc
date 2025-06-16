@@ -3,6 +3,56 @@
   The \textbf{Lie derivative on $0$-cochains} is defined as
   \begin{equation}
     L \colon \mathfrak{X} K \to \Hom(C^0 \mathcal{K}, C^0 \mathcal{K}),
-    L_X := i_X \circ \delta,\ X \in \mathfrak{X} K.
+    L_{\mathcal{X}} := i_{\mathcal{X}} \circ \delta,\
+    \mathcal{X} \in \mathfrak{X} K.
+  \end{equation}
+  The above expression applied to a function $f \in C^0 \mathcal{K}$ equals to
+  \begin{equation}
+    L_{\mathcal{X}} f
+    = i_{\mathcal{X}} (\delta f)
+    = (\delta_0 f) \circ \mathcal{X}
+    = f \circ \partial_1 \circ X.
   \end{equation}
 \end{definition}
+\begin{remark}
+  No we are going to analyse to what extent the Leibniz rule is reproduced in
+  the discrete setting.
+  Namely, for
+  $\mathcal{X} \in \mathfrak{X} K$, $f, g \in \mathcal{F} K$
+  we are estimating
+  \begin{equation}
+    \Delta_\mathcal{X}(f, g) :=
+    (L_{\mathcal{X}} f) \smile g
+    + f \smile (L_{\mathcal{X}} g)
+    - L_{\mathcal{X}} (f \smile g).
+  \end{equation}
+  Let $\mathcal{N} \in \mathcal{K}_0$.
+  Then
+  \begin{equation}
+    \begin{split}
+        \Delta_\mathcal{X}(f, g) \mathcal{N}_\bullet
+      & =
+        ((L_{\mathcal{X}} f) \smile g + f \smile (L_{\mathcal{X}} g)
+        - L_{\mathcal{X}} (f \smile g)) \mathcal{N}_\bullet \\
+      & = f (\partial(X \mathcal{N}_\bullet))\, g \mathcal{N}_\bullet
+        + f \mathcal{N}_\bullet\, g (\partial(X \mathcal{N}_\bullet))
+        - (f \smile g)(\partial(X \mathcal{N}_\bullet)) \\
+      & = \sum_{\mathcal{E} \succ \mathcal{N}}
+        \mathcal{X}_\mathcal{N}^\mathcal{E}
+        ( (\sum_{\mathcal{N}' \prec \mathcal{E}}
+          \varepsilon(\mathcal{E}, \mathcal{N}') f_{\mathcal{N}'})
+          g_{\mathcal{N}}
+          + f_{\mathcal{N}} (\sum_{\mathcal{N}' \prec \mathcal{E}}
+          \varepsilon(\mathcal{E}, \mathcal{N}') g_{\mathcal{N}'})
+          - \sum_{\mathcal{N}' \prec \mathcal{E}}
+          \varepsilon(\mathcal{E}, \mathcal{N}')
+          f_{\mathcal{N}'} g_{\mathcal{N}'}
+        ) \\
+      & = \sum_{\mathcal{E} \succ \mathcal{N}}
+        \mathcal{X}_\mathcal{N}^\mathcal{E}\,
+        \varepsilon(\mathcal{E}, \mathcal{N})\,
+        \, (\delta_0 f)(\mathcal{E})\,
+        (\delta_0 g)(\mathcal{E}).
+    \end{split}
+  \end{equation}
+\end{remark}

@@ -3,7 +3,124 @@
   The \textbf{discrete interior product on $1$-cochains} is defined as
   \begin{equation}
     i \colon \mathfrak{X} K \to \Hom(C^1 \mathcal{K}, C^0 \mathcal{K}),
-    i_X \sigma := \sigma \circ X,\
-    X \in \mathfrak{X} K,\ \sigma \in C^1 \mathcal{K}.
+    i_{\mathcal{X}} \sigma := \sigma \circ \mathcal{X} \in C^0 \mathcal{K},\
+    \mathcal{X} \in \mathfrak{X} K,\ \sigma \in C^1 \mathcal{K}.
+  \end{equation}
+  In other words, for a node $\mathcal{N}$,
+  \begin{equation}
+    (i_{\mathcal{X}} \sigma)(\mathcal{N})
+    = (\sigma \circ \mathcal{X})(\mathcal{N})
+    = \sum_{\mathcal{E} \succ \mathcal{N}}
+      \mathcal{X}^{\mathcal{E}}_{\mathcal{N}} \sigma_{\mathcal{E}}.
   \end{equation}
 \end{definition}
+\begin{definition}
+  Let
+    $D \in \N^+$,
+    $K$ be an orthogonal parallelotope in $\R^D$,
+    whose unit directions are the vectors $e_1, ..., e_D$.
+  Define a regular mesh for $K$ as follows.
+  Let
+    $h_1, ..., h_D \in \R^+$,
+    $\mathcal{K}$ be a grid of (orthogonal) parallelotopes with sides
+      $h_1, ..., h_D$.
+  Let $X \in \mathfrak{X} K$,
+  $X = \sum_{p = 1}^D f^p \frac{\partial}{\partial x^p}$.
+  Define the approximation
+  \begin{equation}
+    J \colon \mathfrak{X} K \to \mathfrak{X} \mathcal{K}
+  \end{equation}
+  as follows.
+  Let $p \in \{1, ..., D\}$,
+  $\mathcal{E}$ be an edge in the direction of the basis vector $e_p$,
+  $\mathcal{N}$ be a node of $\mathcal{E}$ with coordinates
+  $x = (x_1, ..., x_D)$.
+  Then,
+  \begin{equation}
+    (J X)^{\mathcal{E}}_{\mathcal{N}} :=
+    \begin{cases}
+      \frac{f^p(x)}{2 h_p}, & \text{$\mathcal{N}$ is an interior node} \\
+      \frac{f^p(x)}{h_p}, & \text{$\mathcal{N}$ is a boundary node} \\
+    \end{cases}.
+  \end{equation}
+\end{definition}
+\begin{remark}
+  Consider the setup of the previous definition.
+  We will show that the discrete interior product is a good approximation of the
+  continuous one.
+  Precisely, let $X \in \mathfrak{X} K$, $\omega \in \Omega^1 K$.
+  We will compare $i_{J X}{R_1 \omega}$ with $R i_X \omega$.
+  By definition, $i_X \omega = \omega(X)$.
+  In coordinates,
+  \begin{align}
+    X & = \sum_{p = 1}^D {f^p} \frac{\partial}{\partial x^p},\
+      f^1, ..., f^D \in \mathcal{F} K, \\
+    \omega & = \sum_{p = 1}^D {g_p}\, d x^p,\
+      g_1, ..., g_D \in \mathcal{F} K, \\
+    i_X \omega & = \sum_{p = 1}^D f^p\; g_p.
+  \end{align}
+  Consider a node $\mathcal{N}$ with coordinates $x = (x_1, ..., x_D)$.
+  Then
+  \begin{equation}
+    (R i_X \omega) \mathcal{N} = \sum_{p = 1}^D f^p(x_p)\; g_p(x_p).
+  \end{equation}
+  On the other hand,
+  \begin{equation}
+    (i_{J X}{R_1 \omega}) \mathcal{N}
+    = \sum_{\mathcal{E} \succ \mathcal{N}}
+      (J X)^{\mathcal{E}}_{\mathcal{N}} \int_{\mathcal{E}} \omega
+    = \sum_{p = 1}^D
+      \sum_{\mathcal{E} \succ \mathcal{N},\ \mathcal{E} \parallel e_p}
+        (J X)^{\mathcal{E}}_{\mathcal{N}} \int_{\mathcal{E}} \omega.
+  \end{equation}
+  In the above equation, for any $p \in \{1, ..., D\}$
+  the internal sum consists of $1$ or $2$ terms:
+  $1$ when $\mathcal{N}$ is on the boundary of the direction of $e_p$,
+  and $2$ elsewhere.
+  Define the this internal sum as $A_p$.
+  We need to show it is close to $f^p(x_p)\; g_p(x_p)$.
+  
+  First, assume that $\mathcal{N}$ is in the interior.
+  Then it is the boundary of two edges parallel to $e_p$:
+  $\mathcal{E}_1$ and $\mathcal{E}_2$.
+  Combined, they give the segment $\mathcal{E}$ connecting
+  $x - h_p e_p$ with $x + h_p e_p$.
+  Then
+  \begin{equation}
+    A_p = \frac{f^p(x)}{2 h_p} \int_{\mathcal{E}} \omega
+    = f^p(x_p) \frac{1}{2 h_p}
+      \int_{x_p - h_p}^{x_p + h_p}
+      g_p(x_1, ..., x_{p - 1}, t, x_{p + 1}, ..., x_D)\, d t.
+  \end{equation}
+  However, from $1$D numerical analysis it follows that the approximation
+  (the lowest order Gauss quadrature)
+  \begin{equation}
+    \frac{1}{b - a} \int_a^b g(t)\, d t \approx g\left(\frac{a + b}{2}\right)
+  \end{equation}
+  is exact for polynomials of degree $\leq 1$.
+  In our case, substituting $a = x_p - h_p,\ b = x_p + h_p$
+  implies that $f^p(x_p)\; g_p(x_p)$ is an $O(h_p^2)$ approximation of $A_p$.
+
+  Second, assume that $\mathcal{E}$ is a boundary node.
+  Fix it to be on the left.
+  Then, using an analogous argument, we need to compare
+  $g(a)$ with $\frac{1}{b - a} \int_a^b g(t)\, dt$
+  which is the formula of left rectangles, this time exact only for constants.
+  This gives total error of $O(h_p)$ in the direction of $e_p$ with $O(h^2)$ in
+  the interior.
+  Hence, the approximation formula is of order $O(h_1 + ... + h_D)$ with order
+  $O(h_1^2 + ... + h_D^2)$ in the interior.
+\end{remark}
+\begin{remark}
+  \begin{equation}
+    i_{f \mathcal{X}} \sigma = f \smile i_\mathcal{X} \sigma.
+  \end{equation}
+  Indeed, for any $\mathcal{N} \in \mathcal{K}_0$,
+  \begin{equation}
+    (i_{f \mathcal{X}} \sigma) \mathcal{N}_\bullet
+    = (\sigma \circ {f \mathcal{X}}) \mathcal{N}_\bullet
+    = \sigma (f \mathcal{N}_\bullet\, \mathcal{X} \mathcal{N}_\bullet)
+    = f \mathcal{N}_\bullet\, \sigma(\mathcal{X} \mathcal{N}_\bullet)
+    = (f \smile i_\mathcal{X} \sigma) \mathcal{N}_\bullet.
+  \end{equation}
+\end{remark}

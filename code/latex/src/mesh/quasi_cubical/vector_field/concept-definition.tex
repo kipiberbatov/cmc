@@ -1,11 +1,11 @@
 \begin{definition}
   Let $\mathcal{K}$ be a quasi-cubical mesh.
-  We say that $X \in \Hom(C_0 \mathcal{K}, C_1 \mathcal{K})$
+  We say that $\mathcal{X} \in \Hom(C_0 \mathcal{K}, C_1 \mathcal{K})$
   is a \textbf{combinatorial vector field} if for any
   $\mathcal{N} \in \mathcal{K}_0$ and $\mathcal{E} \in \mathcal{K}_1$,
   \begin{equation}
     \mathcal{N} \notin \partial \mathcal{E} \Rightarrow
-    \mathcal{E}^\bullet(X \mathcal{N}_\bullet) = 0
+    \mathcal{E}^\bullet(\mathcal{X} \mathcal{N}_\bullet) = 0
   \end{equation}
   (here $a_\bullet$ and $a^\bullet$ denote the corresponding basis chains and
   cochains to a cell $a$).
@@ -14,9 +14,24 @@
   that do not contain $\mathcal{N}$.
   We will write its coefficients by
   \begin{equation}
-    X^{\mathcal{E}}_{\mathcal{N}} := \mathcal{E}^\bullet(X \mathcal{N}_\bullet).
+    \mathcal{X}^{\mathcal{E}}_{\mathcal{N}}
+    := \mathcal{E}^\bullet(X \mathcal{N}_\bullet).
   \end{equation}
-
   The space of all combinatorial vector fields will be denoted by
   $\mathfrak{X} K$.
 \end{definition}
+\begin{definition}
+  Let $\mathcal{K}$ be a quasi-cubical mesh.
+  Define the product of a function with a vector field as follows:
+  for any $f \in C^0 \mathcal{K}$, $\mathcal{X} \in \mathfrak{X} K$,
+  $f \mathcal{X} \in \mathfrak{X} K$, and when applied at
+  the basis chain of $\mathcal{N} \in \mathcal{K}_0$,
+  \begin{equation}
+    (f \mathcal{X}) \mathcal{N}_\bullet
+    := f \mathcal{N}\, \mathcal{X} \mathcal{N}_\bullet.
+  \end{equation}
+\end{definition}
+\begin{proposition}
+  Let $\mathcal{K}$ be a quasi-cubical mesh.
+  Then the space $\mathfrak{X} K$ is a module over $C^0 \mathcal{K}$.
+\end{proposition}
