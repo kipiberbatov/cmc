@@ -150,7 +150,6 @@ void diffusion_steady_state_discrete_from_continuous(
   data_discrete->g_dirichlet = g_dirichlet;
   data_discrete->boundary_neumann_dm1 = boundary_neumann_dm1;
   data_discrete->g_neumann = g_neumann;
-  *result = data_discrete;
   return;
 
   /* cleaning if an error occurs */
