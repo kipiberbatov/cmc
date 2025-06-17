@@ -16,11 +16,16 @@ jobs:
     uses: ./.github/workflows/build-code.yaml
 
   build-website:
-    needs: build-code
     name: Build website
+    needs: build-code
     uses: ./.github/workflows/build-website.yaml
 
+  check-pages-status:
+    name: Check GitHub Pages status
+    uses: ./.github/workflows/check-pages-status.yaml
+
   deploy-website:
-    needs: build-website
     name: Deploy website
+    needs: [build-website, check-pages-status]
+    if: needs.check-pages-status.outputs.environment-usable == 'true'
     uses: ./.github/workflows/deploy-website.yaml

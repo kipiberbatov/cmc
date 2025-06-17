@@ -1,0 +1,39 @@
+name: Is GitHub Pages enabled?
+
+on:
+  workflow_call:
+    outputs:
+      environment-usable:
+        description: "Whether GitHub Pages is enabled for the repository."
+        value: ${{ jobs.check-pages-status.outputs.enabled }}
+
+jobs:
+  check-pages-status:
+    name: Is GitHub Pages enabled?
+    runs-on: ubuntu-latest
+    outputs:
+      enabled: ${{ steps.check-pages.outputs.enabled }}
+    permissions:
+      pages: read
+    steps:
+      - name: Check if GitHub Pages is enabled
+        id: check-pages
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const response = await github.rest.repos.getPages(
+              {
+                owner: context.repo.owner,
+                repo: context.repo.repo
+              }
+            ).catch(error =>
+              {
+                if (error.status === 404) {
+                  return null;
+                }
+                throw error;
+              }
+            );
+
+            const enabled = !!response && response.status === 200;
+            core.setOutput('enabled', enabled);

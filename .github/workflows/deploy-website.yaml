@@ -1,4 +1,4 @@
-name: Deploy to Github Pages
+name: Deploy to GitHub Pages
 
 on:
   workflow_call:
@@ -12,16 +12,15 @@ jobs:
     concurrency:
       group: "pages"
       cancel-in-progress: false
-
-    if: github.repository == 'kipiberbatov/cmc'
+    
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Set up Github Pages
+      - name: Set up GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Deploy website to GitHub Pages
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
