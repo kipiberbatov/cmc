@@ -6,9 +6,6 @@ on:
       enabled:
         description: "Whether the 'github-pages' environment is enabled."
         value: ${{ jobs.check-pages-status.outputs.enabled }}
-    secrets:
-      GH_PAT:
-        required: true
 
 jobs:
   check-pages-status:
@@ -23,5 +20,5 @@ jobs:
       - name: Check if GitHub Pages is enabled
         id: check-pages
         env:
-          GH_PAT: ${{ secrets.GH_PAT }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: bash .github/scripts/check-pages-enabled.sh

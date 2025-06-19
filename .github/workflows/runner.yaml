@@ -23,8 +23,6 @@ jobs:
   check-pages-status:
     name: Check GitHub Pages status
     uses: ./.github/workflows/check-pages-status.yaml
-    secrets:
-      GH_PAT: ${{ secrets.GH_PAT }}
 
   deploy-website:
     name: Deploy website
