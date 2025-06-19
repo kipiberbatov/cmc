@@ -5,16 +5,17 @@
   Define the commutator $[X, Y] \in \mathcal{X} K$ as follows:
   for any edge $\mathcal{E}$ and node $\mathcal{N} \prec \mathcal{E}$,
   \begin{equation}
-    [X, Y]^{\mathcal{E}}_{\mathcal{N}}
-    := 2 \varepsilon(\mathcal{E}, \mathcal{N})
-      (   X^{\mathcal{E}}_{\mathcal{E} \setminus \mathcal{N}}
-          Y^{\mathcal{E}}_{\mathcal{N}}
-        - X^{\mathcal{E}}_{\mathcal{N}}
-          Y^{\mathcal{E}}_{\mathcal{E} \setminus \mathcal{N}}
-      )
-      + \sum_{\mathcal{F} \succ_{2, 0} \mathcal{N}}
-        \sum_{\mathcal{E}' \perp_{\mathcal{F}} \mathcal{E},\
-              \mathcal{N} \in \mathcal{E}'}
+    [X, Y]^{\mathcal{E}}_{\mathcal{N}} :=
+    2 \varepsilon(\mathcal{E}, \mathcal{N})
+    (   X^{\mathcal{E}}_{\mathcal{E} \setminus \mathcal{N}}
+        Y^{\mathcal{E}}_{\mathcal{N}}
+      - X^{\mathcal{E}}_{\mathcal{N}}
+        Y^{\mathcal{E}}_{\mathcal{E} \setminus \mathcal{N}}
+    )
+    +
+    \sum_{\mathcal{F} \succ_{2, 0} \mathcal{N}}
+      \sum_{\mathcal{E}' \perp_{\mathcal{F}} \mathcal{E},\
+            \mathcal{N} \in \mathcal{E}'}
         \varepsilon(\mathcal{E}', \mathcal{N})
         ( X^{\mathcal{E}'}_{\mathcal{N}}
           (Y^{\mathcal{E}}_{\mathcal{N}}

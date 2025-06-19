@@ -1,0 +1,214 @@
+\begin{discussion}
+  Let us calculate the discrete Lie derivative of the commutator on a regular
+  quasic-cubical mesh and compare it to the continuum.
+  Let $D \in \N^+$, $\mathcal{K}$ be a regular quasi-cubical of dimension $D$
+  with unit orthogonal directions $e_1, ..., e_D \in \R^D$ and lengths
+  $h_1, ..., h_D \in \R^+$.
+  We assume that for any $p \in \{0, ..., D\}$, any $p$-element ordered set
+  $I \subset (1, ..., D)$, and any $p$-cell with directions
+  $e_{I_1}, ..., e_{I_p}$, its embedded orientation is induced by
+  the multivector $e_{I_1} \wedge ... \wedge e_{I_p}$.
+  For any $\alpha = (\alpha_1, ..., \alpha_D) \in \N^D$ by $\mathcal{N}_\alpha$
+  we will denote the node with coordinates $(\alpha_1 h_1, ..., \alpha_D h_D)$.
+  
+  Let $X, Y \in \mathcal{X} K$.
+  Let $p \in \{1, ..., D\}$, $\alpha = (\alpha_1, ..., \alpha_D) \in \N^D$.
+  $s \in \{0, 1\}$ and take the edge
+  $\mathcal{E}_{p, \alpha}$ with endpoints $\mathcal{N}_\alpha$ and
+  $\mathcal{N}_{\alpha + e_p}$.
+  Then for $s \in {0, 1}$, assuming $\mathcal{N}_{\alpha + s e_p}$
+  is an interior node,
+  \begin{equation}
+    \begin{split}
+      [X, Y]^{\mathcal{E}_{p, \alpha}}_{\mathcal{N}_{\alpha + s e_p}} =\
+      & 2 (-1)^{1 - s}
+      ( X^{\mathcal{E}_{p, \alpha}}_{\mathcal{N}_{\alpha + (1 - s) e_p}}
+        Y^{\mathcal{E}_{p, \alpha}}_{\mathcal{N}_{\alpha + s e_p}}
+        -
+        Y^{\mathcal{E}_{p, \alpha}}_{\mathcal{N}_{\alpha + (1 - s) e_p}}
+        X^{\mathcal{E}_{p, \alpha}}_{\mathcal{N}_{\alpha + s e_p}}
+      ) \\
+      & +
+      \sum_{q \neq p}
+        \sum_{t \in \{-1, 0\}}
+          (-1)^{t + 1} \\
+          & \qquad
+          ( X^{\mathcal{E}_{q, \alpha + s e_p + t e_q}}
+             _{\mathcal{N}_{\alpha + s e_p}}
+            (Y^{\mathcal{E}_{p, \alpha}}_{\mathcal{N}_{\alpha + s e_p}}
+             - Y^{\mathcal{E}_{p, \alpha + (2 t + 1) e_q}}
+                _{\mathcal{N}_{\alpha + (2 t + 1) e_q + s e_p }})
+            -
+            Y^{\mathcal{E}_{q, \alpha + s e_p + t e_q}}
+             _{\mathcal{N}_{\alpha + s e_p}}
+            (X^{\mathcal{E}_{p, \alpha}}_{\mathcal{N}_{\alpha + s e_p}}
+             - X^{\mathcal{E}_{p, \alpha + (2 t + 1) e_q}}
+                _{\mathcal{N}_{\alpha + (2 t + 1) e_q + s e_p }})
+          ).
+    \end{split}
+  \end{equation}
+  Now, assume these discrete vector fields come from continuous ones:
+  \begin{equation}
+    X = J {\bf X}
+      = J\left(\sum_{p = 1}^D f^p \frac{\partial}{\partial x^p}\right),\
+    Y = J {\bf Y}
+      = J\left(\sum_{p = 1}^D g^p \frac{\partial}{\partial x^p}\right).
+  \end{equation}
+  Then
+  \begin{equation}
+    \begin{split}
+      [X, Y]^{\mathcal{E}_{p, \alpha}}_{\mathcal{N}_{\alpha + s e_p}} = \
+      &
+      (-1)^{1 - s} 
+        \frac{f^p(\alpha + (1 - s) h_p e_p) g^p(\alpha + s h_p e_p)
+          - f^p(\alpha + s h_p e_p) g^p(\alpha + (1 - s) h_p e_p)}{2 h_p^2} \\
+      &
+      +
+      \sum_{q \neq p}
+        \sum_{t \in \{-1, 0\}}
+          (-1)^{t + 1} \\
+      & \qquad
+          \left(
+            \frac{f^q(\alpha + s h_p e_p)}{2 h_q}
+            \left(
+              \frac{g^p(\alpha + s h_p e_p)
+              - g^p(\alpha + s h_p e_p + (2 t + 1) h_q e_q)}{2 h_p}
+            \right)
+          \right. \\
+      & \qquad \
+            -
+          \left.
+            \frac{g^q(\alpha + s h_p e_p)}{2 h_q}
+            \left(
+              \frac{f^p(\alpha + s h_p e_p)
+              - f^p(\alpha + s h_p e_p + (2 t + 1) h_q e_q)}{2 h_p}
+            \right)
+          \right).
+    \end{split}
+  \end{equation}
+  For simplicity, let $s = 0$.
+  Then,
+  \begin{equation}
+    \begin{split}
+        [X, Y]^{\mathcal{E}_{p, \alpha}}_{\mathcal{N}_{\alpha}} = \
+      & -
+        \frac
+        {f^p(\alpha + h_p e_p) g^p(\alpha) - f^p(\alpha) g^p(\alpha + h_p e_p)}
+        {2 h_p^2} \\
+      & +
+        \sum_{q \neq p}
+        \sum_{t \in \{-1, 0\}}
+          (-1)^{t + 1} \\
+      & \qquad
+          \left(
+            \frac{f^q(\alpha)}{2 h_q}
+            \left(
+              \frac{g^p(\alpha)
+              - g^p(\alpha + (2 t + 1) h_q e_q)}{2 h_p}
+            \right)
+            -
+            \frac{g^q(\alpha)}{2 h_q}
+            \left(
+              \frac{f^p(\alpha)
+              - f^p(\alpha + (2 t + 1) h_q e_q)}{2 h_p}
+            \right)
+          \right).
+    \end{split}
+  \end{equation}
+  Hence,
+  \begin{equation}
+    \begin{split}
+        [X, Y]^{\mathcal{E}_{p, \alpha}}_{\mathcal{N}_{\alpha}} = \
+      & \frac
+        {f^p(\alpha) g^p(\alpha + h_p e_p) - f^p(\alpha + h_p e_p) g^p(\alpha)}
+        {2 h_p^2} \\
+      & +
+        \sum_{q \neq p}
+          \left(
+            \frac{f^q(\alpha)}{2 h_q}
+            \left(\frac{g^p(\alpha + h_q e_q) - g^p(\alpha)}{2 h_p}\right)
+            -
+            \frac{g^q(\alpha)}{2 h_q}
+            \left(\frac{f^p(\alpha + h_q e_q) - f^p(\alpha)}{2 h_p}\right)
+          \right) \\
+      & +
+        \sum_{q \neq p}
+          \left(
+            \frac{f^q(\alpha)}{2 h_q}
+            \left(\frac{g^p(\alpha) - g^p(\alpha - h_q e_q)}{2 h_p}\right)
+            -
+            \frac{g^q(\alpha)}{2 h_q}
+            \left(\frac{f^p(\alpha) - f^p(\alpha - h_q e_q)}{2 h_p}\right)
+          \right)
+    \end{split}.
+  \end{equation}
+  Up to a first order approximation, the last expression equals to
+  \begin{equation}
+    \begin{split}
+        [X, Y]^{\mathcal{E}_{p, \alpha}}_{\mathcal{N}_{\alpha}} \approx \
+      & \frac
+        {\left(f^p \frac{\partial g^p}{\partial x^p}
+         - g^p \frac{\partial f^p}{\partial x^p}\right)(\alpha)}
+        {2 h_p} \\
+      & +
+        \sum_{q \neq p}
+          \frac
+          {
+            \left(
+              f^q \frac{\partial g^p}{\partial x^q}
+              - g^q \frac{\partial f^p}{\partial x^q}
+            \right)
+            (\alpha)
+          }
+          {4 h_p} \\
+      & +
+        \sum_{q \neq p}
+          \frac
+          {
+            \left(
+              f^q \frac{\partial g^p}{\partial x^q}
+              - g^q \frac{\partial f^p}{\partial x^q}
+            \right)
+            (\alpha)
+          }
+          {4 h_p},
+    \end{split}
+  \end{equation}
+  which simplifies to
+  \begin{equation}
+    [X, Y]^{\mathcal{E}_{p, \alpha}}_{\mathcal{N}_{\alpha}}
+    \approx
+    \sum_{q = 1}^D
+      \frac
+      {
+        \left(
+          f^q \frac{\partial g^p}{\partial x^q}
+          - g^q \frac{\partial f^p}{\partial x^q}
+        \right)
+        (\alpha)
+      }
+      {2 h_p}.
+  \end{equation}
+  If we denote ${\bf Z} := [{\bf X}, {\bf Y}]$, its expression in coordinates is
+  \begin{align}
+    {\bf Z} & = \sum_{p = 1}^D z^p \frac{\partial}{\partial x^p}, \\
+    z^p & = \sum_{q = 1}^D ( f^q \frac{\partial g^p}{\partial x^q}
+                             - g^q \frac{\partial f^p}{\partial x^q}).
+  \end{align}
+  Hence, the discrete Lie bracket further simplifies to
+  \begin{equation}
+    [X, Y]^{\mathcal{E}_{p, \alpha}}_{\mathcal{N}_{\alpha}}
+    \approx
+    \frac{z^p(\alpha)}{2 h_p}.
+  \end{equation}
+  However, by definition, the right hand side expresses the coefficients of the
+  discrete vector field that approximates ${\bf Z}$.
+  Hence,
+  \begin{equation}
+    J([{\bf X}, {\bf Y}]) \approx [J {\bf X}, J {\bf Y}],
+  \end{equation}
+  where the left bracket is the continuum Lie bracket,
+  while the right bracket is the discrete Lie bracket.
+
+  This calculation is the reason for the definition we gave earlier.
+\end{discussion}
