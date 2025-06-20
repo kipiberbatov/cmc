@@ -12,6 +12,6 @@ if [[ "$HTTP_STATUS" -eq 200 ]]; then
   echo "Environment 'github-pages' found."
   echo "enabled=true" >> "$GITHUB_OUTPUT"
 else
-  echo "Environment 'github-pages' does not exist (API status: $HTTP_STATUS)."
+  echo "Environment 'github-pages' does not exist (HTTP status: $HTTP_STATUS)."
   echo "enabled=false" >> "$GITHUB_OUTPUT"
 fi
