@@ -19,6 +19,4 @@ jobs:
 
       - name: Check if GitHub Pages is enabled
         id: check-pages
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: bash .github/scripts/check-pages-enabled.sh
