@@ -15,22 +15,46 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Compile files without external dependecies
-        run: make obj_src obj_main obj_plugins_diffusion
+        run: |
+          ./.github/scripts/sub-steps.sh make obj_src
+          ./.github/scripts/sub-steps.sh make obj_main
+          ./.github/scripts/sub-steps.sh make obj_plugins_diffusion
 
       - name: Create static libraries and diffusion plugin
-        run: make lib_src lib_plugins_diffusion
+        run: |
+          ./.github/scripts/sub-steps.sh make lib_src
+          ./.github/scripts/sub-steps.sh make lib_plugins_diffusion
 
       - name: Create executables (Link)
         run: make bin
 
       - name: Run text-outputting demos
-        run: make txt
+        run: |
+          ./.github/scripts/sub-steps.sh make txt_array
+          ./.github/scripts/sub-steps.sh make txt_algebra
+          ./.github/scripts/sub-steps.sh make txt_region
+          ./.github/scripts/sub-steps.sh make txt_mesh
+          ./.github/scripts/sub-steps.sh make txt_diffusion_steady_state
+          ./.github/scripts/sub-steps.sh make txt_diffusion_transient
+          ./.github/scripts/sub-steps.sh make txt_graphics
 
       - name: Install gtk+-3.0
         run: sudo apt-get install -y libgtk-3-dev
 
-      - name: Run PDF-outputting demos for LaTeX (Compiling plugins on the way)
-        run: make pdf_mesh pdf_diffusion_steady_state pdf_diffusion_transient
+      - name: Compile and link plugins
+        run: |
+          ./.github/scripts/sub-steps.sh make obj_plugins_animation
+          ./.github/scripts/sub-steps.sh make obj_plugins_canvas
+          ./.github/scripts/sub-steps.sh make lib_plugins_animation
+          ./.github/scripts/sub-steps.sh make lib_plugins_canvas
+
+      - name: Run PDF-outputting demos
+        run: |
+          ./.github/scripts/sub-steps.sh make pdf_filled_window
+          ./.github/scripts/sub-steps.sh make pdf_colorbar
+          ./.github/scripts/sub-steps.sh make pdf_mesh
+          ./.github/scripts/sub-steps.sh make pdf_diffusion_steady_state
+          ./.github/scripts/sub-steps.sh make pdf_diffusion_transient
 
       - name: Run SVG-outputting demos
         run: make svg
