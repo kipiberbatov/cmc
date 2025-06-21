@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 echo "Checking for existence of environment: 'github-pages'"
 
 HTTP_STATUS=$(curl --write-out "%{http_code}" --silent --output /dev/null \
