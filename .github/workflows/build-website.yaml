@@ -23,8 +23,19 @@ jobs:
           name: linux-release
           path: build/release
 
-      - name: Install TeX Live and most used packages
-        run: sudo apt-get install -y texlive-latex-extra
+      - name: Download already bundled TeX Live distribution
+        run: |
+          TEXLIVE_ASSET="https://github.com/kipiberbatov/texlive-packages/releases/download/v2025.0/texlive-2025.tar.gz"
+          curl --silent --location $TEXLIVE_ASSET -o texlive.tar.gz
+
+      - name: Setup TeX Live
+        run: |
+          mkdir -p $HOME/texlive
+          echo "Unpacking TeX Live..."
+          tar -xzf texlive.tar.gz -C $HOME/texlive
+          TEXLIVE_BIN_DIR=$(find $HOME/texlive -type d -name "x86_64-linux")
+          echo "Adding $TEXLIVE_BIN_DIR to PATH"
+          echo "$TEXLIVE_BIN_DIR" >> $GITHUB_PATH
 
       - name: Build website (do not build already downloaded PDF images)
         run: make website -o build/.pdf
