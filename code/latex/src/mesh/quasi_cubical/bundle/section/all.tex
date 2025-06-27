@@ -1,0 +1,92 @@
+\begin{proposition}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $(E, \pi, \mathcal{K})$ be a discrete vector bundle over $\mathcal{K}$.
+  A \textbf{section} on $E$ is a function
+  $\mathcal{X} \colon \mathcal{K}_0 \to E$
+  such that
+  $\pi \circ \mathcal{X} = \id_{\mathcal{K}_{0}}$.
+
+  The space of all sections on $E$ is denoted by $\Gamma E$.
+\end{proposition}
+\begin{remark}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $E$ be a vector bundle over $\mathcal{K}$.
+  We can think of a bundle as assignment of a vector space
+  $\restrict{E}{\mathcal{N}}$ at each node $\mathcal{N}$ of $\mathcal{K}$.
+  A section on $E$ is then an assignment of a single vector
+  $\restrict{e}{\mathcal{N}} \in\restrict{E}{\mathcal{N}}$
+  at each node $\mathcal{N}$ of $\mathcal{K}$.
+\end{remark}
+\begin{example}
+  Let $\mathcal{K}$ be a quasi-cubical mesh.
+  The \textbf{space of discrete vector fields} on $\mathcal{K}$ is
+  $\Gamma(T \mathcal{K})$ -- the space of sections on the discrete tangent
+  bundle of $\mathcal{K}$.
+\end{example}
+\begin{definition}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $E$ be a vector bundle over $\mathcal{K}$.
+  Define addition on $\Gamma E$ in a component-wise manner.
+  Precisely, if $X, Y \in \Gamma E$, then
+  \begin{equation}
+    X + Y \in \Gamma E,\ \forall \mathcal{N} \in \mathcal{K}_0,
+    \restrict{(X + Y)}{\mathcal{N}}
+    := \restrict{X}{\mathcal{N}} + \restrict{Y}{\mathcal{N}}.
+  \end{equation}
+\end{definition}
+\begin{proposition}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $E$ be a vector bundle over $\mathcal{K}$.
+  Then $\Gamma E$ is an abelian group under the addition operation defined
+  above.
+  The zero element is the section giving zero at any point, while negation is
+  defined component-wise in the obvious way.
+\end{proposition}
+\begin{definition}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $E$ be a vector bundle over $\mathcal{K}$,
+    $X \in \Gamma E$,
+    $f \in C^0 \mathcal{K}$.
+  We define $f\, X \in \Gamma E$ as follows:
+  for any $\mathcal{N} \in \mathcal{K}_0$,
+  \begin{equation}
+    \restrict{(f\, X)}{\mathcal{N}}
+    := f(\mathcal{N}_\bullet)\, \restrict{X}{\mathcal{N}}.
+  \end{equation}
+\end{definition}
+\begin{proposition}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $E$ be a vector bundle over $\mathcal{K}$.
+  The space $\Gamma E$ is an $(C^0 \mathcal{K})$-module under the multiplication
+  operation defined above.
+\end{proposition}
+\begin{proposition}
+  Let
+   $\mathcal{K}$ be a quasi-cubical mesh,
+    $E$ and $F$ be vector bundles over $\mathcal{K}$.
+  The following equalities show functoriality of the $\Gamma$ operator,
+  sending a bundle over $\mathcal{K}$ to a module over $C^0 \mathcal{K}$.
+  (Note that operations on the left are on discrete vector bundles,
+  while those on the right are on $(C^0 \mathcal{K})$-modules.)
+  \begin{subequations}
+    \begin{alignat}{2}
+      & \Gamma(E^*)
+      && \simeq (\Gamma E)^*, \\
+      %
+      & \Gamma(E \oplus F)
+      && \simeq \Gamma E \oplus \Gamma F, \\
+      %
+      & \Gamma(E \otimes F)
+      && \simeq \Gamma E \otimes \Gamma F, \\
+      %
+      & \Gamma(\Hom(E, F))
+      && \simeq \Hom(\Gamma E, \Gamma F).
+    \end{alignat}
+  \end{subequations}
+\end{proposition}

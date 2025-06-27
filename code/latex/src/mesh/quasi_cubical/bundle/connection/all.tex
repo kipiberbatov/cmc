@@ -1,0 +1,88 @@
+\newcommand{\Connections}{\mathop{\rm Connections}\nolimits}
+\begin{definition}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $E$ be a vector bundle on $\mathcal{K}$.
+  A \textbf{connection} $\nabla$ on $E$ is a $(C^0 \mathcal{K})$-linear map
+  \begin{equation}
+    \nabla \colon \Gamma(T \mathcal{K})  \to (\Gamma E \to \Gamma E)
+  \end{equation}
+  such that for all
+  $X \in \Gamma(T \mathcal{K})$,
+  $f \in C^0 \mathcal{K}$,
+  $\sigma \in \Gamma E$,
+  \begin{equation}
+    \nabla_X (f \sigma) = (L_X f)\, \sigma + f\, \nabla_X \sigma.
+  \end{equation}
+  We denote the space of all connections on $E$ by $\Connections(E)$.
+\end{definition}
+\begin{proposition}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $E$ be a vector bundle on $\mathcal{K}$,
+    $\nabla, \widehat{\nabla} \in \Connections(E)$.
+  Then $\nabla - \widehat{\nabla}$ is $(C^0 \mathcal{K})$-bilinear
+  (as a map from $\Gamma(T \mathcal{K}) \times \Gamma E$ to $\Gamma E$).
+  In other words, $\Connections(E)$ is an affine space over
+  $\Gamma(T^* \mathcal{K}) \otimes (\Gamma E)^* \otimes \Gamma E$.
+\end{proposition}
+\begin{definition}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $E$ and $E'$ be vector bundles on $\mathcal{K}$,
+    $\nabla \in \Connections(E)$,
+    $\nabla' \in \Connections(E')$.
+  \begin{enumerate}
+    \item 
+      The \textbf{direct sum connection}
+      \begin{equation}
+        \nabla \oplus \nabla' \in \Connections(E \oplus E')
+      \end{equation}
+      is defined as follows: for any $X \in \mathfrak{X} \mathcal{K}$,
+      $\sigma \in \Gamma E$, $\sigma' \in \Gamma E'$,
+      \begin{equation}
+        (\nabla \oplus \nabla')_X (\sigma \oplus \sigma')
+        := \nabla_X \sigma \oplus \nabla'_X \sigma'.
+      \end{equation}
+    \item
+      The \textbf{tensor product connection}
+      \begin{equation}
+        \nabla \otimes \nabla' \in \Connections(E \otimes E')
+      \end{equation}
+      is defined as follows: for any $X \in \mathfrak{X} \mathcal{K}$,
+      $\sigma \in \Gamma E$, $\sigma' \in \Gamma E'$,
+      \begin{equation}
+        (\nabla \otimes \nabla')_X (\sigma \otimes \sigma')
+        := \nabla_X \sigma \otimes \sigma' + \sigma \otimes \nabla'_X \sigma',
+      \end{equation}
+      and extended by bilinearity for all tensors.
+    \item
+      The \textbf{Hom connection}
+      \begin{equation}
+        \nabla^{\Hom(E, E')} \in \Connections(\Hom(E, E'))
+      \end{equation}
+      is defined so that for any $X \in \mathfrak{X} \mathcal{K}$,
+      $\sigma \in \Gamma E$, $\varphi \in \Hom(E, E')$,
+      \begin{equation}
+        \nabla'_X(\varphi \sigma)
+        = (\nabla^{\Hom(E, E')}_X \varphi) \sigma + \varphi(\nabla_X \sigma),
+      \end{equation}
+      i.e.,
+      \begin{equation}
+        (\nabla^{\Hom(E, E')} \varphi) \sigma
+        := \nabla'_X(\varphi \sigma) - \varphi(\nabla_X \sigma).
+      \end{equation}
+    \item
+      The \textbf{dual connection}
+      \begin{equation}
+        \nabla^* \in \Connections(E^*)
+      \end{equation}
+      is defined as a particular case of the $\Hom$ connection, i.e,
+      for any $X \in \mathfrak{X} \mathcal{K}$,
+      $\sigma \in \Gamma E$, $\omega \in \Gamma E^*$,
+      \begin{equation}
+        (\nabla^*_X \omega) \sigma
+        := L_X(\omega \sigma) - \omega(\nabla_X \sigma).
+      \end{equation}
+  \end{enumerate}
+\end{definition}

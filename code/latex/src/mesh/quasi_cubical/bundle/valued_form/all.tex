@@ -1,0 +1,44 @@
+\begin{definition}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $D = \dim \mathcal{K}$,
+    $E$ be a vector bundle on $\mathcal{K}$,
+    $p \in \{0, ..., D\}$.
+  The space of \textbf{$E$-valued differential $p$-forms} is the
+  $(C^0 \mathcal{K})$-module
+  \begin{equation}
+    \Omega^{p}(\mathcal{K}, E)
+    := \Gamma(E \otimes L^p \mathcal{K})
+    \simeq \Gamma E \otimes \Omega^p \mathcal{K}.
+  \end{equation}
+  The \textbf{algebra of $E$-valued differential forms} is the
+  $(C^0 \mathcal{K})$-algebra
+  \begin{equation}
+    \Omega^\bullet(\mathcal{K}, E)
+    := \bigoplus_{p = 0}^D \Omega^p(\mathcal{K}, E).
+  \end{equation}
+\end{definition}
+\begin{remark}
+  Clearly, $\Omega^{0}(\mathcal{K}, E) \simeq \Gamma E$.
+\end{remark}
+\begin{definition}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $D = \dim \mathcal{K}$,
+    $E$ be a vector bundle on $\mathcal{K}$,
+    $p, q \in \N$.
+  The \textbf{wedge product of $E$-valued differential forms} is the map
+  \begin{equation}
+    \usmile
+    \colon \Omega^p(\mathcal{K}, E) \times \Omega^q \mathcal{K}
+    \to \Omega^{p + q}(\mathcal{K}, E),
+  \end{equation}
+  defined as follows the unique bilinear map such that for any
+  $\sigma \in \Gamma E$,
+  $\omega \in \Omega^p \mathcal{K}$,
+  $\eta \in \Omega^q \mathcal{M}$,
+  \begin{equation}
+    (\sigma \otimes \omega) \usmile \theta :=
+    \sigma \otimes (\omega \smile \theta).
+  \end{equation}
+\end{definition}

@@ -1,0 +1,92 @@
+\begin{definition}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $E$ be a vector bundle on $\mathcal{K}$.
+  A \textbf{connection derivative} on $E$ is a map
+  \begin{equation}
+    \widetilde{\mathcal{D}} \colon \Gamma E \to \Omega^1(M, E)
+  \end{equation}
+  that satisfies the product rule:
+  for any $f \in C^0 \mathcal{K}$ and $\sigma \in \Gamma E$,
+  \begin{equation}
+    \widetilde{\mathcal{D}}(\sigma \otimes f)
+    = (\widetilde{\mathcal{D}} \sigma) \usmile f + \sigma \otimes \delta_0 f.
+  \end{equation}
+\end{definition}
+\begin{remark}
+  There is one-to one correspondence between connection derivatives and
+  connections.
+  Indeed, to a connection derivative $\widetilde{\mathcal{D}}$ corresponds a
+  connection $\nabla$ (and vice versa) as follows:
+  for any $X \in \mathfrak{X} \mathcal{K}$ and $\sigma \in \Gamma E$,
+  \begin{equation}
+    (\widetilde{\mathcal{D}} \sigma)(X) = \nabla_X \sigma.
+  \end{equation}
+\end{remark}
+\begin{definition}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $D = \dim \mathcal{K}$,
+    $E$ be a vector bundle on $\mathcal{K}$,
+    $\widetilde{\mathcal{D}}$ be a connection on $E$, 
+    $p \in \{0, ..., D\}$.
+  Define a graded map $\widetilde{\mathcal{D}}$,
+  \begin{equation}
+    \mathcal{D}_p
+    \colon \Omega^p(\mathcal{K}, E) \to \Omega^{p + 1}(\mathcal{K}, E)\
+    (p = 0, ..., D - 1),
+  \end{equation}
+  as follows:
+  for any $\sigma \in \Gamma E$ and $\omega \in \Omega^p(\mathcal{K})$,
+  \begin{equation}
+    \mathcal{D}_p(\sigma \otimes \omega)
+    := (\widetilde{\mathcal{D}} \sigma) \usmile \omega
+    + \sigma \otimes (\delta_p \omega),
+  \end{equation}
+  and extended by bilinearity for all tensors.
+  $\mathcal{D}$ is called the \textbf{(discrete) covariant exterior derivative}
+  induced by $\widetilde{\mathcal{D}}$.
+  (Moreover, if $\widetilde{\mathcal{D}}$ is induced by some connection
+  $\nabla$, we may say that $\mathcal{D}$ is induced by $\nabla$.)
+\end{definition}
+\begin{proposition}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $E$ be a vector bundle on $\mathcal{K}$,
+    $\widetilde{\mathcal{D}}$ be a connection derivative on $E$,
+    $\mathcal{D}$ be its corresponding covariant exterior derivative,
+    $p, q \in \N$,
+    $\tau \in \Omega^p(\mathcal{K}, E)$,
+    $\omega \in \Omega^q \mathcal{K}$.
+  Then $\mathcal{D}$ satisfies the following version of the graded Leibniz rule:
+  \begin{equation}
+    \mathcal{D}_{p + q}(\tau \usmile \omega)
+    = \mathcal{D}_p \tau \usmile \omega + (-1)^p \tau \usmile \delta_q \omega.
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  It is enough to prove the proposition when $\tau$ is a simple tensor.
+  So, let $\tau = \sigma \otimes \eta$
+  for some $\sigma \in \Gamma E$ and $\eta \in \Omega^p \mathcal{K}$.
+  Then
+  \begin{equation}
+    \begin{split}
+      \mathcal{D}_{p + q}(\tau \usmile \omega)
+      & = \mathcal{D}_{p + q}((\sigma \otimes \eta) \usmile \omega) \\
+      & = \mathcal{D}_{p + q}(\sigma \otimes (\eta \smile \omega)) \\
+      & = \widetilde{\mathcal{D}} \sigma \usmile (\eta \smile \omega)
+          + \sigma \otimes \delta_{p + q}(\eta \smile \omega) \\
+      & = (\widetilde{\mathcal{D}} \sigma \usmile \eta) \usmile \omega
+          + \sigma \otimes
+          (\delta_p \eta \smile \omega + (-1)^p \eta \smile \delta_q \omega) \\
+      & = ( \widetilde{\mathcal{D}} \sigma \usmile \eta
+            + \sigma \otimes \delta_p \eta)
+          \usmile \omega
+          + (-1)^p (\sigma \otimes \eta) \usmile \delta_q \omega \\
+      & = \mathcal{D}_p(\sigma \otimes \eta) \usmile \omega
+          + (-1)^p (\sigma \otimes \eta) \usmile \delta_q \omega \\
+      & = \mathcal{D}_p \tau \usmile \omega
+          + (-1)^p \tau \usmile \delta_q \omega. \qedhere
+    \end{split}
+  \end{equation}
+\end{proof}

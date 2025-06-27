@@ -1,0 +1,170 @@
+\begin{definition}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $D := \dim \mathcal{K}$,
+    $p \in \{0, ..., D\}$,
+    $\mathcal{N} \in \mathcal{K}$.
+  A $p$-\textbf{chain around} $\mathcal{N}$ is a $p$-chain such whose
+  coefficients are zero on all $p$-cells not containing $\mathcal{N}$.
+  By $\restrict{\Lambda_p \mathcal{K}}{\mathcal{N}}$ we will denote the space of
+  all $p$-chains around $\mathcal{N}$.
+  The corresponding bundle of \textbf{$p$-chain spaces} on $\mathcal{K}$
+  is defined by
+  \begin{equation}
+    \Lambda_p \mathcal{K}
+    := \coprod_{\mathcal{N} \in \mathcal{K}}
+      \restrict{\Lambda_p \mathcal{K}}{\mathcal{N}}.
+  \end{equation}
+  (In particular, $\Lambda_1 \mathcal{K} = \mathfrak{X} K$.)
+  We define the bundle of all \textbf{chain spaces} as
+  \begin{equation}
+    \Lambda_\bullet \mathcal{K} := \bigoplus_{p = 0}^D \Lambda_p \mathcal{K}.
+  \end{equation}
+\end{definition}
+\begin{definition}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $D := \dim \mathcal{K}$,
+    $p \in \{0, ..., D\}$,
+    $\mathcal{N} \in \mathcal{K}$.
+  A $p$-\textbf{cochain around} $\mathcal{N}$ is a $p$-cochain whose
+  coefficients are zero on all $p$-cells not containing $\mathcal{N}$.
+  By $\restrict{\Lambda^p \mathcal{K}}{\mathcal{N}}$ we will denote the space of
+  all $p$-cochains around $\mathcal{N}$.
+  The bundle of \textbf{$p$-cochain spaces} is given by
+  \begin{equation}
+    \Lambda^p \mathcal{K}
+    := (\Lambda_p \mathcal{K})^*
+    = \coprod_{\mathcal{N} \in \mathcal{K}}
+      \restrict{\Lambda^p \mathcal{K}}{\mathcal{N}}.
+  \end{equation}
+  The bundle of \textbf{cochain spaces} is given by
+  \begin{equation}
+    \Lambda^\bullet \mathcal{K}
+     := \bigoplus_{p = 0}^D \Lambda^p \mathcal{K}
+     \simeq (\Lambda_\bullet \mathcal{K})^*.
+  \end{equation}
+\end{definition}
+\begin{definition}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $D = \dim \mathcal{K}$,
+    $p \in \{0, ..., D\}$.
+  The space $\Omega^p \mathcal{K}$ of \textbf{$p$-forms} is defined by
+  \begin{equation}
+    \Omega^p \mathcal{K} := \Gamma(\Lambda^p \mathcal{K}).
+  \end{equation}
+  Correspondingly, the space of all forms $\Omega^\bullet \mathcal{K}$
+  is defined by
+  \begin{equation}
+    \Omega^\bullet \mathcal{K}
+     := \bigoplus_{p = 0}^D \Omega^p \mathcal{K}.
+  \end{equation}
+\end{definition}
+\begin{notation}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $D = \dim \mathcal{K}$,
+    $p \in \{0, ..., D\}$,
+    $\mathcal{N} \in \mathcal{K}$.
+  We will denote
+  \begin{equation}
+    \Omega^p_\mathcal{N} \mathcal{K}
+    := \restrict{\Lambda^p \mathcal{K}}{\mathcal{N}}.
+  \end{equation}
+\end{notation}
+\begin{proposition}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $\mathcal{N} \in \mathcal{K}$,
+    $p, q \in N$,
+    $\omega \in \Omega^p_\mathcal{N} \mathcal{K}$,
+    $\eta \in \Omega^q_\mathcal{N} \mathcal{K}$.
+  Then
+  $\omega \smile \eta \in \Omega^{p + q}_\mathcal{N} \mathcal{K}$.
+\end{proposition}
+\begin{proof}
+  Let $a \in \mathcal{K}_{p + q}$.
+  Then
+  \begin{equation}
+    (\omega \smile \eta) a
+    = \frac{1}{2^{p + q}}
+      \sum_{(b, c) \in \perp_{p, q} a}
+        \varepsilon^\perp(a, b, c)\, \omega(b)\, \eta(c).
+  \end{equation}
+  Assume that $a$ does not contain $\mathcal{N}$.
+  Then it cannot contain any cells that contain $\mathcal{N}$.
+  But the cells containing $\mathcal{N}$ are the only cells leading to nonzero
+  contributions in $\omega$ and $\eta$.
+  Therefore, in that case $(\omega \smile \eta) a = 0$.
+  Hence,
+  $\omega \smile \eta \in \Omega^{p + q}_\mathcal{N} \mathcal{K}$.
+\end{proof}
+\begin{definition}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $p, q \in \N$,
+    $\omega \in \Omega^p \mathcal{K}$,
+    $\eta \in \Omega^q \mathcal{K}$.
+  Define $\omega \smile \eta \in \Omega^{p + q} \mathcal{K}$ as follows:
+  for any $\mathcal{N} \in \mathcal{K}_0$,
+  \begin{equation}
+    \restrict{(\omega \smile \eta)}{\mathcal{N}}
+    := \restrict{\omega}{\mathcal{N}} \smile \restrict{\eta}{\mathcal{N}},
+  \end{equation}
+  where the product on the right is the standard cup product.
+  (The definition is correct because of the previous proposition.)
+\end{definition}
+\begin{proposition}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $\mathcal{N} \in \mathcal{K}$,
+    $p \in N$,
+    $\omega \in \Omega^p_\mathcal{N} \mathcal{K}$.
+  Then $\delta_p \omega \in \Omega^{p + 1}_\mathcal{N} \mathcal{K}$.
+\end{proposition}
+\begin{proof}
+  Let $a \in \mathcal{K}_{p + 1}$.
+  Then
+  \begin{equation}
+    (\delta_p \omega) a = \omega(\partial_{p + 1} a).
+  \end{equation}
+  Assume that $a$ does not contain $\mathcal{N}$.
+  Then none of its boundary cells contain $\mathcal{N}$.
+  But the cells containing $\mathcal{N}$ are the only cells leading to nonzero
+  contributions in $\omega$.
+  Therefore, in that case $(\delta_p \omega) a = 0$.
+  Hence,
+  $\delta_p \omega \in \Omega^{p + 1}_\mathcal{N} \mathcal{K}$.
+\end{proof}
+\begin{definition}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $p \in \N$,
+    $\omega \in \Omega^p \mathcal{K}$.
+  Define $\delta_p \omega \in \Omega^{p + 1} \mathcal{K}$ as follows:
+  for any $\mathcal{N} \in \mathcal{K}_0$,
+  \begin{equation}
+    \restrict{(\delta_p \omega)}{\mathcal{N}}
+    := \delta_p\left(\restrict{\omega}{\mathcal{N}}\right),
+  \end{equation}
+  where the $\delta_p$ on the right is the standard coboundary operator.
+  (The definition is correct because of the previous proposition.)
+\end{definition}
+\begin{proposition}[graded Leibniz rule for discrete bundle-type cochains]
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $p, q \in \N$,
+    $\omega \in \Omega^p \mathcal{K}$,
+    $\eta \in \Omega^q \mathcal{K}$.
+  Then
+  \begin{equation}
+    \delta_{p + q} \omega \smile \eta
+    = \delta_p \omega \smile \eta + (-1)^p \omega \smile \delta_q \eta.
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  Choose a node $\mathcal{N} \in \mathcal{K}_0$.
+  Then, restricted to $\mathcal{N}$, both sides represend the left and right
+  hand side of the standard graded Leibniz rule for cochains.
+\end{proof}
