@@ -27,18 +27,74 @@
     $D = \dim \mathcal{K}$,
     $E$ be a vector bundle on $\mathcal{K}$,
     $p, q \in \N$.
-  The \textbf{wedge product of $E$-valued differential forms} is the map
+  The \textbf{cup product of an $E$-valued differential forms with a form}
+  is the map
   \begin{equation}
     \usmile
     \colon \Omega^p(\mathcal{K}, E) \times \Omega^q \mathcal{K}
     \to \Omega^{p + q}(\mathcal{K}, E),
   \end{equation}
-  defined as follows the unique bilinear map such that for any
+  defined as follows: it is the unique bilinear map such that for any
   $\sigma \in \Gamma E$,
   $\omega \in \Omega^p \mathcal{K}$,
-  $\eta \in \Omega^q \mathcal{M}$,
+  $\eta \in \Omega^q \mathcal{K}$,
   \begin{equation}
     (\sigma \otimes \omega) \usmile \theta :=
     \sigma \otimes (\omega \smile \theta).
   \end{equation}
 \end{definition}
+\begin{remark}
+  The extension of the cup product define above is a straightforward
+  generalisation of the cup product when one of the objects has two ``legs'':
+  a bundle leg and a form leg.
+  (Only the form legs multiply; the bundle leg stays the same.)
+  We can further generalise if we have an operation on the bundle sections
+  (e.g., a Lie bracket),
+  or even an external operation between the sections of different bundles
+  (e.g., a tensor product). 
+\end{remark}
+\begin{definition}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $D = \dim \mathcal{K}$,
+    $E, F, G$ be vector bundles on $\mathcal{K}$,
+    $\mu \colon \Gamma E \times \Gamma F \to \Gamma G$ be a bilinear map,
+    $p, q \in \N$.
+  The \textbf{$\mu$-cup product of bundle-valued differential forms} is the map
+  \begin{equation}
+    \smile_\mu
+    \colon \Omega^p(\mathcal{K}, E) \times \Omega^q(\mathcal{K}, F)
+    \to \Omega^{p + q}(\mathcal{K}, G),
+  \end{equation}
+  defined as follows: it is the unique bilinear map such that for any
+  $\sigma \in \Gamma E$,
+  $\tau \in \Gamma F$,
+  $\omega \in \Omega^p \mathcal{K}$,
+  $\eta \in \Omega^q \mathcal{K}$,
+  \begin{equation}
+    (\sigma \otimes \omega) \smile_\mu (\tau \otimes \theta) :=
+    \mu(\sigma, \tau) \otimes (\omega \smile \theta).
+  \end{equation}
+\end{definition}
+\begin{example}
+  Let
+    $\mathcal{K}$ be a quasi-cubical mesh,
+    $D = \dim \mathcal{K}$,
+    $p, q \in \N$.
+  The \textbf{$[\cdot, \cdot]$-cup product of vector-valued differential forms}
+  is the map
+  \begin{equation}
+    \smile_{[\cdot, \cdot]}
+    \colon \Omega^p(\mathcal{K}, \mathfrak{X} \mathcal{K})
+    \times \Omega^q(\mathcal{K}, \mathfrak{X} \mathcal{K})
+    \to \Omega^{p + q}(\mathcal{K}, \mathfrak{X} \mathcal{K}),
+  \end{equation}
+  defined as follows: it is the unique bilinear map such that for any
+  $X, Y \in \mathfrak{X} \mathcal{K}$,
+  $\omega \in \Omega^p \mathcal{K}$,
+  $\eta \in \Omega^q \mathcal{K}$,
+  \begin{equation}
+    (X \otimes \omega) \smile_{[\cdot, \cdot]} (Y \otimes \theta) :=
+    [X, Y] \otimes (\omega \smile \theta).
+  \end{equation}
+\end{example}
