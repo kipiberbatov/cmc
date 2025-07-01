@@ -2,6 +2,11 @@ name: Compile LaTeX document and upload the project's website
 
 on:
   workflow_call:
+    inputs:
+      retention_days:
+        required: true
+        type: string
+
 
 jobs:
   build-website:
@@ -44,4 +49,4 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: build/website
-          retention-days: 7
+          retention-days: ${{ inputs.retention_days }}

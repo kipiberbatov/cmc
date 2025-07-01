@@ -2,6 +2,10 @@ name: Compile, archive, link, and run the C code
 
 on:
   workflow_call:
+    inputs:
+      retention_days:
+        required: true
+        type: string
 
 jobs:
   build-code:
@@ -64,4 +68,4 @@ jobs:
         with:
           name: linux-release
           path: build/release
-          retention-days: 7
+          retention-days: ${{ inputs.retention_days }}
