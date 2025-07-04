@@ -1,0 +1,22 @@
+\begin{proof}
+  Consider the simple tensors
+  $c_1 := a_1 \otimes b_1,\ c_2 := a_2 \otimes b_2 \in A \otimes B$.
+  Then
+  \begin{equation}
+    \begin{split}
+      D(c_1 \cdot c_2)
+      & = D((a_1 \otimes b_1) \cdot (a_2 \otimes b_2)) \\
+      & = D((a_1 \cdot a_2) \otimes (b_1 \cdot b_2)) \\
+      & = D_A(a_1 \cdot a_2) \otimes (b_1 \cdot b_2)
+        + (a_1 \cdot a_2) \otimes D_B(b_1 \cdot b_2) \\
+      & = (D_A a_1 \cdot a_2 + a_1 \cdot D_A a_2) \otimes (b_1 \cdot b_2)
+        + (a_1 \cdot a_2) \otimes (D_B b_1 \cdot b_2 + b_1 \cdot D_B b_2) \\
+      & = (D_A a_1 \otimes b_1 + a_1 \otimes D_B b_1) \cdot (a_2 \otimes b_2)
+        + (a_1 \otimes b_1) \cdot (D_A a_2 \otimes b_2 + a_2 \otimes D_B b_2) \\
+      & = D(a_1 \otimes b_1) \cdot (a_2 \otimes b_2)
+        + (a_1 \otimes b_1) \cdot D(a_2 \otimes b_2) \\
+      & = D c_1 \cdot c_2 + c_1 \cdot D c_2.
+    \end{split}
+  \end{equation}
+  By linearity, the Leibniz rule is satisfied for all tensors.
+\end{proof}
