@@ -1,0 +1,32 @@
+\begin{proof}
+  Since $\Hom(V, W)$ is a subset of the space of functions from $V$ to $W$,
+  which, as we already know, form a module, it is enough to show that
+  $\Hom(V, W)$ is closed under addition and scalar multiplication.
+  \begin{itemize}
+    \item
+      Let $f, g \in \Hom(V, W)$.
+      We want to show that $f + g \in \Hom(V, W)$.
+      Take arbitrary $u, v \in U$, $\lambda, \mu \in R$.
+      Then
+      \begin{equation}
+        (f + g)(\lambda u + \mu v)
+        = f(\lambda u + \mu v) + g(\lambda u + \mu v)
+        = \lambda f(u) + \mu f(v) + \lambda g(u) + \mu g(v)
+        = \lambda (f + g)(u) + \mu (f + g)(v).
+      \end{equation}
+      Hence, $f + g \in \Hom(V, W)$.
+    \item
+      Let $f \in \Hom(V, W)$, $r \in R$.
+      We want to show that $r f \in \Hom(V, W)$.
+      Take arbitrary $u, v \in U$, $\lambda, \mu \in R$.
+      Then
+      \begin{equation}
+        (r f)(\lambda u + \mu v)
+        = r f(\lambda u + \mu v)
+        = r \lambda f(u) + r \mu f(v)
+        = \lambda (r f)(u) + \mu (r f)(v).
+      \end{equation}
+      Hence, $r f\in \Hom(V, W)$.
+  \end{itemize}
+  Hence $\Hom(V, W)$ is a subspace of $V^W$.
+\end{proof}
