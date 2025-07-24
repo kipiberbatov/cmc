@@ -1,0 +1,231 @@
+\begin{definition}
+  Let $M$ be a smooth manifold.
+  Define the \textbf{Lie derivative on functions},
+  $L \colon \mathfrak{X} M \to {\rm Der}_{\mathcal{F} M}(\mathcal{F} M)$,
+  as the evaluation map, i.e.,
+  for any $X \in \mathfrak{X} M$, $f \in \mathcal{F} M$,
+  \begin{equation}
+    L_X f := X f.
+  \end{equation}
+\end{definition}
+\begin{definition}
+  Let $M$ be a smooth manifold.
+  Define the \textbf{Lie derivative on vector fields},
+  $L \colon \mathfrak{X} M \to {\rm Der}_{\mathcal{F} M}(\mathfrak{X} M)$,
+  as the adjoint map, i.e., for any $X, Y \in \mathfrak{X} M$,
+  \begin{equation}
+    L_X Y := {\rm adj}_X Y = [X, Y].
+  \end{equation}
+\end{definition}
+\begin{definition}
+  Let $M$ be a smooth manifold, $E$ and $F$ be bundles so that there are
+  Lie derivatives on their spaces of sections, i.e., for $Z \in \{E, F\}$,
+  \begin{equation}
+    L^{(Z)} \colon \mathfrak{X} M \to {\rm Der}_{\mathcal{F} M}(\Gamma(Z)).
+  \end{equation}
+  Define the \textbf{tensor product Lie derivative}
+  \begin{equation}
+    L^{(E \otimes F)}
+    \colon \mathfrak{X} M \to {\rm Der}_{\mathcal{F} M}(\Gamma(E \otimes F)),
+  \end{equation}
+  such that for any $X \in \mathfrak{X} M$, $V \in \Gamma E$, $W \in \Gamma F$,
+  \begin{equation}
+    L^{(E \otimes F)}_X(V \otimes W)
+    := L^{(E)}_X V \otimes W + V \otimes L^{(F)}_X W.
+  \end{equation}
+\end{definition}
+\begin{definition}
+  Let $M$ be a smooth manifold, $E$ and $F$ be bundles so that there are
+  Lie derivatives $L^{(Z)}$ on their spaces of sections, for $Z \in \{E, F\}$.
+  Define the \textbf{Hom Lie derivative}
+  \begin{equation}
+    L^{\Hom(E, F)}
+    \colon \mathfrak{X} M
+    \to {\rm Der}_{\mathcal{F} M}(\Hom(\Gamma E, \Gamma F)),
+  \end{equation}
+  such that for any
+    $X \in \mathfrak{X} M$,
+    $\varphi \in \Hom(\Gamma E, \Gamma F)$,
+    $V \in \Gamma E$,
+  \begin{equation}
+    L^{(F)}_X(\varphi V) = (L^{\Hom(E, F)}_X \varphi) V + \varphi(L^{(E)}_X V),
+  \end{equation}
+  which gives the explicit formula
+  \begin{equation}
+    (L^{\Hom(E, F)}_X \varphi) V = L^{(F)}_X(\varphi V) - \varphi(L^{(E)}_X V).
+  \end{equation}
+\end{definition}
+\begin{definition}
+  Let $M$ be a smooth manifold, $E$ be a bundle so that there is a
+  Lie derivative $L^{(E)}$ on $\Gamma E$.
+  Then, specialising the definition of the Lie derivative on Hom spaces for the
+  trivial bundle as the codomain, we get the \textbf{dual Lie derivative}
+  \begin{equation}
+    L^{(E^*)} \colon \mathfrak{X} M \to {\rm Der}_{\mathcal{F} M}(\Gamma E^*),
+  \end{equation}
+  defined so that for any
+    $X \in \mathfrak{X} M$,
+    $\varphi \in \Gamma E^*$,
+    $V \in \Gamma E$,
+  \begin{equation}
+    (L^{(E^*)}_X \varphi) V = X(\varphi V) - \varphi(L^{(E)}_X V).
+  \end{equation}
+\end{definition}
+\begin{definition}
+  Let $M$ be a smooth manifold.
+  Consider the Lie derivative on the whole tensor algebra
+  (tensor products of vector and covector fields).
+  For any $X, Y in \mathfrak{X} M$ denote the Lie bracket
+  \begin{equation}
+    [L_X , L_Y] = L_X \circ L_Y - L_Y \circ L_X.
+  \end{equation}
+\end{definition}
+\begin{proposition}
+  Let $M$ be a smooth manifold, $X, Y \in \mathfrak{X} M$.
+  Then
+  \begin{equation}
+    [L_X , L_Y] = L_{[X, Y]}.
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  We will consider $4$ cases.
+  \begin{enumerate}
+    \item
+      On functions the claim is obvious since $L = \id$.
+    \item
+      On vector fields the claim is restatement of the homomorphism nature of
+      the adjoint map.
+    \item
+      (Tensor products.)
+      Assume that
+      $[L_X , L_Y] V = L_{[X, Y]} V$ and
+      $[L_X , L_Y] W = L_{[X, Y]} W$.
+      Then
+      \begin{equation}
+        \begin{split}
+          [L_X , L_Y](V \otimes W)
+          & = (L_X \circ L_Y - L_Y \circ L_X)(V \otimes W) \\
+          & = L_X(L_Y V \otimes W + V \otimes L_Y W)
+            - L_Y(L_X V \otimes W + V \otimes L_X W) \\
+          & \begin{split}
+              & = L_X(L_Y V) \otimes W + L_Y V \otimes L_X W
+                + L_X V \otimes L_Y W + V \otimes L_X(L_Y W) \\
+              & \quad - L_Y(L_X V) \otimes W + L_X V \otimes L_Y W
+                - L_Y V \otimes L_X W + V \otimes L_Y(L_X W)
+            \end{split} \\
+          & = (L_X \circ L_Y - L_Y \circ L_X) V \otimes W
+            + V \otimes (L_X \circ L_Y - L_Y \circ L_X) W \\
+          & = [L_X, L_Y] V \otimes W + V \otimes [L_X, L_Y] W \\
+          & = L_{[X, Y]} V \otimes W + V \otimes L_{[X, Y]} V \\
+          & = L_{[X, Y]}(V \otimes W).
+        \end{split}
+      \end{equation}
+    \item
+      (Homomorphisms.)
+      Assume that
+      $[L_X , L_Y] \varphi = L_{[X, Y]} \varphi$ and
+      $[L_X , L_Y] V = L_{[X, Y]} V$.
+      Then
+      \begin{equation}
+        \begin{split}
+          ([L_X , L_Y] \phi) V
+          & = ((L_X \circ L_Y - L_Y \circ L_X) \phi) V \\
+          & = L_X((L_Y \phi) V) - (L_Y \phi) (L_X V)
+            - (L_Y((L_X \phi) V) - (L_X \phi) (L_Y V)) \\
+          & \begin{split}
+              & = L_X(L_Y(\phi V) - \phi(L_Y V))
+                - (L_Y(\phi (L_X V)) - \phi(L_Y(L_X V)) \\
+              & \quad - (L_Y(L_X(\phi V) - \phi(L_X V))
+                         - (L_X (\phi (L_Y V)) - \phi(L_X(L_Y V)))
+            \end{split} \\
+          & \begin{split}
+              & = (L_X \circ L_Y)(\phi V) - L_X(\phi(L_Y V))
+                - L_Y(\phi (L_X V)) + \phi((L_Y \circ L_X) V) \\
+              & \quad - (L_Y \circ L_X) (\phi V) + L_Y (\phi(L_X V))
+                         - L_X(\phi (L_Y V)) + \phi((L_X \circ L_Y) V)
+            \end{split} \\
+          & = [L_X, L_Y](\phi V) - \phi([L_X, L_Y] V) \\
+          & = L_{[X, Y]}(\phi V) - \phi(L_{[X, Y]} V) \\
+          & = (L_{[X, Y]} \phi) V.
+        \end{split}
+      \end{equation}
+  \end{enumerate}
+  By structural induction on the space of tensors, we get the desired result on
+  the whole tensor algebra of $\mathfrak{X} M$.
+\end{proof}
+\begin{definition}
+  Let
+    $(M, g)$ be a (pseudo-)Riemannian manifold.
+    $X \in \mathfrak{X} M$.
+  We say that $X$ is a (global) \textbf{Killing vector field}
+  (named after German mathematician Wilhem Killing) if
+  \begin{equation}
+    L_X g = 0.
+  \end{equation}
+  Denote by ${\rm Killing}(M, g)$ the space of all Killing vector fields on $M$.
+\end{definition}
+\begin{proposition}
+  Let $(M, g)$ be a pseudo-Riemannian manifold.
+  Then ${\rm Killing}(M, g)$ is a subalgebra of the Lie algebra of vector fields
+  on $M$.
+\end{proposition}
+\begin{proof}
+  Let $X, Y \in {\rm Killing}(M, g)$, i.e., $L_X g = L_Y g = 0$.
+  Then
+  \begin{equation}
+    \begin{split}
+      L_{[X, Y]} g
+      = [L_X, L_Y] g = L_X(L_Y g) - L_Y(L_X g) = L_X(0) - L_Y(0) = 0.
+      \qedhere
+    \end{split}
+  \end{equation}
+\end{proof}
+\begin{example}
+  We are going to calculate the Lie algebra of the Killing vector fields on a
+  pseudo-Euclidean space $(V, g)$ of dimension $D$.
+  By Sylvester's law of inertia we can choose a basis in which the metric has a
+  diagonal form with values
+  \begin{equation}
+    g_{i, j} = s_i \delta_{i, j},\ s_i \in \{-1, 1\}\ (i, j = 1, ..., D).
+  \end{equation}
+  In other words, in the chosen coordinate system
+  \begin{equation}
+    g = \sum_{i = 1}^D s_i\, d x^i \otimes d x^i.
+  \end{equation}
+  Let $X = \sum_{i = 1}^D f^i \partial_{x_i}$ be a Killing vector field.
+  First, for any $i \in 1, ..., D$ we calculate
+  \begin{equation}
+    L_X(d x^i)
+    = d(L_X x^i)
+    = d f^i
+    = \sum_{j = 1}^D (\partial_{x_j} f^i)\, d x^j.
+  \end{equation}
+  Then
+  \begin{equation}
+    0
+    = L_X g
+    = \sum_{i = 1}^D s_i L_X(d x^i) \otimes d x^i + d x^i \otimes L_X(d x^i)
+    = \sum_{i, j = 1}^D
+      (s_i \partial_{x_j} f^i + s_j \partial_{x_i} f^j)\, d x^i \otimes d x^j.
+  \end{equation}
+  Hence, for $i, j = 1, ..., D$,
+  \begin{equation}
+    s_i \partial_{x_j} f^i + s_j \partial_{x_i} f^j = 0.
+  \end{equation}
+  We can show that the above system of PDE leads to the following
+  $D (D + 1) / 2$ linearly independent solutions:
+  \begin{enumerate}
+    \item
+      the $D$ basis vectors fields
+      \begin{equation}
+        C_i := \partial_{x_i},\ i = 1, ..., D;
+      \end{equation}
+    \item
+      the $D (D - 1) / 2$ linear vector fields (boosts)
+      \begin{equation}
+        B_{i, j}
+        := s_j x_j \partial_{x_i} - s_i x_i \partial_{x_j},\
+        1 \leq i < j \leq D.
+      \end{equation}
+  \end{enumerate}
+\end{example}
