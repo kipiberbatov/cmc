@@ -1,0 +1,298 @@
+\begin{discussion}
+  Let
+    $(M, g)$ be a Riemannian manifold,
+    $\mathcal{B}$ be a manifold diffeomorphic to an open submanifold of $M$,
+    $I$ be an interval.
+  A map $\kappa \colon I \times \mathcal{B} \to M$
+  is called an \textbf{deformation} if it is smooth and for any $t \in I$,
+  $\kappa_t := \kappa(t, \cdot) \colon \mathcal{B} \to M$ is an embedding.
+\end{discussion}
+\begin{discussion}
+  Let $t \in I$.
+  We denote the image of $\kappa_t$ as $\mathcal{B}_t$.
+  Then $\mathcal{B}_t$ is diffeomorphic to $\mathcal{B}$.
+\end{discussion}
+\begin{discussion}
+  Now fix $t_0, t_1 \in I$ with $t_0 < t_1$.
+  Define the diffeomorphism
+  \begin{equation}
+    \varphi
+    := \kappa_1 \circ \kappa_0^{-1}
+    \colon \mathcal{B}_{t_0} \to \mathcal{B}_{t_1}
+  \end{equation}
+  which is also called a deformation.
+  Here, $X := \mathcal{B}_{t_0}$ is called the \textbf{reference configuration},
+  while $Y := \mathcal{B}_{t_1}$ is called the \textbf{deformed configuration}.
+\end{discussion}
+\begin{discussion}
+  Consider the differential of $\varphi$,
+  \begin{equation}
+    F := d \varphi \colon T X \to T Y.
+  \end{equation}
+  Traditionally is called the \textbf{deformation gradient},
+  but in our formalism it is more logical to call it
+  \textbf{deformation differential}, which we will do.
+  Since $\varphi$ is a diffeomorphism, $F$ is also a diffeomorphism, and also
+  for any $x \in X$, a linear isomorphism
+  $F_x \colon T_x X \to T_{\varphi(x)} Y$.
+  Since $\varphi$ is an instance of a deformation, $F_x$ has a positive
+  determinant in any coordinate system in $M$ (inherited by both $X$ and $Y$).
+\end{discussion}
+\begin{discussion}
+  Define the bundle map $F^T \colon T Y \to T X$ as follows:
+  for any $x \in X$, $F^T_{\varphi(x)}$ is the linear transpose to $F_x$
+  with respect to the inner products $g_x$ and $g_{\varphi(x)}$.
+  In other words, for any $x \in X$, $v \in T_x X$, $w \in T_{\varphi(x)} Y$,
+  \begin{equation}
+    g_x(v, F^T_{\varphi(x)} w) = g_{\varphi(x)}(F_x v, w).
+  \end{equation}
+\end{discussion}
+\begin{discussion}
+  Denote $C := F^T \circ F \colon T X \to T X$.
+  Since for any $y \in Y$, $F^T_y \colon T_y Y \to T_{\varphi^{-1} y} X$,
+  we conclude that for any $x \in X$,
+  \begin{equation}
+    C_x = (F^T \circ F)_x = F^T_{\varphi(x)} \circ F_x \colon T_x X \to T_x X.
+  \end{equation}
+  Hence, $C$ can equivalently be considered as a section of the bundle
+  $\End(T M)$,
+  i.e., by the tensor field
+  $\tilde{C} \colon M \to \End(T M)$
+  defined for any $x \in M$ and $v \in T_x M$ by
+  \begin{equation}
+    \tilde{C}(x) v = C(x, v) \in T_x M.
+  \end{equation}
+  For this reason we will identify $C$ with the tensor field $\tilde{C}$.
+  $C$ is a $(1, 1)$ tensor field on the initial configuration.
+  $C$ is called the \textbf{Green's deformation tensor}, the
+  \textbf{right Cauchy-Green deformation tensor}, or the
+  \textbf{Cauchy strain tensor}.
+  We will make use also of the tensor field $U = \sqrt{C}$.
+\end{discussion}
+\begin{remark}
+  Note that although $C$ is a tensor field on the initial configuration $X$,
+  it does not encode an intrinsic property on it but a relation with another
+  configuration.
+  However, it may be possible to interpret $C$ as an intrinsic property if we
+  stop treating the metric tensor as fixed.
+  In that case, we start with some initial metric tensor $g$ on $X$,
+  but the new metric tensor $h$ on $X$
+  \begin{equation}
+    h = \restrict{g}{X}  \circ C,
+  \end{equation}
+  where we use the representation
+  $\restrict{g}{X} \colon \mathcal{X} X \to \mathcal{X}^* X$.
+  This new metric tensor in fact implicitly measures the distances in $Y$.
+  Indeed, take $x \in X$ and $v, w \in T_x X$.
+  Then
+  \begin{equation}
+    h_x(v, w)
+    = g_x(C_x v, w)
+    = g_x(F^T_x F_x v, w)
+    = g_{\varphi(x)}(F_x v, F_x w)
+    = g_{\varphi(x)}((d \varphi)_x v, (d \varphi)_x w),
+  \end{equation}
+  which is the inner product on $T_{\varphi(x)}$.
+\end{remark}
+\begin{remark}
+  In a similar fashion we can consider the map
+  \begin{equation}
+    B := F \circ F^T \colon T Y \to T Y
+  \end{equation}
+  identical to a section of $\End(T Y)$.
+  Hence, $B$ is a $(1, 1)$ tensor field on the deformed configuration.
+  $B$ is called the \textbf{Finger's deformation tensor}, the
+  \textbf{left Cauchy-Green deformation tensor} or the
+  \textbf{Green strain tensor}.
+\end{remark}
+\begin{discussion}
+  What we called the deformation map $\varphi$ in fact represents a general
+  motion of the continuum body $\mathcal{B}$.
+  The actual meaning of deformation is the change of distances.
+  On a Riemannian manifold there are two distance measurements.
+  One is the local one, that measures how lengths of vectors in the tangent
+  spaces change.
+  The global one works on the manifold itself and measures how lengths of
+  geodesics change.
+  We will primarily work with the local one but we will see how it gives us
+  global insights as well.
+\end{discussion}
+\begin{discussion}
+  Let $V$ and $W$ be finite dimensional isomorphic vector spaces with inner
+  products $g \colon V \times V \to \R$ and $h \colon W \times W \to \R$.
+  Consider a linear isomorphism $F \colon V \to W$.
+  We want to isolate the deformation information encoded in $F$.
+  In other words, we want to ignore rotations.
+  More precisely, let $X$ be some set (of invariants).
+  We want to characterise the functions
+  $f \colon {\rm Iso}(V, W) \coprod {\rm Aut}(V) \to X$
+  satisfying the following property: for any $S \in O((W, h), (V, g))$,
+  \begin{equation}
+    f(S \circ F) = f(F).
+  \end{equation}
+  Consider the polar decomposition of $F$:
+  the unique orthogonal map $R \colon V \to W$ and a
+  symmetric positive definite map $U \colon W \to W$ such that
+  $F = R \circ U$.
+  Concretely,
+  \begin{equation}
+    F^T F = U^T R^T R U = U^T U = U^2,
+  \end{equation}
+  and this equation has unique positive-definite solution for $U$, denoted by
+  $U := \sqrt{U^2} = \sqrt{F^T F} = \sqrt{C}$.
+  This also gives the unique $R$, $R = F U^{-1} = F \sqrt{C}^{-1}$.
+  Going back to our characterisation of $f$, if we plug
+  $S = R^{T} \colon W \to V$,
+  we get
+  \begin{equation}
+    f(F) = f(R^T F) = f(R^T R U) = f(U).
+  \end{equation}
+  Hence, the deformation information of $F$ can be encoded in the symmetric
+  positive definite map $U$.
+  The eigenvalues of $U$ (the \textbf{singular values} of $F$)
+  are the stretches of the deformation.
+\end{discussion}
+\begin{discussion}
+  We will now show that if $\psi \colon X \to Z$ is another deformation with
+  the same Green deformation tensor $C_\psi = C$, then $\psi$ and $\varphi$ are
+  related by a local isometry.
+  (Recall that $\varphi \colon X \to Y$.)
+  Indeed, let $\tau = \psi \circ \varphi^{-1} \colon Y \to Z$.
+  Since,
+  \begin{equation}
+    d \tau = d \psi \circ d \varphi^{-1} \circ T Y \to T Z,
+  \end{equation}
+  then
+  \begin{equation}
+    \begin{split}
+        (d \tau)^T \circ (d \tau)
+      & = (d \psi \circ d \varphi^{-1})^T \circ (d \psi) \circ (d \varphi^{-1})
+        = (d \varphi)^{-T} \circ (d \psi)^T \circ (d \psi) \circ
+          (d \varphi)^{-1}
+        = F^{-T} C_\psi F^{-1} \\
+      & = F^{-T} C F^{-1}
+        = F^{-T} F^T F F^{-1}
+        = I,
+    \end{split}
+  \end{equation}
+  which is precisely the condition for $\tau$ being a local isometry.
+\end{discussion}
+\begin{discussion}
+  It can be proven that if the ambient manifold $M$ is the Euclidean space
+  $\R^n$, then a local isometry $\tau \colon Y \to Z$ is a global one,
+  i.e., it can be represented as a rigid body motion:
+  \begin{equation}
+    \tau(y) = Q y + a,\ Q \in {\rm SO}(n),\ a \in \R^n.
+  \end{equation}
+  For a general Riemannian manifold, local distances are measured by the inner
+  products on the tangent spaces which make them Euclidean spaces.
+  Globally, however, distances are measured by lengths of geodesics and global
+  isometries preserve those distances.
+  In the online discussion
+  \url{https://math.stackexchange.com/questions/116195/how-to-go-from-local-to-global-isometry}
+  it is shown that under certain conditions for $M$ we can still make the
+  conclusion that local isometry implies global isometry.
+  Therefore, the Green deformation tensor $C$ (or its square root $U$) uniquely
+  reconstructs the deformation up to a local (and hence a global) isometry.
+  This means that $U$ (or invertible expressions of it considered below)
+  uniquely determine the deformation, disregarding the rigid body motions still
+  contained in the deformation differential $F$.
+  The eigenvalues of $U$ are called \textbf{stretches}.
+\end{discussion}
+\begin{discussion}
+  If we do not have a deformation but only a rigid body motion, then
+  $U$ is the identity $I$ and stretches will be all equal to $1$.
+  \textbf{Strain measures} are reversible expressions
+  $E \colon {\rm Symm}_+(T X) \to {\rm Symm}(T X)$
+  defined as analytic functions measuring the extent to which $U$
+  differs from $I$.
+  This is imposed by the constraint $E(I) = 0$.
+  We also impose another condition that makes all strain measures equal to
+  second order as well, namely $E'(I) = I$.
+  Possible strain measures include:
+  \begin{enumerate}
+    \item
+      \textbf{logarithmic strain}, \textbf{natural strain},
+      \textbf{true strain}, or \textbf{Hencky strain}:
+      \begin{equation}
+        E_{0}(U) := \ln U = \frac{1}{2} \ln{C}.
+      \end{equation}
+    \item
+      the \textbf{Seth-Hill strain measures} or \textbf{Doyle-Ericksen tensors}:
+      for any $m \in \R \setminus \{0\}$,
+      \begin{equation}
+        E_{(m)}(U) := \frac{1}{2 m}(U^{2 m} - I) = \frac{1}{2 m}(C^m - I).
+      \end{equation}
+      In particular, we have the \textbf{Green-Lagrangian strain tensor}
+      \begin{equation}
+        E_{(1)}(U) := \frac{1}{2}(U^2 - I) = \frac{1}{2}(C- I),
+      \end{equation}
+      and the \textbf{Biot strain tensor}
+      \begin{equation}
+        E_{(1 / 2)}(U) := U - I = \sqrt{C} - I.
+      \end{equation}
+    \item
+      for any $m \in \R \setminus \{0\}$,
+      \begin{equation}
+        E^{(m)}(U) := \frac{1}{2 m}(U^m - U^{-m}).
+      \end{equation}
+  \end{enumerate}
+\end{discussion}
+\begin{discussion}
+  Another way to describe motion is via \textbf{displacements}.
+  In other words we are looking for an object $u(x)$ that measures the increment
+  of the motion of a point $x \in X$ to $y = \varphi(x) \in Y$.
+  On a Euclidean space this is done by the displacement vector
+  $u(x) = \varphi(x) - x$.
+  However, in the generic setting of curved manifolds, it is not possible to
+  take point differences.
+  Despite that, on Riemannian manifolds something similar is possible.
+  Indeed, let $x \in X$ and $v \in T_x X = T_x M$ is sufficiently ``small''.
+  Then there exists unique geodesic $\gamma$ starting at $x$, in the direction
+  of $v$, i.e., $\gamma \in [0, 1] \to M$ with $\gamma(0) = x$ and
+  $\gamma'(0) = v$.
+  Define the exponential map of $v$ at $x$ by
+  \begin{equation}
+    \exp_x(v) := \gamma(1).
+  \end{equation}
+  In other words, it gives the point that we traverse through a geodesic
+  starting at $x$ in the direction of $v$ and moving for a unit amount of time.
+  If the exponent map is defined everywhere, it is a map
+  \begin{equation}
+    \exp \colon T M \to M.
+  \end{equation}
+  In particular, on a Euclidean space $\R^n$, to a point $x$ in direction $v$
+  corresponds the geodesic $\gamma(t) = x + t v$.
+  Hence,
+  \begin{equation}
+    \exp_x(v) = \gamma(1) = x + v,
+  \end{equation}
+  which coincides with the intuition of starting at $x$ and moving along the
+  vector $v$.
+  Now consider the reverse problem: given two points $x$ and $y$ in $M$,
+  find a vector $v$ such that $\exp_x(v) = y$.
+  This problem may have multiple solutions if more than one geodesic connects
+  $x$ and $y$ but we are interested in the small geodesics that connect $x$ and
+  $y$.
+  For the sake of simplicity we will assume that there is unique such small
+  geodesic $\gamma \colon [0, 1] \to M$ with $\gamma(0) = x$ and
+  $\gamma(1) = y$.
+  In this case, if $v = \gamma'(0)$, then by definition
+  \begin{equation}
+    \exp_x(v) := \gamma(1) = y.
+  \end{equation}
+  Denote this vector by $v := y - x \in T_x X$.
+  We will call it the \textbf{displacement} of $x$.
+  This gives us the \textbf{displacement vector field}
+  \begin{equation}
+    u \colon X \to T X, u(x) = \phi(x) - x \in T_x X.
+  \end{equation}
+  Hence,
+  \begin{equation}
+    \varphi = \restrict{\exp}{T X} \circ u \colon X \to Y.
+  \end{equation}
+  By the chain rule,
+  \begin{equation}
+    F = d \varphi = d(\restrict{\exp}{T X}) \circ d u.
+  \end{equation}
+\end{discussion}
