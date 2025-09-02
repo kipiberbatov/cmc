@@ -1,0 +1,226 @@
+\begin{definition}
+  Let $D \in \N^+$, $V$ be a vector space of dimension $D + 1$.
+  A non-degenerate symmetric bilinear map $g \colon V \times V \to \R$ is called
+  a \textbf{Minkowski metric} if it has signature $(1, D)$.
+  In other words, there exist a basis $e_0, e_1, ..., e_D$ such that
+  $g(e_0, e_0) = -1$, and for $i \in \{1, ..., D\}$, $g(e_i, e_i) = 1$.
+
+  Alternatively, there exist subspaces $T$ and $S$ with $\dim T = 1$ and
+  $\dim S = D$ such that $V = T \oplus S$, $g$ is positive definite on $T$ and
+  negative definite on $S$.
+  In that case $e_0$ is a basis of $T$, while $e_1, ..., e_D$ is a basis of $S$.
+
+  In physics context the basis vector $e_0$ is called
+  \textbf{temporal direction} and $T$ is the \textbf{time component},
+  while the basis vectors $e_1, ..., e_D$ are called the
+  \textbf{spatial directions} and $S$ is the \textbf{space component}.
+  The space $(V, g)$ is then called \textbf{Minkowski spacetime} or
+  \textbf{flat spacetime}.
+\end{definition}
+\begin{remark}
+  From now on we will assume that Minkowski metrics are of dimension
+  $\length^2$.
+\end{remark}
+\begin{definition}
+  Let $(V, g)$ be a Minkowski spacetime.
+  A vector $v \in V$ is called:
+  \begin{enumerate}
+    \item \textbf{time-like} if $g(v, v) > 0$;
+    \item \textbf{null} or \textbf{light-like} if $g(v, v) = 0$;
+    \item \textbf{space-like} if $g(v, v) < 0$.
+  \end{enumerate}
+\end{definition}
+\begin{definition}
+  Let $D \in \N^+$, $M$ be a smooth manifold of dimension $D + 1$,
+  $g \in (\mathfrak{X} M)^* \otimes (\mathfrak{X} M)^*$.
+  We say that $g$ is a \textbf{Lorentzian metric} if for any $x \in M$,
+  $g_x \in T_x^* M \otimes T_x^* M$ is a Minkowski metric.
+
+  The pair $(M, g)$ is called a \textbf{Lorentzian manifold}.
+\end{definition}
+\begin{definition}
+  Let $(M, g)$ be a Lorentzian manifold, $C$ be a $1$-dimensional submanifold of
+  $M$, i.e., a (nonparametrised) curve on $M$.
+  We say that $C$ is a \textbf{world line} if for any $x \in C$ and any
+  $v \in T_x C \subset T_x M$, $v$ is time-like, i.e., $g_x(v, v) > 0$.
+\end{definition}
+\begin{proposition}
+  Let $(M, g)$ be a Lorentzian manifold, $C$ be a world-line on $M$ with
+  beginning $a$ and end $b$.
+  Then there exist a unique parametrisation
+  $\gamma \colon [0, {\rm length}(C)] \to M$ of $C$
+  with $\gamma(0) = a$ and $\gamma(1) = b$,
+  so that for any $\tau \in [0, 1]$,
+  $g_{\gamma(\tau)}(\dot{\gamma}(\tau), \dot{\gamma}(\tau))) = 1$.
+
+  This unique parametrisation is called a \textbf{proper time parametrisation}.
+  The volume form for this unique parametrisation is called
+  \textbf{proper time}.
+\end{proposition}
+\begin{definition}
+  Let $(M, g)$ be a Lorentzian manifold, $C$ be an oriented world-line on $M$
+  with proper time parametrisation $\gamma$.
+  The \textbf{velocity} $v_C$ of $C$ is is the unit tangent vector field along
+  $C$ following the orientation of $C$.
+  It is represented by $\dot{\gamma}$.
+  
+  The physical dimension of $v_C$ is $\time^{-1}$
+  so that its absolute value has dimension $\length \time^{-1}$.
+\end{definition}
+\begin{definition}
+  Let
+    $(M, g)$ be a Lorentzian manifold,
+    $\nabla$ be the corresponding Levi-Civita connection,
+    $C$ be an oriented world line on $M$
+    $\gamma$ be a proper time parametrisation of $C$.
+  The \textbf{acceleration of} this world line is defined as
+  \begin{equation}
+    a_C := \nabla_{v_C} v_C.
+  \end{equation}
+  We say that $C$ is a \textbf{free fall trajectory} if $a_C = 0$.
+
+  The physical dimension of $a_C$ is $\time^{-2}$
+  so that its absolute value has dimension $\length \time^{-2}$.
+\end{definition}
+\begin{proposition}
+  Let
+    $(M, g)$ be a Lorentzian manifold,
+    $\nabla$ be the corresponding Levi-Civita connection,
+    $C$ be an oriented world line on $M$
+    $\gamma$ be a proper time parametrisation of $C$.
+  Then
+  \begin{equation}
+    g(v_C, a_C) = 0.
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  Since the connection is parallel to the metric we have the following:
+  for any vector fields $X, Y, Z$,
+  \begin{equation}
+    0
+    = (\nabla g)(X, Y, Z)
+    = (\nabla_X g)(Y, Z)
+    = \nabla_X (g(Y, Z)) - g(\nabla_X Y, Z) - g(Y, \nabla_X, Z).
+  \end{equation}
+  Denote $v := v_C$ and take $X = Y = Z = v$.
+  Then
+  \begin{equation}
+    0
+    = \nabla_v 1
+    = \nabla_v (g(v, v))
+    = g(\nabla_v v, v) + g(v, \nabla_v v)
+    = 2 g(v, \nabla_v v)
+    = 2 g(v_C, a_C).
+  \end{equation}
+  Hence, $g(v_C, u_C) = 0$. 
+\end{proof}
+\begin{definition}
+  Let
+    $(M, g)$ be a Lorentzian manifold,
+    $C$ be an oriented world line on $M$.
+  An \textbf{invariant mass} or \textbf{rest mass} is a smooth function
+  $m \colon C \to \R^+$ with physical dimension $\mass$.
+  (We will write $m \in \mathcal{F}^+ C$.)
+\end{definition}
+\begin{definition}
+  Let
+    $(M, g)$ be a Lorentzian manifold,
+    $\nabla$ be the corresponding Levi-Civita connection,
+    $C$ be a particle trajectory.
+    $m \in \mathcal{F}^+ C$ be the particle's rest mass.
+  The particle's \textbf{momentum} $p_C$ is defined by
+  \begin{equation}
+    p_C := m v_C.
+  \end{equation}
+  The physical dimension of $p_C$ is $\mass \time^{-1}$
+  so that its absolute value has dimension $\mass \length \time^{-1}$.
+\end{definition}
+\begin{definition}
+  Let
+    $(M, g)$ be a Lorentzian manifold,
+    $\nabla$ be the corresponding Levi-Civita connection,
+    $C$ be a particle trajectory.
+    $m \in \mathcal{F}^+ C$ be the particle's rest mass.
+  The particle's \textbf{force} $f_C$ is defined by
+  \begin{equation}
+    f_C := \nabla_{v_C} p_C.
+  \end{equation}
+  The physical dimension of $f_C$ is $\mass \time^{-2}$
+  so that its absolute value has dimension $\mass \length \time^{-2}$.
+\end{definition}
+\begin{discussion}
+   Let
+    $(M, g)$ be a Lorentzian manifold,
+    $\nabla$ be the corresponding Levi-Civita connection,
+    $C$ be a particle trajectory.
+    $m \in \mathcal{F}^+ C$ be the particle's rest mass.
+  We can expand the definition of force (dropping trajectory's index) to get
+  \begin{equation}
+    f
+    = \nabla_v P
+    = \nabla_v (m v)
+    = (\nabla_v m) v + m \nabla_v v
+    = (\nabla_v m) v + m a.
+  \end{equation}
+  If we take the inner product with velocity, we get
+  \begin{equation}
+    g(f, v) = g(v, v) \nabla_v m + m g(v, a) = \nabla_v m
+  \end{equation}
+  The result $\nabla_v m$ is related to internal energy change (heating).
+\end{discussion}
+\begin{definition}
+  Let
+    $(M, g)$ be a Lorentzian manifold,
+    $\nabla$ be the corresponding Levi-Civita connection,
+    $C$ be a particle trajectory.
+    $m \in \mathcal{F}^+ C$ be the particle's rest mass,
+    $p$ be the corresponding momentum.
+    $K$ be a timelike Killing vector field of physical dimension $\time^{-1}$,
+      i.e., it can be represented by $\partial_t$ in decomposition of spacetime
+      into temporal and spatial components.
+  The particle's \textbf{energy} $E_C \in \mathcal{F} C$ is defined by
+  \begin{equation}
+    E_C := g(p, K).
+  \end{equation}
+  The physical dimension of $E_C$ equals to
+  \begin{equation}
+    [[E_C]]
+    = [[g(p_C, K)]]
+    = [[g]] \cdot [[p_C]] \cdot [[K]]
+    = \length^2 \cdot (\mass \time^{-1}) \cdot \time^{-1}
+    = \mass \length^2 \time^{-2}.
+  \end{equation}
+\end{definition}
+\begin{definition}
+  Let
+    $(M, g)$ be a Lorentzian manifold,
+    $\nabla$ be the corresponding Levi-Civita connection,
+    $C$ be a particle trajectory.
+    $m \in \mathcal{F}^+ C$ be the particle's rest mass,
+    $p$ be the corresponding momentum.
+    $K$ be a timelike Killing vector field of physical dimension $\time^{-1}$.
+  The particle's \textbf{power} $P_C \in \mathcal{F} C$ is defined by
+  \begin{equation}
+    P_C := \nabla_{v_C} E_C.
+  \end{equation}
+  The physical dimension of $P_C$ equals to
+  \begin{equation}
+    [[P_C]]
+    = [[E_C] \cdot [[v_C]]
+    = (\mass \length^2 \time^{-2}) \cdot \time^{-1}
+    = \mass \length^2 \time^{-1}.
+  \end{equation}
+\end{definition}
+\begin{remark}
+  Using the fact that $g(p, \nabla_v K) = 0$, we can expand power to get
+  \begin{equation}
+    P
+    = \nabla_v E
+    = \nabla_v (g(p, K))
+    = (\nabla_v g)(p, K) + g(\nabla_v p, K) + g(p, \nabla_v K)
+    = g(f, K).
+  \end{equation}
+  If mass $m$ is constant and particle is in free fall, we get $a = 0$,
+  $f = m a = 0$, and hence $P = g(0, K) = 0$.
+  In other words, energy $E$ is conserved along the trajectory $C$.
+\end{remark}
