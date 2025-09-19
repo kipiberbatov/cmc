@@ -1,0 +1,256 @@
+\begin{definition}
+  Let
+    $R$ be a ring,
+    $V$ be a finite-dimensional $R$-module,
+    $\omega \in \Lambda^2 V^*$.
+  We say that $\omega$ is \textbf{non-degenerate} or \textbf{symplectic}
+  if the associated map
+  \begin{equation}
+    \hat{\omega} \colon V \to V^*,\
+    X \in V \mapsto \hat{\omega}(X)
+    := (Y \in V \mapsto \omega(X \wedge Y))
+    \in V^*,
+  \end{equation}
+  is an isomorphism.
+
+  The pair $(V, \omega)$ is called a \textbf{symplectic module}
+  (or \textbf{symplectic vector space} if $R$ is a field).
+\end{definition}
+\begin{proposition}
+  Let
+    $R$ be a ring without,
+    $(V, \omega)$ be a finite-dimensional symplectic module over $R$.
+  Assume that for any $x \in R,\ x + x = 0 \Rightarrow x = 0$.
+  Then $\dim V$ is an even number.
+\end{proposition}
+\begin{proof}
+  Let $n = \dim V$.
+  In a basis of $V$ $\omega$ is represented by an antisymmetric matrix $A$.
+  But then
+  \begin{equation}
+    \det A = \det(A^T) = \det(-A) = (-1)^n \det A.
+  \end{equation}
+  If $n$ is odd, then $\det A + \det A = 0$.
+  By assumption this means that $\det A = 0$
+  which contradicts the nondegeneracy of $\omega$.
+  Hence, $n$ is even.
+\end{proof}
+\begin{definition}
+  Let $M$ be a smooth manifold, $\omega \in \Omega^\bullet M$.
+  We say that:
+  \begin{enumerate}
+    \item
+      $\omega$ is \textbf{closed} if $d \omega = 0$
+    \item
+      $\omega$ is \textbf{exact} if there exists $\eta \in \Omega^\bullet M$
+      such that $d \eta = \omega$.
+  \end{enumerate}
+\end{definition}
+\begin{proposition}
+  Let $M$ be a smooth manifold, $\omega \in \Omega^\bullet M$.
+  If $\omega$ is exact, then it is closed.
+\end{proposition}
+\begin{proof}
+  Let $\eta \in \Omega^\bullet M$ be such that $d \eta = \omega$.
+  Then $d \omega = d (d \eta) = 0$, i.e., $\omega$ is closed.
+\end{proof}
+\begin{definition}
+  Let $M$ be a smooth manifold, $\omega \in \Omega^2 M$.
+  We say that $\omega$ is a \textbf{symplectic form}
+  if it is non-degenerate
+  (with base module $\mathfrak{X} M$ over $\mathcal{F} M$) and closed.
+
+  The pair $(M, \omega)$ is called a \textbf{symplectic manifold}.
+\end{definition}
+\begin{proposition}
+  Let $(M, \omega)$ be a symplectic manifold.
+  Then $M$ is even-dimensional.
+\end{proposition}
+\begin{definition}
+  Let $Q$ be a smooth manifold.
+  Consider the cotangent bundle $T^* Q$ with bundle projection
+  $\pi \colon T^* Q \to Q$
+  with differential $d \pi \colon T(T^* Q) \to T Q$.
+  Define the \textbf{tautological one-form}
+  $\theta \colon T^* Q \to T^* (T^* Q)$ as follows:
+  for any $(q, p) \in T^*Q$ (i.e,. $q \in Q$, $p \in \Hom(T_q Q, \R)$),
+  \begin{equation}
+    \restrict{\theta}{(q, p)}
+    := p \circ \restrict{d \pi}{(q, p)} \in T^*_{(q, p)}(T^* Q).
+  \end{equation}
+  In other words, if we denote $M := T^* Q$, then $\theta$ is a section of its
+  cotangent bundle $T^* M$, i.e., an $1$-form on $M$. 
+\end{definition}
+\begin{definition}
+  Let
+    $Q$ be a smooth manifold,
+    $\theta \in \Omega^1(T^* Q)$ be the tautological one-form.
+  Define $\omega := - d \theta$.
+  The pair $(T^* Q, \omega)$ is called the \textbf{phase space} of $Q$.
+  (In this setting $Q$ is usually called the \textbf{configuration space}.)
+\end{definition}
+\begin{remark}
+  Let $Q$ be a smooth manifold.
+  The elements of $T^* Q$ are of the form $(q, p)$ where $q \in Q$ and
+  $p \in T^*_q Q = \Hom(T_q Q, \R)$.
+  $q$ is called \textbf{generalised position}, while $p$ is called
+  \textbf{generalised momentum}.
+\end{remark}
+\begin{proposition}
+  Let
+    $Q$ be a smooth manifold,
+    $(T^* Q, \omega)$ be its phase space.
+  Then $(T^* Q, \omega)$ is a symplectic manifold.
+\end{proposition}
+\begin{definition}
+  Let $Q$ be a smooth manifold of dimension $n$.
+  Consider a point $q_0 \in Q$ and let $(U, \hat{\varphi})$ be a chart around
+  $q_0$, i.e., $U$ is a neighbourhood of $q_0$ and
+  $\hat{\varphi} \colon U \to \R^n$ is a diffeomorphism.
+  Let $\{\hat{q}^i \colon U \to \R\}_{i = 1}^n$ be the corresponding local
+  coordinates, i.e., if $\{\pi^i \colon \R^n \to \R\}_{i = 1}^n$ are the
+  projection maps, then $\{\hat{q}^i = \pi^i \circ \hat{\varphi}\}_{i = 1}^n$.
+  Let $i \in \{1, ..., n\}$.
+  Define \textbf{position coordinate} $q^i \colon T^* U \to \R$ by
+  \begin{equation}
+    q^i := \hat{q}^i \circ \restrict{\pi}{U}.
+  \end{equation}
+  Also, define \textbf{momentum coordinate} $p_i \colon T^* U \to \R$
+  as follows: for any $(q, p) \in T^* U$,
+  \begin{equation}
+    p_i(q, p)
+    := p\left(\restrict{\frac{\partial}{\partial \hat{q}^i}}{q}\right).
+  \end{equation}
+\end{definition}
+\begin{proposition}
+  Let
+    $Q$ be a smooth manifold of dimension $n$,
+    $q_0 \in Q$,
+    $(U, \hat{\varphi})$ be a chart around $q_0$,
+    $\{\hat{q}^i \colon U \to \R\}_{i = 1}^n$ be the corresponding local
+      coordinates,
+    $\{q^i \colon T^* U \to \R\}_{i = 1}^n$ be the corresponding position
+      coordinates,
+    $\{p_i \colon T^* U \to \R\}_{i = 1}^n$ be the corresponding momentum
+      coordinates.
+  Then the map $\varphi \colon T^* U \to \R^{2 n}$ defined by
+  \begin{equation}
+    \varphi(q, p) = (q^1(q, p), ..., q^n(q, p), p_1(q, p), ..., p_n(q, p))
+  \end{equation}
+  is a diffeomorphism, i.e., $(T^* U, \varphi)$ is a chart around $(q_0, 0)$.
+  (The covector in $T^*_{q_0}$ does not matter, so we make the trivial choice by
+  taking zero.)
+
+  These local coordinates are called \textbf{generalised coordinates}.
+\end{proposition}
+\begin{remark}
+  From now on, given a manifold $Q$ and a chart $(U, \hat{\varphi})$, unless
+  stated otherwise, we will fix the notation and use the objects defined above:
+  the projection map $\pi \colon T^* Q \to Q$, the tautological one-form
+  $\theta$ and the canonical symplectic form $\omega = - d \theta$;
+  for $i = 1, ..., n$ the coordinate maps $\hat{q}^i$, $q^i$, and $p_i$;
+  the chart $(T^* U, \varphi)$.
+\end{remark}
+\begin{proposition}
+  Let
+    $Q$ be a smooth manifold of dimension $n$,
+    $(U, \hat{\varphi})$ be a chart,
+    $(q, p) \in T^* U$,
+    $ i \in \{1, ..., n\}$.
+  Then
+  \begin{equation}
+    \restrict{d \pi}{(q, p)}
+    \left(\restrict{\frac{\partial}{\partial q^i}}{(q, p)}\right)
+    = \restrict{\frac{\partial}{\partial \hat{q}^i}}{q}.
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  Let $f \colon Q \to \R$ be smooth.
+  Take the standard coordinate systems (given by projections)
+  $\{\hat{x}^i\}_{i = 1}^n$ on $\R^n$ and
+  $\{x^i\}_{i = 1}^{2 n}$ on $\R^{2 n}$.
+  Then, by the definitions of differential and partial derivative on manifold,
+  \begin{equation}
+    {\rm LHS}
+    := (\restrict{d \pi}{(q, p)}
+      \left(\restrict{\frac{\partial}{\partial q^i}}{(q, p)}\right)) f
+    = \restrict{\frac{\partial}{\partial q^i}}{(q, p)}(f \circ \pi)
+    = \frac{\partial(f \circ \pi \circ \varphi^{-1})}{x^i}(\varphi(q, p)),
+  \end{equation}
+  and
+  \begin{equation}
+    {\rm RHS}
+    := \restrict{\frac{\partial}{\partial \hat{q}^i}}{q} f
+    = \frac{\partial(f \circ \hat{\varphi}^{-1})}{\hat{x}^i}(\hat{\varphi}(q)).
+  \end{equation}
+  Define the functions
+  $\hat{g} := f \circ \hat{\varphi}^{-1} \colon \R^n \to \R$ and
+  $g := f \circ \pi \circ \varphi^{-1} \colon \R^{2 n} \to \R$.
+  Then for any $X^1, ..., X^n, Y^1, ..., Y^n \in \R$,
+  \begin{equation}
+    g(X^1, ..., X^n, Y^1, ..., Y^n) = \hat{g}(X^1, ..., X^n),
+  \end{equation}
+  from which it follows that
+  \begin{equation}
+    \begin{split}
+      \frac{\partial g}{\partial x^i}(X^1, ..., X^n, Y^1, ..., Y^n)
+      & = \lim_{h \to 0}
+        \frac
+        {g(X^1, ..., X^i + h, ..., X^n, Y^1, ..., Y^n)
+         - g(X^1, ..., X^n, Y^1, ..., Y^n)}
+        {h} \\
+      & = \lim_{h \to 0}
+        \frac{\hat{g}(X^1, ..., X^i + h, ..., X^n) - \hat{g}(X^1, ..., X^n)}{h}
+        \\
+      & = \frac{\partial \hat{g}}{\partial \hat{x}^i}(X^1, ..., X^n).
+    \end{split}
+  \end{equation}
+  Denote $(X^1, ..., X^n, Y^1, ..., Y^n) = \varphi(q, p)$.
+  This means that $(X^1, ..., X^n) = \hat{\varphi}(q)$.
+  Then, by the above equality,
+  \begin{equation}
+    {\rm LHS}
+    = \frac{\partial g}{\partial x^i}(X^1, ..., X^n, Y^1, ..., Y^n)
+    = \frac{\partial \hat{g}}{\partial \hat{x}^i}(X^1, ..., X^n)
+    = {\rm RHS},
+  \end{equation}
+  as wanted
+\end{proof}
+\begin{proposition}
+  Let
+    $Q$ be a smooth manifold of dimension $n$,
+    $(U, \hat{\varphi})$ be a chart.
+  Then
+  \begin{equation}
+    (\varphi^{-1})^* \restrict{\theta}{U} = \sum_{i = 1}^n p_i\, d q^i.
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  Let $(q, p) \in T^* U$.
+  Recall that $\restrict{\theta}{(q, p)} = p \circ \restrict{d \pi}{(q, p)}$.
+  In the induced bases
+  the functional $p$ is represented by the vector $(p_1(q, p), ..., p_n(q, p))$,
+  while the operator $\restrict{d \pi}{(q, p)}$ is represented by the matrix
+  $(I_n\, O_n)$.
+  Hence, $\theta$ has its vector representation their product which is
+  $(p_1(q, p), ..., p_n(q, p), 0, ..., 0)$.
+  But this corresponds to the $1$-form $\sum_{i = 1}^n p_i\, d q^i$.
+\end{proof}
+\begin{corollary}
+  Let
+    $Q$ be a smooth manifold of dimension $n$,
+    $(U, \hat{\varphi})$ be a chart,
+    $(q, p) \in T^* U$.
+  Then
+  \begin{equation}
+    (\varphi^{-1})^* \restrict{\omega}{U} = \sum_{i = 1}^n d q^i \wedge d p_i.
+  \end{equation}
+\end{corollary}
+\begin{proof}
+  Let $i \in \{1, ..., n\}$.
+  Then
+  \begin{equation}
+    - d(p_i\, d q^i) = - d p_i \wedge d q^i = d q^i \wedge d p_i.
+  \end{equation}
+  Summing up for all $i$, we get the desired result.
+\end{proof}
