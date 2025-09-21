@@ -161,36 +161,30 @@
   \begin{equation}
     \restrict{d \pi}{(q, p)}
     \left(\restrict{\frac{\partial}{\partial q^i}}{(q, p)}\right)
-    = \restrict{\frac{\partial}{\partial \hat{q}^i}}{q}.
+    = \restrict{\frac{\partial}{\partial \hat{q}^i}}{q}
+  \end{equation}
+  and
+  \begin{equation}
+    \restrict{d \pi}{(q, p)}
+    \left(\restrict{\frac{\partial}{\partial p^i}}{(q, p)}\right)
+    = 0.
   \end{equation}
 \end{proposition}
 \begin{proof}
   Let $f \colon Q \to \R$ be smooth.
-  Take the standard coordinate systems (given by projections)
-  $\{\hat{x}^i\}_{i = 1}^n$ on $\R^n$ and
-  $\{x^i\}_{i = 1}^{2 n}$ on $\R^{2 n}$.
-  Then, by the definitions of differential and partial derivative on manifold,
-  \begin{equation}
-    {\rm LHS}
-    := (\restrict{d \pi}{(q, p)}
-      \left(\restrict{\frac{\partial}{\partial q^i}}{(q, p)}\right)) f
-    = \restrict{\frac{\partial}{\partial q^i}}{(q, p)}(f \circ \pi)
-    = \frac{\partial(f \circ \pi \circ \varphi^{-1})}{x^i}(\varphi(q, p)),
-  \end{equation}
-  and
-  \begin{equation}
-    {\rm RHS}
-    := \restrict{\frac{\partial}{\partial \hat{q}^i}}{q} f
-    = \frac{\partial(f \circ \hat{\varphi}^{-1})}{\hat{x}^i}(\hat{\varphi}(q)).
-  \end{equation}
   Define the functions
   $\hat{g} := f \circ \hat{\varphi}^{-1} \colon \R^n \to \R$ and
   $g := f \circ \pi \circ \varphi^{-1} \colon \R^{2 n} \to \R$.
-  Then for any $X^1, ..., X^n, Y^1, ..., Y^n \in \R$,
+  Let $(X^1, ..., X^n, Y^1, ..., Y^n) := \varphi(p, q) \in \R^n$.
+  This means that $(X^1, ..., X^n) = \hat{\varphi}(q)$.
+  Then
   \begin{equation}
-    g(X^1, ..., X^n, Y^1, ..., Y^n) = \hat{g}(X^1, ..., X^n),
+    g(X^1, ..., X^n, Y^1, ..., Y^n)
+    = f(\pi(q, p))
+    = f(q)
+    = \hat{g}(X^1, ..., X^n).
   \end{equation}
-  from which it follows that
+  Hence,
   \begin{equation}
     \begin{split}
       \frac{\partial g}{\partial x^i}(X^1, ..., X^n, Y^1, ..., Y^n)
@@ -205,45 +199,82 @@
       & = \frac{\partial \hat{g}}{\partial \hat{x}^i}(X^1, ..., X^n).
     \end{split}
   \end{equation}
-  Denote $(X^1, ..., X^n, Y^1, ..., Y^n) = \varphi(q, p)$.
-  This means that $(X^1, ..., X^n) = \hat{\varphi}(q)$.
-  Then, by the above equality,
+  Similarly, since $g$ is constant with respect to the last $n$ coordinates,
   \begin{equation}
-    {\rm LHS}
-    = \frac{\partial g}{\partial x^i}(X^1, ..., X^n, Y^1, ..., Y^n)
-    = \frac{\partial \hat{g}}{\partial \hat{x}^i}(X^1, ..., X^n)
-    = {\rm RHS},
+    \frac{\partial g}{\partial x^{n + i}}(X^1, ..., X^n, Y^1, ..., Y^n) = 0
   \end{equation}
-  as wanted
+  Take the standard coordinate systems (given by projections)
+  $\{\hat{x}^k\}_{k = 1}^n$ on $\R^n$ and
+  $\{x^k\}_{k = 1}^{2 n}$ on $\R^{2 n}$.
+  Then, by the definitions of differential and partial derivative on manifold,
+  \begin{equation}
+    (\restrict{d \pi}{(q, p)}
+      \left(\restrict{\frac{\partial}{\partial q^i}}{(q, p)}\right)) f
+    = \restrict{\frac{\partial}{\partial q^i}}{(q, p)}(f \circ \pi)
+    = \frac{\partial(f \circ \pi \circ \varphi^{-1})}{x^i}(\varphi(q, p))
+    = \frac{\partial(f \circ \hat{\varphi}^{-1})}{\hat{x}^i}(\hat{\varphi}(q))
+    = \restrict{\frac{\partial}{\partial \hat{q}^i}}{q} f,
+  \end{equation}
+  from which it follows that the first equality holds.
+  Similarly,
+  \begin{equation}
+    (\restrict{d \pi}{(q, p)}
+      \left(\restrict{\frac{\partial}{\partial p^i}}{(q, p)}\right)) f
+    = \restrict{\frac{\partial}{\partial p^i}}{(q, p)}(f \circ \pi)
+    = \frac{\partial(f \circ \pi \circ \varphi^{-1})}{x^{i + n}}(\varphi(q, p))
+    = 0,
+  \end{equation}
+  from which it follows that the second equality holds.
 \end{proof}
-\begin{proposition}
+\begin{proposition}[Tautological one-form in generalised coordinates]
   Let
     $Q$ be a smooth manifold of dimension $n$,
     $(U, \hat{\varphi})$ be a chart.
   Then
   \begin{equation}
-    (\varphi^{-1})^* \restrict{\theta}{U} = \sum_{i = 1}^n p_i\, d q^i.
+    \restrict{\theta}{U} = \sum_{i = 1}^n p_i\, d q^i.
   \end{equation}
 \end{proposition}
 \begin{proof}
   Let $(q, p) \in T^* U$.
   Recall that $\restrict{\theta}{(q, p)} = p \circ \restrict{d \pi}{(q, p)}$.
-  In the induced bases
-  the functional $p$ is represented by the vector $(p_1(q, p), ..., p_n(q, p))$,
-  while the operator $\restrict{d \pi}{(q, p)}$ is represented by the matrix
-  $(I_n\, O_n)$.
-  Hence, $\theta$ has its vector representation their product which is
-  $(p_1(q, p), ..., p_n(q, p), 0, ..., 0)$.
-  But this corresponds to the $1$-form $\sum_{i = 1}^n p_i\, d q^i$.
+  Hence,
+  \begin{equation}
+    \restrict{\theta}{(q, p)}
+    \left(\restrict{\frac{\partial}{\partial q^i}}{(q, p)}\right)
+    = p\left(\restrict{\frac{\partial}{\partial \hat{q}^i}}{q}\right)
+    = p_i(q, p),
+  \end{equation}
+  and
+  \begin{equation}
+    \restrict{\theta}{(q, p)}
+    \left(\restrict{\frac{\partial}{\partial p^i}}{(q, p)}\right)
+    = p(0)
+    = 0.
+  \end{equation}
+  Therefore,
+  \begin{equation}
+    \restrict{\theta}{(q, p)}
+    = \sum_{i = 1}^n
+      \restrict{\theta}{(q, p)}
+      \left(\restrict{\frac{\partial}{\partial q^i}}{(q, p)}\right)\,
+      \restrict{d q^i}{(q, p)}
+    + \sum_{i = 1}^n
+      \restrict{\theta}{(q, p)}
+      \left(\restrict{\frac{\partial}{\partial p^i}}{(q, p)}\right)\,
+      \restrict{d p^i}{(q, p)}
+    = \sum_{i = 1}^n p_i(q, p)\, \restrict{d q^i}{(q, p)},
+  \end{equation}
+  from which the proposition follows.
 \end{proof}
-\begin{corollary}
+\begin{corollary}[Canonical symplectic in generalised coordinates]
   Let
     $Q$ be a smooth manifold of dimension $n$,
     $(U, \hat{\varphi})$ be a chart,
     $(q, p) \in T^* U$.
   Then
   \begin{equation}
-    (\varphi^{-1})^* \restrict{\omega}{U} = \sum_{i = 1}^n d q^i \wedge d p_i.
+    \restrict{\omega}{U} = \sum_{i = 1}^n d q^i \wedge d p_i.
   \end{equation}
 \end{corollary}
 \begin{proof}
