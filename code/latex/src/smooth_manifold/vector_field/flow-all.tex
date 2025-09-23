@@ -1,0 +1,126 @@
+\begin{definition}
+  Let $M$ be a smooth manifold, $I$ be a real interval.
+  A \textbf{smooth curve} on $M$ with domain $I$ is a smooth function
+  $\gamma \colon I \to M$.
+\end{definition}
+\begin{definition}
+  Let
+    $M$ be a smooth manifold,
+    $I$ be a real interval,
+    $\gamma \colon I \to M$ be a smooth curve.
+  We define the \textbf{derivative} of $\gamma$,
+  $\dot{\gamma} \colon I \to T M$, by
+  \begin{equation}
+    \restrict{\dot{\gamma}}{t} \in T_{\gamma(t) M},\ t \in I,
+  \end{equation}
+  such that for any $f \in \mathcal{F} M$,
+  \begin{equation}
+    \restrict{\dot{\gamma}}{t} f := (f \circ \gamma)'(t).
+  \end{equation}
+  Here, $'$ denotes the standard derivative of the single-variable function
+  $f \circ \gamma \colon I \to R$.
+\end{definition}
+\begin{definition}
+  Let $M$ be a smooth manifold, $X \in \mathfrak{X} M$, $I$ be a real interval.
+  We say that a smooth curve $\gamma \colon I \to M$ is an
+  \textbf{integral curve} for $X$ if
+  \begin{equation}
+    \dot{\gamma} = X \circ \gamma.
+  \end{equation}
+  In other words, for any $t \in I$,
+  \begin{equation}
+    \restrict{\dot{\gamma}}{t} = \restrict{X}{\gamma(t)}.
+  \end{equation}
+\end{definition}
+\begin{proposition}
+  Let $M$ be a smooth manifold, $X \in \mathfrak{X} M$, $x_0 \in M$.
+  Then
+  \begin{enumerate}
+    \item
+      \textbf{Existence.}
+      There exists an open interval $I$ containing $0$ and an integral curve
+      $\gamma \colon I \to \R$ of $X$ with $\gamma(0) = x_0$.
+    \item
+      \textbf{Uniqueness.}
+      In any open interval $I$ containing $0$ there exists at most one integral
+      curve $\gamma \colon I \to \R$ of $X$ with $\gamma(0) = x_0$.
+  \end{enumerate}
+\end{proposition}
+\begin{definition}
+  Let $M$ be a smooth manifold, $X \in \mathfrak{X} M$, $x_0 \in M$.
+  The \textbf{flow} of $X$ is the unique function
+  (may not be defined everywhere)
+  $\varphi \colon \R \to (M \to M)$
+  satisfying the following: for any $x \in M$, 
+  $\varphi_{\cdot}(x) \colon \R \to M$ is the integral curve of $X$ with
+  $\varphi_0(x) = x$.
+\end{definition}
+\begin{example}
+  Let $M := \R^2$ and
+  $X := - y \frac{\partial}{\partial x} + x \frac{\partial}{\partial y}$.
+  We will first find the integral curves of $X$.
+  Let $\gamma \colon \R \to \R^2$ be an integral curve,
+  $\gamma(t) = (u(t), v(t))$.
+  Then $\dot{\gamma}(t) = (\dot{u}(t), \dot{v}(t))$
+  and $(X \circ \gamma)(t) = (- v(t), u(t))$.
+  Hence, we get the system
+  \begin{equation}
+    \dot{u} = - v,\ \dot{v} = u.
+  \end{equation}
+  Its soultions are of the form
+  \begin{equation}
+    (u(t), v(t)) = (A \cos t - B \sin t, A \sin t + B \cos t),\ A, B \in \R.
+  \end{equation}
+  Geometrically, they are circles centred at $0$ with radii $\sqrt{A^2 + B^2}$.
+
+  If $\varphi \colon \R \to (\R^2 \to \R^2)$ is the flow of $X$, and has the
+  above form, then for any $(x, y) \in \R^2$,
+  \begin{equation}
+    (x, y) = \varphi_0(x, y) = (A, B).
+  \end{equation}
+  Hence, the flow of $X$ is given by
+  \begin{equation}
+    \varphi_t(x, y)
+    = (x \cos t - y \sin t, x \sin t + y \cos t)
+    =
+    \begin{pmatrix}
+      \cos t & - \sin t \\
+      \sin t & \cos t
+    \end{pmatrix}
+    \begin{pmatrix}
+      x \\
+      y
+    \end{pmatrix}.
+  \end{equation}
+\end{example}
+\begin{proposition}
+  Let
+    $M$ be a smooth manifold,
+    $X \in \mathfrak{X} M$,
+    $\varphi$ be the flow of $X$,
+    $s \in \R$.
+  Then $\varphi_t \colon M \to M$ is a diffeomorphism (an automorphism).
+\end{proposition}
+\begin{proposition}
+  Let
+    $M$ be a smooth manifold,
+    $X \in \mathfrak{X} M$,
+    $\varphi$ be the flow of $X$,
+    $s, t \in \R$.
+  Then
+  \begin{equation}
+    \varphi_{s + t} = \varphi_s \circ \varphi_t.
+  \end{equation}
+\end{proposition}
+\begin{corollary}
+  Let
+    $M$ be a smooth manifold,
+    $X \in \mathfrak{X} M$.
+    $\varphi$ be the flow of $X$.
+  If $\varphi$ is defined everywhere, then it is a group action of $(\R, +)$ on
+  $\Aut M$.
+\end{corollary}
+\begin{remark}
+  For this reason, the flow of a vector field on a manifold is also called a
+  \textbf{one-parameter group of diffeomorphisms}.
+\end{remark}
