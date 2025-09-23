@@ -6,10 +6,8 @@
   We say that $\omega$ is \textbf{non-degenerate} or \textbf{symplectic}
   if the associated map
   \begin{equation}
-    \hat{\omega} \colon V \to V^*,\
-    X \in V \mapsto \hat{\omega}(X)
-    := (Y \in V \mapsto \omega(X \wedge Y))
-    \in V^*,
+    \tilde{\omega} \colon V \to V^*,\
+    X \in V \mapsto \tilde{\omega}(X) := i_X \omega \in V^*,
   \end{equation}
   is an isomorphism.
 
@@ -270,8 +268,7 @@
 \begin{corollary}[Canonical symplectic in generalised coordinates]
   Let
     $Q$ be a smooth manifold of dimension $n$,
-    $(U, \hat{\varphi})$ be a chart,
-    $(q, p) \in T^* U$.
+    $(U, \hat{\varphi})$ be a chart.
   Then
   \begin{equation}
     \restrict{\omega}{U} = \sum_{i = 1}^n d q^i \wedge d p_i.
@@ -285,3 +282,266 @@
   \end{equation}
   Summing up for all $i$, we get the desired result.
 \end{proof}
+\begin{definition}
+  Let $(M, \omega)$ be a symplectic manifold, $f \in \mathcal{F} M$.
+  We say that $X \in \mathfrak{X} M$ is a \textbf{Hamiltonian vector field} for
+  $f$ if
+  \begin{equation}
+    i_X \omega + d_0 f = 0.
+  \end{equation}
+\end{definition}
+\begin{proposition}
+  Let $(M, \omega)$ be a symplectic manifold, $f \in \mathcal{F} M$.
+  Then there exists a unique Hamiltonian vector field for $f$.
+\end{proposition}
+\begin{proof}
+  The non-degeneracy of $\omega$ means that we can interpret the symplectic form
+  as the isomorphism $\tilde{\omega} \colon \mathfrak{X} M \to \Omega^1 M$,
+  given by
+  \begin{equation}
+    (\tilde{\omega} X) := i_X \omega,\ X \in \mathfrak{X} M.
+  \end{equation}
+  Hence, the problem at hand has a unique solution
+  $X = \tilde{\omega}^{-1}(- d_0 f)$.
+\end{proof}
+\begin{definition}
+  Let $(M, \omega)$ be a symplectic manifold.
+  Define the map $\hamiltonian \colon \mathcal{F} M \to \mathfrak{X} M$ by
+  \begin{equation}
+    \hamiltonian = - \tilde{\omega}^{-1} \circ d_0.
+  \end{equation}
+  It maps a function to its corresponding Hamiltonian vector field.
+  We will write $\hamiltonian_f$ instead of $\hamiltonian(f)$
+  for $f \in \mathcal{F} M$.
+\end{definition}
+\begin{proposition}
+  Let
+    $Q$ be a smooth manifold of dimension $n$,
+    $(U, \hat{\varphi})$ be a chart on $Q$,
+    $f \in \mathcal{F}(T^* Q)$.
+  Then
+  \begin{equation}
+    \hamiltonian_f
+    = \sum_{i = 1}^n
+    \left(
+      - \frac{\partial f}{\partial p^i} \frac{\partial}{\partial q^i}
+      + \frac{\partial f}{\partial q^i} \frac{\partial}{\partial p^i}
+    \right).
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  First, note that
+  $i_{\frac{\partial}{\partial q^i}} \omega = d p^i$ and
+  $i_{\frac{\partial}{\partial p^i}} \omega = - d q^i$.
+  Denote
+  \begin{equation}
+    X
+    := \sum_{i = 1}^n
+    \left(
+      - \frac{\partial f}{\partial p^i} \frac{\partial}{\partial q^i}
+      + \frac{\partial f}{\partial q^i} \frac{\partial}{\partial p^i}
+    \right).
+  \end{equation}
+  Then
+  \begin{equation}
+    i_X \omega
+    = \sum_{i}^n
+    \left(
+      - \frac{\partial f}{\partial p^i} i_{\frac{\partial}{\partial q^i}} \omega
+      + \frac{\partial f}{\partial q^i} i_{\frac{\partial}{\partial p^i}} \omega
+    \right)
+    = \sum_{i}^n
+    \left(
+      - \frac{\partial f}{\partial p^i} d p^i
+      - \frac{\partial f}{\partial q^i} d q^i
+    \right)
+    = - d f.
+  \end{equation}
+  Hence, $\hamiltonian_f = X$.
+\end{proof}
+\begin{proposition}
+  Let $(M, \omega)$ be a symplectic manifold, $f, g \in \mathcal{F} M$.
+  Then
+  \begin{equation}
+    \hamiltonian_{f g} = f \hamiltonian_g + g \hamiltonian_f.
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  Follows directly from the Leibniz rule for $d_0$.
+\end{proof}
+\begin{definition}
+  Let $(M, \omega)$ be a symplectic manifold, $X \in \mathfrak{X} M$.
+  We say that $X$ is a \textbf{symplectic vector field} if $L_X \omega = 0$.
+\end{definition}
+\begin{remark}
+  Since $L_{\lie{X}{Y}} = \lie{L_X}{L_Y} = L_X \circ L_Y - L_Y \circ L_X$,
+  the symplectic vector fields form a Lie subalgebra of the Lie algebra of
+  vector fields.
+\end{remark}
+\begin{proposition}
+  Let $(M, \omega)$ be a symplectic manifold, $f \in \mathcal{F} M$.
+  Then $\hamiltonian_f$ is a symplectic vector field.
+\end{proposition}
+\begin{proof}
+  $
+    L_{\hamiltonian_f} \omega
+    = i_{\hamiltonian_f}(d \omega) + d(i_{\hamiltonian_f} \omega)
+    = i_{\hamiltonian_f} 0 - d(d f)
+    = 0.
+  $
+\end{proof}
+\begin{proposition}
+  Let
+    $(M, \omega)$ be a symplectic manifold,
+    $X \in \mathfrak{X} M$ be a symplectic vector fields.
+  Then
+  \begin{equation}
+    d(i_X \omega) = 0.
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  $
+    d(i_X \omega)
+    = L_X \omega - i_X(d \omega)
+    = 0 - 0
+    = 0.
+  $
+\end{proof}
+\begin{proposition}
+  Let $M$ be a smooth manifold, $X, Y \in \mathfrak{X} M$.
+  Then
+  \begin{equation}
+    L_X \circ i_Y = i_{\lie{X}{Y}} + i_Y \circ L_X.
+  \end{equation}
+\end{proposition}
+\begin{proposition}
+  Let
+    $(M, \omega)$ be a symplectic manifold,
+    $X, Y \in \mathfrak{X} M$ be symplectic vector fields.
+  Then
+  \begin{equation}
+    \lie{X}{Y} = \hamiltonian_{i_Y(i_X \omega)}.
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  \begin{equation}
+    i_{\lie{X}{Y}} \omega
+    = (L_X \circ i_Y - i_Y \circ L_X) \omega
+    = (L_X \circ i_Y) \omega
+    = ((d \circ i_X + i_X \circ d) \circ i_Y) \omega
+    = d(i_X(i_Y \omega))
+    = - d(i_Y(i_X \omega)).
+  \end{equation}
+  We get the desired result from the definition of $\hamiltonian$.
+\end{proof}
+\begin{definition}
+  Let $(M, \omega)$ be a symplectic manifold.
+  Define the \textbf{Poisson bracket}
+  $\poisson{\cdot}{\cdot} \colon \mathcal{F} M \to \mathcal{F} M$ by
+  \begin{equation}
+    \poisson{f}{g}
+    := i_{\hamiltonian_g}(i_{\hamiltonian_f} \omega),\
+    f, g \in \mathcal{F} M.
+  \end{equation}
+\end{definition}
+\begin{corollary}
+  Let $(M, \omega)$ be a symplectic manifold, $f, g \in \mathcal{F} M$.
+  Then
+  \begin{equation}
+    \lie{\hamiltonian_f}{\hamiltonian_g}
+    = \hamiltonian_{i_{\hamiltonian_g}(i_{\hamiltonian_f} \omega)}
+    = \poisson{f}{g}.
+  \end{equation}
+\end{corollary}
+\begin{proposition}[Leibniz rule holds for the Poisson bracket]
+  Let $(M, \omega)$ be a symplectic manifold, $f, g, h \in \mathcal{F} M$.
+  Then
+  \begin{equation}
+    \poisson{f}{g h} = \poisson{f}{g} h + g \poisson{f}{h}.
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  $
+    \poisson{f}{g h}
+    = i_{\hamiltonian_{g h}}(i_{\hamiltonian_f} \omega)
+    = i_{h \hamiltonian_g + g \hamiltonian_{h}}(i_{\hamiltonian_f} \omega)
+    = (i_{\hamiltonian_g}(i_{\hamiltonian_f} \omega))\, h
+      + g\, (i_{\hamiltonian_h}(i_{\hamiltonian_f} \omega)) 
+    = \poisson{f}{g} h + g \poisson{f}{h}.
+  $
+\end{proof}
+\begin{proposition}
+  Let $(M, \omega)$ be a symplectic manifold, $f, g, h \in \mathcal{F} M$.
+  Then
+  \begin{equation}
+    \poisson{f}{g} = L_{\hamiltonian_f} g.
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  $
+    \poisson{f}{g}
+    = i_{\hamiltonian_g}(i_{\hamiltonian_f} \omega)
+    = - i_{\hamiltonian_f} \circ i_{\hamiltonian_g} \omega
+    = i_{\hamiltonian_f}(d g)
+    = L_{\hamiltonian_f} g.
+  $
+\end{proof}
+\begin{definition}
+  Let $(M, \omega)$ be a symplectic manifold.
+  Define
+  ${\rm ad} \colon \mathcal{F} M \to (\mathcal{F} M \to \mathcal{F} M)$ by
+  \begin{equation}
+    {\rm ad}_f g := \poisson{f}{g},\ f, g \in \mathcal{F} M,
+  \end{equation}
+\end{definition}
+\begin{proposition}
+  Let $(M, \omega)$ be a symplectic manifold.
+  Then
+  \begin{equation}
+    \lie{{\rm ad}_f}{{\rm ad}_g} = {\rm ad}_{\poisson{f}{g}}.
+  \end{equation}
+  (Here the bracket $\lie{\cdot}{\cdot}$ is the commutator of operators.)
+\end{proposition}
+\begin{proof}
+  From the previous proposition it follows that
+  \begin{equation}
+    {\rm ad}_f = L_{X_f},\ f \in \mathcal{F} M.
+  \end{equation}
+  Hence,
+  \begin{equation}
+    \lie{{\rm ad}_f}{{\rm ad}_g}
+    = \lie{L_{\hamiltonian_f}}{L_{\hamiltonian_g}}
+    = L_{\lie{\hamiltonian_f}{\hamiltonian_g}}
+    = L_{\hamiltonian_{\poisson{f}{g}}}
+    = {\rm ad}_{\poisson{f}{g}}.
+  \end{equation}
+\end{proof}
+\begin{corollary}
+  Let $(M, \omega)$ be a symplectic manifold.
+  Then $(\mathcal{F} M, \poisson{\cdot}{\cdot})$ is a Lie algebra over $\R$.
+\end{corollary}
+\begin{proof}
+  Bilinearity and antisymmetry are trivial to check.
+  The Jacobi identity is equivalent to the adjoint map being a Lie algebra
+  homomorphism, which was the previous proposition.
+\end{proof}
+\begin{definition}
+  Let
+    $R$ be a commutative ring with unity ring,
+    $(A, +, \cdot)$ be an $R$-module
+    with additional structures of
+    an associative algebra $(A, *)$ and
+    a Lie algebra $(A, \poisson{\cdot}{\cdot})$.
+  We say that $A$ is a Poisson algebra if the Lie bracket acts as a derivation,
+  i.e., for all $f, g, h \in A$,
+  \begin{equation}
+    \poisson{f}{g * h} = \poisson{f}{g} * h + g * \poisson{f}{h}.
+  \end{equation}
+\end{definition}
+\begin{corollary}
+  Let $(M, \omega)$ be a symplectic manifold.
+  Then $\mathcal{F} M$ is a Poisson algebra over $\R$.
+  Here, addition, scalar multiplication, and multiplication are given by the
+  corresponding pointwise operations, while the Lie bracket is given by the
+  Poisson bracket.
+\end{corollary}
