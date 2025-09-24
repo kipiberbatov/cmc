@@ -1,0 +1,54 @@
+\begin{definition}
+  Let $(G, e, \iota, \mu)$ be a group with a manifold structure on it.
+  We say that $G$ is a \textbf{Lie group} if
+  the multiplication $\mu \colon G \times G \to G$ and
+  the inversion $\iota \colon G \to G$
+  are smooth functions.
+\end{definition}
+\begin{definition}
+  Let $G$ be a Lie group.
+  For any $g \in G$ define the left action $L_g \colon G \to G$ as follows:
+  for any $h \in G$, $L_g h = g h$.
+  We say that a vecctor field $X$ on $G$ is \textbf{left-invariant} if for any
+  $g, h \in G$,
+  \begin{equation}
+    (d L_g) \restrict{X}{h} = \restrict{X}{g h}.
+  \end{equation}
+  Denote the space of left-invariant vector fields on $G$ by ${\rm Left}(G)$.
+\end{definition}
+\begin{proposition}
+  Let $G$ be a Lie group.
+  Then ${\rm Left}(G)$ is a Lie subalgebra of the Lie algebra of vector fields.
+\end{proposition}
+\begin{proposition}
+  Let $G$ be a Lie group.
+  Define the map $f \colon {\rm Left}(G) \to T_e G$ as
+  \begin{equation}
+    f(X) := \restrict{X}{e},\ X \in {\rm Left}(G)
+  \end{equation}
+  Then $f$ is a linear isomorphism.
+\end{proposition}
+\begin{definition}
+   Let $G$ be a Lie group.
+   Define $\mathfrak{g} := T_e G$.
+   For $X, Y \in \mathfrak{g}$ define (using the map $f$ from above)
+   \begin{equation}
+     \lie{X}{Y} := \lie{f^{-1} X}{f^{-1} Y},
+   \end{equation}
+   where the right Lie bracket is the standard Lie bracket on vector fields.
+   In other words, the Lie bracket structure on ${\rm Left}(G)$ is transported
+   to a Lie algebra structure on $\mathfrak{g}$.
+   The Lie algebra $\mathfrak{g}, \lie{\cdot}{\cdot}$ is called the
+   \textbf{Lie algebra of the Lie group} $G$.
+\end{definition}
+\begin{definition}
+  Let $G$ be a Lie group with a Lie algebra $\mathfrak{g}$.
+  Define the \textbf{exponential map} $\exp \colon \mathfrak{g} \to G$
+  as folows: for any $X \in \mathfrak{g}$, let $\gamma_X \colon \R \to G$ be the
+  unique one-parameter subgroup of $G$ whose tangent vector at the identity is
+  equal to $X$.
+  Then
+  \begin{equation}
+    \exp X := \gamma_X(1).
+  \end{equation}
+\end{definition}

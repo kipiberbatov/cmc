@@ -1,0 +1,75 @@
+\begin{definition}
+  Let $(M, \omega)$ be a symplectic manifold, $H \in \mathcal{F} M$.
+  We say that $(M, \omega, H)$ is a \textbf{Hamiltonian system}. 
+\end{definition}
+\begin{definition}
+  Let
+    $M$ be a manifold,
+    $H \in \mathcal{F} M$,
+    $G$ be a Lie group,
+    $\rho \colon G \to \Aut M$ be a group action.
+  We say that $\rho$ \textbf{leaves $H$ invariant} if for any $g \in G$,
+  \begin{equation}
+    H \circ \rho_g = H.
+  \end{equation}
+\end{definition}
+\begin{definition}
+  Let
+    $(M, \omega, H)$ be a Hamiltonian system,
+    $G$ be a Lie group with Lie algebra $\mathfrak{g}$,
+    $\rho \colon G \to \Aut M$ be a group action leaving $H$ invariant.
+  Define $\gamma \colon \mathfrak{g} \to \mathfrak{X} M$ as follows:
+  for $A \in \mathfrak{g}$, $x \in M$,
+  \begin{equation}
+    \gamma^A x
+    := - \restrict{\frac{d}{d t}}{t = 0}(t \mapsto \rho_{(\exp(t A)} x).
+  \end{equation}
+  Let $\hat{J} \colon \mathfrak{g} \to \mathcal{F} M$ satisfies
+  \begin{equation}
+    \hamiltonian_H \circ \hat{J} = \gamma.
+  \end{equation}
+  Define the \textbf{momentum map} $J \colon M \to \mathfrak{g}^*$ as follows:
+  for any $x \in M$, $A \in \mathfrak{g}$,
+  \begin{equation}
+    (J x) A = \hat{J}^A x.
+  \end{equation}
+\end{definition}
+\begin{theorem}[Noether]
+  Let
+    $(M, \omega, H)$ be a Hamiltonian system,
+    $G$ be a Lie group with Lie algebra $\mathfrak{g}$,
+    $\rho \colon G \to \Aut(M)$ be a group action that leaves $H$ invariant,
+    $\gamma \colon \mathfrak{g} \to \mathfrak{X} M$ and
+    $\hat{J} \colon \mathfrak{g} \to \mathcal{F} M$ be constructed as above,
+    $J \colon M \to \mathfrak{g}^*$ be the corresponding momentum map,
+    $\varphi \colon \R \to \Aut M$ be the flow of $\hamiltonian_H$.
+  Then $J$ leaves the flow of $\hamiltonian_H$ invariant.
+  In other words, for any $t \in \R$,
+  \begin{equation}
+    J \circ \varphi_t = J.
+  \end{equation}
+\end{theorem}
+\begin{proof}
+  Let $A \in \mathfrak{g}$, $x \in M$ 
+  \begin{equation}
+    \poisson{\hat{J}^A}{H}(x)
+    = {\restrict{\hamiltonian_{\hat{J}(A)}} H}(x)
+    = (\gamma^A H)(x)
+    = \restrict{\frac{d}{d t}}{t = 0} H(\rho_{\exp(t A)} x)
+    = \restrict{\frac{d}{d t}}{t = 0} H(x)
+    = 0.
+  \end{equation}
+  Hence, $\hat{J}^A \circ \varphi_t$ is constant.
+  Therefore,
+  \begin{equation}
+    \hat{J}^A \circ \varphi_t = \hat{J}^A \circ \varphi_0 = \hat{J}^A.
+  \end{equation}
+  As a result,
+  \begin{equation}
+    (J(\varphi_t(x))) A
+    = \hat{J}^A(\varphi_t(x))
+    = \hat{J}^A(x)
+    = (J x) A.
+  \end{equation}
+  Since $A$ and $x$ are arbitrary, $J \circ \varphi_t = J$, as wanted.
+\end{proof}
