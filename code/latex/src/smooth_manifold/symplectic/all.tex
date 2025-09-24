@@ -79,6 +79,36 @@
   In other words, if we denote $M := T^* Q$, then $\theta$ is a section of its
   cotangent bundle $T^* M$, i.e., an $1$-form on $M$. 
 \end{definition}
+\begin{discussion}
+  Let $Q$ be a smooth manifold, $\pi \colon T^* Q \to Q$ be the projection.
+  Then a $1$-form on $Q$ is a section of $\colon T^* Q$, i.e., a smooth map
+  $\mu \colon Q \to \colon T^* Q$ such that $\pi \circ \mu = \id_Q$.
+  As such it has a pullback
+  $\mu^* \colon \Omega^\bullet(T^* Q) \to \Omega^\bullet Q$.
+\end{discussion}
+\begin{proposition}
+  Let
+    $Q$ be a smooth manifold,
+    $\theta$ be the tautological one-form on $T^* Q$,
+    $\mu \in \Omega^1 Q$.
+  Then
+  \begin{equation}
+    \mu^* \theta = \mu.
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  Let $q \in Q$.
+  Then
+  \begin{equation}
+    \restrict{\mu^* \theta}{q}
+    = \restrict{\theta}{\mu q} \circ \restrict{d \mu}{q}
+    = \restrict{\mu}{q} \circ \restrict{(d \pi)}{\mu q}
+      \circ \restrict{d \mu}{q}
+    = \restrict{\mu}{q} \circ \restrict{d(\pi \circ \mu)}{q}
+    = \restrict{\mu}{q}.
+  \end{equation}
+  Since $q$ is arbitrary, $\mu^* \theta = \mu$.
+\end{proof}
 \begin{definition}
   Let
     $Q$ be a smooth manifold,
@@ -149,6 +179,126 @@
   for $i = 1, ..., n$ the coordinate maps $\hat{q}^i$, $q^i$, and $p_i$;
   the chart $(T^* U, \varphi)$.
 \end{remark}
+\begin{proposition}
+  Let
+    $Q$ be a smooth manifold,
+    $\xi \in \Omega^1(T^* Q)$ has the following property:
+    for any $1$-form $\mu$ on $Q$, $\mu^* \xi= 0$.
+  Then $\xi = 0$.
+\end{proposition}
+\begin{proof}
+  Let
+    $n := \dim Q$, $(U, \hat{\varphi})$ be a chart on $Q$ and
+    $\{f_i, g^i \in \mathcal{F}(T^* U)\}_{i = 1}^n$ be such that
+  \begin{equation}
+    \restrict{\xi}{U} = \sum_{i = 1}^n f_i\, d q^i + \sum_{i = 1}^n g^i\, d p_i.
+  \end{equation}
+  Take arbitrary $\{h_j \in \mathcal{F} U\}_{j = 1}^n$ so that
+  \begin{equation}
+    \restrict{\mu}{U} = \sum_{j = 1}^n h_j\, d \hat{q}^j.
+  \end{equation}
+  Note that
+  $q^i \circ \restrict{\mu}{U} = \hat{q}^i$ and
+  $p_i \circ \restrict{\mu}{U} = h_i$.
+  Hence,
+  \begin{equation}
+    0 
+    = \restrict{(\mu^* \xi)}{U}
+    = \sum_{i = 1}^n (f_i \circ \restrict{\mu}{U})\,
+      d(q^i \circ \restrict{\mu}{U})
+    + \sum_{i = 1}^n (g^i \circ \restrict{\mu}{U})\,
+      d(p_i \circ \restrict{\mu}{U})
+    = \sum_{i = 1}^n (f_i \circ \restrict{\mu}{U})\, d \hat{q}^i
+    + \sum_{i = 1}^n (g^i \circ \restrict{\mu}{U})\, d h_i.
+  \end{equation}
+  Fix $q_0 \in U$, $p_0 \in T^*_{q_0} Q$ so that $(p_0, q_0) \in T^* U$.
+  Denote
+  \begin{equation}
+    c_i
+    :=
+    p_0\left(\restrict{\frac{\partial}{\partial \hat{q}^i}}{q_0}\right),
+    i = 1, ..., n,
+  \end{equation}
+  so that
+  \begin{equation}
+    p_0 = \sum_{i = 1}^n c_i \restrict{d \hat{q}^i}{q_0}.
+  \end{equation}
+  \begin{enumerate}
+    \item
+      We will first prove that
+      for any $i \in \{1, ..., n\}$, $f_i(q_0, p_0) = 0$.
+      Define the constant functions
+      \begin{equation}
+        h_i(q) := c_i,\ i \in \{1, ..., n\},\ q \in U.
+      \end{equation}
+      Then for any $i \in \{1, ..., n\}$, $d h_i = 0$.
+      Hence,
+      \begin{equation}
+        \begin{split}
+          0
+          & = \restrict{(\mu^* \xi)}{q_0} \\
+          & = \sum_{i = 1}^n
+              f_i(q_0, \sum_{j = 1}^n h_j(q_0) \restrict{d \hat{q}^j}{q_0})\,
+              \restrict{d \hat{q}^i}{q_0} \\
+          & = \sum_{i = 1}^n
+              f_i(q_0, \sum_{j = 1}^n c_j \restrict{d \hat{q}^j}{q_0})\,
+              \restrict{d \hat{q}^i}{q_0} \\
+          & = \sum_{i = 1}^n f_i(q_0, p_0)\, \restrict{d \hat{q}^i}{q_0}.
+        \end{split}
+      \end{equation}
+      Therefore, for any $i \in \{1, ..., n\}$, $f_i(q_0, p_0) = 0$.
+    \item
+      We will now prove that
+      for any $i \in \{1, ..., n\}$, $g^i(q_0, p_0) = 0$.
+      Define the linear functions
+      \begin{equation}
+        h_i(q) := c_i + \hat{q}^i(q) - \hat{q}^i(q_0).
+      \end{equation}
+      Then for any $i \in \{1, ..., n\}$,
+      $d h_i = d \hat{q}^i$ and $h_i(q) = c_i$.
+      Hence,
+      \begin{equation}
+        \begin{split}
+          0
+          & = \restrict{(\mu^* \xi)}{q_0} \\
+          & = \sum_{i = 1}^n
+              g^i(q_0, \sum_{j = 1}^n h_j(q_0) \restrict{d \hat{q}^j}{q_0})\,
+              \restrict{d h_i}{q_0} \\
+          & = \sum_{i = 1}^n
+              g^i(q_0, \sum_{j = 1}^n c_j \restrict{d \hat{q}^j}{q_0})\,
+              \restrict{d \hat{q}^i}{q_0} \\
+          & = \sum_{i = 1}^n g^i(q_0, p_0)\, \restrict{d \hat{q}^i}{q_0}.
+        \end{split}
+      \end{equation}
+      Therefore, for any $i \in \{1, ..., n\}$, $g^i(q_0, p_0) = 0$.
+  \end{enumerate}
+  Since $(q_0, p_0) \in T^* U$ was arbitrary, we conclude that
+  for any $i \in \{1, ..., n\}$, $f_i = g^i = 0$.
+  Hence, $\restrict{\xi}{U} = 0$.
+  Taking an atlas $\{(U_\alpha, \hat{\varphi}_\alpha)\}_{\alpha \in A}$ of $Q$
+  (for some index set $A$), we conclude that $\xi = 0$.
+\end{proof}
+\begin{corollary}
+  Let
+    $Q$ be a smooth manifold,
+    $\theta$ be the tautological one-form on $T^* Q$,
+    $\eta \in \Omega^1(T^* Q)$ has the following property:
+    for any $1$-form $\mu$ on $Q$, $\mu^* \eta = \mu$.
+  Then $\eta = \theta$.
+\end{corollary}
+\begin{proof}
+  Write $\eta = \theta + \xi$, i.e., $\xi := \eta - \theta$.
+  Then, for any $\mu \in \Omega^1 Q$,
+  \begin{equation}
+    \mu
+    = \mu^* \eta
+    = \mu^* \theta + \mu^* \xi
+    = \mu + \mu^* \xi
+    \Rightarrow \mu^* \xi = 0.
+  \end{equation}
+  But from the previous proposition it follows that $\xi = 0$,
+  and hence $\eta = \theta$.
+\end{proof}
 \begin{proposition}
   Let
     $Q$ be a smooth manifold of dimension $n$,
