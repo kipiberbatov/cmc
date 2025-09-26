@@ -1,0 +1,368 @@
+\begin{definition}
+  Let $X$ be a set.
+  A function $d \colon X \times X \to \R$ is called a \textbf{metric} if
+  \begin{subequations}
+    \begin{alignat}{2}
+      & \forall x, y \in X,\ d(x, y) \geq 0 \qquad
+      && (\text{non-negativity}), \\
+      %
+      & \forall x, y \in X,\ d(x, y) = 0 \Rightarrow x = y \qquad
+      && (\text{non-degeneracy}), \\
+      %
+      & \forall x, y \in X,\ d(x, y) = d(y, x) \qquad
+      && (\text{symmetry}), \\
+      %
+      & \forall x, y, z \in X,\ d(x, z) \leq d(x, y) + d(y, z) \qquad
+      && (\text{triangle inequality}).
+    \end{alignat}
+  \end{subequations}
+  The pair $(X, d)$ is called a \textbf{metric space}.
+\end{definition}
+\begin{proposition}
+  Let
+    $(X, d)$ be a metric space, $n \in \N$, $x_0, ..., x_n \in X$.
+  Then
+  \begin{equation}
+    d(x_0, x_n) \leq \sum_{i = 0}^{n - 1} d(x_i, x_{i + 1}).
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  Induction on $n$.
+  \begin{enumerate}
+    \item
+      \textbf{Base case.}
+      For $n = 0$ we get the true proposition $d(x_0, x_0) \leq 0$.
+    \item
+      \textbf{Induction step.}
+      Assume that the proposition is true for $n$.
+      Then for $n + 1$,
+      \begin{equation}
+        d(x_0, x_{n + 1})
+        \leq d(x_0, x_n) + d(x_n, x_{n + 1})
+        \leq \sum_{i = 0}^{n - 1} d(x_i, x_{i + 1}) + d(x_n, x_{n + 1})
+        = \sum_{i = 0}^n d(x_i, x_{i + 1}).
+      \end{equation}
+  \end{enumerate}
+\end{proof}
+\begin{definition}
+  Let
+    $(V, \norm{\cdot})$ be a normed vector space,
+    $A$ be an affine space over $V$.
+  Define $d \colon A \times A \to \R$ by
+  \begin{equation}
+    d(x, y) := \norm{x - y},\ x, y \in A.
+  \end{equation}
+  We call $d$ the \textbf{induced metric} by $\norm{\cdot}$.
+\end{definition}
+\begin{proposition}[Correctness of the definition of metric induced by a norm]
+  Let
+    $(V, \norm{\cdot})$ be a normed vector space,
+    $A$ be an affine space over $V$,
+    $d \colon A \times A \to \R$ be the induced metric.
+  Then $(A, d)$ is a metric space.
+\end{proposition}
+\begin{proof}
+  Non-negativity and non-degeneracy of $d$ follow respectively from
+  the non-negativity and non-degeneracy of $\norm{\cdot}$.
+  Let $x, y, z \in X$.
+  Symmetry of $d$ comes from
+  \begin{equation}
+    d(x, y) = \norm{x - y} = \norm{- (x - y)} = \norm{y - x} = d(y, x).
+  \end{equation}
+  Triangle inequality for $d$ follows from triangle inequality for
+  $\norm{\cdot}$:
+  \begin{equation}
+    d(x, z)
+    = \norm{x - z}
+    = \norm{(x - y) + (y - z)}
+    \leq \norm{x - y} + \norm{y - z}
+    = d(x, y) + d(y, z).
+  \end{equation}
+\end{proof}
+\begin{example}
+  Consider $n \in N^+$ and $\R^n$ with the Euclidean norm:
+  for ${\bf x} := (x_1, ..., x_n) \in \R^n$,
+  \begin{equation}
+    \norm{\bf x}
+    := \sqrt{\inner{\bf x}{\bf x}}
+    = \sqrt{x_1^2 + ... + x_n^2}.
+  \end{equation}
+  Then we get the corresponding \textbf{Euclidean metric}:
+  for ${\bf x} := (x_1, ..., x_n),\ {\bf y} := (y_1, ..., y_n) \in \R^n$,
+  \begin{equation}
+    d({\bf x}, {\bf y})
+    := \norm{{\bf x} - {\bf y}}
+    = \sqrt{(x_1 - y_1)^2 + ... +f (x_n - y_n)^2}.
+  \end{equation}
+\end{example}
+\begin{definition}
+  Let
+    $(X, d)$ be a metric space,
+    $\{a_n \in X\}_{n = 0}^\infty$ be an infinite sequence,
+    $A \in X$.
+  We say that \textbf{$a$ converges to $A$}
+  (or that $A$ is a \textbf{limit} of $a$) if
+  \begin{equation}
+    \forall \varepsilon \in \R^+\
+      \exists N \in \N\
+        \forall n > N\
+          d(a_n, A) < \varepsilon.
+  \end{equation}
+  Intuitively, the points in the sequence come arbitrarily close
+  (to a precision $\varepsilon$) to $A$ after some index ($N$).
+\end{definition}
+\begin{definition}
+  Let
+    $(X, d)$ be a metric space,
+    $\{a_n \in X\}_{n = 0}^\infty$ be an infinite sequence.
+  We say that \textbf{$a$ is convergent} if
+  there exists $A \in X$ such that $a$ converges to $A$.
+\end{definition}
+\begin{proposition}
+  Let
+    $(X, d)$ be a metric space,
+    $\{a_n \in X\}_{n = 0}^\infty$ be an infinite sequence.
+  If $a$ is convergent, then it has exactly one limit.
+\end{proposition}
+\begin{proof}
+  Let $A, B \in X$ be limits of $a$, $\varepsilon \in \R^+$.
+  Choose $N_A \in \N$ such that for all $n > N_A$, $d(x_n, A) < \varepsilon / 2$
+  and $N_B \in \N$ such that for all $n > N_B$, $d(x_n, B) < \varepsilon / 2$.
+  Let $N := \max(N_A, N_B)$.
+  Then, for any $n > N$,
+  \begin{equation}
+    0
+    \leq d(A, B)
+    \leq d(A, x_n) + d(x_n, B)
+    < \varepsilon / 2 + \varepsilon / 2
+    < \varepsilon.
+  \end{equation}
+  Hence, $d(A, B)$ is nonnegative but smaller than any positive number.
+  Therefore, $d(A, B) = 0$ and so $A = B$.
+\end{proof}
+\begin{notation}
+  Let
+    $(X, d)$ be a metric space,
+    $\{a_n \in X\}_{n = 0}^\infty$ be a convergent sequence,
+    $A$ be the limit of $a$ (unique by the previous proposition).
+  We denote this by
+  \begin{equation}
+    A = \lim_{n \to \infty} a_n.
+  \end{equation}
+\end{notation}
+\begin{definition}
+  Let
+    $(X, d)$ be a metric space,
+    $\{a_n \in X\}_{n = 0}^\infty$ be an infinite sequence.
+  We say that $a$ is a \textbf{Cauchy sequence} if
+  \begin{equation}
+    \forall \varepsilon \in \R^+\
+      \exists N \in \N\
+        \forall m, n > N\
+          d(a_m, a_n) < \varepsilon.
+  \end{equation}
+  Intuitively, the points in the sequence come arbitrarily close
+  (to a precision $\varepsilon$) to one another after some index ($N$).
+\end{definition}
+\begin{proposition}
+  Let
+    $(X, d)$ be a metric space,
+    $\{a_n \in X\}_{n = 0}^\infty$ be an infinite sequence.
+  If $a$ is convergent, then $a$ is Cauchy.
+\end{proposition}
+\begin{proof}
+  Let
+    $A := \lim_{n \to \infty} a$,
+    $\varepsilon \in \R^+$,
+    $N \in \N^+$ be such that for all $n > N$, $d(x_n, A) < \varepsilon / 2$.
+  Then, for any $m, n > N$,
+  \begin{equation}
+    d(x_m, x_n)
+    \leq d(x_m, A) + d(A, x_n)
+    < \varepsilon / 2 + \varepsilon / 2
+    = \varepsilon.
+  \end{equation}
+  By definition this means that $a$ is Cauchy.
+\end{proof}
+\begin{definition}
+  Let
+    $X$ be a set,
+    $f \colon X \to X$,
+    $x \in X$.
+  We say that $x$ is a \textbf{fixed point for $f$} if $f x= x$.
+\end{definition}
+\begin{definition}
+  Let $(X, d)$ be a metric space, $f \colon X \to X$, $q \in [0, 1)$.
+  We say that $f$ is a \textbf{contraction with Lipschitz constant $q$} if
+  for any $x, y \in X$,
+  \begin{equation}
+    d(f x, f y) \leq q d(x, y).
+  \end{equation}
+  If the Lipschitz constant $q$ is not fixed (but still less than $1$),
+  we just say that $f$ is a \textbf{contraction}.
+\end{definition}
+\begin{theorem}
+  Let
+    $(X, d)$ be a metric space,
+    $f \colon X \to X$ be a contraction.
+  Then $f$ has at most one fixed point.
+\end{theorem}
+\begin{proof}
+  Let $q \in [0, 1)$ be a Lipschitz constant for $f$.
+  Assume that $x, y \in X$ are fixed points of $f$,
+  i.e., $f x = x$ and $f y = y$.
+  Then
+  \begin{equation}
+    d(x, y) = d(f x, f y) \leq q d(x, y)
+    \Rightarrow (1 - q) d(x, y) \leq 0.
+  \end{equation}
+  Since $d(x, y) \geq 0$ and $1 - q > 0$, we get $d(x, y) = 0$.
+  Hence, $x = y$.
+\end{proof}
+\begin{proposition}
+  Let
+    $(X, d)$ be a metric space,
+    $q \in [0, 1)$,
+    $f \colon X \to X$ be a contraction with Lipschitz constant $q$,
+    $x, y \in X$,
+    $n \in \N$.
+  Then
+  \begin{equation}
+    d(f^n x, f^n y) \leq q^n d(x, y).
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  Induction on $n$.
+  \begin{enumerate}
+    \item
+      \textbf{Base case.}
+      For $n = 0$ we get the true proposition $d(x, y) \leq d(x, y)$.
+    \item
+      \textbf{Induction step.}
+      Assume that the proposition is true for $n$.
+      Then for $n + 1$,
+      \begin{equation}
+        d(f^{n + 1}x, f^{n + 1} y)
+        = d(f^n(f x), f^n(f y))
+        \leq q^n d(f x, f y)
+        \leq q^n q d(x, y)
+        = q^{n + 1} d(x, y).
+      \end{equation}
+  \end{enumerate}
+\end{proof}
+\begin{proposition}
+  Let
+    $(X, d)$ be a metric space,
+    $q \in [0, 1)$,
+    $f \colon X \to X$ be a contraction with Lipschitz constant $q$,
+    $x \in X$,
+    $n \in \N^{+}$.
+  Then
+  \begin{equation}
+    d(x, f^n x) \leq \frac{1}{1 - q} d(x, f x).
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  Using
+    the generalised version of triangle inequality and
+    the previous proposition
+  we get
+  \begin{equation}
+    d(x, f^n x)
+    \leq \sum_{i = 0}^{n - 1} d(f^i x, f^{i + 1} x)
+    = \sum_{i = 0}^{n - 1} d(f^i x, f^i(f x))
+    \leq \sum_{i = 0}^{n - 1} q^i d(x, f x)
+    = \frac{1 - q^n}{1 - q} d(x, f x)
+    \leq \frac{1}{1 - q} d(x, f x).
+  \end{equation}
+\end{proof}
+\begin{corollary}
+  Let
+    $(X, d)$ be a metric space,
+    $q \in [0, 1)$,
+    $f \colon X \to X$ be a contraction with Lipschitz constant $q$,
+    $x \in X$,
+    $m, n \in \N$.
+  Then
+  \begin{equation}
+    d(f^m x, f^n x) \leq q^{\min(m, n)} \frac{1}{1 - q} d(x, f x).
+  \end{equation}
+\end{corollary}
+\begin{proof}
+  If $m = n$, then $d(f^m x, f^n x) = 0$ and the inequality follows trivially.
+  So let us assume that $m \neq n$.
+  First consder the case $m < n$.
+  Then
+  \begin{equation}
+    d(f^m x, f^n x)
+    = d(f^m x, f^m(f^{n - m} x))
+    \leq q^m d(x, f^{n - m} x)
+    \leq q^m \frac{1}{1 - q} d(x, f x)
+    = q^{\min(m, n)} \frac{1}{1 - q} d(x, f x).
+  \end{equation}
+  A symmetric argument shows that for $m > n$,
+  \begin{equation}
+    d(f^m x, f^n x)
+    \leq q^n \frac{1}{1 - q} d(x, f x)
+    = q^{\min(m, n)} \frac{1}{1 - q} d(x, f x).
+  \end{equation}
+  Hence, we get the desired inequality.
+\end{proof}
+\begin{proposition}
+  Let
+    $(X, d)$ be a metric space,
+    $f \colon X \to X$ be a contraction,
+    $x_0 \in X$.
+  Then $\{a_n := f^n x_0\}_{n = 0}^\infty$ is a Cauchy sequence.
+\end{proposition}
+\begin{proof}
+  Let $q$ be a Lipschitz constant for $f$.
+  Fix $\varepsilon > 0$.
+  We need to find $N \in \N^+$ such that
+  for all $m, n > N$, $d(a_m, a_n) < \varepsilon$.
+  Assume that we have found $N$ and let $m, n > N$.
+  Then
+  \begin{equation}
+    d(a_m, a_n)
+    = d(f^m x_0, f^n x_0)
+    \leq q^{\min(m, n)} \frac{1}{1 - q} d(x_0, f x_0)
+    \leq q^N \frac{1}{1 - q} d(x_0, x_1).
+  \end{equation}
+  Hence, it is enough to show that there exists $N \in \N$ such that
+  $q^N \frac{1}{1 - q} d(x_0, x_1) < \varepsilon$.
+  If $q = 0$ or $d(x_0, x_1) = 0$ there is nothing to prove as any $N$ works.
+  Otherwise, we have:
+  \begin{equation}
+    q^N \frac{1}{1 - q} d(x_0, x_1) < \varepsilon
+    \Leftrightarrow q^N < \frac{(1 - q) \varepsilon}{d(x_0, x_1)}
+    \Leftrightarrow (1 / q)^N > \frac{d(x_0, x_1)}{(1 - q) \varepsilon}.
+  \end{equation}
+  Hence,
+  \begin{equation}
+    N
+    := \floor*{\frac{\ln(d(x_0, x_1) / ((1 - q) \varepsilon))}{\ln(1 / q)}} + 1
+  \end{equation}
+  does the job as a function of $\varepsilon$.
+\end{proof}
+\begin{definition}
+  Let $(X, d)$ be a metric space.
+  We say that $(X, d)$ is a \textbf{complete metric space}
+  if every Cauchy sequence in $(X, d)$ is convergent.
+\end{definition}
+\begin{theorem}[Banach fixed point theorem]
+  Let
+    $(X, d)$ be a complete metric space,
+    $f \colon X \to X$ be a contraction.
+  Then there exists a unique fixed point for $f$.
+\end{theorem}
+\begin{proof}
+  Uniqueness was proven before.
+  For existence, we provide an iterative procedure.
+  Let $x_0 \in X$ be arbitrary and consider the sequence
+  $\{a_n := f^n x_0\}_{n = 0}^\infty$.
+  Previously we proved that $a$ is a Cauchy sequence.
+  Since $(X, d)$ is complete, this means that it has a limit $x \in X$.
+  Since for any $n \in \N$, $a_{n + 1} = f a_n$, in the limit this leads to
+  $x = f x$.
+  Hence, $x = \lim_{n \to \infty} f^n x_0$ is the fixed point of $X$.
+\end{proof}

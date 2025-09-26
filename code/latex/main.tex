@@ -5,6 +5,7 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{makecell}
+\usepackage{mathtools}
 \usepackage{bookmark}
 \addtocontents{toc}{\protect{\pdfbookmark[0]{\contentsname}{toc}}}
 \addtocontents{lof}{\protect{\pdfbookmark[0]{\listfigurename}{lof}}}
@@ -105,6 +106,9 @@
 \newcommand{\set}[2]{\left\{ #1 \mid #2 \right\}}
 \newcommand{\restrict}[2]{\left. #1 \right|_{#2}}
 
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \newcommand{\abs}[1]{\left\lvert#1\right\rvert}
 \newcommand{\inner}[2]{\langle#1,#2\rangle}
@@ -155,7 +159,7 @@
 \title{Combinatorial Mesh Calculus (CMC) \\
        \url{https://github.com/kipiberbatov/cmc}}
 \author{Kiprian Berbatov}
-\date{24 September 2025}
+\date{26 September 2025}
 
 \begin{document}
 
@@ -286,6 +290,12 @@
 \input{differential_graded_algebra/concept-definition.tex}
 \input{differential_graded_algebra/tensor_product-definition.tex}
 \input{differential_graded_algebra/tensor_product_is_differential_graded_algebra-proposition.tex}
+
+\part{Real analysiis}
+
+\section{Metric spaces}
+\label{section:metric_spaces}
+\input{metric_space/all.tex}
 
 \part{Smooth manifolds}
 
