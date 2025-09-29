@@ -1,0 +1,291 @@
+\begin{discussion}
+  We already proved that any converging sequence is a Cauchy sequence.
+  The converse, i.e., that any Cauchy sequence has a limit,
+  is not true in general.
+  (This motivated the introduction of complete metric spaces.)
+  For instance, there are Cauchy sequences of rational numbers that
+  do not converge to a rational number.
+  For example, consider the sequence $a \colon \N \to \Q$,
+  \begin{subequations}
+    \begin{alignat}{1}
+      & a_0 := 1, \\
+      & a_{n + 1} := \frac{1}{a_n} + \frac{a_n}{2},\ n \in \N.
+    \end{alignat}
+  \end{subequations}
+  Let $d \colon \Q \times \Q \to \Q$ be the standard metric given by
+  \begin{equation}
+    d(x, y) := \abs{x - y},\ x, y \in \Q.
+  \end{equation}
+  (We define the codomain to be $\Q$ since we assume $\R$ is not constructed
+  yet.)
+  It is not hard to check that $a \in \Cauchy(\Q, d)$.
+  However, assume it has a limit $A \in \Q$.
+  Then, it will satisfy the relation
+  \begin{equation}
+    A = \frac{1}{A} + \frac{A}{2}
+    \Rightarrow A = \frac{2 + A^2}{2 A}
+    \Rightarrow 2 A^2 = 2 + A^2
+    \Rightarrow A^2 = 2.
+  \end{equation}
+  But there are is no rational whose square is $2$.
+  To bee able to find the square root of $2$, we need to \emph{complete} the
+  space of rationals.
+\end{discussion}
+\begin{proposition}
+  Let $(X, d)$ be a metric space $Y \subseteq X$.
+  Then $(Y, \restrict{d}{Y})$ is also a metric space.
+\end{proposition}
+\begin{proof}
+  All the requirements for a function to be a metric have only universal
+  quantifiers.
+  Hence, they translate to subsets as well.
+\end{proof}
+\begin{definition}
+  Let $(X, d)$ and $(Y, \delta)$ be metric spaces.
+  A function $f \colon X \to Y$ is called an
+  \textbf{isomorphism of metric spaces}
+  if it is bijective and for any $x, y \in X$,
+  \begin{equation}
+    \delta(f x, f y) = d(x, y).
+  \end{equation}
+\end{definition}
+\begin{definition}
+  Let $(X, d)$ be a metric space, $Y \subseteq X$.
+  We say that $Y$ is a \textbf{dense subset of $X$} if
+  for any $x \in X$ there exists a Cauchy sequence in $(Y, \restrict{d}{Y})$
+  that converges (as a sequence in $X$) to $x$.
+\end{definition}
+\begin{definition}
+  Let $(X, d)$ be a metric space, $a$ and $b$ be sequences in $X$.
+  Define the sequence $\hat{d}(a, b) \colon \N \to \R$ by
+  \begin{equation}
+    \hat{d}(a, b) := \{d(a_n, b_n)\}_{n = 0}^\infty.
+  \end{equation}
+\end{definition}
+\begin{proposition}
+  Let $(X, d)$ be a metric space, $x, y, z \in X$.
+  Then
+  \begin{equation}
+    \abs{\hat{d}(x, y) - \hat{d}(y, z)} \leq \hat{d}(x, z).
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  From triangle inequality and symmetry it follows that
+  $\hat{d}(x, y) - \hat{d}(y, z) \leq \hat{d}(x, z)$ and
+  $\hat{d}(y, z) - \hat{d}(x, y) \leq \hat{d}(x, z)$.
+  This gives the desired inequality.
+\end{proof}
+\begin{notation}
+  We will denote $\Cauchy(\R) := \Cauchy(\R, d_\R)$, where
+  $d_\R$ is the standard metric on $\R$,
+  $d_\R(x, y) := \abs{x - y}$ for $x, y \in \R$.
+\end{notation}
+\begin{proposition}
+  Let $(X, d)$ be a metric space, $a, b \in \Cauchy(X, d)$.
+  Then $\hat{d}(a, b) \in \Cauchy(\R)$.
+  (And hence, converging since $\R$ is complete.)
+\end{proposition}
+\begin{proof}
+  Denote $x := \hat{d}(a, b) \colon \N \to \R$.
+  Let $m, n \in \N$.
+  Then
+  \begin{equation}
+    \begin{split}
+      \abs{x_m - x_n}
+      & = \abs{d(a_m, b_m) - d(a_n, b_n)}
+        = \abs{d(a_m, b_m) - d(a_n, b_m) + d(a_n, b_m) - d(a_n, b_n)} \\
+      & \leq \abs{d(a_m, b_m) - d(a_n, b_m)} + \abs{d(a_n, b_m) - d(a_n, b_n)}
+        \leq d(a_m, a_n) + d(b_m, b_n).
+    \end{split}
+  \end{equation}
+  Now let $\varepsilon > 0$.
+  Choose $N_a \in \N$ such that
+  for all $m, n > N_a$, $d(a_m, a_n) < \varepsilon / 2$,
+  and $N_b \in \N$ such that
+  for all $m, n > N_b$, $d(b_m, b_n) < \varepsilon / 2$.
+  Define $N := \max(N_A, N_B)$.
+  Then for any $m, n > N$,
+  \begin{equation}
+    \abs{x_m - x_n}
+    \leq d(a_m, a_n) + d(b_m, b_n)
+    \leq \varepsilon / 2 + \varepsilon / 2
+    = \varepsilon,
+  \end{equation}
+  which means that $x \in \Cauchy(\R)$.
+\end{proof}
+\begin{corollary}
+  Let $(X, d)$ be a metric space, $a$ and $b$ be convergent sequences.
+  Then
+  \begin{equation}
+    \lim_{n \to \infty} d(a_n, b_n)
+    = d\left(\lim_{n \to \infty} a_n, \lim_{n \to \infty} b_n\right).
+  \end{equation}
+\end{corollary}
+\begin{remark}
+  The above equality can be stated as
+  \begin{equation}
+    \lim_\R(\hat{d}(a, b)) = d(\lim_{(X, d)} a, \lim_{(X, d)} b)
+  \end{equation}
+  which can be stated as the commutative diagram relation
+  \begin{equation}
+    \lim_\R \circ \hat{d} = d \circ (\lim_{(X, d)} \times \lim_{(X, d)}).
+  \end{equation}
+\end{remark}
+\begin{definition}
+  Let $(X, d)$ be a metric space.
+  Define $\delta \colon \Cauchy(X, d) \times \Cauchy(X, d) \to \R$ as follows:
+  for any $a, b \in \Cauchy(X, d)$,
+  \begin{equation}
+    \delta(a, b) := \lim_{n \to \infty} d(a_n, b_n).
+  \end{equation}
+\end{definition}
+\begin{proposition}
+  Let
+    $(X, d)$ be a metric space,
+    $Y := \Cauchy(X, d)$,
+    $\delta \colon Y \times Y \to \R$ be defined as above.
+  Then $(Y, \delta)$ is a \textbf{semi-metric space}.
+  (A metric space without non-degeneracy.)
+\end{proposition}
+\begin{proof}
+  Let $a, b, c \in \Cauchy(X, d)$.
+  \begin{enumerate}
+    \item
+      \textbf{Non-negativity.}
+      Since for any $n \in \N$, $d(a_n, b_n) \geq 0$,
+      then the non-negativity is preserved in the limit case,
+      i.e., $d(a, b) \geq 0$.
+    \item
+      \textbf{Symmetry.}
+      Since for any $n \in \N$, $d(a_n, b_n) = d(b_n, a_n)$,
+      then the symmetry is preserved in the limit case,
+      i.e., $\delta(a, b) = \delta(b, a)$.
+    \item
+      \textbf{Triangle inequality.}
+      Since for any $n \in \N$, $d(a_n, c_n) \leq d(a_n, b_n) + d(b_n, c_n)$,
+      then the triangle inequality is preserved in the limit case,
+      i.e., $\delta(a, c) \leq \delta(a, b) + \delta(b, c)$.
+  \end{enumerate}
+\end{proof}
+\begin{remark}
+  Note that positive definiteness of the metric is not preserved for Cauchy
+  sequences.
+  Indeed, two sequences which coincide after some point but have different
+  initial values.
+  Then they agree in the limiting case and so their distance is zero,
+  but they are unequal.
+
+  Another interesting case occurs when the two sequences differ entirely but
+  converge to one another in the limiting case.
+  For intance, the constant zero sequence and the sequence
+  $\{1 / (n + 1)\}_{n = 0}^\infty$.
+\end{remark}
+\begin{proposition}
+  Let
+    $(X, d)$ be a metric space,
+    $\delta$ be the semi-metric on $\Cauchy(X, d)$.
+  Define the relation $\sim$ on $\Cauchy(X, d)$ by
+  \begin{equation}
+    a \sim b \Leftrightarrow \delta(a, b) = 0,\
+    a, b \in \Cauchy(X, d).
+  \end{equation}
+  Then $\sim$ is an equivalence relation on $\Cauchy(X, d)$.
+\end{proposition}
+\begin{proof}
+  Reflexivity and symmetry are obvious, so let us consider transitivity.
+  Consider $a, b, c \in \Cauchy(X, d)$ and let
+  $a \sim b$ and $b \sim c$.
+  Then for any $n \in \N$,
+  \begin{equation}
+    d(a_n, c_n) \leq d(a_n, b_n) + d(b_n, c_n).
+  \end{equation}
+  Let $\varepsilon > 0$.
+  Choose
+  $N_A \in \N$ such that for all $n > N_A$, $d(a_n, b_n) < \varepsilon / 2$, and
+  $N_B \in \N$ such that for all $n > N_B$, $d(b_n, c_n) < \varepsilon / 2$.
+  Let $N := \max(N_a, N_B)$.
+  Then for any $n > N$,
+  \begin{equation}
+    0
+    \leq d(a_n, c_n)
+    \leq d(a_n, b_n) + d(b_n, c_n)
+    < \varepsilon / 2 + \varepsilon / 2
+    = \varepsilon.
+  \end{equation}
+  Hence, $\lim_{n \to \infty} d(a_n, c_n) = 0$, i.e. $a \sim c$.
+  Therefore, $\sim$ is an equivalence relation.
+\end{proof}
+\begin{proposition}
+  Let $(X, d)$ be a metric space, $a, a', b, b' \in \Cauchy(X, d)$.
+  Assume that $a \sim a'$ and $b \sim b'$.
+  Then $\delta(a, b) = \delta(a', b')$.
+\end{proposition}
+\begin{definition}
+  Let $(X, d)$ be a metric space.
+  Define the $\rho$ on $\Cauchy(X, d) / \sim$ by
+  \begin{equation}
+    \rho([a]_\sim, [b]_\sim) := \delta(a, b).
+  \end{equation}
+  (Correctness of the definition is follows from the previous proposition.)
+\end{definition}
+\begin{proposition}
+  Let $(X, d)$ be a metric space.
+  Then $(\Cauchy(X, d) / \sim, \rho)$ is a metric space.
+\end{proposition}
+\begin{proposition}
+  Let $(X, d)$ be a metric space.
+  Then the metric $\rho$ on $\Cauchy(X, d) / \sim$ is complete.
+\end{proposition}
+\begin{proposition}
+  Let $(X, d)$ be a metric space.
+  Consider the map
+  $f \colon X \to \Cauchy(X, d) / \sim$ defined by embedding constants
+  as constant sequences:
+  \begin{equation}
+    f(x) = [(x, x, ..., x, ...)]_\sim.
+  \end{equation}
+  Then $f$ is an embedding and its image is a dense subset of
+  $\Cauchy(X, d) / \sim$.
+  Moreover, if $X$ is complete, then $f$ is an isomorphism.
+\end{proposition}
+\begin{remark}
+  All of what we did in this section has the following interpretation.
+  The space $(Y, \rho)$ of equivalence calsees of Cauchy sequences on $(X, d)$
+  is a complete metric space that has $(X, d)$
+  isomorphic to a dense subset of $X$ with the induced metric.
+  For this reason $Y$ is called the \textbf{completion of $X$}.
+  Moreover, if $(X, d)$ is already complete, then $(Y, \rho)$ is isomorphic to
+  $(X, d)$.
+  In other words, the completion of a complete metric space is essentially the
+  same space, as one could expect.
+\end{remark}
+\begin{remark}
+  In constructive setting one often works with the so called
+  \textbf{rapidly converging sequences} and \textbf{rapid Cauchy sequences},
+  thus removing the dependence on a real argument in the respective definitions
+  of a converging sequence and a Cauchy sequence.
+\end{remark}
+\begin{definition}
+  Let $(X, d)$ be a metric space, $a \colon \N \to X$.
+  We say that $a$ is a \textbf{rapidly converging sequence} if
+  there exists $A \in X$ such that for any $k \in \N$ there exists $N \in N$
+  such that for all $m, n > N$,
+  \begin{equation}
+    \exists A \in X,\
+      \forall k \in \N,\
+        \exists N \in \N,\
+          \forall n \in \N,\
+             n > N \Rightarrow d(a_n, A) < 2^{-k}.
+  \end{equation}
+\end{definition}
+\begin{definition}
+  Let $(X, d)$ be a metric space, $a \colon \N \to X$.
+  We say that $a$ is a \textbf{rapid Cauchy sequence} if
+  for any $k \in \N$ there exists $N \in N$ such that for all $m, n > N$,
+  \begin{equation}
+    \forall k \in \N,\
+      \exists N \in \N,\
+        \forall m, n \in \N,\
+           m, n > N \Rightarrow d(a_m, a_n) < 2^{-k}.
+  \end{equation}
+\end{definition}

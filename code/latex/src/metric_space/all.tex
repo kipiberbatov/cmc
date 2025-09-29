@@ -98,7 +98,7 @@
 \begin{definition}
   Let
     $(X, d)$ be a metric space,
-    $\{a_n \in X\}_{n = 0}^\infty$ be an infinite sequence,
+    $a \colon \N \to X$,
     $A \in X$.
   We say that \textbf{$a$ converges to $A$}
   (or that $A$ is a \textbf{limit} of $a$) if
@@ -108,28 +108,35 @@
         \forall n > N\
           d(a_n, A) < \varepsilon.
   \end{equation}
-  Intuitively, the points in the sequence come arbitrarily close
-  (to a precision $\varepsilon$) to $A$ after some index ($N$).
 \end{definition}
+\begin{remark}
+  Intuitively, the points in a sequence $a$ converging to $a$, given a tolerance
+  $\varepsilon$, eventually (after some index $N$) com within that tolerance 
+  to the limit $A$.
+\end{remark}
 \begin{definition}
   Let
     $(X, d)$ be a metric space,
-    $\{a_n \in X\}_{n = 0}^\infty$ be an infinite sequence.
+    $a \colon \N \to X$.
   We say that \textbf{$a$ is convergent} if
   there exists $A \in X$ such that $a$ converges to $A$.
+
+  We will denote by $\Convergent(X, d)$
+  the space of all convergent sequences on $(X, d)$.
 \end{definition}
 \begin{proposition}
   Let
     $(X, d)$ be a metric space,
-    $\{a_n \in X\}_{n = 0}^\infty$ be an infinite sequence.
-  If $a$ is convergent, then it has exactly one limit.
+    $a \colon \N \to X$.
+  If $a \in \Convergent(X, d)$, then $a$ has exactly one limit.
 \end{proposition}
 \begin{proof}
   Let $A, B \in X$ be limits of $a$, $\varepsilon \in \R^+$.
-  Choose $N_A \in \N$ such that for all $n > N_A$, $d(x_n, A) < \varepsilon / 2$
-  and $N_B \in \N$ such that for all $n > N_B$, $d(x_n, B) < \varepsilon / 2$.
+  Choose
+    $N_A \in \N$ such that for all $n > N_A$, $d(x_n, A) < \varepsilon / 2$, and
+    $N_B \in \N$ such that for all $n > N_B$, $d(x_n, B) < \varepsilon / 2$.
   Let $N := \max(N_A, N_B)$.
-  Then, for any $n > N$,
+  Then for any $n > N$,
   \begin{equation}
     0
     \leq d(A, B)
@@ -143,17 +150,17 @@
 \begin{notation}
   Let
     $(X, d)$ be a metric space,
-    $\{a_n \in X\}_{n = 0}^\infty$ be a convergent sequence,
+    $a \in \Convergent(X, d)$.
     $A$ be the limit of $a$ (unique by the previous proposition).
   We denote this by
   \begin{equation}
-    A = \lim_{n \to \infty} a_n.
+    A = \lim_{n \to \infty} a_n\ \qquad \text{or} \qquad A = \lim a.
   \end{equation}
 \end{notation}
 \begin{definition}
   Let
     $(X, d)$ be a metric space,
-    $\{a_n \in X\}_{n = 0}^\infty$ be an infinite sequence.
+    $\{a_n \in X\}_{n = 0}^\infty$.
   We say that $a$ is a \textbf{Cauchy sequence} if
   \begin{equation}
     \forall \varepsilon \in \R^+\
@@ -161,28 +168,32 @@
         \forall m, n > N\
           d(a_m, a_n) < \varepsilon.
   \end{equation}
-  Intuitively, the points in the sequence come arbitrarily close
-  (to a precision $\varepsilon$) to one another after some index ($N$).
+  We will denote the set of all Cauchy sequences on $(X, d)$ by $\Cauchy(X, d)$.
 \end{definition}
+\begin{remark}
+  Intuitively, the points in a Cauchy sequence $a$ sequence, given a tolerance
+  $\varepsilon$, eventually (after some index $N$) come within that tolerance
+  with one another.
+\end{remark}
 \begin{proposition}
   Let
     $(X, d)$ be a metric space,
-    $\{a_n \in X\}_{n = 0}^\infty$ be an infinite sequence.
-  If $a$ is convergent, then $a$ is Cauchy.
+    $\{a_n \in X\}_{n = 0}^\infty$.
+  If $a \in \Convergent(X, d)$, then $a \in \Cauchy(X, d)$.
 \end{proposition}
 \begin{proof}
   Let
     $A := \lim_{n \to \infty} a$,
     $\varepsilon \in \R^+$,
     $N \in \N^+$ be such that for all $n > N$, $d(x_n, A) < \varepsilon / 2$.
-  Then, for any $m, n > N$,
+  Then for any $m, n > N$,
   \begin{equation}
     d(x_m, x_n)
     \leq d(x_m, A) + d(A, x_n)
     < \varepsilon / 2 + \varepsilon / 2
     = \varepsilon.
   \end{equation}
-  By definition this means that $a$ is Cauchy.
+  By definition this means that $a \in \Cauchy(X, d)$.
 \end{proof}
 \begin{definition}
   Let
@@ -312,8 +323,9 @@
   Let
     $(X, d)$ be a metric space,
     $f \colon X \to X$ be a contraction,
-    $x_0 \in X$.
-  Then $\{a_n := f^n x_0\}_{n = 0}^\infty$ is a Cauchy sequence.
+    $x_0 \in X$,
+    $\{a_n := f^n x_0\}_{n = 0}^\infty$.
+  Then $a \in \Cauchy(X, d)$.
 \end{proposition}
 \begin{proof}
   Let $q$ be a Lipschitz constant for $f$.
@@ -360,7 +372,7 @@
   For existence, we provide an iterative procedure.
   Let $x_0 \in X$ be arbitrary and consider the sequence
   $\{a_n := f^n x_0\}_{n = 0}^\infty$.
-  Previously we proved that $a$ is a Cauchy sequence.
+  Previously we proved that $a \in \Cauchy(X, d)$.
   Since $(X, d)$ is complete, this means that it has a limit $x \in X$.
   Since for any $n \in \N$, $a_{n + 1} = f a_n$, in the limit this leads to
   $x = f x$.
