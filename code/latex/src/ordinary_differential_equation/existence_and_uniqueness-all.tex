@@ -1,0 +1,288 @@
+\begin{definition}
+  Let $x \in \R$, $I \subseteq \R$.
+  We say that $I$ is \textbf{an interval around $x$} if $I$ is a connected set
+  containing an open neighbourhood of $x$.
+\end{definition}
+\begin{definition}
+  Let
+    $t_0 \in \R$,
+    $n \in \N^+$,
+    $x_0 \in \R^n$,
+    $D \subseteq \R \times \R^n$ be an open neighbourhood of $(t_0, x_0)$,
+    $F \colon D \to \R^n$ be continuous.
+  The \textbf{initial value-problem for the system of ordinary differential
+  equations for right-hand side $F$} is the following problem: find
+    an interval $I$ around $t_0$,
+    a neighbourhood $C \subseteq \R^n$ of $x_0$,
+    and a curve $x \colon I \to C$,
+  such that for any $t \in I$, $(t, x(t)) \in D$ and
+  \begin{subequations}
+    \label{equation:ordinary_differential_equation/initial_value_problem}
+    \begin{alignat}{1}
+      & \dot{x}(t) = F(t, x(t)),\ \forall t \in I, \\
+      & x(t_0) = x_0.
+    \end{alignat}
+  \end{subequations}
+\end{definition}
+\begin{discussion}
+  Under the assumptions of the above definition, assume that $x$ is a solution
+  and let $t \in I$.
+  Integrating over the segment $[t_0, t]$ the differential equation, we get
+  \begin{equation}
+    \int_{t_0}^t F(s, x(s))\, d s
+    = \int_{t_0}^s \dot{x}(s)\, d s
+    = x(t) - x(t_0)
+    = x(t) - x_0,
+  \end{equation}
+  which can be restated as the system of integral equations
+  \begin{equation}
+    \label{equation:ordinary_differential_equation/initial_value_problem/integral}
+    x(t) = x_0 + \int_{t_0}^t F(s, x(s)).
+  \end{equation}
+  Conversely, if $x$ solves
+  \Cref{equation:ordinary_differential_equation/initial_value_problem/integral},
+  then $x(t_0) = x_0$.
+  Moreover, if $x$ is assumed to be differentiable, then differentiating it we
+  get $\dot{x}(t) = F(t, x(t))$.
+
+  In general the integral system
+  \Cref{equation:ordinary_differential_equation/initial_value_problem/integral}
+  is more general than the differential system
+  \Cref{equation:ordinary_differential_equation/initial_value_problem}
+  and may include non-smooth solutions.
+  However they are equivalent under smoothness assumptions which will mostly
+  interest us.
+  Nevertheless, the analysis is still easier to perform on the integral one to
+  which we will stick.
+  We will show that under mild assumptions the integral formulation gives rise
+  locally to a contraction operator to which the Banach fixed point theorem
+  applies.
+  % In summary, under the same assumptions, we will study the integral formulation
+  % and not the differential one.
+\end{discussion}
+\begin{definition}
+  Let
+    $(X, d_X)$ and $(Y, d_Y)$ be metric spaces,
+    $f \colon X \to Y$,
+    $K \in \R$.
+  We say that $f$ is \textbf{Lipschitz continuous with Lipschitz constant $L$}
+  if for any $x_1, x_2 \in X$,
+  \begin{equation}
+    d_Y(f x_1, x_2) \leq L d_X(x_1, x_2).
+  \end{equation}
+  If the constant $L$ merely exists (but is not being fixed) we say that
+  $f$ is Lipschitz continuous.
+\end{definition}
+\begin{definition}
+  Let $n \in \N^+$, $D \subseteq \R \times \R^n$ be open, $S \subset D$.
+  We say that $S$ is a \textbf{spatial surface} if there exists $t \in \R$ such
+  that for any $x \in S$, the temporal (first) component of $S$ is $t$.
+\end{definition}
+\begin{definition}
+  Let
+    $n \in \N^+$,
+    $D \subseteq \R \times \R^n$ be an open set,
+    $F \colon D \to \R^n$ be continuous,
+    $L \in \R^+$.
+  We say that $F$ is \textbf{Lipschitz continuous with respect to the spatial
+  arguments with Lipschitz constant $L$} if for any spatial surface
+  $S \subset D$, $\restrict{F}{S}$ is Lipschitz continuous with Lipschitz
+  constant $L$.
+
+  If the constant $L$ merely exists (but is not being fixed) we say that
+  $F$ is Lipschitz continuous with respect to the spatial arguments.
+\end{definition}
+\begin{notation}
+  Let $n \in \N^+$, $x_0 \in \R^n$, $\varepsilon \in \R^+$.
+  By $\mathcal{C}(x_0, \varepsilon)$ we will denote the closed ball centered at
+  $x_0$ with
+  radius $\varepsilon$, i.e.,
+  \begin{equation}
+    \mathcal{C}(x_0, \varepsilon)
+    := \set{x \in \R^n}{\norm{x - x_0} \leq \varepsilon}.
+  \end{equation}
+\end{notation}
+\begin{proposition}
+  Let
+    $t_0 \in \R$,
+    $n \in \N^+$,
+    $x_0 \in \R^n$,
+    $D \subseteq \R \times \R^n$ be an open neighbourhood of $(t_0, x_0)$,
+    $F \colon D \to \R^n$ be continuous and Lipschitz continuous with respect to
+      the spatial arguments.
+  Then there exist $\tau, h \in \R^+$ such that:
+  \begin{itemize}
+    \item
+      for any
+      $x \in C^0(\mathcal{C}(t_0, \tau), \mathcal{C}(x_0, h))$ and
+      $t \in \mathcal{C}(t_0, \tau)$,
+      \begin{equation}
+        x_0 + \int_{t_0}^t F(s, x(s))\, d s \in \mathcal{C}(x_0, h),
+      \end{equation}
+      or equivalently,
+      \begin{equation}
+        \norm{\int_{t_0}^t F(t, x(t))}\, d s \leq h;
+      \end{equation}
+    \item
+      the resulting operator
+      \begin{equation}
+        \label{equation:ordinary_differential_equation/initial_value_problem/operator}
+        \begin{split}
+          & T
+            \colon C^0(\mathcal{C}(t_0, \tau), \mathcal{C}(x_0, h))
+            \to C^0(\mathcal{C}(t_0, \tau), \mathcal{C}(x_0, h)), \\
+          & (T x)(t) := x_0 + \int_{t_0}^t F(s, x(s))\, d s,
+        \end{split}
+      \end{equation}
+      is a contraction.
+  \end{itemize}
+\end{proposition}
+\begin{proof}
+  For a compact (bounded and closed) subset $Y$ of $D$ denote
+  \begin{equation}
+    M_Y := \norm{F}_{Y, \infty} = \max_{y \in Y}(\abs{f(y)})
+  \end{equation}
+  (existing since $F$ is continuous, hence attaing maxima on compact subsets).
+  Clearly if $Z \subseteq Y$ is a compact, then $M_Z \leq M_Y$.
+  Let $L \in \R^+$ be a (spatial) Lipschitz constant for $f$.
+
+  Let $q \in [0, 1)$ be arbitrary.
+  ($q$ will be our final Lipschitz constant that will control how small we will
+  choose our closed balls around $t_0$ and $x_0$.)
+  Take any $\tilde{\tau} = q / L$ and choose $h \in \R^+$ sufficiently small so
+  that
+  \begin{equation}
+    \mathcal{C}(t_0, \tau) \times \mathcal{C}(x_0, h) \subset D.
+  \end{equation}
+  Define $\tau := \min(\tilde{\tau}, q h / M_{\mathcal{C}(x_0, h)})$.
+  We claim that $(\tau, h)$ satisfy the requirements of the proposition.
+  Let
+    $x \in C^0(\mathcal{C}(t_0, \tau), \mathcal{C}(x_0, h))$ and
+    $t \in \mathcal{C}(t_0, \tau)$.
+  \begin{itemize}
+    \item
+      \textbf{The integral operator $T$ is well defined.}
+      \begin{equation}
+        \begin{split}
+          \norm{\int_{t_0}^t F(s, x(s))\, d s}
+          \leq \int_{t_0}^{t} \norm{F(s, x(s))}\, d s
+          \leq M_{\mathcal{C}(x_0, h)}) \abs{t - t_0}
+          \leq M_{\mathcal{C}(x_0, h)}) \tau
+          \leq q h
+          < h.
+        \end{split}
+      \end{equation}
+    \item
+      \textbf{$T$ is a contraction with Lipschitz constant $q$.}
+      Let $x, y \in C^0(\mathcal{C}(t_0, \tau), \mathcal{C}(x_0, h))$.
+      Choose $t \in \mathcal{C}(t_0, \tau)$ such that
+      \begin{equation}
+        \norm{T x - T y}_{C^0(\mathcal{C}(t_0, \tau), \mathcal{C}(x_0, h))}
+        = \norm{(T x - T y)(t)}_{\R^n}.
+      \end{equation}
+      Then
+      \begin{equation}
+        \begin{split}
+          \norm{T x - T y}_\infty
+          & = \norm{(T x - T y)(t)}_U \\
+          & = \norm{\int_{t_0}^t (F(s, x(s)) - F(s, y(s)))\, d s}_U \\
+          & \leq \int_{t_0}^t \norm{(F(s, x(s)) - F(s, y(s)))}_U\, d s \\
+          & \leq L \int_{t_0}^t \norm{x(s) - y(s)}_U\, d s \\
+          & \leq L \int_{t_0}^t \norm{x - y}_\infty\, d s \\
+          & = L \abs{t - t_0} \norm{x - y}_\infty \\
+          & \leq L \tau \norm{x - y}_\infty \\
+          & \leq q \norm{x - y}_\infty.
+        \end{split}
+      \end{equation}
+  \end{itemize}
+  Hence, $T$ is a contraction with Lipschitz constant $q$.
+\end{proof}
+\begin{theorem}[Picard-Lindel\"{o}f]
+  Let
+    $t_0 \in \R$,
+    $n \in \N^+$,
+    $x_0 \in \R^n$,
+    $D \subseteq \R \times \R^n$ be an open neighbourhood of $(t_0, x_0)$,
+    $k \in \N$,
+    $F \in C^k(D, \R^n)$ be
+      Lipschitz continuous with respect to the spatial arguments.
+  Then there exist $\tau, h \in \R^+$ such that the problem
+  \Cref{equation:ordinary_differential_equation/initial_value_problem}
+  has a unique solution
+  $x \in C^{k + 1}(\mathcal{C}(t_0, \tau), \mathcal{C}(x_0, h))$.
+
+  In particular if $k = \infty$ so that $F \in C^\infty(D, \R^n)$, then
+  $x \in C^\infty(\mathcal{C}(t_0, \tau), \mathcal{C}(x_0, h))$.
+\end{theorem}
+\begin{proof}
+  Denote
+    $I := \mathcal{C}(t_0, \tau)$,
+    $V := \mathcal{C}(x_0, h)$,
+  \begin{equation}
+     u := \restrict{F}{I \times V} \in C^k(I \times V, \R^n).
+   \end{equation} 
+  Let $q \in [0, 1)$ be arbitrary.
+  Take (from the proof of the previous proposition) $\tau, h \in \R^+$ such that
+  the operator $T$ defined on
+  $C^0(I, V)$ in
+  \Cref{equation:ordinary_differential_equation/initial_value_problem/operator}
+  is a contraction with Lipschitz constant $q$.
+  According to the Banach fixed point theorem, since $C^0$ spaces between closed
+  subsets of Euclidean spaces are complete, there exists a unique
+  $x \in C^0(I, V)$ that is a fixed point
+  of $T$.
+  We need to show that the solution $x$ is in fact of class $C^{k + 1}$, not
+  merely continuous.
+  First we use the fact that
+  \begin{equation}
+    \frac{d}{d t} \int_{t_0}^t u(s, x(s))\, d s = u(t, x(t))
+  \end{equation}
+  to get $x'(t) = u(t, x(t))$.
+  Define
+  \begin{subequations}
+    \begin{alignat}{1}
+      & \tilde{x} \colon I \to I \to V, \\
+      & \tilde{x}(t) := (t, x(t)),\ \forall t \in I,
+    \end{alignat}
+  \end{subequations}
+  so that $\dot{x} = u \circ \tilde{x}$.
+  For any $n \in \N$ define the \textbf{material derivative}
+  \begin{subequations}
+    \begin{alignat}{1}
+      & \frac{D}{D t}
+        \colon C^{n + 1}(I \times V, \R^n) \to C^n(I \times V, \R^n), \\
+      & \frac{D y}{D t}
+         := \frac{\partial y}{\partial t} + u \cdot \boldsymbol{\nabla} y,\
+         \forall y \in C^{n + 1}(I \times V, \R^n).
+    \end{alignat}
+  \end{subequations}
+  It is defined so that it satisfies the following relation
+  (a consequence of the chain rule)
+  for any $n \in \N$ and $g \in C^{n + 1}(I \times V, \R^n)$,
+  \begin{equation}
+    \frac{d (g \circ \tilde{x})}{d t} = \frac{D g}{D t} \circ \tilde{x}.
+  \end{equation}
+  Next, define the sequence
+  \begin{subequations}
+    \begin{alignat}{1}
+      & \{H_i \in C^{k - i}(I \times V, \R^n)\}_{i = 0}^k, \\
+      & H_0 := F, \\
+      & H_{i + 1} := \frac{D H_i}{D t},\ i = 0, ..., k - 1. 
+    \end{alignat}
+  \end{subequations}
+  Then by a straightforward induction it follows that for $i = 1, ..., k$,
+  \begin{equation}
+    \frac{d^{i + 1} x}{d t^{i + 1}} = H_i \circ \tilde{x}.
+  \end{equation}
+  Indeed, the base case is the flow equation $\dot{x} = F_0 \circ \tilde{x}$,
+  while the induction step $i \mapsto i + 1$ follows from
+  \begin{equation}
+    \frac{d^{i + 2} x}{d t^{i + 2}}
+    = \frac{d}{d t}\left(\frac{d^{i + 1} x}{d t^{i + 1}}\right)
+    = \frac{d (H_i \circ \tilde{x})}{d t}
+    = \frac{D H_i}{D t} \circ \tilde{x}
+    = H_{i + 1} \circ \tilde{x}.
+  \end{equation}
+  As a result, $\frac{d^{k + 1} x}{d t^{k + 1}} = H_k \circ \tilde{x}$.
+  Hence, $x \in C^{k + 1}(I, V)$, as wanted.
+\end{proof}
