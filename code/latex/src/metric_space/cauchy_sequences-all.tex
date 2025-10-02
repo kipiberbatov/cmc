@@ -144,27 +144,33 @@
     $(X, d)$ be a metric space,
     $Y := \Cauchy(X, d)$,
     $\delta \colon Y \times Y \to \R$ be defined as above.
-  Then $(Y, \delta)$ is a \textbf{semi-metric space}.
-  (A metric space without non-degeneracy.)
+  Then $(Y, \delta)$ is a \textbf{pseudometric space}.
+  (A metric space without non-degeneracy, but with requiring zero distance for
+  equal points.)
 \end{proposition}
 \begin{proof}
   Let $a, b, c \in \Cauchy(X, d)$.
   \begin{enumerate}
     \item
+      \textbf{Equal points have zero distance.}
+      Since for any $n \in \N$, $d(a_n, a_n) = 0$, $\hat{d}(a, b)$ is the zero
+      sequence, whose limit is zero, i.e.,
+      $\delta(a, a) = \lim \hat{d}(a, a) = 0$.
+    \item
       \textbf{Non-negativity.}
       Since for any $n \in \N$, $d(a_n, b_n) \geq 0$,
-      then the non-negativity is preserved in the limit case,
-      i.e., $d(a, b) \geq 0$.
+      then the non-negativity is preserved in the limit case, i.e.,
+      $\delta(a, b) = \lim \hat{d}(a, b) \geq 0$.
     \item
       \textbf{Symmetry.}
       Since for any $n \in \N$, $d(a_n, b_n) = d(b_n, a_n)$,
-      then the symmetry is preserved in the limit case,
-      i.e., $\delta(a, b) = \delta(b, a)$.
+      then the symmetry is preserved in the limit case, i.e.,
+      $\delta(a, b) = \lim \hat{d}(a, b) = \lim \hat{d}(b, a) = \delta(b, a)$.
     \item
       \textbf{Triangle inequality.}
       Since for any $n \in \N$, $d(a_n, c_n) \leq d(a_n, b_n) + d(b_n, c_n)$,
-      then the triangle inequality is preserved in the limit case,
-      i.e., $\delta(a, c) \leq \delta(a, b) + \delta(b, c)$.
+      then the triangle inequality is preserved in the limit case, i.e.,
+      $\delta(a, c) \leq \delta(a, b) + \delta(b, c)$.
   \end{enumerate}
 \end{proof}
 \begin{remark}
@@ -183,7 +189,7 @@
 \begin{proposition}
   Let
     $(X, d)$ be a metric space,
-    $\delta$ be the semi-metric on $\Cauchy(X, d)$.
+    $\delta$ be the pseudometric on $\Cauchy(X, d)$.
   Define the relation $\sim$ on $\Cauchy(X, d)$ by
   \begin{equation}
     a \sim b \Leftrightarrow \delta(a, b) = 0,\
