@@ -1,0 +1,53 @@
+\begin{definition}
+  Let $\mathcal{C}$ and $\mathcal{D}$ be categories.
+  A \textbf{functor} $F$ is a pair $(F_{\rm Obj}, F_{\rm Mor})$, where
+  $F_{\rm Obj} \colon {\rm Obj}_{\mathcal{C}} \to {\rm Obj}_{\mathcal{D}}$ and
+  $F_{\rm Mor} \colon {\rm Mor}_{\mathcal{C}} \to {\rm Mor}_{\mathcal{D}}$
+  and the following conditions are satisfied.
+  \begin{enumerate}
+    \item
+      \textbf{$F$ maps domains and codomains accordingly.}
+      For any $f \in {\rm Mor}_{\mathcal{C}}$,
+      \begin{subequations}
+        \begin{alignat}{1}
+          & {\rm Domain}_{\mathcal{D}}(F_{\rm Mor} f)
+          = F_{\rm Obj}({\rm Domain}_{\mathcal{D}} f), \\
+          & {\rm Codomain}_{\mathcal{D}}(F_{\rm Mor} f)
+          = F_{\rm Obj}({\rm Codomain}_{\mathcal{D}} f).
+        \end{alignat}
+      \end{subequations}
+    \item
+      \textbf{$F$ respects identities.}
+      For any $X \in {\rm Obj}_{\mathcal{C}}$,
+      \begin{equation}
+        F_{\rm Mor} \id_X = \id_{F_{\rm Obj} X}
+      \end{equation}
+    \item
+      \textbf{$F$ respects composition.}
+      for any $f, g \in {\rm Mor}_{\mathcal{C}}$, with
+      ${\rm Domain} g = {\rm Codomain} f$,
+      \begin{equation}
+        F(g \circ f) = F g \circ F f.
+      \end{equation}
+  \end{enumerate}
+  It is a common convention to abuse the notation and use the single symbol $F$
+  for both $(F_{\rm Obj}$ and $F_{\rm Mor})$.
+\end{definition}
+\begin{example}[Forgetful functors]
+  Let $\mathcal{C}$ be a category of algebraic structures
+  (e.g., groups, rings, modules, etc.).
+  We define the forgetful functor $F$ as follows: it maps an algebraic structure
+  to its carrier set (e.g., the group $(\R, +, -, 0)$ to the set $\R$) and a
+  mrphism to itself.
+  All the conditions for a functor are trivially satisfied.
+\end{example}
+\begin{example}[Power-set functor]
+  In the category of sets consider the endofunctor
+  $F = (F_{\rm Obj}, F_{\rm Mor})$ defined as follows.
+  For a set $X$ define $F_{\rm Obj}(X) = \mathcal{P} X$ and for a function
+  $f \colon X \to Y$ define $F f \colon \mathcal{P} X \to \mathcal{P} Y$ by
+  \begin{equation}
+    A \in \mathcal{P} X
+    \mapsto (F f) A := \set{f(x)}{x \in A} \in \mathcal{P} Y.
+  \end{equation}
+\end{example}

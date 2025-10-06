@@ -1,0 +1,65 @@
+\begin{definition}
+  Let
+    $R$ be a commutative ring with unity,
+    $V$ be a module over $R$,
+    $E$ be an associative algebra with unity,
+    $\iota \colon V \to E$ be an $R$-linear map.
+  We say that $E$ is a \textbf{tensor algebra of $V$} if for any associative
+  algebra $A$ and any $R$-linear $f \colon V \to A$,
+  there exists a unique homomorphism of algebras with unity
+  $F \colon E \to A$ such that $f = F \circ \iota$.
+\end{definition}
+\begin{proposition}
+  Any two tensor algebras over $V$ are isomorphisc.
+\end{proposition}
+\begin{proof}
+  This is a universal property.
+\end{proof}
+\begin{notation}
+  Let
+    $R$ be a commutative ring with unity,
+    $V$ be a module over $R$.
+  By $T^\bullet V$  we denote free associative algebra with unity over $V$.
+\end{notation}
+\begin{proposition}
+  Let
+    $R$ be a commutative ring with unity,
+    $V$ be a module over $R$.
+  Then $T^\bullet V$ is a tensor algebra of $V$.
+  (And it will be used as a canonical representative, i.e., as
+  \emph{the} tensor algebra of $V$.)
+\end{proposition}
+\begin{definition}
+  Let
+    $R$ be a commutative ring with unity,
+    $V$ be a module over $R$,
+    $E$ be an alternating and associative algebra,
+    $\iota \colon V \to E$ be an $R$-linear map.
+  We say that $E$ is an \textbf{exterior algebra of $V$} if for any alternating
+  and associative algebra $A$ and any $R$-linear map $f \colon V \to A$,
+  there exists a unique alternating algebra homomorphism
+  $F \colon E \to A$ such that $f = F \circ \iota$.
+\end{definition}
+\begin{proposition}
+  Any two exterior algebras over $V$ are isomorphisc.
+\end{proposition}
+\begin{proof}
+  This is a universal property.
+\end{proof}
+\begin{notation}
+  Let
+    $R$ be a commutative ring with unity,
+    $V$ be a module over $R$,
+    $I$ be the ideal over the tensor algebra $T^\bullet V$ on $M$ defined to be
+    the smallest ideal of $T^\bullet V$ such that for any $v \in V$,
+    $v \otimes v \in I$.
+  Define $\Lambda^\bullet V := T^\bullet V / I$.
+\end{notation}
+\begin{proposition}
+  Let
+    $R$ be a commutative ring with unity,
+    $V$ be a module over $R$.
+  Then $\Lambda^\bullet V$ is an exterior algebra on $V$.
+  (And it will be used as a canonical representative, i.e., as
+  \emph{the} exterior algebra of $V$.)
+\end{proposition}

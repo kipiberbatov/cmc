@@ -57,8 +57,6 @@
   We will show that under mild assumptions the integral formulation gives rise
   locally to a contraction operator to which the Banach fixed point theorem
   applies.
-  % In summary, under the same assumptions, we will study the integral formulation
-  % and not the differential one.
 \end{discussion}
 \begin{definition}
   Let
@@ -121,7 +119,7 @@
       \end{equation}
       or equivalently,
       \begin{equation}
-        \norm{\int_{t_0}^t F(t, x(t))}\, d s \leq h;
+        \norm{\int_{t_0}^t F(s, x(s))\, d s} \leq h;
       \end{equation}
     \item
       the resulting operator
@@ -197,6 +195,110 @@
   \end{itemize}
   Hence, $T$ is a contraction with Lipschitz constant $q$.
 \end{proof}
+\begin{definition}
+  Let
+    $I$ be an open interval,
+    $n \in \N^+$,
+    $U$ be an open subset of $\R \times \R^n$.
+    $V$ be a vector space,
+    $k \in \N^+$,
+    $m \geq k - 1$,
+    $u \in C^m(U \to \R^n)$ (usually a flow velocity),
+    $\partial_t \colon C^k(U, V) \to C^{k - 1}(U, V)$
+      be the temporal partial derivative,
+    $d_x \colon C^k(U, V) \to C^{k - 1}(U, V \times (\R^n)^*)$
+      be the spatial differential (the differential when time is fixed),
+    $i_u \colon C^{k - 1}(U, V \times (\R^n)^*) \to C^{k - 1}(U, V)$
+      be the contraction with the flow field.
+  The material derivative on $V$-valued functions is defined by
+  \begin{equation}
+    \frac{D}{D t} \colon C^k(U, V) \to C^{k - 1}(U, V),\
+    \frac{D}{D t} := \partial_t + i_u \circ d_x.
+  \end{equation}
+\end{definition}
+\begin{proposition}
+  Let
+    $I$ be an open interval,
+    $n \in \N^+$,
+    $A$ be an open subset of $\R^n$
+    $c \colon I \to A$,
+    $V$ be a vector space,
+    $B$ be an open subset of $V$,
+    $f \colon A \to B$.
+  Then
+  \begin{equation}
+    \frac{d(f \circ c)}{d t} = i_{\dot{c}}(d f \circ c) \colon I \to \R.
+  \end{equation}
+\end{proposition}
+\begin{proposition}
+  Let
+    $I$ be an interval,
+    $n \in \N^+$,
+    $U$ be an open subset of $\R \times \R^n$.
+    $V$ be a vector space,
+    $k \in \N^+$,
+    $u \in C^{k - 1}(U, \R^n)$ (usually a flow velocity),
+    $x \colon I \to \R^n$ be an integral curve of $u$,
+    $\tilde{x} := \id_I \odot x \colon I \to I \times \R^n$,
+    $g \in C^k(I, \R^n)$.
+  Then
+  \begin{equation}
+    \frac{d (g \circ \tilde{x})}{d t} = \frac{D g}{D t} \circ \tilde{x}.
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  The flow velocity and motion $x$ are related by
+  \begin{equation}
+    \dot{x} = u \circ x.
+  \end{equation}
+  Hence,
+  \begin{equation}
+    \begin{split}
+      \frac{d (g \circ \tilde{x})}{d t}
+      & = i_{\dot{\tilde{x}}}(d g \circ \tilde{x}) \\
+      & = i_{1 \oplus \dot{x}}((\partial_t g \oplus d_x g) \circ \tilde{x}) \\
+      & = \partial_t g \circ \tilde{x}
+        + i_{u \circ \tilde{x}} ((d_x g) \circ \tilde{x}) \\
+      & = \partial_t g \circ \tilde{x} + (i_u(d_x g)) \circ \tilde{x}) \\
+      & = ((\partial_t + i_u \circ d_x) g) \circ \tilde{x} \\
+      & = \frac{D g}{D t} \circ \tilde{x}.
+    \end{split}
+  \end{equation}
+\end{proof}
+\begin{corollary}
+  Let
+    $I$ be an interval,
+    $n \in \N^+$,
+    $U$ be an open subset of $\R \times \R^n$.
+    $V$ be a vector space,
+    $k \in \N^+$,
+    $u \in C^{k - 1}(U, \R^n)$ (usually a flow velocity),
+    $x \colon I \to \R^n$ be an integral curve of $u$,
+    $\tilde{x} := \id_I \odot x \colon I \to I \times \R^n$,
+    $g \in C^k(I, \R^n)$.
+  \begin{equation}
+    \frac{d^k (g \circ \tilde{x})}{d t^k} = \frac{D^k g}{D t^k} \circ \tilde{x}.
+  \end{equation}
+\end{corollary}
+\begin{proof}
+  We proceed by the induction.
+  In the base case $k = 0$ noth sides equal to $g \circ \tilde{x}$
+  For the induction step assume the proposition is true for the integer $k$.
+  Then for $k + 1$ we get
+  \begin{equation}
+    \begin{split}
+      \frac{d^{k + 1} (g \circ \tilde{x})}{d t^{k + 1}}
+      & = \frac{d}{d t}\left(\frac{d^k (g \circ \tilde{x})}{d t^k}\right)
+      & \qquad (\text{Definition of operator power}) \\
+      & = \frac{d}{d t}\left(\frac{D^k g}{D^k t} \circ \tilde{x}\right)
+      & \qquad (\text{Induction hypothesis}) \\
+      & = \frac{D}{D t}\left(\frac{D^k g}{D^k t}\right) \circ \tilde{x}
+      & \qquad (\text{Pevious proposition}) \\
+      & = \frac{D^{k + 1} g}{D t^{k + 1}} \circ \tilde{x}
+      & \qquad (\text{Definition of operator power}).
+    \end{split}
+  \end{equation}
+\end{proof}
 \begin{theorem}[Picard-Lindel\"{o}f]
   Let
     $t_0 \in \R$,
@@ -241,48 +343,17 @@
   Define
   \begin{subequations}
     \begin{alignat}{1}
-      & \tilde{x} \colon I \to I \to V, \\
+      & \tilde{x} \colon I \to I \times V, \\
       & \tilde{x}(t) := (t, x(t)),\ \forall t \in I,
     \end{alignat}
   \end{subequations}
   so that $\dot{x} = u \circ \tilde{x}$.
-  For any $n \in \N$ define the \textbf{material derivative}
-  \begin{subequations}
-    \begin{alignat}{1}
-      & \frac{D}{D t}
-        \colon C^{n + 1}(I \times V, \R^n) \to C^n(I \times V, \R^n), \\
-      & \frac{D y}{D t}
-         := \frac{\partial y}{\partial t} + u \cdot \boldsymbol{\nabla} y,\
-         \forall y \in C^{n + 1}(I \times V, \R^n).
-    \end{alignat}
-  \end{subequations}
-  It is defined so that it satisfies the following relation
-  (a consequence of the chain rule)
-  for any $n \in \N$ and $g \in C^{n + 1}(I \times V, \R^n)$,
+  From the previous propoition it follows that $u$ is $k$ time differentiable
+  and
   \begin{equation}
-    \frac{d (g \circ \tilde{x})}{d t} = \frac{D g}{D t} \circ \tilde{x}.
+    \frac{d^{k + 1} x}{d t^{k + 1}}
+    = \frac{d^k (u \circ \tilde{x})}{d t^k}
+    = \frac{D^k u}{D t^k} \circ \tilde{x}.
   \end{equation}
-  Next, define the sequence
-  \begin{subequations}
-    \begin{alignat}{1}
-      & \{H_i \in C^{k - i}(I \times V, \R^n)\}_{i = 0}^k, \\
-      & H_0 := F, \\
-      & H_{i + 1} := \frac{D H_i}{D t},\ i = 0, ..., k - 1. 
-    \end{alignat}
-  \end{subequations}
-  Then by a straightforward induction it follows that for $i = 1, ..., k$,
-  \begin{equation}
-    \frac{d^{i + 1} x}{d t^{i + 1}} = H_i \circ \tilde{x}.
-  \end{equation}
-  Indeed, the base case is the flow equation $\dot{x} = F_0 \circ \tilde{x}$,
-  while the induction step $i \mapsto i + 1$ follows from
-  \begin{equation}
-    \frac{d^{i + 2} x}{d t^{i + 2}}
-    = \frac{d}{d t}\left(\frac{d^{i + 1} x}{d t^{i + 1}}\right)
-    = \frac{d (H_i \circ \tilde{x})}{d t}
-    = \frac{D H_i}{D t} \circ \tilde{x}
-    = H_{i + 1} \circ \tilde{x}.
-  \end{equation}
-  As a result, $\frac{d^{k + 1} x}{d t^{k + 1}} = H_k \circ \tilde{x}$.
   Hence, $x \in C^{k + 1}(I, V)$, as wanted.
 \end{proof}

@@ -1,0 +1,182 @@
+\begin{definition}
+  Let
+    $(M, U, \norm{\cdot}_U)$ and $(N, V, \norm{\cdot}_V)$
+      be normed affine spaces,
+    $X$ and $Y$ be open subsets of $M$ and $N$ respectively,
+    $f \colon X \to Y$,
+    $x_0 \in X$,
+    $u \in U$.
+  We say that \textbf{$f$ is differentiable at $x_0$ in the direction $u$}
+  if the following limit exists:
+  \begin{equation}
+    \nabla_u f(x_0)
+    := \lim_{\varepsilon \to 0}
+      \frac{f(x_0 + \varepsilon u) - f(x_0)}{\varepsilon} \in V.
+  \end{equation}
+  We call $\nabla_u f(x_0)$ the
+  \textbf{directional derivative of $f$ at $x_0$ in direction $u$}.
+\end{definition}
+\begin{remark}
+  Denote $I := \set{t \in \R}{x_0 + t u \in Y}$. 
+  Define $g \colon I \to Y$ by
+  \begin{equation}
+    g(t) = f(x_0 + t u).
+  \end{equation}
+  Then $\nabla_u f(x_0) = g'(0)$.
+\end{remark}
+\begin{proposition}[Directional derivative is a linear operator]
+  Let
+    $(M, U, \norm{\cdot}_U)$ and $(N, V, \norm{\cdot}_V)$
+      be normed affine spaces,
+    $X$ and $Y$ be open subsets of $M$ and $N$ respectively.
+    $x_0 \in X$,
+    $u \in U$,
+    $f, g \colon X \to Y$,
+    $\lambda, \mu \in \R$.
+  If $f$ and $g$ are differentiable in the direction of $u$ at $x_0$, so is
+  $\lambda f + \mu g$.
+  Moreover,
+  \begin{equation}
+    \nabla_u (\lambda f + \mu g)(x_0)
+    = \lambda \nabla f(x_0) + \mu \nabla_u g(x_0).
+  \end{equation}
+\end{proposition}
+\begin{definition}
+  Let
+    $(M, U, \norm{\cdot}_U)$ and $(N, V, \norm{\cdot}_V)$
+      be normed affine spaces,
+    $X$ and $Y$ be open subsets of $M$ and $N$ respectively,
+    $f \colon X \to Y$,
+    $x_0 \in X$.
+  We say that \textbf{$f$ is Gateux-differentiable at $x_0$} if all directional
+  derivatives of $f$ at $x_0$ exist.
+\end{definition}
+\begin{definition}
+  Let
+    $(M, U, \norm{\cdot}_U)$ and $(N, V, \norm{\cdot}_V)$
+      be normed affine spaces,
+    $X$ and $Y$ be open subsets of $M$ and $N$ respectively,
+    $f \colon X \to Y$.
+  We say that $f$ is \textbf{Gateaux-differentiable}
+  if it is Gateux-differentiable at any $x_0 \in X$.
+\end{definition}
+\begin{definition}
+  Let
+    $(M, U, \norm{\cdot}_U)$ and $(N, V, \norm{\cdot}_V)$
+      be normed affine spaces,
+    $X$ and $Y$ be open subsets of $M$ and $N$ respectively,
+    $f \colon X \to Y$,
+    $x_0 \in X$.
+  We say that $f$ is \textbf{Fr\'{e}chet differentiable at $x_0$} if
+  there exists $A \in \Hom(U, V)$ such that
+  for any $\varepsilon > 0$
+  there exists $\delta > 0$ such that
+  $B(f(x_0), \delta) \subseteq Y$ and
+  for any $h \in V$ with $\norm{h} < \delta$,
+  \begin{equation}
+    \norm{f(x_0 + h) - f(x_0) - A h}_V \leq \varepsilon \norm{h}_U.
+  \end{equation}
+  We say that $A$ is \textbf{a differential of $f$ at $x_0$}.
+\end{definition}
+\begin{proposition}
+  Let
+    $(M, U, \norm{\cdot}_U)$ and $(N, V, \norm{\cdot}_V)$
+      be normed affine spaces,
+    $X$ and $Y$ be open subsets of $M$ and $N$ respectively,
+    $f \colon X \to Y$,
+    $x_0 \in X$,
+    $f$ be differentiable at $x_0$,
+    $A, B \in \Hom(U, V)$ be differentials of $f$ at $x_0$.
+  Then $A = B$.
+  In other words, whenever the differential exists, it is unique.
+\end{proposition}
+\begin{proof}
+  Let $\varepsilon > 0$.
+  Choose $\delta_A > 0$ such that for all $\norm{h_A}_U < \delta_A$,
+  \begin{equation}
+    \norm{f(x_0 + h_A) - f(x_0) - B h_A}_V \leq \varepsilon \norm{h_A}_U / 2,
+  \end{equation}
+  and $\delta_B > 0$ such that for all $\norm{h_B}_U < \delta_B$,
+  \begin{equation}
+    \norm{f(x_0 + h_B) - f(x_0) - A h_B}_V \leq \varepsilon \norm{h_B}_U / 2.
+  \end{equation}
+  Let $\delta = \min(\delta_A, \delta_B)$.
+  Then for any $h \in U$ with $\norm{h}_U < \delta$,
+  \begin{equation}
+    \begin{split}
+      \norm{(B - A) h}
+      & = \norm{B h - A h} \\
+      & \leq
+        \norm{(f(x_0 + h) - f(x_0) - A h) - (f(x_0 + h) - f(x_0) - B h)}_V \\
+      & \leq \norm{(f(x_0 + h) - f(x_0) - A h)}_V
+        + \norm{(f(x_0 + h) - f(x_0) - B h)}_V \\
+      & \leq \varepsilon h.
+    \end{split}
+  \end{equation}
+  This means that $\norm{B - A}_{\Hom(U, V)} \leq \varepsilon$.
+  (More precisely, the latter is true for small $h$ but the estimate for the
+  homomorphism norm comes from linearity of $B - A$.)
+  Since $\varepsilon$ is arbitrary, this means that
+  $\norm{B - A}_{\Hom(U, V)} = 0$.
+  Hence $B - A = 0$, i.e., $A = B$.
+\end{proof}
+\begin{notation}
+  Let
+    $(M, U, \norm{\cdot}_U)$ and $(N, V, \norm{\cdot}_V)$
+      be normed affine spaces,
+    $X$ and $Y$ be open subsets of $M$ and $N$ respectively,
+    $f \colon X \to Y$,
+    $x_0 \in X$,
+    $f$ be differentiable at $x_0$.
+  We denote the differential of $f$ at $x_0$ by $D f_{x_0}$.
+\end{notation}
+\begin{proposition}
+  Let
+    $(M, U, \norm{\cdot}_U)$ and $(N, V, \norm{\cdot}_V)$
+      be normed affine spaces,
+    $X$ and $Y$ be open subsets of $M$ and $N$ respectively,
+    $f \colon X \to Y$,
+    $x_0 \in X$,
+    $f$ be Fr\'{e}chet differentiable at $x_0$.
+  Then $f$ is Gateux differentiable at $x_0$.
+  Moreover any $u \in U$
+  \begin{equation}
+    D f_{x_0} u = \nabla_u f(x_0).
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  Let $u \in U$, $\varepsilon > 0$.
+  Take $\delta > 0$ so that
+  $\set{x_0 + t u}{\abs{t} < \delta} \subseteq X$
+  and for any $t \in (- \delta, \delta)$,
+  \begin{equation}
+    \norm{f(x_0 + t u) - f(x_0) - D f_{x_0}(t u))}
+    \leq \varepsilon \norm{t u}
+    = \varepsilon t \norm{u}.
+  \end{equation}
+  But the definition of derivative gives a similar estimate, without the term
+  $\norm{u}$ which is bounded however and does not change the estimate.
+  By the uniqueness of derivatives, we get the desired result.
+\end{proof}
+\begin{corollary}[Differential in cooridnates]
+  Let
+    $(M, U, \norm{\cdot}_U)$ and $(N, V, \norm{\cdot}_V)$
+      be normed affine spaces of dimensions $m$ and $n$ respectively,
+    $X$ and $Y$ be open subsets of $M$ and $N$ respectively,
+    $x_0 \in X$,
+    $f \colon X \to Y$ be differentiable at $x_0$.
+    $a = (a_1, ..., a_m)$ and $b = (b_1, ..., b_n)$ be bases of $U$ and $V$
+      respectively,
+    ${\bf A} \in M_{n \times m}(\R)$ be the matrix of $D f_{x_0}$ in
+    those bases.
+  Then for $i = 1, ..., m$ and $j = 1, ..., n$,
+  \begin{equation}
+    {\bf A}^j_i = b^j(\nabla_{a_i} f(x_0)).
+  \end{equation}
+\end{corollary}
+\begin{proof}
+  By definition of matrix of operator, if $A = D f_{x_0}$, then
+  ${\bf A}^j_i = b^j(A a_i)$.
+  But since for any $u \in U$, $D f_{x_0}(u) = \nabla_u f(x_0)$, we get
+  $b^j(A a_i) = b^j(\nabla_{a_i} f(x_0))$, as wanted.
+\end{proof}
