@@ -1,0 +1,171 @@
+\begin{example}
+  The following are computations of the exterior derivative in flat space.
+  \begin{enumerate}
+    \item
+      \textbf{Exterior derivative in $\R^2$.}
+      Let $x^1, x^2 \colon \R^2 \to \R$ be the coordinate maps.
+      \begin{enumerate}
+        \item
+          \textbf{Exterior derivative of $0$-forms.}
+          Consider a $0$-form (a function)
+          $f \in \Omega^1(\R^2) = \mathcal{F}(\R^2)$.
+          Then
+          \begin{equation}
+            d_0 f
+            = \frac{\partial f}{\partial x^1}\, d x^1
+            + \frac{\partial f}{\partial x^2}\, d x^2.
+          \end{equation}
+        \item
+          \textbf{Exterior derivative of $1$-forms.}
+          Consider a $1$-form $\omega \in \Omega^1(\R^2)$ such that
+          $\omega = f_1\, d x^1 + f_2\, d x^2$,
+          for some $f_1, f_2 \in \mathcal{F}(\R^2)$.
+          Then
+          \begin{equation}
+            \begin{split}
+              d_1 \omega
+              & = d f_1 \wedge d x^1 + d f_2 \wedge d x^2 \\
+              & =
+                \left(
+                  \frac{\partial f_1}{\partial x^1}\, d x^1
+                  + \frac{\partial f_1}{\partial x^2}\, d x^2
+                \right)
+                \wedge d x^1
+                +
+                \left(
+                  \frac{\partial f_2}{\partial x^1}\, d x^1
+                  + \frac{\partial f_2}{\partial x^2}\, d x^2
+                \right)
+                \wedge d x^2 \\
+              & =
+                \left(
+                  \frac{\partial f_2}{\partial x^1}
+                  - \frac{\partial f_1}{\partial x^2}
+                \right)\,
+                d x^1 \wedge d x^2.
+            \end{split}
+          \end{equation}
+      \end{enumerate}
+    \item
+      \textbf{Exterior derivative in $\R^3$.}
+      Let $x^1, x^2, x^3 \colon \R^3 \to \R$ be the coordinate maps.
+      \begin{enumerate}
+        \item
+          \textbf{Exterior derivative of $0$-forms.}
+          Consider a $0$-form (a function)
+          $f \in \Omega^1(\R^3) = \mathcal{F}(\R^3)$.
+          Then
+          \begin{equation}
+            d_0 f
+            = \frac{\partial f}{\partial x^1}\, d x^1
+            + \frac{\partial f}{\partial x^2}\, d x^2
+            + \frac{\partial f}{\partial x^3}\, d x^3.
+          \end{equation}
+        \item
+          \textbf{Exterior derivative of $1$-forms.}
+          Consider a $1$-form $\omega \in \Omega^1(\R^3)$ such that
+          $\omega = f_1\, d x^1 + f_2\, d x^2 + f_3\, d x^3$,
+          for some $f_1, f_2, f_3 \in \mathcal{F}(\R^3)$.
+          Then
+          \begin{equation}
+            \begin{split}
+              d_1 \omega
+              & = d f_1 \wedge d x^1 + d f_2 \wedge d x^2 + d f_3 \wedge d x^3
+                \\
+              & =
+                \left(
+                  \frac{\partial f_1}{\partial x^1}\, d x^1
+                  + \frac{\partial f_1}{\partial x^2}\, d x^2
+                  + \frac{\partial f_1}{\partial x^3}\, d x^3
+                \right)
+                \wedge d x^1 \\
+              & \quad
+                +
+                \left(
+                  \frac{\partial f_2}{\partial x^1}\, d x^1
+                  + \frac{\partial f_2}{\partial x^2}\, d x^2
+                  + \frac{\partial f_2}{\partial x^3}\, d x^3
+                \right)
+                \wedge d x^2 \\
+              & \quad
+                +
+                \left(
+                  \frac{\partial f_3}{\partial x^1}\, d x^1
+                  + \frac{\partial f_3}{\partial x^2}\, d x^2
+                  + \frac{\partial f_3}{\partial x^3}\, d x^3
+                \right)
+                \wedge d x^3
+                \\
+              & =
+                \left(
+                  \frac{\partial f_3}{\partial x^2}
+                  - \frac{\partial f_2}{\partial x^3}
+                \right)\,
+                d x^2 \wedge d x^3
+                +
+                \left(
+                  \frac{\partial f_1}{\partial x^3}
+                  - \frac{\partial f_3}{\partial x^1}
+                \right)\,
+                d x^3 \wedge d x^1
+                +
+                \left(
+                  \frac{\partial f_2}{\partial x^1}
+                  - \frac{\partial f_1}{\partial x^2}
+                \right)\,
+                d x^1 \wedge d x^2.
+            \end{split}
+          \end{equation}
+        \item
+          \textbf{Exterior derivative of $1$-forms.}
+          Consider a $2$-form $\omega \in \Omega^2(\R^3)$ such that
+          \begin{equation}
+            \omega
+            = f_1\, d x^2 \wedge d x^3
+            + f_2\, d x^3 \wedge d x^1
+            + f_3\, d x^1 \wedge d x^2,
+          \end{equation}
+          for some $f_1, f_2, f_3 \in \mathcal{F}(\R^3)$.
+          Then
+          \begin{equation}
+            \begin{split}
+              d_2 \omega
+              & = d f_1 \wedge d x^2 \wedge d x^3
+                + d f_2 \wedge d x^3 \wedge d x^1
+                + d f_3 \wedge d x^1 \wedge d x^2
+                \\
+              & =
+                \left(
+                  \frac{\partial f_1}{\partial x^1}\, d x^1
+                  + \frac{\partial f_1}{\partial x^2}\, d x^2
+                  + \frac{\partial f_1}{\partial x^3}\, d x^3
+                \right)
+                \wedge d x^2 \wedge d x^3 \\
+              & \quad
+                +
+                \left(
+                  \frac{\partial f_2}{\partial x^1}\, d x^1
+                  + \frac{\partial f_2}{\partial x^2}\, d x^2
+                  + \frac{\partial f_2}{\partial x^3}\, d x^3
+                \right)
+                \wedge d x^3 \wedge d x^1 \\
+              & \quad
+                +
+                \left(
+                  \frac{\partial f_3}{\partial x^1}\, d x^1
+                  + \frac{\partial f_3}{\partial x^2}\, d x^2
+                  + \frac{\partial f_3}{\partial x^3}\, d x^3
+                \right)
+                \wedge d x^1 \wedge d x^2 \\
+              & =
+                \left(
+                  \frac{\partial f_1}{\partial x^1}
+                  + \frac{\partial f_2}{\partial x^2}
+                  + \frac{\partial f_3}{\partial x^3}
+                \right)\,
+                d x^1 \wedge d x^2 \wedge d x^3.
+            \end{split}
+          \end{equation}
+      \end{enumerate}
+  \end{enumerate}
+\end{example}
