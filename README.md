@@ -59,10 +59,11 @@ grids of orthogonal parallelotopes.
 This renewed definition has been used ever since.
 
 Further applications of CMC for fluid flows on porous media on rock samples were
-performed in the article "Calculus with combinatorial differential forms for
-fluid flow analysis in porous and fractured media".
-The article is currently under review but it is available as a preprint at
-<https://arxiv.org/abs/2501.08996>
+performed in the article
+"Combinatorial differential forms for multi-dimensional fluid flow in porous
+media: A unified framework for volumetric pores, fractures, and channels",
+published at
+<https://www.sciencedirect.com/science/article/pii/S030917082500209X>.
 The calculations were done by Changhao Liu, expanding on Pieter's code.
 Changhao's code is available at <https://github.com/changhaoliu-UOM/flow_2024>.
 
