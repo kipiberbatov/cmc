@@ -1,6 +1,8 @@
 #include <errno.h>
 #include <stdlib.h>
 
+#include "cmc_error_message.h"
+#include "color.h"
 #include "double_array2.h"
 #include "mesh_qc.h"
 #include "vector_sparse.h"
@@ -14,10 +16,10 @@ double * mesh_qc_inner_p(const mesh_qc * m, const double * m_vol_d,
   m_cn_p = m->cn[p];
 
   m_inner_p = (double *) malloc(sizeof(double) * m_cn_p);
-  if (errno)
+  if (m_inner_p == NULL)
   {
-    fprintf(stderr,
-            "mesh_qc_inner_p - cannot allocate memory for m_inner[%d]\n", p);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(double) * m_cn_p, "m_inner_p");
     return NULL;
   }
 
@@ -36,18 +38,21 @@ double ** mesh_qc_inner(
   m_dim = m->dim;
 
   m_inner = (double **) malloc(sizeof(double *) * (m_dim + 1));
-  if (errno)
+  if (m_inner == NULL)
   {
-    fputs("mesh_qc_inner - cannot allocate memory for m_inner\n", stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(double) * (m_dim + 1), "m_inner");
     return NULL;
   }
 
   for (p = 0; p <= m_dim; ++p)
   {
     m_inner[p] = mesh_qc_inner_p(m, m_vol_d, p, m_metric[p]);
-    if (errno)
+    if (m_inner[p] == NULL)
     {
-      fprintf(stderr, "mesh_qc_inner - cannot calculate m_inner[%d]\n", p);
+      color_error_position(__FILE__, __LINE__);
+      fprintf(stderr, "cannot calculate m_inner[%s%d%s]\n",
+        color_variable, p, color_none);
       double_array2_free(m_inner, p);
       return NULL;
     }

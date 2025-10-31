@@ -1,6 +1,9 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "cmc_error_message.h"
+#include "color.h"
 #include "int.h"
 #include "double.h"
 #include "matrix_sparse.h"
@@ -15,15 +18,19 @@ matrix_sparse_heat_conduction_trapezoid_rule_private(
   matrix_sparse * id, * l;
 
   id = matrix_sparse_identity(laplacian_0->cols);
-  if (errno)
+  if (id == NULL)
   {
-    fputs("matrix_sparse_laplacian_dynamic - cannot calculate id\n", stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_cannot_calculate("id");
     return NULL;
   }
 
   l = matrix_sparse_linear_combination(laplacian_0, id, sign * tau / 2, 1);
-  if (errno)
-    fputs("matrix_sparse_laplacian_dynamic - cannot calculate l\n", stderr);
+  if (l == NULL)
+  {
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_cannot_calculate("l");
+  }
 
   matrix_sparse_free(id);
   return l;
@@ -74,19 +81,27 @@ double * matrix_sparse_diffusion(
   matrix_sparse * l, * r;
 
   l = matrix_sparse_heat_conduction_trapezoid_rule_lhs(laplacian_0, tau);
-  r = matrix_sparse_heat_conduction_trapezoid_rule_rhs(laplacian_0, tau);
-  if (errno)
+  if (l == NULL)
   {
-    fputs("matrix_sparse_diffusion - cannot calculate l\n", stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_cannot_calculate("l");
     goto end;
+  }
+
+  r = matrix_sparse_heat_conduction_trapezoid_rule_rhs(laplacian_0, tau);
+  if (l == NULL || r == NULL)
+  {
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_cannot_calculate("r");
+    goto l_free;
   }
 
   u = (double *) malloc(sizeof(double) * l->cols * (N + 1));
   if (errno)
   {
-    fputs("matrix_sparse_diffusion - cannot allocate memory for u\n",
-          stderr);
-    goto l_free;
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(double) * l->cols * (N + 1), "u");
+    goto r_free;
   }
   tmp = (double *) malloc(sizeof(double) * l->cols);
   memcpy(tmp, lhs, sizeof(double) * l->cols);
@@ -112,7 +127,8 @@ double * matrix_sparse_diffusion(
     matrix_sparse_linear_solve(l, u + l->cols * (i + 1), "--lu");
     if (errno)
     {
-      fputs("matrix_sparse_diffusion - cannot find u[i]\n", stderr);
+      color_error_position(__FILE__, __LINE__);
+      fputs("cannot find u[i]\n", stderr);
       goto u_free;
     }
   }
@@ -125,8 +141,9 @@ double * matrix_sparse_diffusion(
   /* cleaning if an error occurs */
 u_free:
   free(u);
-l_free:
+r_free:
   matrix_sparse_free(r);
+l_free:
   matrix_sparse_free(l);
 end:
   return NULL;

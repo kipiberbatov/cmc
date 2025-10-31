@@ -1,5 +1,7 @@
 #include <errno.h>
 #include <string.h>
+
+#include "color.h"
 #include "matrix_sparse.h"
 
 void matrix_sparse_array_file_print(
@@ -12,9 +14,10 @@ void matrix_sparse_array_file_print(
     matrix_sparse_file_print(out, a[i], format);
     if (errno)
     {
+      color_error_position(__FILE__, __LINE__);
       fprintf(stderr,
-              "matrix_sparse_array_file_print - cannot print a[%d]: %s\n",
-              i, strerror(errno));
+        "cannot print a[%s%d%s] for reading: %s\n",
+        color_variable, i, color_none, strerror(errno));
       return;
     }
     if (i < n - 1)

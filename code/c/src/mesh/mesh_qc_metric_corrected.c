@@ -1,7 +1,9 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
-// #include "array_indexed.h"
+
+#include "cmc_error_message.h"
+#include "color.h"
 #include "double.h"
 #include "int.h"
 #include "mesh_qc.h"
@@ -16,10 +18,10 @@ static vector_sparse * mesh_qc_metric_corrected_p_i(
   jagged1 m_volumes_j;
 
   m_metric_p_i = (vector_sparse *) malloc(sizeof(vector_sparse));
-  if (errno)
+  if (m_metric_p_i == NULL)
   {
-    fprintf(stderr, "mesh_qc_metric_corrected_p_i - cannot allocate memory for "
-            "m_metric[%d][%d]\n", p, i);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(vector_sparse), "m_metric_p_i");
     goto end;
   }
 
@@ -28,10 +30,11 @@ static vector_sparse * mesh_qc_metric_corrected_p_i(
 
   m_metric_p_i->positions =
     (int *) malloc(sizeof(int) * m_metric_p_i->nonzero_max);
-  if (errno)
+  if (m_metric_p_i->positions == NULL)
   {
-    fprintf(stderr, "mesh_qc_metric_corrected_p_i - cannot allocate memory for "
-            "m_metric[%d][%d]->positions\n", p, i);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(
+      sizeof(int) * m_metric_p_i->nonzero_max, "m_metric_p_i->positions");
     goto m_metric_p_i_free;
   }
   memcpy(m_metric_p_i->positions, m_c_p_i_nodes->a1,
@@ -39,10 +42,11 @@ static vector_sparse * mesh_qc_metric_corrected_p_i(
 
   m_metric_p_i->values =
     (double *) malloc(sizeof(double) * m_metric_p_i->nonzero_max);
-  if (errno)
+  if (m_metric_p_i->values == NULL)
   {
-    fprintf(stderr, "mesh_qc_metric_corrected_p_i - cannot allocate memory for "
-            "m_metric[%d][%d]->values\n", p, i);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(
+      sizeof(double) * m_metric_p_i->nonzero_max, "m_metric_p_i->values");
     goto m_metric_p_i_positions_free;
   }
   denominator_p_i = ((double) m_c_p_i_nodes->a0) * (m_vol_p_i * m_vol_p_i);
@@ -57,8 +61,8 @@ static vector_sparse * mesh_qc_metric_corrected_p_i(
   vector_sparse_rearrange(m_metric_p_i);
   if (errno)
   {
-    fprintf(stderr, "mesh_qc_metric_corrected_p_i - cannot rearange "
-            "m_metric[%d][%d]\n", p, i);
+    color_error_position(__FILE__, __LINE__);
+    fprintf(stderr, "unable to rearrange m_metric_p_i\n");
     goto m_metric_p_i_values_free;
   }
 
@@ -89,10 +93,10 @@ vector_sparse ** mesh_qc_metric_corrected_p(
   m_cn_p = m_cn[p];
 
   m_metric_p = (vector_sparse **) malloc(m_cn_p * sizeof(vector_sparse *));
-  if (errno)
+  if (m_metric_p == NULL)
   {
-    fprintf(stderr, "mesh_qc_metric_corrected_p - cannot allocate memory for "
-            "m_metric[%d]\n", p);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(m_cn_p * sizeof(vector_sparse *), "m_metric_p");
     return NULL;
   }
 
@@ -103,10 +107,11 @@ vector_sparse ** mesh_qc_metric_corrected_p(
     m_metric_p[i] =
       mesh_qc_metric_corrected_p_i(m_cn[0], &m_c_p_i_nodes, p, i,
                                    m_vol_p[i], node_curvatures, &m_volumes);
-    if (errno)
+    if (m_metric_p[i] == NULL)
     {
-      fprintf(stderr, "mesh_qc_metric_corrected_p - cannot calculate "
-              "m_metric[%d][%d]\n", p, i);
+      color_error_position(__FILE__, __LINE__);
+      fprintf(stderr,
+        "cannot calculate m_metric_p[%s%d%s]\n", color_variable, i, color_none);
       vector_sparse_array_free(m_metric_p, i);
       return NULL;
     }
@@ -124,20 +129,22 @@ vector_sparse *** mesh_qc_metric_corrected(
   m_dim = m->dim;
 
   m_metric = (vector_sparse ***) malloc(sizeof(vector_sparse **) * (m_dim + 1));
-  if (errno)
+  if (m_metric == NULL)
   {
-    fputs("mesh_qc_metric_corrected - cannot allocate memory for m_metric\n",
-          stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(
+      sizeof(vector_sparse **) * (m_dim + 1), "m_metric");
     return NULL;
   }
 
   for (p = 0; p <= m_dim; ++p)
   {
     m_metric[p] = mesh_qc_metric_corrected_p(m, p, m_vol[p], node_curvatures);
-    if (errno)
+    if (m_metric[p] == NULL)
     {
-      fprintf(stderr, "mesh_qc_metric_corrected - cannot calculate "
-              "m_metric[%d]\n", p);
+      color_error_position(__FILE__, __LINE__);
+      fprintf(stderr,
+        "cannot calculate m_metric[%s%d%s]\n", color_variable, p, color_none);
       vector_sparse_array2_free(m_metric, p, m->cn);
       return NULL;
     }

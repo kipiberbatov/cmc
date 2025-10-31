@@ -1,5 +1,7 @@
-#include <errno.h>
 #include <stdlib.h>
+
+#include "cmc_error_message.h"
+#include "color.h"
 #include "forman_private.h"
 #include "int.h"
 #include "mesh_private.h"
@@ -10,9 +12,10 @@ mesh * forman(const mesh * m, const char * new_coordinates_format)
   mesh * m_forman;
 
   m_forman = (mesh *) malloc(sizeof(mesh));
-  if (errno)
+  if (m_forman == NULL)
   {
-    fputs("forman - cannot allocate memory for m_forman\n", stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(mesh), "m_forman");
     goto end;
   }
 
@@ -20,26 +23,29 @@ mesh * forman(const mesh * m, const char * new_coordinates_format)
   m_forman->dim = m->dim;
 
   m_forman->cn = (int *) calloc((m->dim + 1), sizeof(int));
-  if (errno)
+  if (m_forman->cn == NULL)
   {
-    fputs("forman - cannot allocate memory for m_forman->cn\n", stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(int) * (m->dim + 1), "m_forman->cn");
     goto m_forman_free;
   }
   forman_cn(m_forman->cn, m);
 
   m_forman_c_size = int_array_total_sum(m->dim + 1, m_forman->cn);
   m_forman->c = (int *) malloc(sizeof(int) * m_forman_c_size);
-  if (errno)
+  if (m_forman->c == NULL)
   {
-    fputs("forman - cannot allocate memory for m_forman->c\n", stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(int) * m_forman_c_size, "m_forman->c");
     goto m_forman_cn_free;
   }
   mesh_c(m_forman->c, m->dim, m_forman->cn);
 
   m_forman->cf = forman_cf(m, m_forman->cn);
-  if (errno)
+  if (m_forman->cf == NULL)
   {
-    fputs("forman - cannot calculate m_forman->cf", stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_cannot_calculate("m_forman->cf");
     goto m_forman_c_free;
   }
 
@@ -47,9 +53,11 @@ mesh * forman(const mesh * m, const char * new_coordinates_format)
 
   m_forman_coord_size = m->dim_embedded * m_forman->cn[0];
   m_forman->coord = (double *) calloc(m_forman_coord_size, sizeof(double));
-  if (errno)
+  if (m_forman->coord == NULL)
   {
-    fputs("forman - cannot allocate memory for m_forman_coord", stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(
+      sizeof(double) * m_forman_coord_size, "m_forman->coord");
     goto m_forman_cf_free;
   }
   forman_coordinates(m_forman->coord, m, new_coordinates_format);

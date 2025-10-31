@@ -4,6 +4,8 @@
 #include <math.h>
 #include <stdlib.h>
 
+#include "cmc_error_message.h"
+#include "color.h"
 #include "double_array.h"
 #include "int.h"
 #include "matrix_sparse_private.h"
@@ -155,10 +157,10 @@ double * matrix_sparse_heat_conduction_solve_non_grid(
   matrix_sparse * identity, * matrix_lhs, * matrix_lhs_in;
 
   m_nodes_in = jagged1_complement(m_laplacian->cols, m_nodes_bd);
-  if (errno)
+  if (m_nodes_in == NULL)
   {
-    fputs("matrix_sparse_heat_conduction_solve_non_grid - cannot allocate "
-          "memory for m_nodes_in\n", stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_cannot_calculate("m_nodes_in");
     goto end;
   }
 
@@ -168,10 +170,10 @@ double * matrix_sparse_heat_conduction_solve_non_grid(
   matrix_lhs_in = matrix_sparse_restrict_symmetric(m_laplacian, m_nodes_in);
   /* the next line may need to be commented and the code refactored */
   m_laplacian_in = matrix_sparse_restrict_symmetric(m_laplacian, m_nodes_in);
-  if (errno)
+  if (m_laplacian_in == NULL)
   {
-    fputs("matrix_sparse_heat_conduction_solve_non_grid - cannot allocate "
-          "memory for m_laplacian_in\n", stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_cannot_calculate("m_laplacian_in");
     goto m_nodes_in_free;
   }
 
@@ -185,24 +187,24 @@ double * matrix_sparse_heat_conduction_solve_non_grid(
   b_in = (double *) malloc(sizeof(double) * m_nodes_in->a0);
   if (errno)
   {
-    fputs("matrix_sparse_heat_conduction_solve_non_grid - cannot allocate "
-          "memory for b_in\n", stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(double) * m_nodes_in->a0, "b_in");
     goto matrix_lhs_in_free;
   }
 
   b_bd = (double *) malloc(sizeof(double) * m_nodes_bd->a0);
-  if (errno)
+  if (b_bd == NULL)
   {
-    fputs("matrix_sparse_heat_conduction_solve_non_grid - cannot allocate "
-          "memory for b_bd\n", stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(double) * m_nodes_bd->a0, "b_bd");
     goto b_in_free;
   }
 
   x = (double *) malloc(sizeof(double) * (N + 1) * m_laplacian->cols);
-  if (errno)
+  if (x == NULL)
   {
-    fputs("matrix_sparse_heat_conduction_solve_non_grid - cannot allocate "
-          "memory for x\n", stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(double) * (N + 1) * m_laplacian->cols, "x");
     goto b_bd_free;
   }
 
@@ -234,8 +236,8 @@ double * matrix_sparse_heat_conduction_solve_non_grid(
     matrix_sparse_linear_solve(matrix_lhs_in, b_in, "--cholesky");
     if (errno)
     {
-      fputs("matrix_sparse_laplace_equation_solve - cannot solve the reduced "
-            "linear system\n", stderr);
+      color_error_position(__FILE__, __LINE__);
+      fputs("cannot solve the reduced linear system\n", stderr);
       goto b_bd_free;
     }
     y = x + m_laplacian->rows * k;

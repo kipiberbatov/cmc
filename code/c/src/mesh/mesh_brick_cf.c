@@ -1,5 +1,7 @@
-#include <errno.h>
 #include <stdlib.h>
+
+#include "cmc_error_message.h"
+#include "color.h"
 #include "int.h"
 #include "mesh_private.h"
 #include "mesh_brick_private.h"
@@ -10,44 +12,49 @@ jagged4 * mesh_brick_cf(int d, const int * m_cn, const int * partitions)
   jagged4 * m_cf;
 
   m_cf = (jagged4 *) malloc(sizeof(jagged4));
-  if (errno)
+  if (m_cf == NULL)
   {
-    fputs("mesh_brick_cf - cannot allocate memory for m->cf\n", stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(jagged4), "m_cf");
     goto end;
   }
 
   m_cf->a0 = d;
   m_cf->a1 = (int *) malloc(sizeof(int) * d);
-  if (errno)
+  if (m_cf->a1 == NULL)
   {
-    fputs("mesh_brick_cf - cannot allocate memory for m->cf->a1\n", stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(int) * d, "m_cf->a1");
     goto m_cf_free;
   }
   mesh_cf_a1(m_cf->a1, d);
 
   m_cf_a2_size = int_array_total_sum(d, m_cf->a1);
   m_cf->a2 = (int *) malloc(sizeof(int) * m_cf_a2_size);
-  if (errno)
+  if (m_cf->a2 == NULL)
   {
-    fputs("mesh_brick_cf - cannot allocate memory for m->cf->a2\n", stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(int) * m_cf_a2_size, "m_cf->a2");
     goto m_cf_a1_free;
   }
   mesh_cf_a2(m_cf->a2, d, m_cn);
 
   m_cf_a3_size = int_array_total_sum(m_cf_a2_size, m_cf->a2);
   m_cf->a3 = (int *) malloc(sizeof(int) * m_cf_a3_size);
-  if (errno)
+  if (m_cf->a3 == NULL)
   {
-    fputs("mesh_brick_cf - cannot allocate memory for m->cf->a3\n", stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(int) * m_cf_a3_size, "m_cf->a3");
     goto m_cf_a2_free;
   }
   mesh_brick_cf_a3(m_cf->a3, d, m_cn);
 
   m_cf_a4_size = int_array_total_sum(m_cf_a3_size, m_cf->a3);
   m_cf->a4 = (int *) malloc(sizeof(int) * m_cf_a4_size);
-  if (errno)
+  if (m_cf->a4 == NULL)
   {
-    fputs("mesh_brick_cf - cannot allocate memory for m->cf->a4\n", stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(int) * m_cf_a4_size, "m_cf->a4");
     goto m_cf_a3_free;
   }
   mesh_brick_cf_a4(m_cf->a4, d, partitions);

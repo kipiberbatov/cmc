@@ -1,5 +1,7 @@
 #include <stdlib.h>
 
+#include "cmc_error_message.h"
+#include "color.h"
 #include "matrix_sparse.h"
 
 static void matrix_sparse_columns_restrict_set_cols_total(
@@ -85,7 +87,8 @@ matrix_sparse * matrix_sparse_columns_restrict(
   b = (matrix_sparse *) malloc(sizeof(matrix_sparse));
   if (b == NULL)
   {
-    fputs("matrix_sparse_restrict - cannot allocate memory for b\n", stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(matrix_sparse), "b");
     goto end;
   }
 
@@ -95,8 +98,8 @@ matrix_sparse * matrix_sparse_columns_restrict(
   b->cols_total = (int *) malloc(sizeof(int) * (b->cols + 1));
   if (b->cols_total == NULL)
   {
-    fprintf(stderr,
-      "%s:%d: cannot allocate memory for b->cols_total\n", __FILE__, __LINE__);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(int) * (b->cols + 1), "b->cols_total");
     goto b_free;
   }
   matrix_sparse_columns_restrict_set_cols_total(b->cols_total, a, columns);
@@ -106,8 +109,8 @@ matrix_sparse * matrix_sparse_columns_restrict(
   b->row_indices = (int *) malloc(sizeof(int) * b_nonzero_max);
   if (b->row_indices == NULL)
   {
-    fprintf(stderr,
-      "%s:%d: cannot allocate memory for b->row_indices\n", __FILE__, __LINE__);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(int) * b_nonzero_max, "b->row_indices");
     goto b_cols_total_free;
   }
   matrix_sparse_columns_restrict_set_row_indices(
@@ -116,8 +119,8 @@ matrix_sparse * matrix_sparse_columns_restrict(
   b->values = (double *) malloc(sizeof(double) * b_nonzero_max);
   if (b->values == NULL)
   {
-    fprintf(stderr,
-      "%s:%d: cannot allocate memory for b->values\n", __FILE__, __LINE__);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(double) * b_nonzero_max, "b->values");
     goto b_row_indices_free;
   }
   matrix_sparse_columns_restrict_set_values(

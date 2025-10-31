@@ -1,6 +1,7 @@
-#include <errno.h>
 #include <stdlib.h>
 
+#include "cmc_error_message.h"
+#include "color.h"
 #include "double_array.h"
 #include "int.h"
 #include "matrix_sparse.h"
@@ -10,9 +11,10 @@ matrix_sparse * matrix_sparse_identity(int n)
   matrix_sparse * a;
 
   a = (matrix_sparse *) malloc(sizeof(matrix_sparse));
-  if (errno)
+  if (a == NULL)
   {
-    fputs("matrix_sparse_identity - cannot allocate memory for a\n", stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(matrix_sparse), "a");
     goto end;
   }
 
@@ -20,28 +22,28 @@ matrix_sparse * matrix_sparse_identity(int n)
   a->cols = n;
 
   a->cols_total = (int *) malloc(sizeof(int) * (n + 1));
-  if (errno)
+  if (a->cols_total == NULL)
   {
-    fputs("matrix_sparse_identity - cannot allocate memory for "
-          "a->cols_total\n", stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(int) * (n + 1), "a->cols_total");
     goto a_free;
   }
   int_array_assign_identity(a->cols_total, n + 1);
 
   a->row_indices = (int *) malloc(sizeof(int) * n);
-  if (errno)
+  if (a->row_indices == NULL)
   {
-    fputs("matrix_sparse_identity - cannot allocate memory for "
-          "a->row_indices\n", stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(int) * n, "a->row_indices");
     goto a_cols_total_free;
   }
   int_array_assign_identity(a->row_indices, n);
 
   a->values = (double *) malloc(sizeof(double) * n);
-  if (errno)
+  if (a->values == NULL)
   {
-    fputs("matrix_sparse_identity - cannot allocate memory for "
-          "a->row_indices\n", stderr);
+    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(double) * n, "a->values");
     goto a_row_indices_free;
   }
   double_array_assign_constant(a->values, n, 1.);

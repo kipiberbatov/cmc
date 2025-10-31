@@ -1,6 +1,8 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "color.h"
 #include "vector_sparse.h"
 
 vector_sparse * vector_sparse_file_scan_by_name(
@@ -12,16 +14,18 @@ vector_sparse * vector_sparse_file_scan_by_name(
   in = fopen(name, "r");
   if (errno)
   {
-    fprintf(stderr, "vector_sparse_file_scan_by_name - cannot open file %s: %s\n",
-            name, strerror(errno));
+    color_error_position(__FILE__, __LINE__);
+    fprintf(stderr, "cannot open file %s%s%s: %s\n",
+      color_variable, name, color_none, strerror(errno));
     goto end;
   }
 
   a = vector_sparse_file_scan(in, format);
   if (errno)
   {
-    fprintf(stderr, "vector_sparse_file_scan_by_name - cannot scan a ");
-    fprintf(stderr, "in format %s: %s\n", format, strerror(errno));
+    color_error_position(__FILE__, __LINE__);
+    fprintf(stderr, "cannot scan a in format %s%s%s: %s\n",
+      color_variable, format, color_none, strerror(errno));
     goto in_close;
   }
 
