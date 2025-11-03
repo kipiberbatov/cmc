@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "mesh.h"
 
 /* p = d - 1 */
@@ -54,7 +54,7 @@ jagged1 * mesh_boundary_hyperfaces(const mesh * m)
   result = (jagged1 *) malloc(sizeof(jagged1));
   if (result == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for result\n",
       sizeof(jagged1));
@@ -65,7 +65,7 @@ jagged1 * mesh_boundary_hyperfaces(const mesh * m)
   result->a1 = (int *) malloc(sizeof(int) * result->a0);
   if (result->a1 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for result->a1\n",
       sizeof(int) * result->a0);

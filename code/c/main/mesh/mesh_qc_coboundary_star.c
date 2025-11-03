@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "double_array2.h"
 #include "mesh_qc.h"
@@ -20,7 +20,7 @@ static void mesh_qc_coboundary_star_file_print_raw(
       mesh_qc_coboundary_star_p(m, p, m_bd[p - 1], m_inner[p], m_inner[p - 1]);
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot calculate m_cbd_star[%d]\n", p);
       return;
     }
@@ -42,7 +42,7 @@ int main(int argc, char ** argv)
 
   if (argc != 3)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "number of command line arguments must be 3\n");
     errno = EINVAL;
     goto end;
@@ -51,7 +51,7 @@ int main(int argc, char ** argv)
   m_file = fopen(argv[1], "r");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot open mesh file %s: %s\n", argv[1], strerror(errno));
     goto end;
   }
@@ -59,7 +59,7 @@ int main(int argc, char ** argv)
   m = mesh_file_scan(m_file, "--raw");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m\n", stderr);
     fclose(m_file);
     goto end;
@@ -69,7 +69,7 @@ int main(int argc, char ** argv)
   m->fc = mesh_fc(m);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->fc\n", stderr);
     fclose(m_file);
     goto m_free;
@@ -78,7 +78,7 @@ int main(int argc, char ** argv)
   m_bd = mesh_file_scan_boundary(m_file, m);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m_bd\n", stderr);
     fclose(m_file);
     goto m_free;
@@ -89,7 +89,7 @@ int main(int argc, char ** argv)
   m_inner = double_array2_file_scan_by_name(argv[2], d + 1, m->cn, "--raw");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m_vol\n", stderr);
     goto m_bd_free;
   }
@@ -97,7 +97,7 @@ int main(int argc, char ** argv)
   mesh_qc_coboundary_star_file_print_raw(stdout, m, m_bd, m_inner);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot print m_inner\n", stderr);
     goto m_inner_free;
   }

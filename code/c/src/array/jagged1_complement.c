@@ -1,7 +1,6 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
 #include "cmc_error_message.h"
 #include "jagged.h"
 
@@ -13,7 +12,7 @@ jagged1 * jagged1_complement(int n, const jagged1 * arr)
   res = (jagged1 *) malloc(sizeof(jagged1));
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(jagged1), "res");
     goto end;
   }
@@ -23,7 +22,7 @@ jagged1 * jagged1_complement(int n, const jagged1 * arr)
   res->a1 = (int *) malloc(sizeof(int) * res->a0);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(int) * res->a0, "res->a1");
     goto res_free;
   }

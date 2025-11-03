@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "mesh.h"
 
 double * mesh_boundary_node_vectors_matrix(const mesh * m, int i)
@@ -20,7 +20,7 @@ double * mesh_boundary_node_vectors_matrix(const mesh * m, int i)
   result = (double *) malloc(sizeof(double) * m_fc_0_1_i.a0 * d);
   if (result == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes memory for result\n",
       sizeof(double) * m_fc_0_1_i.a0 * d);

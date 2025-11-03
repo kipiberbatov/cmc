@@ -4,7 +4,7 @@
 
 #include <gtk/gtk.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "cmc_animation.h"
 #include "cmc_animation_generic_data.h"
 
@@ -37,7 +37,7 @@ static int on_draw_event(
     animation->draw_snapshot((void *) cr, &(input->status), animation);
     if (input->status)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fputs("cannot draw to Cairo context\n", stderr);
       input->to_be_closed = 1;
       return TRUE;
@@ -48,7 +48,7 @@ static int on_draw_event(
   animation->draw_snapshot((void *) cr, &(input->status), animation);
   if (input->status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot draw to Cairo context\n", stderr);
     input->to_be_closed = 1;
     return TRUE;
@@ -169,7 +169,7 @@ static void cmc_cairo_gtk_animation_log_by_name(
   out = fopen(output, "w");
   if (out == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot open file %s%s%s: %s\n",
       color_variable, output, color_none,
       strerror(errno));
@@ -192,7 +192,7 @@ void cmc_cairo_gtk_animation(
   cmc_cairo_gtk_animation_run(animation, status);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot run GTK animation\n", stderr);
   }
 
@@ -203,7 +203,7 @@ void cmc_cairo_gtk_animation(
     status, argc, argv, index, total_steps, output);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot log GTK animation\n", stderr);
   }
 }

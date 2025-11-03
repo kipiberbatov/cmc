@@ -2,13 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "diffusion_transient_discrete_primal_weak.h"
 #include "diffusion_transient_discrete_primal_weak_solve_trapezoidal_next.h"
 #include "diffusion_transient_discrete_primal_weak_trapezoidal_loop_data.h"
 #include "double_array.h"
 #include "double_array_sequence_dynamic.h"
-#include "cmc_error_message.h"
 #include "mesh.h"
 
 /*
@@ -37,7 +36,7 @@ static void loop(
       double_array_sequence_dynamic_resize(potential);
       if (errno)
       {
-        color_error_position(__FILE__, __LINE__);
+        cmc_error_message_position_in_code(__FILE__, __LINE__);
         fprintf(stderr, "loop: cannot resize in iteration %d\n", i);
         return;
       }
@@ -46,7 +45,7 @@ static void loop(
     potential->values[i + 1] = (double *) malloc(sizeof(double) * m_cn_0);
     if (potential->values[i + 1] == NULL)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
         "loop: cannot allocate %s%ld%s bytes of memory for "
         "potential->values[%s%d%s]\n",
@@ -59,7 +58,7 @@ static void loop(
       potential->values[i + 1], rhs_final, potential->values[i], input);
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "loop: cannot calculate potential->values[%d]\n", i + 1);
       return;
     }
@@ -91,7 +90,7 @@ diffusion_transient_discrete_primal_weak_solve_trapezoidal_to_steady_state(
     m, m_inner_0, m_inner_1, data, time_step);
   if (input == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot initialize loop input\n", stderr);
     goto end;
   }
@@ -102,7 +101,7 @@ diffusion_transient_discrete_primal_weak_solve_trapezoidal_to_steady_state(
   rhs_final = (double *) malloc(sizeof(double) * m_cn_0);
   if (rhs_final == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m_cn_0, "rhs_final");
     goto input_free;
   }
@@ -110,7 +109,7 @@ diffusion_transient_discrete_primal_weak_solve_trapezoidal_to_steady_state(
   potential = double_array_sequence_dynamic_initialize(m_cn_0);
   if (potential == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot initialize potential with size %d\n", m_cn_0);
     goto rhs_final_free;
   }
@@ -125,7 +124,7 @@ diffusion_transient_discrete_primal_weak_solve_trapezoidal_to_steady_state(
   loop(potential, rhs_final, input, tolerance);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("error in loop calculating final potential\n", stderr);
     double_array_sequence_dynamic_free(potential);
     potential = NULL;

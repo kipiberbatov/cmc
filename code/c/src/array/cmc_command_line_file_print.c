@@ -1,4 +1,4 @@
-#include "color.h"
+#include "cmc_error_message.h"
 #include "cmc_command_line.h"
 
 void cmc_command_line_file_print(

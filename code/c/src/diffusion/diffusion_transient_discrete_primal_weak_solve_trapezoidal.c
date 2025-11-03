@@ -2,11 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "diffusion_transient_discrete_primal_weak.h"
 #include "diffusion_transient_discrete_primal_weak_solve_trapezoidal_next.h"
 #include "diffusion_transient_discrete_primal_weak_trapezoidal_loop_data.h"
-#include "cmc_error_message.h"
 #include "mesh.h"
 
 /*
@@ -31,7 +30,7 @@ static void loop(
       potential + m_cn_0 * (i + 1), rhs_final, potential + m_cn_0 * i, input);
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot calculate loop iteration %d\n", i);
       return;
     }
@@ -55,7 +54,7 @@ double * diffusion_transient_discrete_primal_weak_solve_trapezoidal(
     m, m_inner_0, m_inner_1, data, time_step);
   if (input == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot initialize loop input\n", stderr);
     goto end;
   }
@@ -66,7 +65,7 @@ double * diffusion_transient_discrete_primal_weak_solve_trapezoidal(
   rhs_final = (double *) malloc(sizeof(double) * m_cn_0);
   if (rhs_final == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m_cn_0, "rhs_final");
     goto input_free;
   }
@@ -75,7 +74,7 @@ double * diffusion_transient_discrete_primal_weak_solve_trapezoidal(
   potential = (double*) malloc(sizeof(double) * (number_of_steps + 1) * m_cn_0);
   if (potential == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * (number_of_steps + 1) * m_cn_0,
       "potential");
     goto rhs_final_free;
@@ -90,7 +89,7 @@ double * diffusion_transient_discrete_primal_weak_solve_trapezoidal(
   loop(potential, rhs_final, input, number_of_steps);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate potential\n", stderr);
     free(potential);
     potential =  NULL;

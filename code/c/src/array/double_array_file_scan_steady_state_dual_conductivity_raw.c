@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array_private.h"
 #include "int.h"
 
@@ -15,7 +15,7 @@ double_array_file_scan_steady_state_dual_conductivity_raw(FILE * in, int n)
   int_file_scan(in);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan number_of_cells_1\n", stderr);
     return NULL;
   }
@@ -24,7 +24,7 @@ double_array_file_scan_steady_state_dual_conductivity_raw(FILE * in, int n)
   int_file_scan(in);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan number_of_cells_d\n", stderr);
     return NULL;
   }
@@ -33,7 +33,7 @@ double_array_file_scan_steady_state_dual_conductivity_raw(FILE * in, int n)
   int_file_scan(in);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan number_of_cells_d\n", stderr);
     return NULL;
   }
@@ -42,7 +42,7 @@ double_array_file_scan_steady_state_dual_conductivity_raw(FILE * in, int n)
   a = double_array_file_scan_raw(in, n);
   if (a == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan array of length %s%d%s\n",
       color_variable, n, color_none);
@@ -54,7 +54,7 @@ double_array_file_scan_steady_state_dual_conductivity_raw(FILE * in, int n)
   a = double_array_file_scan_raw(in, n);
   if (a == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan array of length %s%d%s\n",
       color_variable, n, color_none);

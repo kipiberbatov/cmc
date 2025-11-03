@@ -1,6 +1,6 @@
 #include <errno.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "mesh_qc.h"
 
 static void mesh_qc_hodge_coeff_file_print_raw(FILE * out, const mesh * m)
@@ -28,7 +28,7 @@ int main(void)
   m = mesh_file_scan(in, "--raw");
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan mesh m in format --raw\n", stderr);
     return errno;
   }

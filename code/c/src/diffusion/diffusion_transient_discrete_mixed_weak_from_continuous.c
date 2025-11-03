@@ -3,13 +3,12 @@
 
 #include "boundary_scalar_field_discretize.h"
 #include "boundary_pseudoscalar_field_discretize.h"
-#include "color.h"
+#include "cmc_error_message.h"
 #include "de_rham.h"
 #include "diffusion_steady_state_discrete_flow_rate_from_potential.h"
 #include "diffusion_transient_continuous.h"
 #include "diffusion_transient_discrete_mixed_weak.h"
 #include "double_array.h"
-#include "cmc_error_message.h"
 #include "mesh_qc.h"
 #include "unsigned_approximation.h"
 
@@ -27,7 +26,7 @@ static void set_initial_flow_rate(
   dual_conductivity = (double *) malloc(sizeof(double) * m->cn[1]);
   if (dual_conductivity == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m->cn[1], "dual_conductivity");
     return;
   }
@@ -39,7 +38,7 @@ static void set_initial_flow_rate(
   discrete_potential = (double *) malloc(sizeof(double) * m->cn[0]);
   if (discrete_potential == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m->cn[0], "discrete_potential");
     goto dual_conductivity_free;
   }
@@ -51,7 +50,7 @@ static void set_initial_flow_rate(
     m, m_bd_1, dual_conductivity, discrete_potential, m_hodge_1);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot calculate initial flow_rate\n");
     goto discrete_potential_free;
   }
@@ -77,7 +76,7 @@ static void discrete_dual_potential_from_continuous_potential(
   discrete_potential = (double *) malloc(sizeof(double) * m->cn[0]);
   if (discrete_potential == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m->cn[0], "discrete_potential");
     return;
   }
@@ -106,7 +105,7 @@ diffusion_transient_discrete_mixed_weak_from_continuous(
   *(void **) (&data_discrete) = malloc(sizeof(*data_discrete));
   if (data_discrete == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(*data_discrete), "data_discrete");
     goto end;
   }
@@ -117,7 +116,7 @@ diffusion_transient_discrete_mixed_weak_from_continuous(
   data_discrete->pi_d = (double *) malloc(sizeof(double) * m->cn[d]);
   if (data_discrete->pi_d == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m->cn[d], "data_discrete->pi_d");
     goto data_discrete_free;
   }
@@ -127,7 +126,7 @@ diffusion_transient_discrete_mixed_weak_from_continuous(
   data_discrete->kappa_dm1 = (double *) malloc(sizeof(double) * m->cn[d - 1]);
   if (data_discrete->kappa_dm1 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m->cn[d - 1],
       "data_discrete->kappa_dm1");
     goto data_discrete_pi_d_free;
@@ -139,7 +138,7 @@ diffusion_transient_discrete_mixed_weak_from_continuous(
     sizeof(double) * m->cn[d]);
   if (data_discrete->initial_dual_potential == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m->cn[d],
       "data_discrete->initial_dual_potential");
     goto data_discrete_kappa_dm1_free;
@@ -149,7 +148,7 @@ diffusion_transient_discrete_mixed_weak_from_continuous(
     m, m_vol_d, data_continuous->initial);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate data_discrete->initial_dual_potential\n", stderr);
     goto data_discrete_initial_dual_potential_free;
   }
@@ -158,7 +157,7 @@ diffusion_transient_discrete_mixed_weak_from_continuous(
   = (double *) calloc(m->cn[d - 1], sizeof(double));
   if (data_discrete->initial_flow_rate == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m->cn[d - 1],
       "data_discrete->initial_flow_rate");
     goto data_discrete_initial_dual_potential_free;
@@ -167,7 +166,7 @@ diffusion_transient_discrete_mixed_weak_from_continuous(
     m, m_bd_1, m_hodge_1, data_continuous);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate data_discrete->initial_dual_potential\n", stderr);
     goto data_discrete_initial_flow_rate_free;
   }
@@ -175,7 +174,7 @@ diffusion_transient_discrete_mixed_weak_from_continuous(
   data_discrete->source = (double *) malloc(sizeof(double) * m->cn[d]);
   if (data_discrete->source == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m->cn[d],
       "data_discrete->source");
     goto data_discrete_initial_flow_rate_free;
@@ -188,7 +187,7 @@ diffusion_transient_discrete_mixed_weak_from_continuous(
     m, data_continuous->boundary_dirichlet);
   if (data_discrete->boundary_dirichlet_dm1 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot calculate data_discrete->boundary_dirichlet_dm1\n");
     goto data_discrete_source_free;
   }
@@ -197,7 +196,7 @@ diffusion_transient_discrete_mixed_weak_from_continuous(
     m, data_continuous->boundary_dirichlet);
   if (data_discrete->boundary_dirichlet_0 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot calculate data_discrete->boundary_dirichlet_0\n");
     goto data_discrete_boundary_dirichlet_dm1_free;
   }
@@ -206,7 +205,7 @@ diffusion_transient_discrete_mixed_weak_from_continuous(
     sizeof(double) * (data_discrete->boundary_dirichlet_0->a0));
   if (data_discrete->g_dirichlet_0 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(
       sizeof(double) * data_discrete->boundary_dirichlet_0->a0,
       "data_discrete->g_dirichlet_0");
@@ -224,7 +223,7 @@ diffusion_transient_discrete_mixed_weak_from_continuous(
     m, data_continuous->boundary_neumann);
   if (data_discrete->boundary_neumann_dm1 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot calculate data_discrete->boundary_neumann_dm1\n");
     goto data_discrete_g_dirichlet_0_free;
   }
@@ -233,7 +232,7 @@ diffusion_transient_discrete_mixed_weak_from_continuous(
     sizeof(double) * (data_discrete->boundary_neumann_dm1->a0));
   if (data_discrete->g_neumann_dm1 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(
       sizeof(double) * data_discrete->boundary_neumann_dm1->a0,
       "data_discrete->g_neumann_dm1");

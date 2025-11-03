@@ -1,7 +1,6 @@
 // #include <math.h>
 // #include <stdlib.h>
 
-// #include "color.h"
 // #include "cmc_error_message.h"
 // #include "matrix_sparse.h"
 
@@ -163,7 +162,7 @@
 //   l = (matrix_sparse *) malloc(sizeof(matrix_sparse));
 //   if (l == NULL)
 //   {
-//     color_error_position(__FILE__, __LINE__);
+//     cmc_error_message_position_in_code(__FILE__, __LINE__);
 //     cmc_error_message_malloc(sizeof(matrix_sparse), "l");
 //     goto end;
 //   }
@@ -174,7 +173,7 @@
 //   l->cols_total = (int *) malloc(sizeof(int) * (n + 1));
 //   if (l->cols_total == NULL)
 //   {
-//     color_error_position(__FILE__, __LINE__);
+//     cmc_error_message_position_in_code(__FILE__, __LINE__);
 //     cmc_error_message_malloc(sizeof(int) * (n + 1), "l_cols_total");
 //     goto l_free;
 //   }
@@ -185,7 +184,7 @@
 //   l->row_indices = (int *) malloc(sizeof(int) * l_nonzero_max);
 //   if (l->row_indices == NULL)
 //   {
-//     color_error_position(__FILE__, __LINE__);
+//     cmc_error_message_position_in_code(__FILE__, __LINE__);
 //     cmc_error_message_malloc(sizeof(int) * l_nonzero_max, "l_row_indices");
 //     goto l_cols_total_free;
 //   }
@@ -194,7 +193,7 @@
 //   l->values = (double *) malloc(sizeof(double) * l_nonzero_max);
 //   if (l->values == NULL)
 //   {
-//     color_error_position(__FILE__, __LINE__);
+//     cmc_error_message_position_in_code(__FILE__, __LINE__);
 //     cmc_error_message_malloc(sizeof(double) * l_nonzero_max, "l_values");
 //     goto l_row_indices_free;
 //   }
@@ -217,7 +216,6 @@
 
 #include <stdlib.h>
 
-#include "color.h"
 #include "cmc_error_message.h"
 #include "matrix_sparse_private.h"
 
@@ -232,7 +230,7 @@ matrix_sparse * matrix_sparse_cholesky_decomposition(const matrix_sparse * a)
   l = (matrix_sparse *) malloc(sizeof(matrix_sparse));
   if (l == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(matrix_sparse), "l");
     goto end;
   }
@@ -243,7 +241,7 @@ matrix_sparse * matrix_sparse_cholesky_decomposition(const matrix_sparse * a)
   S = cs_schol(1, &a0);
   if (S == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot do symbolic analysis of Cholesky decomposition\n", stderr);
     goto end;
   }
@@ -251,7 +249,7 @@ matrix_sparse * matrix_sparse_cholesky_decomposition(const matrix_sparse * a)
   N = cs_chol(&a0, S);
   if (N == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate Cholesky decomposition in csn structure\n", stderr);
     goto S_free;
   }

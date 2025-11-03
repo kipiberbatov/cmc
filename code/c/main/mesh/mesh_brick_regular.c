@@ -1,7 +1,6 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
 #include "cmc_error_message.h"
 #include "int.h"
 #include "mesh_brick.h"
@@ -16,7 +15,7 @@ static void mesh_brick_regular_file_print_raw(FILE * out, int d, int n)
   m = mesh_brick_regular(d, n);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m\n", stderr);
     goto end;
   }
@@ -29,7 +28,7 @@ static void mesh_brick_regular_file_print_raw(FILE * out, int d, int n)
   m_bd = mesh_brick_boundary(m->dim, partitions, m_bd_sizes);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->bd\n", stderr);
     goto m_free;
   }
@@ -50,7 +49,7 @@ int main(int argc, char ** argv)
 #define ARGC 3
   if (argc != 3)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_number_of_command_line_arguments_mismatch(ARGC, argc);
     errno = EIO;
     goto end;
@@ -59,14 +58,14 @@ int main(int argc, char ** argv)
   d = int_string_scan(argv[1]);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan dimension d\n", stderr);
     goto end;
   }
 
   if (d > MAX_DIM || d < 0)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     if (d > MAX_DIM)
       fprintf(stderr, "dimension %d is too big; limit is %d\n", d, MAX_DIM);
     else
@@ -78,14 +77,14 @@ int main(int argc, char ** argv)
   n = int_string_scan(argv[2]);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan number of partitions n\n", stderr);
     goto end;
   }
 
   if (n <= 0)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "number of partitions %d must be positive\n", n);
     errno = EINVAL;
     goto end;
@@ -94,7 +93,7 @@ int main(int argc, char ** argv)
   mesh_brick_regular_file_print_raw(stdout, d, n);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot generate and print mesh m\n", stderr);
     goto end;
   }

@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "diffusion_transient_discrete_primal_weak.h"
 #include "diffusion_transient_discrete_primal_weak_solve_trapezoidal_next.h"
 #include "diffusion_transient_discrete_primal_weak_trapezoidal_loop_data.h"
@@ -28,7 +28,7 @@ void diffusion_transient_discrete_primal_weak_solve_trapezoidal_next(
   matrix_sparse_linear_solve(input->lhs, potential_next, "--lu");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot solve linear system using LU decomposition\n", stderr);
     return;
   }

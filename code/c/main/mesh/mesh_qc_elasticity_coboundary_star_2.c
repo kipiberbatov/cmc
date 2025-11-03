@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double.h"
 #include "double_array.h"
 #include "double_array2.h"
@@ -38,7 +38,7 @@ int main(int argc, char ** argv)
 
   if (argc != 4)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "number of command line arguments must be 4\n");
     errno = EINVAL;
     goto end;
@@ -47,7 +47,7 @@ int main(int argc, char ** argv)
   mu = double_string_scan(argv[1]);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan mu\n", stderr);
     goto end;
   }
@@ -55,7 +55,7 @@ int main(int argc, char ** argv)
   m_file = fopen(argv[2], "r");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot open mesh file %s: %s\n", argv[2], strerror(errno));
     goto end;
   }
@@ -63,7 +63,7 @@ int main(int argc, char ** argv)
   m = mesh_file_scan(m_file, "--raw");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m\n", stderr);
     fclose(m_file);
     goto end;
@@ -73,7 +73,7 @@ int main(int argc, char ** argv)
   m->fc = mesh_fc(m);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->fc\n", stderr);
     fclose(m_file);
     goto m_free;
@@ -82,7 +82,7 @@ int main(int argc, char ** argv)
   m_bd = mesh_file_scan_boundary(m_file, m);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m_bd\n", stderr);
     fclose(m_file);
     goto m_free;
@@ -93,7 +93,7 @@ int main(int argc, char ** argv)
   m_inner = double_array2_file_scan_by_name(argv[3], d + 1, m->cn, "--raw");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m_vol\n", stderr);
     goto m_bd_free;
   }
@@ -102,7 +102,7 @@ int main(int argc, char ** argv)
     stdout, m, m_bd[1], m_inner[2], m_inner[1], mu);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate and print result\n", stderr);
     goto m_inner_free;
   }

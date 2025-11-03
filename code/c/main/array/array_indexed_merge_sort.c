@@ -3,7 +3,7 @@
 #include <string.h>
 
 #include "array_indexed.h"
-#include "color.h"
+#include "cmc_error_message.h"
 #include "int.h"
 #include "jagged.h"
 
@@ -20,7 +20,7 @@ int main(void)
   arr = jagged1_file_scan(in, "--raw");
   if (arr == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan arr in format --raw\n", stderr);
     goto end;
   }
@@ -30,7 +30,7 @@ int main(void)
   a.positions = (int *) malloc(sizeof(int) * n);
   if (a.positions == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for a.positions\n",
       sizeof(int) * n);
@@ -41,7 +41,7 @@ int main(void)
   a.values = (int *) malloc(sizeof(int) * n);
   if (a.values == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for a.positions\n",
       sizeof(int) * n);
@@ -52,7 +52,7 @@ int main(void)
   array_indexed_merge_sort(&a, n);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot merge sort a\n", stderr);
     goto a_values_free;
   }

@@ -1,7 +1,6 @@
 #include <stdlib.h>
 
 #include "cmc_error_message.h"
-#include "color.h"
 #include "int.h"
 #include "mesh_brick_private.h"
 
@@ -42,7 +41,7 @@ int ** mesh_brick_boundary(int d, const int * n, const int * m_bd_sizes)
   m_bd = (int **) malloc(sizeof(int *) * d);
   if (m_bd == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(int *) * d, "m->bd");
     return NULL;
   }
@@ -52,7 +51,7 @@ int ** mesh_brick_boundary(int d, const int * n, const int * m_bd_sizes)
     m_bd[p - 1] = (int *) malloc(sizeof(int) * m_bd_sizes[p - 1]);
     if (m_bd[p - 1] == NULL)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
         "cannot allocate %s%ld%s bytes of memory for m->bd[%s%d%s]\n",
         color_variable, sizeof(int) * m_bd_sizes[p - 1], color_none,

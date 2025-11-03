@@ -1,7 +1,6 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
 #include "cmc_error_message.h"
 #include "int.h"
 
@@ -14,7 +13,7 @@ static void int_array_combination_file_print(FILE * out, int m, int n)
   a = (int *) malloc(sizeof(int) * n);
   if (a == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(int) * n, "a");
     return;
   }
@@ -37,7 +36,7 @@ int main(int argc, char ** argv)
 #define ARGC 3
   if (argc != ARGC)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_number_of_command_line_arguments_mismatch(ARGC, argc);
     return EINVAL;
   }
@@ -45,7 +44,7 @@ int main(int argc, char ** argv)
   m = int_string_scan(argv[1]);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan total number of elements m from string %s\n",
       argv[1]);
@@ -53,7 +52,7 @@ int main(int argc, char ** argv)
   }
   if (m < 0)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "total number of elements %d is negative\n", m);
     errno = EINVAL;
     goto end;
@@ -62,13 +61,13 @@ int main(int argc, char ** argv)
   n = int_string_scan(argv[2]);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot scan subsets size n from string %s\n", argv[2]);
     goto end;
   }
   if (n < 0)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "subsets size %d is negative\n", n);
     errno = EINVAL;
     goto end;
@@ -77,7 +76,7 @@ int main(int argc, char ** argv)
   int_array_combination_file_print(stdout, m, n);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot print %d-element combinations of the set {0, ..., %d}\n",
       n, m - 1);

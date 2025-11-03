@@ -1,7 +1,6 @@
 #include <errno.h>
 #include <string.h>
 
-#include "color.h"
 #include "cmc_error_message.h"
 #include "jagged.h"
 #include "matrix_sparse.h"
@@ -16,7 +15,7 @@ int main(int argc, char ** argv)
 #define ARGC 6
   if (argc != ARGC)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_number_of_command_line_arguments_mismatch(ARGC, argc);
     errno = EIO;
     goto end;
@@ -28,7 +27,7 @@ int main(int argc, char ** argv)
   a = matrix_sparse_file_scan_by_name(a_name, a_format);
   if (a == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan matrix a from file %s in format %s\n",
       a_name, a_format);
@@ -42,7 +41,7 @@ int main(int argc, char ** argv)
   rows_file = fopen(rows_name, "r");
   if (rows_file == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan open file %s for reading: %s\n",
       rows_name, strerror(errno));
@@ -51,7 +50,7 @@ int main(int argc, char ** argv)
   rows = jagged1_file_scan(rows_file, rows_format);
   if (rows == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan rows from file %s in format %s\n",
       rows_name, rows_format);
@@ -63,7 +62,7 @@ int main(int argc, char ** argv)
   b = matrix_sparse_remove_symmetric(a, rows);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate restricted matrix b\n", stderr);
     goto rows_free;
   }

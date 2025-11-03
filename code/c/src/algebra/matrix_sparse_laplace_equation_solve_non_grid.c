@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "matrix_sparse_private.h"
 
@@ -60,7 +60,7 @@ double * matrix_sparse_laplace_equation_solve_non_grid(
   b_bd = (double *) malloc(sizeof(double) * m_nodes_bd->a0);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for b_bd\n",
       sizeof(double) * m_nodes_bd->a0);
@@ -71,7 +71,7 @@ double * matrix_sparse_laplace_equation_solve_non_grid(
   m_nodes_in = jagged1_complement(m_laplacian->cols, m_nodes_bd);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m_nodes_in\n", stderr);
     goto b_bd_free;
   }
@@ -79,7 +79,7 @@ double * matrix_sparse_laplace_equation_solve_non_grid(
   b_in = (double *) malloc(sizeof(double) * m_nodes_in->a0);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for b_in\n",
       sizeof(double) * m_nodes_in->a0);
@@ -92,7 +92,7 @@ double * matrix_sparse_laplace_equation_solve_non_grid(
   m_laplacian_in = matrix_sparse_restrict_symmetric(m_laplacian, m_nodes_in);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m_laplacian_in\n", stderr);
     goto b_in_free;
   }
@@ -100,7 +100,7 @@ double * matrix_sparse_laplace_equation_solve_non_grid(
   matrix_sparse_linear_solve(m_laplacian_in, b_in, "--cholesky");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs(
       "cannot solve the reduced linear system using Cholesky decomposition\n",
       stderr);
@@ -110,7 +110,7 @@ double * matrix_sparse_laplace_equation_solve_non_grid(
   x = (double *) malloc(sizeof(double) * m_laplacian->rows);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for x\n",
       sizeof(double) * m_laplacian->rows);

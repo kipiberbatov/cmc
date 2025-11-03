@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "cmc_graphics_rectangle.h"
 #include "cmc_graphics_colorbar_direction.h"
 #include "cmc_graphics_colorbar_draw_functions.h"
@@ -33,7 +33,7 @@ static void cmc_graphics_colorbar_draw_rectangles_horizontal(
     draw_rectangle(canvas, status, rectangle, get_color);
     if (*status)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fputs("cannot draw rectangle\n", stderr);
       return;
     }
@@ -68,7 +68,7 @@ static void cmc_graphics_colorbar_draw_rectangles_vertical(
     draw_rectangle(canvas, status, rectangle, get_color);
     if (*status)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fputs("cannot draw rectangle\n", stderr);
       return;
     }
@@ -101,7 +101,7 @@ void cmc_graphics_colorbar_draw_rectangles(
     drawer = cmc_graphics_colorbar_draw_rectangles_vertical;
   else
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("direction is neither horizontal, nor vertical\n", stderr);
     *status = 1;
     return;
@@ -110,7 +110,7 @@ void cmc_graphics_colorbar_draw_rectangles(
   drawer(rectangle, canvas, status, width, height, total_colors, functions);
   if(*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot draw rectangles\n", stderr);
     return;
   }

@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "cmc_command_line.h"
 
 static int cmc_command_line_is_option(const char * option)
@@ -49,7 +49,7 @@ static void cmc_command_line_find_number_of_occurences_optional(
   j = cmc_command_line_index(size, options, option_name);
   if (j == -1)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "%s%.*s%s is not a valid option\n",
       color_variable, cmc_command_line_length(option_name), option_name,
@@ -67,7 +67,7 @@ static void cmc_command_line_find_number_of_occurences_optional(
       ++*i;
       if (*i == argc)
       {
-        color_error_position(__FILE__, __LINE__);
+        cmc_error_message_position_in_code(__FILE__, __LINE__);
         fprintf(stderr,
           "last option %s%s%s has no arguments\n",
           color_variable, option_j->name, color_none);
@@ -93,7 +93,7 @@ static void cmc_command_line_find_number_of_occurences(
         options, status, &i, size, argc, argv[i]);
       if (*status)
       {
-        color_error_position(__FILE__, __LINE__);
+        cmc_error_message_position_in_code(__FILE__, __LINE__);
         fprintf(stderr, "cannot parse argument %s%s%s\n",
           color_variable, argv[i], color_none);
         return;
@@ -122,7 +122,7 @@ static void cmc_command_line_check_minimality(
     min_j = option_j->minimal_number_of_arguments;
     if (min_j > total_j)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
         "the minimal number of arguments for option %s%s%s is %s%d%s "
         "but only %s%d%s were found\n",
@@ -195,7 +195,7 @@ static void cmc_command_line_allocate_arguments(
         option_j->arguments = malloc(option_j->type_size * total_j);
         if (option_j->arguments == NULL)
         {
-          color_error_position(__FILE__, __LINE__);
+          cmc_error_message_position_in_code(__FILE__, __LINE__);
           fprintf(stderr,
             "cannot allocate %ld bytes of memory for option %s%s%s",
             option_j->type_size * total_j,
@@ -249,7 +249,7 @@ static void cmc_command_line_set_optional_argument_data(
     option_j->string_scan(data, status, data_name);
     if (*status)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
         "cannot scan data for option %s%s%s from string %s%s%s\n",
         color_variable, option_j->name, color_none,
@@ -288,7 +288,7 @@ static void cmc_command_line_set_optional_argument(
     cmc_command_line_set_optional_argument_data(option_j, status, data_name);
     if (*status)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
         "cannot set option %s%s%s from string %s%s%s\n",
         color_variable, option_j->name, color_none,
@@ -316,7 +316,7 @@ static void cmc_command_line_set_positional_argument(
     option_j->string_scan(data, status, data_name);
     if (*status)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
         "cannot scan data for option %s%s%s from string %s%s%s\n",
         color_variable, option_j->name, color_none,
@@ -351,7 +351,7 @@ static void cmc_command_line_set_arguments(
       cmc_command_line_set_optional_argument(options, &i, status, size, argv);
       if (*status)
       {
-        color_error_position(__FILE__, __LINE__);
+        cmc_error_message_position_in_code(__FILE__, __LINE__);
         fputs("cannot set optional argument\n", stderr);
         return;
       }
@@ -362,7 +362,7 @@ static void cmc_command_line_set_arguments(
       cmc_command_line_set_positional_argument(options[j], status, argv[i]);
       if (*status)
       {
-        color_error_position(__FILE__, __LINE__);
+        cmc_error_message_position_in_code(__FILE__, __LINE__);
         fputs("cannot set positional argument\n", stderr);
         return;
       }
@@ -396,7 +396,7 @@ void cmc_command_line_parse(
     options, status, size, argc, argv);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot find number of occurences of arguments\n", stderr);
     return;
   }
@@ -404,7 +404,7 @@ void cmc_command_line_parse(
   cmc_command_line_check_minimality(options, status, size);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("an option has less than minimal number of arguments\n", stderr);
     return;
   }
@@ -412,7 +412,7 @@ void cmc_command_line_parse(
   cmc_command_line_allocate_arguments(options, status, size, argc, argv);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot allocate memory for command-line arguments\n", stderr);
     return;
   }
@@ -420,7 +420,7 @@ void cmc_command_line_parse(
   cmc_command_line_set_arguments(options, status, size, argc, argv);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot set optional arguments\n", stderr);
     cmc_command_line_free_arguments(options, size);
     return;

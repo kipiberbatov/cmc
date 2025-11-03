@@ -1,7 +1,6 @@
 #include <stdlib.h>
 
 #include "cmc_error_message.h"
-#include "color.h"
 #include "double_array.h"
 #include "int.h"
 #include "matrix_sparse.h"
@@ -13,7 +12,7 @@ matrix_sparse * matrix_sparse_identity(int n)
   a = (matrix_sparse *) malloc(sizeof(matrix_sparse));
   if (a == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(matrix_sparse), "a");
     goto end;
   }
@@ -24,7 +23,7 @@ matrix_sparse * matrix_sparse_identity(int n)
   a->cols_total = (int *) malloc(sizeof(int) * (n + 1));
   if (a->cols_total == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(int) * (n + 1), "a->cols_total");
     goto a_free;
   }
@@ -33,7 +32,7 @@ matrix_sparse * matrix_sparse_identity(int n)
   a->row_indices = (int *) malloc(sizeof(int) * n);
   if (a->row_indices == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(int) * n, "a->row_indices");
     goto a_cols_total_free;
   }
@@ -42,7 +41,7 @@ matrix_sparse * matrix_sparse_identity(int n)
   a->values = (double *) malloc(sizeof(double) * n);
   if (a->values == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * n, "a->values");
     goto a_row_indices_free;
   }

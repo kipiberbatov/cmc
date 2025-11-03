@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "jagged.h"
 
 jagged1 * jagged1_difference(const jagged1 * y, const jagged1 * x)
@@ -15,7 +15,7 @@ jagged1 * jagged1_difference(const jagged1 * y, const jagged1 * x)
   z = (jagged1 *) malloc(sizeof(jagged1));
   if (z == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for z\n", sizeof(jagged1));
     return NULL;
@@ -29,7 +29,7 @@ jagged1 * jagged1_difference(const jagged1 * y, const jagged1 * x)
   z_a1 = (int *) malloc(sizeof(int) * z_a0);
   if (z_a1 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for z_a1\n", sizeof(int) * z_a0);
     free(z);

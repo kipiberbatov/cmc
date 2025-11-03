@@ -2,12 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array2.h"
 #include "double_matrix.h"
 #include "diffusion_transient_discrete_mixed_weak.h"
 #include "cmc_command_line.h"
-#include "cmc_error_message.h"
 #include "int.h"
 #include "mesh.h"
 
@@ -71,21 +70,21 @@ int main(int argc, char ** argv)
   cmc_command_line_parse(options, &status, size, argc, argv);
   if (status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot parse command line options\n", stderr);
     return status;
   }
 
   if (time_step <= 0.)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "the time step is %g but it must be positive\n", time_step);
     goto end;
   }
 
   if (number_of_steps < 0)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "the number of steps is %d but it must be at least 0\n",
       number_of_steps);
@@ -95,7 +94,7 @@ int main(int argc, char ** argv)
   m_file = fopen(m_name, "r");
   if (m_file == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot open mesh file %s: %s\n", m_name, strerror(errno));
     goto end;
   }
@@ -103,7 +102,7 @@ int main(int argc, char ** argv)
   m = mesh_file_scan(m_file, m_format);
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan mesh m from file %s in format %s\n", m_name, m_format);
     fclose(m_file);
@@ -113,7 +112,7 @@ int main(int argc, char ** argv)
   m->fc = mesh_fc(m);
   if (m->fc == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->fc\n", stderr);
     goto m_free;
   }
@@ -121,7 +120,7 @@ int main(int argc, char ** argv)
   m_bd = mesh_file_scan_boundary(m_file, m);
   if (m_bd == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m_bd\n", stderr);
     fclose(m_file);
     goto m_free;
@@ -137,7 +136,7 @@ int main(int argc, char ** argv)
   m_cbd_dm1 = matrix_sparse_transpose(m_bd[d - 1]);
   if (m_cbd_dm1 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->fc\n", stderr);
     goto m_bd_free;
   }
@@ -146,7 +145,7 @@ int main(int argc, char ** argv)
     m_inner_name, d + 1, m_cn, m_inner_format);
   if (m_inner == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan inner products from file %s in format %s\n",
       m_inner_name, m_inner_format);
@@ -156,7 +155,7 @@ int main(int argc, char ** argv)
   data_file = fopen(data_name, "r");
   if (data_file == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot open problem data file %s for reading: %s\n",
       data_name, strerror(errno));
@@ -165,7 +164,7 @@ int main(int argc, char ** argv)
   data = diffusion_transient_discrete_mixed_weak_file_scan_raw(data_file);
   if (data == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot scan problem data from file %s\n", data_name);
     fclose(data_file);
     goto m_inner_free;
@@ -176,7 +175,7 @@ int main(int argc, char ** argv)
   = (double *) malloc(sizeof(double) * (number_of_steps + 1) * m_cn_dm1);
   if (flow_rate == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * (number_of_steps + 1) * m_cn_dm1,
       "flow_rate");
     goto data_free;
@@ -186,7 +185,7 @@ int main(int argc, char ** argv)
     sizeof(double) * (number_of_steps + 1) * m_cn_d);
   if (dual_potential == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * (number_of_steps + 1) * m_cn_d,
       "dual_potential");
     goto flow_rate_free;
@@ -197,7 +196,7 @@ int main(int argc, char ** argv)
     m, m_cbd_dm1, m_inner[d - 1], m_inner[d], data, time_step, number_of_steps);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot find flow_rate and dual_potential\n", stderr);
     goto dual_potential_free;
   }

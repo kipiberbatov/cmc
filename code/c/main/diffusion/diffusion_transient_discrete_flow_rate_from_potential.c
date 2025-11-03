@@ -1,12 +1,11 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "double_matrix.h"
 #include "diffusion_transient_discrete_flow_rate_from_potential.h"
 #include "cmc_command_line.h"
-#include "cmc_error_message.h"
 #include "int.h"
 #include "mesh.h"
 
@@ -81,14 +80,14 @@ int main(int argc, char ** argv)
   cmc_command_line_parse(options, &status, size, argc, argv);
   if (status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot parse command line options\n", stderr);
     return status;
   }
 
   if (number_of_steps < 0)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "the number of steps is %d but it must be at least 0\n", number_of_steps);
     goto end;
@@ -97,14 +96,14 @@ int main(int argc, char ** argv)
   m_file = fopen(m_name, "r");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot open mesh file %s\n", m_name);
     goto end;
   }
   m = mesh_file_scan(m_file, m_format);
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan mesh m from file %s in format %s\n",
       m_name, m_format);
@@ -117,7 +116,7 @@ int main(int argc, char ** argv)
   m_bd_1 = mesh_file_scan_boundary_p(m_file, m, 1);
   if (m_bd_1 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot scan m_bd_1 from file %s\n", m_name);
     fclose(m_file);
     goto m_free;
@@ -128,7 +127,7 @@ int main(int argc, char ** argv)
     m_hodge_name, m->dim + 1, m_hodge_format);
   if (m_hodge == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan m_hodge form file %s in format %s\n",
       m_hodge_name, m_hodge_format);
@@ -139,7 +138,7 @@ int main(int argc, char ** argv)
     kappa_1_name, m->cn[1],kappa_1_format);
   if (kappa_1 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan kappa_1 form file %s in format %s\n",
       kappa_1_name, kappa_1_format);
@@ -150,7 +149,7 @@ int main(int argc, char ** argv)
     potential_name, number_of_steps + 1, m->cn[0], potential_format);
   if (potential == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan potential form file %s in format %s\n",
       potential_name, potential_format);
@@ -161,7 +160,7 @@ int main(int argc, char ** argv)
   = (double *) calloc((number_of_steps + 1) * m_cn_dm1, sizeof(double));
   if (flow_rate == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(
       sizeof(double) * (number_of_steps + 1) * m_cn_dm1, "flow_rate");
     goto potential_free;
@@ -171,7 +170,7 @@ int main(int argc, char ** argv)
     flow_rate, m, m_bd_1, kappa_1, potential, m_hodge[1], number_of_steps);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate flow_rate %s\n", stderr);
     goto flow_rate_free;
   }
@@ -180,7 +179,7 @@ int main(int argc, char ** argv)
     stdout, number_of_steps + 1, m_cn_dm1, flow_rate, flow_rate_format);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot print flow_rate in format %s\n", flow_rate_format);
     goto flow_rate_free;
   }

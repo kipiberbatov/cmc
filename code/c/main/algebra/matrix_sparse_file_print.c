@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "int.h"
 #include "matrix_sparse.h"
 
@@ -14,7 +14,7 @@ matrix_sparse_file_print_file_scan(FILE * out, FILE * in, char * format)
   a = matrix_sparse_file_scan(in, "--raw");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan matrix a in format --raw\n", stderr);
     goto a_free;
   }
@@ -22,7 +22,7 @@ matrix_sparse_file_print_file_scan(FILE * out, FILE * in, char * format)
   matrix_sparse_file_print(out, a, format);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot print matrix a in format %s\n", format);
     goto a_free;
   }
@@ -41,7 +41,7 @@ static void matrix_sparse_array_file_print_file_scan(
     matrix_sparse_file_print_file_scan(out, in, format);
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot scan %d-th matrix in format %s\n", p, format);
     }
     if (p < d - 1)
@@ -60,7 +60,7 @@ int main(int argc, char ** argv)
     list = argv[2];
     if (!strcmp(list, "list"))
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "%s != list\n", list);
       errno = EINVAL;
       return errno;
@@ -68,14 +68,14 @@ int main(int argc, char ** argv)
     d = int_string_scan(argv[3]);
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot scan dimension d from string %s\n", argv[3]);
       return errno;
     }
     matrix_sparse_array_file_print_file_scan(stdout, stdin, format, d);
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "printf result in format %s\n", format);
       return errno;
     }
@@ -83,7 +83,7 @@ int main(int argc, char ** argv)
   }
   matrix_sparse_file_print_file_scan(stdout, stdin, format);
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "printf result in format %s\n", format);
     return errno;
   }

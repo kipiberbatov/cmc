@@ -3,12 +3,11 @@
 
 #include <dlfcn.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double.h"
 #include "double_array2.h"
 #include "double_matrix.h"
 #include "diffusion_transient_continuous.h"
-#include "cmc_error_message.h"
 #include "int.h"
 #include "mesh.h"
 
@@ -28,7 +27,7 @@ int main(int argc, char ** argv)
 #define ARGC 12
   if (argc != ARGC)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_number_of_command_line_arguments_mismatch(ARGC, argc);
     return EINVAL;
   }
@@ -48,7 +47,7 @@ int main(int argc, char ** argv)
   m = mesh_file_scan_by_name(m_name, m_format);
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan mesh m from file %s in format %s\n",
       m_name, m_format);
@@ -59,7 +58,7 @@ int main(int argc, char ** argv)
   m->fc = mesh_fc(m);
   if (m->fc == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->fc\n", stderr);
     goto m_free;
   }
@@ -68,7 +67,7 @@ int main(int argc, char ** argv)
     m_vol_name, d + 1, m->cn, m_vol_format);
   if (m_vol == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan m_vol from file %s in format %s\n",
       m_vol_name, m_vol_format);
@@ -79,7 +78,7 @@ int main(int argc, char ** argv)
     m_inner_name, d + 1, m->cn, m_inner_format);
   if (m_inner == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot scan m_inner from file %s in format %s\n",
       m_inner_name, m_inner_format);
     goto m_vol_free;
@@ -88,7 +87,7 @@ int main(int argc, char ** argv)
   lib_handle = dlopen(lib_name, RTLD_LAZY);
   if (lib_handle == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot open dynamic library %s\n", lib_name);
     goto m_inner_free;
   }
@@ -99,7 +98,7 @@ int main(int argc, char ** argv)
   error = dlerror();
   if (error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "%s\n", error);
     goto lib_close;
   }
@@ -107,7 +106,7 @@ int main(int argc, char ** argv)
   time_step = double_string_scan(time_step_name);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot scan time_step from string %s\n", time_step_name);
     goto lib_close;
   }
@@ -115,7 +114,7 @@ int main(int argc, char ** argv)
   number_of_steps = int_string_scan(number_of_steps_name);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan number_of_steps from string %s\n", number_of_steps_name);
     goto lib_close;
@@ -133,7 +132,7 @@ int main(int argc, char ** argv)
     number_of_steps);
   if (potential == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate potential\n", stderr);
     goto lib_close;
   }
@@ -142,7 +141,7 @@ int main(int argc, char ** argv)
     stdout, number_of_steps + 1, m->cn[0], potential, potential_format);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot print potential in format %s\n", potential_format);
     goto potential_free;
   }

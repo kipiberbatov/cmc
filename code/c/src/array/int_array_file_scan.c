@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "int_private.h"
 
 int * int_array_file_scan(FILE * in, int n, const char * format)
@@ -16,7 +16,7 @@ int * int_array_file_scan(FILE * in, int n, const char * format)
     a = int_array_file_scan_raw(in, n);
   else
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "format %s is not supported\n", format);
     errno = EINVAL;
     return NULL;
@@ -24,7 +24,7 @@ int * int_array_file_scan(FILE * in, int n, const char * format)
 
   if (a == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot scan input in format %s\n", format);
   }
   return a;

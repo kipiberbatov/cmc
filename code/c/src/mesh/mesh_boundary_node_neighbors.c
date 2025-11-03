@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "mesh.h"
 
 jagged1 * mesh_boundary_node_neighbors(
@@ -19,7 +19,7 @@ jagged1 * mesh_boundary_node_neighbors(
   result = (jagged1 *) malloc(sizeof(jagged1));
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot allocate %zu bytes of memory for result\n",
       sizeof(int) * capacity);
     return NULL;
@@ -30,7 +30,7 @@ jagged1 * mesh_boundary_node_neighbors(
   result->a1 = (int *) malloc(sizeof(int) * capacity);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot allocate %zu bytes of memory for result->a1\n",
       sizeof(int) * capacity);
     free(result);
@@ -59,7 +59,7 @@ jagged1 * mesh_boundary_node_neighbors(
           reallocated = (int *) realloc(result->a1, sizeof(int) * capacity);
           if (errno)
           {
-            color_error_position(__FILE__, __LINE__);
+            cmc_error_message_position_in_code(__FILE__, __LINE__);
             fprintf(stderr,
               "cannot reallocate %zu bytes of memory for result->a1\n",
               sizeof(int) * capacity);

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "matrix_sparse.h"
 
@@ -47,7 +47,7 @@ void matrix_sparse_mixed_perturbed_linear_solve_with_diagonal_top_left_matrix(
   b_times_inverse_a.values = (double *) malloc(sizeof(double) * b_nonzero_max);
   if (b_times_inverse_a.values == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for b_times_inverse_a.values\n",
       sizeof(double) * b_nonzero_max);
@@ -59,7 +59,7 @@ void matrix_sparse_mixed_perturbed_linear_solve_with_diagonal_top_left_matrix(
   b_transpose = matrix_sparse_transpose(b);
   if (b_transpose == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate b_transpose = b^T\n", stderr);
     goto b_times_inverse_a_values_free;
   }
@@ -67,7 +67,7 @@ void matrix_sparse_mixed_perturbed_linear_solve_with_diagonal_top_left_matrix(
   d = matrix_sparse_product(&b_times_inverse_a, b_transpose);
   if (d == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate d = b a^{-1} b^T\n", stderr);
     goto b_transpose_free;
   }
@@ -81,7 +81,7 @@ void matrix_sparse_mixed_perturbed_linear_solve_with_diagonal_top_left_matrix(
   matrix_sparse_linear_solve(d, u, "--cholesky");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate variable u\n", stderr);
     goto d_free;
   }

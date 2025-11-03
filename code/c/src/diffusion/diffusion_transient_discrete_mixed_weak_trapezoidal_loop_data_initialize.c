@@ -2,11 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "diffusion_transient_discrete_mixed_weak.h"
 #include "diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data.h"
 #include "double_array.h"
-#include "cmc_error_message.h"
 #include "mesh_qc.h"
 
 static void set_f_tilde(
@@ -87,7 +86,7 @@ static void set_g_bar(
   g = (double *) malloc(sizeof(double) * m->cn[d - 1]);
   if (g == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m->cn[d - 1], "g");
     return;
   }
@@ -95,7 +94,7 @@ static void set_g_bar(
   g_dirichlet_0_big = (double *) calloc(m->cn[0], sizeof(double));
   if (g_dirichlet_0_big == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m->cn[0], "g_dirichlet_0_big");
     free(g);
     return;
@@ -174,7 +173,7 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
   *(void **) (&input) = malloc(sizeof(*input));
   if (input == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(*input), "input");
     goto end;
   }
@@ -183,7 +182,7 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
     m_cn_dm1, data->boundary_neumann_dm1);
   if (boundary_neumann_dm1_bar == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate boundary_neumann_dm1_bar\n", stderr);
     goto input_free;
   }
@@ -192,7 +191,7 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
     m_cbd_dm1, m_inner_d);
   if (b == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate b\n", stderr);
     goto boundary_neumann_dm1_bar_free;
   }
@@ -200,7 +199,7 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
   c_tau = (double *) malloc(sizeof(double) * m_cn_dm1_bar);
   if (c_tau == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m_cn_dm1_bar, "c_tau");
     goto b_free;
   }
@@ -208,7 +207,7 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
   v_tau = (double *) malloc(sizeof(double) * m_cn_d);
   if (v_tau == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m_cn_d, "v_tau");
     goto c_tau_free;
   }
@@ -216,7 +215,7 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
   p_bar = (double *) malloc(sizeof(double) * m_cn_dm1_bar);
   if (p_bar == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m_cn_dm1_bar, "p_bar");
     goto v_tau_free;
   }
@@ -229,7 +228,7 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
   a_bar_inverse = (double *) malloc(sizeof(double) * m_cn_dm1_bar);
   if (a_bar_inverse == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m_cn_dm1_bar, "v_tau");
     goto v_tau_free;
   }
@@ -241,7 +240,7 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
   set_g_bar(g_bar, m, m_cbd_dm1, boundary_neumann_dm1_bar, data);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot set g_bar\n", stderr);
     free(a_bar_inverse);
     goto p_bar_free;
@@ -261,7 +260,7 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
   b_bar = matrix_sparse_columns_restrict(b, boundary_neumann_dm1_bar);
   if (b_bar == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate b_bar\n", stderr);
     free(a_bar_inverse);
     goto p_bar_free;
@@ -271,7 +270,7 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
   r_bar = matrix_sparse_transpose(b_bar);
   if (r_bar == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate r_bar\n", stderr);
     matrix_sparse_free(b_bar);
     free(a_bar_inverse);
@@ -283,7 +282,7 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
   n_tau = matrix_sparse_product(b_bar, r_bar);
   if (n_tau == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate n_tau\n", stderr);
     matrix_sparse_free(b_bar);
     goto r_bar_free;
@@ -297,7 +296,7 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
   matrix_sparse_linear_solve(n_tau, v_tau, "--cholesky");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot solve v_tau := n_tau^{-1} v_tau with --cholesky \n", stderr);
     goto n_tau_free;
   }

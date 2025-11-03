@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "mesh_qc.h"
 
 jagged1 * mesh_qc_boundary_layer_0_hyperfaces(const mesh * m)
@@ -15,7 +15,7 @@ jagged1 * mesh_qc_boundary_layer_0_hyperfaces(const mesh * m)
   m_bd_layer_0_hyperfaces = (jagged1 *) malloc(sizeof(jagged1));
   if (m_bd_layer_0_hyperfaces == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for m_bd_layer_0_hyperfaces\n",
       sizeof(jagged1));
@@ -32,7 +32,7 @@ jagged1 * mesh_qc_boundary_layer_0_hyperfaces(const mesh * m)
     sizeof(int) * m_bd_layer_0_hyperfaces_a0);
   if (m_bd_layer_0_hyperfaces_a1 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for m_bd_layer_0_hyperfaces_a0\n",
       sizeof(int) * m_bd_layer_0_hyperfaces_a0);
@@ -67,7 +67,7 @@ jagged1 * mesh_qc_boundary_layer_0_cells(
   m_bd_layer_0_cells_duplicated = (jagged1 *) malloc(sizeof(jagged1));
   if (m_bd_layer_0_cells_duplicated == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for m_bd_layer_0_cells_duplicated\n",
       sizeof(jagged1));
@@ -81,7 +81,7 @@ jagged1 * mesh_qc_boundary_layer_0_cells(
     sizeof(int) * m_bd_layer_0_cells_duplicated_a0);
   if (m_bd_layer_0_cells_duplicated_a1 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for "
       "m_bd_layer_0_cells_duplicated_a1\n",
@@ -101,7 +101,7 @@ jagged1 * mesh_qc_boundary_layer_0_cells(
   m_bd_layer_0_cells = jagged1_delete_duplicates(m_bd_layer_0_cells_duplicated);
   if (m_bd_layer_0_cells == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot delete duplicates\n", stderr);
   }
 
@@ -125,7 +125,7 @@ jagged1 * mesh_qc_boundary_layer_0_1_nodes(
   m_bd_layer_0_1_nodes_original = (jagged1 *) malloc(sizeof(jagged1));
   if (m_bd_layer_0_1_nodes_original == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for m_bd_layer_0_1_nodes_original\n",
       sizeof(jagged1));
@@ -146,7 +146,7 @@ jagged1 * mesh_qc_boundary_layer_0_1_nodes(
     m_bd_layer_0_1_nodes_original_a0 * sizeof(int));
   if (m_bd_layer_0_1_nodes_original_a1 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for "
       "m_bd_layer_0_cells_duplicated_a1\n",
@@ -172,7 +172,7 @@ jagged1 * mesh_qc_boundary_layer_0_1_nodes(
     m_bd_layer_0_1_nodes_original);
   if (m_bd_layer_0_1_nodes == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot delete duplicates\n", stderr);
   }
 

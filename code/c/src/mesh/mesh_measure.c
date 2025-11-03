@@ -1,9 +1,8 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
-#include "double_array.h"
 #include "cmc_error_message.h"
+#include "double_array.h"
 #include "int.h"
 #include "mesh_private.h"
 #include "quasi_cube.h"
@@ -76,7 +75,7 @@ double * mesh_measure(const mesh * m)
   m_vol = (double *) malloc(sizeof(double) * m_vol_size);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m_vol_size, "m_vol");
     return NULL;
   }

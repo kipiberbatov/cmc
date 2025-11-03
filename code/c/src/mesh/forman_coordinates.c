@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "forman_coordinates_private.h"
 
 void forman_coordinates(
@@ -16,7 +16,7 @@ void forman_coordinates(
   else
   {
     errno = EINVAL;
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "format %s is not supported\n", format);
   }
 }

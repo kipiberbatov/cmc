@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "mesh.h"
 
 int main(int argc, char ** argv)
@@ -15,7 +15,7 @@ int main(int argc, char ** argv)
   if (argc != 4)
   {
     errno = EINVAL;
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("the number of command-line arguments must be 4\n", stderr);
     goto end;
   }
@@ -24,7 +24,7 @@ int main(int argc, char ** argv)
   m_file = fopen(m_name, "r");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot open file %s: %s\n", m_name, strerror(errno));
     goto end;
   }
@@ -33,7 +33,7 @@ int main(int argc, char ** argv)
   m = mesh_file_scan(m_file, m_format);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m\n", stderr);
     fclose(m_file);
     goto end;
@@ -43,7 +43,7 @@ int main(int argc, char ** argv)
   m->fc = mesh_fc(m);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->fc\n", stderr);
     goto m_free;
   }
@@ -52,7 +52,7 @@ int main(int argc, char ** argv)
   m_bd_nodes = mesh_boundary_nodes(m);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m_bd_nodes\n", stderr);
     goto m_free;
   }

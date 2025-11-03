@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "cmc_cairo.h"
 #include "cmc_graphics_mesh_2d_edge.h"
 
@@ -14,7 +14,7 @@ void cmc_cairo_graphics_mesh_2d_edge_black_draw(
   draw_curve(cr, status, edge->data);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot draw curve to Cairo context: %s\n",
       cairo_status_to_string(*status));
@@ -24,7 +24,7 @@ void cmc_cairo_graphics_mesh_2d_edge_black_draw(
   *status = cairo_status(cr);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot render with Cairo: %s\n",
       cairo_status_to_string(*status));

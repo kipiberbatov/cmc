@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "double_array2.h"
 #include "mesh_qc.h"
@@ -52,7 +52,7 @@ int main(int argc, char ** argv)
   m = mesh_file_scan_by_name(argv[1], "--raw");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m\n", stderr);
     goto end;
   }
@@ -60,7 +60,7 @@ int main(int argc, char ** argv)
   m->fc = mesh_fc(m);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->fc\n", stderr);
     goto m_free;
   }
@@ -68,7 +68,7 @@ int main(int argc, char ** argv)
   m_vol = double_array2_file_scan_by_name(argv[2], m->dim + 1, m->cn, "--raw");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m_vol\n", stderr);
     goto m_free;
   }
@@ -76,7 +76,7 @@ int main(int argc, char ** argv)
   mesh_qc_inner_direct_file_print_raw(stdout, m, m_vol);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot print m_inner\n", stderr);
     goto m_vol_free;
   }

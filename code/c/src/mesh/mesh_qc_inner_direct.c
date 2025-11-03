@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array2.h"
 #include "mesh_private.h"
 #include "mesh_qc.h"
@@ -19,7 +19,7 @@ mesh_qc_inner_direct_d(const mesh_qc * m, const double * m_vol_d)
   m_inner_d = (double *) malloc(sizeof(double) * m_cn_d);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for m_inner[%d]\n",
       sizeof(double) * m_cn_d, d);
@@ -47,7 +47,7 @@ mesh_qc_inner_direct_0(const mesh_qc * m, const double * m_vol_d)
   m_inner_0 = (double *) calloc(m_cn_0, sizeof(double));
   if (m_inner_0 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for m_inner[0]\n",
       sizeof(double) * m_cn_0);
@@ -92,7 +92,7 @@ static double * mesh_qc_inner_direct_nontrivial(
   m_inner_p = (double *) calloc(m_cn_p, sizeof(double));
   if (m_inner_p == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for m_inner[%d]\n",
       sizeof(double) * m_cn_p, p);
@@ -142,7 +142,7 @@ double ** mesh_qc_inner_direct(const mesh_qc * m)
   m_vol = mesh_qc_vol(m);
   if (m_vol == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m_vol\n", stderr);
     goto end;
   }
@@ -150,7 +150,7 @@ double ** mesh_qc_inner_direct(const mesh_qc * m)
   m_inner = (double **) malloc(sizeof(double *) * (d + 1));
   if (m_inner == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for m_inner\n",
       sizeof(double *) * (d + 1));
@@ -162,7 +162,7 @@ double ** mesh_qc_inner_direct(const mesh_qc * m)
     m_inner[p] = mesh_qc_inner_direct_p(m, p, m_vol[p], m_vol[d - p]);
     if (m_inner[p] == NULL)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot calculate m_inner[%d]\n", p);
       double_array2_free(m_inner, p);
       goto m_vol_free;

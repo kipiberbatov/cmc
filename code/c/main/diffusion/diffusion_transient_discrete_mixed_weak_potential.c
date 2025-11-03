@@ -2,13 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "diffusion_transient_discrete_mixed_weak.h"
 #include "double_array.h"
 #include "double_array2.h"
 #include "double_matrix.h"
 #include "cmc_command_line.h"
-#include "cmc_error_message.h"
 #include "int.h"
 #include "mesh_qc.h"
 
@@ -69,14 +68,14 @@ int main(int argc, char ** argv)
   cmc_command_line_parse(options, &status, size, argc, argv);
   if (status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot parse command line options\n", stderr);
     return status;
   }
 
   if (number_of_steps < 0)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "the number of steps is %d but it must be at least 0\n", number_of_steps);
     goto end;
@@ -85,7 +84,7 @@ int main(int argc, char ** argv)
   m_file = fopen(m_name, "r");
   if (m_file == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot open mesh file %s: %s\n", m_name, strerror(errno));
     goto end;
   }
@@ -93,7 +92,7 @@ int main(int argc, char ** argv)
   m = mesh_file_scan_by_name(m_name, m_format);
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan mesh m from file %s in format %s\n", m_name, m_format);
     goto end;
@@ -108,7 +107,7 @@ int main(int argc, char ** argv)
   m->fc = mesh_fc(m);
   if (m->fc == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->fc\n", stderr);
     goto m_free;
   }
@@ -117,7 +116,7 @@ int main(int argc, char ** argv)
     m_vol_name, d + 1, m_cn, m_vol_format);
   if (m_vol == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan cells' measures from file %s in format %s\n",
       m_vol_name, m_vol_format);
@@ -127,7 +126,7 @@ int main(int argc, char ** argv)
   data_file = fopen(data_name, "r");
   if (data_file == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot open problem data file %s: %s\n", data_name, strerror(errno));
     goto m_vol_free;
@@ -135,7 +134,7 @@ int main(int argc, char ** argv)
   data = diffusion_transient_discrete_mixed_weak_file_scan_raw(data_file);
   if (data == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot scan problem data from file %s\n", data_name);
     fclose(data_file);
     goto m_vol_free;
@@ -145,7 +144,7 @@ int main(int argc, char ** argv)
   solution_file = fopen(solution_name, "r");
   if (solution_file == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot open problem solution file %s: %s\n",
       solution_name, strerror(errno));
@@ -156,7 +155,7 @@ int main(int argc, char ** argv)
     number_of_steps + 1, m_cn_dm1, "--raw");
   if (flow_rate == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan flow_rate from file %s in format --raw\n", solution_name);
     fclose(solution_file);
@@ -168,7 +167,7 @@ int main(int argc, char ** argv)
     number_of_steps + 1, m_cn_d, "--raw");
   if (dual_potential == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan dual_potential from file in format --raw %s\n",
       solution_name);
@@ -181,7 +180,7 @@ int main(int argc, char ** argv)
     sizeof(double) * (number_of_steps + 1) * m_cn_0);
   if (potential == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * (number_of_steps + 1) * m_cn_0,
       "potential");
     goto dual_potential_free;

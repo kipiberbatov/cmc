@@ -1,4 +1,4 @@
-#include "color.h"
+#include "cmc_error_message.h"
 #include "matrix_sparse.h"
 
 matrix_sparse * matrix_sparse_material_product(
@@ -11,7 +11,7 @@ matrix_sparse * matrix_sparse_material_product(
   m_cbd_star_1_material = matrix_sparse_copy(m_cbd_star_1);
   if (m_cbd_star_1_material == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot initialize m_cbd_star_1_material\n", stderr);
     return NULL;
   }
@@ -20,7 +20,7 @@ matrix_sparse * matrix_sparse_material_product(
   result = matrix_sparse_product(m_cbd_star_1_material, m_cbd_0);
   if (result == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate result\n", stderr);
     matrix_sparse_free(m_cbd_star_1_material);
     return NULL;

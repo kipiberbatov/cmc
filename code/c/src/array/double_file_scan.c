@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double.h"
 
 double double_file_scan(FILE * in)
@@ -12,7 +12,7 @@ double double_file_scan(FILE * in)
   correct = fscanf(in, "%lf", &a);
   if (correct <= 0)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     if (correct == 0)
       fputs("input is not a valid 64-bit floating point number: %s\n", stderr);
     else

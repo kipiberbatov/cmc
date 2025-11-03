@@ -1,10 +1,9 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "diffusion_transient_discrete_mixed_weak.h"
 #include "double_array.h"
-#include "cmc_error_message.h"
 #include "int.h"
 #include "jagged.h"
 
@@ -16,7 +15,7 @@ diffusion_transient_discrete_mixed_weak_file_scan_raw(FILE * in)
   *(void **) (&data) = malloc(sizeof(*data));
   if (data == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(*data), "data");
     goto end;
   }
@@ -24,7 +23,7 @@ diffusion_transient_discrete_mixed_weak_file_scan_raw(FILE * in)
   data->number_of_cells_dm1 = int_file_scan(in);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan data->number_of_cells_dm1\n", stderr);
     goto data_free;
   }
@@ -32,7 +31,7 @@ diffusion_transient_discrete_mixed_weak_file_scan_raw(FILE * in)
   data->number_of_cells_d = int_file_scan(in);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan data->number_of_cells_d\n", stderr);
     goto data_free;
   }
@@ -40,7 +39,7 @@ diffusion_transient_discrete_mixed_weak_file_scan_raw(FILE * in)
   data->pi_d = double_array_file_scan(in, data->number_of_cells_d, "--raw");
   if (data->pi_d == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan data->pi_d\n", stderr);
     goto data_free;
   }
@@ -49,7 +48,7 @@ diffusion_transient_discrete_mixed_weak_file_scan_raw(FILE * in)
     data->number_of_cells_dm1, "--raw");
   if (data->kappa_dm1 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan data->kappa_dm1\n", stderr);
     goto data_pi_d_free;
   }
@@ -58,7 +57,7 @@ diffusion_transient_discrete_mixed_weak_file_scan_raw(FILE * in)
     data->number_of_cells_d, "--raw");
   if (data->initial_dual_potential == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan data->initial_dual_potential\n", stderr);
     goto data_kappa_dm1_free;
   }
@@ -67,7 +66,7 @@ diffusion_transient_discrete_mixed_weak_file_scan_raw(FILE * in)
     data->number_of_cells_dm1, "--raw");
   if (data->initial_flow_rate == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan data->initial_flow_rate\n", stderr);
     goto data_initial_dual_potential_free;
   }
@@ -75,7 +74,7 @@ diffusion_transient_discrete_mixed_weak_file_scan_raw(FILE * in)
   data->source = double_array_file_scan(in, data->number_of_cells_d, "--raw");
   if (data->source == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan data->source\n", stderr);
     goto data_initial_flow_rate_free;
   }
@@ -83,7 +82,7 @@ diffusion_transient_discrete_mixed_weak_file_scan_raw(FILE * in)
   data->boundary_dirichlet_dm1 = jagged1_file_scan(in, "--raw");
   if (data->boundary_dirichlet_dm1 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan data->boundary_dirichlet_dm1\n", stderr);
     goto data_source_free;
   }
@@ -91,7 +90,7 @@ diffusion_transient_discrete_mixed_weak_file_scan_raw(FILE * in)
   data->boundary_dirichlet_0 = jagged1_file_scan(in, "--raw");
   if (data->boundary_dirichlet_0 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan data->boundary_dirichlet_0\n", stderr);
     goto data_boundary_dirichlet_dm1_free;
   }
@@ -100,7 +99,7 @@ diffusion_transient_discrete_mixed_weak_file_scan_raw(FILE * in)
     data->boundary_dirichlet_0->a0, "--raw");
   if (data->g_dirichlet_0 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan data->g_dirichlet_0\n", stderr);
     goto data_boundary_dirichlet_0_free;
   }
@@ -108,7 +107,7 @@ diffusion_transient_discrete_mixed_weak_file_scan_raw(FILE * in)
   data->boundary_neumann_dm1 = jagged1_file_scan(in, "--raw");
   if (data->boundary_neumann_dm1 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan data->boundary_neumann_dm1\n", stderr);
     goto data_g_dirichlet_0_free;
   }
@@ -117,7 +116,7 @@ diffusion_transient_discrete_mixed_weak_file_scan_raw(FILE * in)
     data->boundary_neumann_dm1->a0, "--raw");
   if (data->g_neumann_dm1 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan data->g_neumann_dm1\n", stderr);
     goto data_boundary_neumann_dm1_free;
   }

@@ -5,7 +5,6 @@
 #include <stdlib.h>
 
 #include "cmc_error_message.h"
-#include "color.h"
 #include "double_array.h"
 #include "int.h"
 #include "matrix_sparse_private.h"
@@ -159,7 +158,7 @@ double * matrix_sparse_heat_conduction_solve_non_grid(
   m_nodes_in = jagged1_complement(m_laplacian->cols, m_nodes_bd);
   if (m_nodes_in == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_cannot_calculate("m_nodes_in");
     goto end;
   }
@@ -172,7 +171,7 @@ double * matrix_sparse_heat_conduction_solve_non_grid(
   m_laplacian_in = matrix_sparse_restrict_symmetric(m_laplacian, m_nodes_in);
   if (m_laplacian_in == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_cannot_calculate("m_laplacian_in");
     goto m_nodes_in_free;
   }
@@ -187,7 +186,7 @@ double * matrix_sparse_heat_conduction_solve_non_grid(
   b_in = (double *) malloc(sizeof(double) * m_nodes_in->a0);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m_nodes_in->a0, "b_in");
     goto matrix_lhs_in_free;
   }
@@ -195,7 +194,7 @@ double * matrix_sparse_heat_conduction_solve_non_grid(
   b_bd = (double *) malloc(sizeof(double) * m_nodes_bd->a0);
   if (b_bd == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m_nodes_bd->a0, "b_bd");
     goto b_in_free;
   }
@@ -203,7 +202,7 @@ double * matrix_sparse_heat_conduction_solve_non_grid(
   x = (double *) malloc(sizeof(double) * (N + 1) * m_laplacian->cols);
   if (x == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * (N + 1) * m_laplacian->cols, "x");
     goto b_bd_free;
   }
@@ -236,7 +235,7 @@ double * matrix_sparse_heat_conduction_solve_non_grid(
     matrix_sparse_linear_solve(matrix_lhs_in, b_in, "--cholesky");
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fputs("cannot solve the reduced linear system\n", stderr);
       goto b_bd_free;
     }

@@ -2,10 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "diffusion_steady_state_discrete_mixed_weak.h"
 #include "double_array.h"
-#include "cmc_error_message.h"
 #include "mesh_qc.h"
 
 void diffusion_steady_state_discrete_mixed_weak_solve(
@@ -27,7 +26,7 @@ void diffusion_steady_state_discrete_mixed_weak_solve(
   a = (double *) malloc(sizeof(double) * m->cn[d - 1]);
   if (a == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m->cn[d - 1], "a");
     return;
   }
@@ -38,7 +37,7 @@ void diffusion_steady_state_discrete_mixed_weak_solve(
     m_cbd_dm1, m_inner_d);
   if (b == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate b\n", stderr);
     goto a_free;
   }
@@ -46,7 +45,7 @@ void diffusion_steady_state_discrete_mixed_weak_solve(
   g_dirichlet_0_big = (double *) calloc(m->cn[0], sizeof(double));
   if (g_dirichlet_0_big == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m->cn[0], "g_dirichlet_0_big");
     goto b_free;
   }
@@ -56,7 +55,7 @@ void diffusion_steady_state_discrete_mixed_weak_solve(
   g = (double *) calloc(m->cn[d - 1], sizeof(double));
   if (g == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m->cn[d - 1], "g");
     goto g_dirichlet_0_big_free;
   }
@@ -66,7 +65,7 @@ void diffusion_steady_state_discrete_mixed_weak_solve(
   f = (double *) malloc(sizeof(double) * m->cn[d]);
   if (f == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m->cn[d], "f");
     goto g_free;
   }
@@ -93,7 +92,7 @@ void diffusion_steady_state_discrete_mixed_weak_solve(
     a, b, g, f, data->boundary_neumann_dm1, data->g_neumann_dm1);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot find flow_rate and potential\n", stderr);
     goto f_free;
   }

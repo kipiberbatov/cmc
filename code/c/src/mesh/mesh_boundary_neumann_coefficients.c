@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double.h"
 #include "matrix.h"
 #include "mesh.h"
@@ -23,7 +23,7 @@ double * mesh_boundary_neumann_coefficients(const mesh * m, int i)
   l = mesh_boundary_node_vectors_matrix(m, i);
   if (l == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate l", stderr);
     result = NULL;
     goto end;
@@ -32,7 +32,7 @@ double * mesh_boundary_neumann_coefficients(const mesh * m, int i)
   l_inverse = (double *) malloc(sizeof(double) * size * d);
   if (l_inverse == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for l_inverse\n",
       sizeof(double) * size * d);
@@ -43,7 +43,7 @@ double * mesh_boundary_neumann_coefficients(const mesh * m, int i)
   result = (double *) calloc(size, sizeof(double));
   if (result == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for result\n",
       sizeof(double) * size);

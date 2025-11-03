@@ -3,12 +3,11 @@
 #include <stdlib.h>
 
 /* internal headers */
-#include "color.h"
+#include "cmc_error_message.h"
 #include "frame.h"
 #include "cmc_animation.h"
 #include "cmc_animation_generic_data.h"
 #include "cmc_command_line.h"
-#include "cmc_error_message.h"
 #include "cmc_graphics_mesh_2d_skeleton.h"
 #include "mesh.h"
 
@@ -143,7 +142,7 @@ int main(int argc, char ** argv)
   cmc_command_line_parse(options, &status, size, argc, argv);
   if (status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot parse command line options\n", stderr);
     goto end;
   }
@@ -154,7 +153,7 @@ int main(int argc, char ** argv)
   cmc_animation_check_input(&status, &animation);
   if (status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("bad input\n", stderr);
     goto end;
   }
@@ -164,7 +163,7 @@ int main(int argc, char ** argv)
   m = mesh_file_scan_by_name(m_name, m_format);
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan mesh m from file %s in format %s\n", m_name, m_format);
     status = 1;
@@ -174,7 +173,7 @@ int main(int argc, char ** argv)
   new_coordinates = (double *) malloc(sizeof(double) * 2 * m->cn[0]);
   if (new_coordinates == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * 2 * m->cn[0], "new_coordinates");
     status = 1;
     goto m_free;
@@ -193,7 +192,7 @@ int main(int argc, char ** argv)
     double * m_coord_2d = malloc(sizeof(double) * 2 * m->cn[0]);
     if (m_coord_2d == NULL)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       cmc_error_message_malloc(sizeof(double) * 2 * m->cn[0], "m_coord_2d");
       status = 1;
       goto new_coordinates_free;
@@ -236,7 +235,7 @@ int main(int argc, char ** argv)
     canvas_library, canvas_backend, animation_library, animation_backend);
   if (status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot read and apply backends\n", stderr);
   }
 

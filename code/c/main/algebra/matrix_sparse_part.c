@@ -1,6 +1,6 @@
 #include <errno.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "matrix_sparse.h"
 
 static void matrix_sparse_part_file_print(FILE * out, const matrix_sparse * a)
@@ -30,7 +30,7 @@ int main(void)
   a = matrix_sparse_file_scan(in, "--raw");
   if (a == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan matrix a in format --raw\n", stderr);
     return errno;
   }

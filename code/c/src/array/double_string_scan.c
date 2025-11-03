@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double.h"
 
 double double_string_scan(const char * s)
@@ -13,7 +13,7 @@ double double_string_scan(const char * s)
   a = strtod(s, &ptr);
   if (strlen(ptr))
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "%s is not a valid 64-bit float\n", s);
     errno = EINVAL;
   }

@@ -1,4 +1,4 @@
-#include "color.h"
+#include "cmc_error_message.h"
 #include "matrix_sparse.h"
 
 matrix_sparse * matrix_sparse_add(
@@ -9,7 +9,7 @@ matrix_sparse * matrix_sparse_add(
   c = matrix_sparse_linear_combination(a, b, 1., 1.);
   if (c == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot add matrices\n", stderr);
   }
   return c;

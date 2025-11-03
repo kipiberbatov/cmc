@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "diffusion_transient_discrete_primal_strong.h"
 #include "diffusion_transient_discrete_primal_strong_solve_trapezoidal_next.h"
 #include "mesh.h"
@@ -29,7 +29,7 @@ static void loop(
       potential + (i + 1) * n, rhs_final, potential + i * n, input);
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "loop: error in iteration %d\n", i);
       return;
     }
@@ -55,7 +55,7 @@ double * diffusion_transient_discrete_primal_strong_solve_trapezoidal(
     m, m_cbd_0, m_cbd_star_1, data, time_step);
   if (input == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot initialize loop input\n", stderr);
     goto end;
   }
@@ -66,7 +66,7 @@ double * diffusion_transient_discrete_primal_strong_solve_trapezoidal(
   rhs_final = (double *) malloc(sizeof(double) * n);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot allocate memory for rhs_final\n", stderr);
     goto input_free;
   }
@@ -75,7 +75,7 @@ double * diffusion_transient_discrete_primal_strong_solve_trapezoidal(
   potential = (double *) malloc(sizeof(double) * (number_of_steps + 1) * n);
   if (errno)
   {
-        color_error_position(__FILE__, __LINE__);
+        cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot allocate memory for potential\n", stderr);
     goto rhs_final_free;
   }
@@ -89,7 +89,7 @@ double * diffusion_transient_discrete_primal_strong_solve_trapezoidal(
   loop(potential, rhs_final, input, number_of_steps);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("error in loop calculating final potential\n", stderr);
     free(potential);
     potential =  NULL;

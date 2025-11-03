@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 #include "arc_2d.h"
-#include "color.h"
+#include "cmc_error_message.h"
 #include "cmc_graphics_mesh_2d_edge.h"
 #include "cmc_graphics_mesh_2d_skeleton.h"
 #include "line_2d.h"
@@ -70,7 +70,7 @@ void cmc_graphics_mesh_2d_skeleton_draw_polar(
       draw_black_edge(canvas, status, &edge, draw_line);
       if (*status)
       {
-        color_error_position(__FILE__, __LINE__);
+        cmc_error_message_position_in_code(__FILE__, __LINE__);
         fprintf(stderr, "cannot draw edge as a line for index %d\n", index);
         return;
       }
@@ -91,7 +91,7 @@ void cmc_graphics_mesh_2d_skeleton_draw_polar(
       draw_black_edge(canvas, status, &edge, draw_arc);
       if (*status)
       {
-        color_error_position(__FILE__, __LINE__);
+        cmc_error_message_position_in_code(__FILE__, __LINE__);
         fprintf(stderr, "cannot draw edge as an arc for index %d\n", index);
         return;
       }

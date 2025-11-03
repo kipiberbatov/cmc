@@ -1,7 +1,6 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
 #include "cmc_error_message.h"
 #include "mesh.h"
 
@@ -17,7 +16,7 @@ static void mesh_coboundary_file_print(
     m_cbd_p = matrix_sparse_transpose(m_bd_p_plus_1);
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot transpose matrix [%d]\n", p);
       matrix_sparse_free(m_cbd_p);
       return;
@@ -25,7 +24,7 @@ static void mesh_coboundary_file_print(
     matrix_sparse_file_print(out, m_cbd_p, format);
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot print transposed matrix [%d]\n", p);
       matrix_sparse_free(m_cbd_p);
       return;
@@ -46,7 +45,7 @@ int main(int argc, char ** argv)
 #define ARGC 2
   if (argc != ARGC)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_number_of_command_line_arguments_mismatch(ARGC, argc);
     return EINVAL;
   }
@@ -56,7 +55,7 @@ int main(int argc, char ** argv)
   m = mesh_file_scan(stdin, "--raw");
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan mesh m in format --raw\n", stderr);
     goto end;
   }
@@ -65,7 +64,7 @@ int main(int argc, char ** argv)
   m_bd = mesh_file_scan_boundary(stdin, m);
   if (m_bd == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan boundary operators m_bd\n", stderr);
     goto m_free;
   }
@@ -73,7 +72,7 @@ int main(int argc, char ** argv)
   mesh_coboundary_file_print(stdout, d, m_bd, format);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot print calculate and print %d coboundary operators in format %s\n",
       d, format);

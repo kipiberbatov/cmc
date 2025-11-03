@@ -3,7 +3,7 @@
 #include <string.h>
 
 #include "array_indexed.h"
-#include "color.h"
+#include "cmc_error_message.h"
 
 static void update(array_indexed * b, int * i, int * k, const array_indexed * a)
 {
@@ -62,7 +62,7 @@ void array_indexed_merge_sort(array_indexed * a, int n)
   b.positions = (int *) malloc(sizeof(int) * n);
   if (b.positions == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for b.positions\n",
       sizeof(int) * n);
@@ -72,7 +72,7 @@ void array_indexed_merge_sort(array_indexed * a, int n)
   b.values = (int *) malloc(sizeof(int) * n);
   if (b.values == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for b.values\n",
       sizeof(int) * n);

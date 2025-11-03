@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array2_private.h"
 #include "double_array2.h"
 
@@ -13,7 +13,7 @@ void double_array2_file_print(FILE * out, int * status,
     printer = double_array2_file_print_raw;
   else
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "format %s%s%s is not supported\n",
       color_variable, format, color_none);

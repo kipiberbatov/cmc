@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "matrix_sparse_private.h"
 
 void matrix_sparse_linear_solve_cholesky(const matrix_sparse * a, double * b)
@@ -13,7 +13,7 @@ void matrix_sparse_linear_solve_cholesky(const matrix_sparse * a, double * b)
   correct = cs_cholsol(1, &a0, b);
   if (!correct)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot solve linear system using Cholesky decomposition\n", stderr);
     errno = EINVAL;
     return;

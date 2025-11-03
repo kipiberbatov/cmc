@@ -3,7 +3,6 @@
 #include <string.h>
 
 #include "cmc_error_message.h"
-#include "color.h"
 #include "int.h"
 #include "double.h"
 #include "matrix_sparse.h"
@@ -20,7 +19,7 @@ matrix_sparse_heat_conduction_trapezoid_rule_private(
   id = matrix_sparse_identity(laplacian_0->cols);
   if (id == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_cannot_calculate("id");
     return NULL;
   }
@@ -28,7 +27,7 @@ matrix_sparse_heat_conduction_trapezoid_rule_private(
   l = matrix_sparse_linear_combination(laplacian_0, id, sign * tau / 2, 1);
   if (l == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_cannot_calculate("l");
   }
 
@@ -83,7 +82,7 @@ double * matrix_sparse_diffusion(
   l = matrix_sparse_heat_conduction_trapezoid_rule_lhs(laplacian_0, tau);
   if (l == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_cannot_calculate("l");
     goto end;
   }
@@ -91,7 +90,7 @@ double * matrix_sparse_diffusion(
   r = matrix_sparse_heat_conduction_trapezoid_rule_rhs(laplacian_0, tau);
   if (l == NULL || r == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_cannot_calculate("r");
     goto l_free;
   }
@@ -99,7 +98,7 @@ double * matrix_sparse_diffusion(
   u = (double *) malloc(sizeof(double) * l->cols * (N + 1));
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * l->cols * (N + 1), "u");
     goto r_free;
   }
@@ -127,7 +126,7 @@ double * matrix_sparse_diffusion(
     matrix_sparse_linear_solve(l, u + l->cols * (i + 1), "--lu");
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fputs("cannot find u[i]\n", stderr);
       goto u_free;
     }

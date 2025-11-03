@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "matrix_sparse.h"
 
 void matrix_sparse_array_file_print(
@@ -14,7 +14,7 @@ void matrix_sparse_array_file_print(
     matrix_sparse_file_print(out, a[i], format);
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
         "cannot print a[%s%d%s] for reading: %s\n",
         color_variable, i, color_none, strerror(errno));

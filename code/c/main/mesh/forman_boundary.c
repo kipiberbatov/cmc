@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "forman.h"
 
@@ -30,7 +30,7 @@ static void forman_boundary_file_print(
   m_forman = forman(m, new_coordinates_format);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m_forman\n", stderr);
     goto end;
   }
@@ -39,7 +39,7 @@ static void forman_boundary_file_print(
   m_forman_boundary = forman_boundary(m, m_forman, m_bd);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m_forman->bd\n", stderr);
     goto m_forman_free;
   }
@@ -62,7 +62,7 @@ int main(int argc, char ** argv)
 
   if (argc != 5)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "number of command line arguments should be 5; instead it is %d\n", argc);
     errno = EINVAL;
@@ -77,7 +77,7 @@ int main(int argc, char ** argv)
   m_file = fopen(m_name, "r");
   if (m_file == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot open mesh file %s: %s\n", m_name, strerror(errno));
     goto end;
   }
@@ -85,7 +85,7 @@ int main(int argc, char ** argv)
   m = mesh_file_scan(m_file, m_format);
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan mesh m in from file %s in fromat %s\n",
       m_name, m_format);
@@ -96,7 +96,7 @@ int main(int argc, char ** argv)
   m->fc = mesh_fc(m);
   if (m->fc == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->fc\n", stderr);
     goto m_free;
   }
@@ -104,7 +104,7 @@ int main(int argc, char ** argv)
   m_bd = mesh_file_scan_boundary(m_file, m);
   if (m_bd == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m_bd\n", stderr);
     fclose(m_file);
     goto m_free;
@@ -116,7 +116,7 @@ int main(int argc, char ** argv)
     m, m_bd, new_coordinates_format, output_format);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate and print m_forman->bd\n", stderr);
     goto m_bd_free;
   }

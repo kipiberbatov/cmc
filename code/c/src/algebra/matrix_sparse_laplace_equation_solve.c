@@ -2,7 +2,6 @@
 #include <stdlib.h>
 
 #include "cmc_error_message.h"
-#include "color.h"
 #include "double_array.h"
 #include "matrix_sparse_private.h"
 
@@ -86,7 +85,7 @@ double * matrix_sparse_laplace_equation_solve(
   b_bd = (double *) malloc(sizeof(double) * m_nodes_bd->a0);
   if (b_bd == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m_nodes_bd->a0, "b_bd");
     goto end;
   }
@@ -95,7 +94,7 @@ double * matrix_sparse_laplace_equation_solve(
   m_nodes_in = jagged1_complement(m_laplacian->cols, m_nodes_bd);
   if (m_nodes_in == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_cannot_calculate("m_nodes_in");
     goto b_bd_free;
   }
@@ -103,7 +102,7 @@ double * matrix_sparse_laplace_equation_solve(
   b_in = (double *) malloc(sizeof(double) * m_nodes_in->a0);
   if (b_in == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m_nodes_in->a0, "b_in");
     goto m_nodes_in_free;
   }
@@ -114,7 +113,7 @@ double * matrix_sparse_laplace_equation_solve(
   m_laplacian_in = matrix_sparse_restrict_symmetric(m_laplacian, m_nodes_in);
   if (m_laplacian_in == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_cannot_calculate("m_laplacian_in");
     goto b_in_free;
   }
@@ -125,7 +124,7 @@ double * matrix_sparse_laplace_equation_solve(
   matrix_sparse_linear_solve(m_laplacian_in, b_in, "--lu");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot solve the reduced linear system\n", stderr);
     goto m_laplacian_in_free;
   }
@@ -133,7 +132,7 @@ double * matrix_sparse_laplace_equation_solve(
   x = (double *) malloc(sizeof(double) * m_laplacian->rows);
   if (x == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m_laplacian->rows, "x");
     goto m_laplacian_in_free;
   }

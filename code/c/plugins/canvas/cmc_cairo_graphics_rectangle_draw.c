@@ -1,7 +1,7 @@
 #include <math.h>
 #include <stdio.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "cmc_cairo.h"
 #include "cmc_graphics_rectangle.h"
 #include "cmc_rgb.h"
@@ -29,7 +29,7 @@ void cmc_cairo_graphics_rectangle_draw(
   *status = cairo_status(cr);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot render with Cairo: %s\n",
       cairo_status_to_string(*status));

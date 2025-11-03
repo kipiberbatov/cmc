@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "mesh.h"
 
@@ -28,7 +28,7 @@ matrix_sparse * mesh_file_scan_boundary_p(FILE * in, const mesh * m, int p)
   m_bd_p = (matrix_sparse *) malloc(sizeof(matrix_sparse));
   if (m_bd_p == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for m->bd[%d]\n",
       sizeof(matrix_sparse), p);
@@ -41,7 +41,7 @@ matrix_sparse * mesh_file_scan_boundary_p(FILE * in, const mesh * m, int p)
   m_bd_p->cols_total = (int *) malloc(sizeof(int) * (m_bd_p->cols + 1));
   if (m_bd_p->cols_total == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for m->bd[%d]->cols_total\n",
       sizeof(int) * (m_bd_p->cols + 1), p);
@@ -54,7 +54,7 @@ matrix_sparse * mesh_file_scan_boundary_p(FILE * in, const mesh * m, int p)
   m_bd_p->row_indices = (int *) malloc(sizeof(int) * m_bd_p_nonzero_max);
   if (m_bd_p->row_indices == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for m->bd[%d]->row_indices\n",
       sizeof(int) * m_bd_p_nonzero_max, p);
@@ -65,7 +65,7 @@ matrix_sparse * mesh_file_scan_boundary_p(FILE * in, const mesh * m, int p)
   m_bd_p->values = double_array_file_scan(in, m_bd_p_nonzero_max, "--raw");
   if (m_bd_p->values == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot scan m->bd[%d]->values in format --raw\n", p);
     goto m_bd_p_row_indices_free;
   }
@@ -93,7 +93,7 @@ matrix_sparse ** mesh_file_scan_boundary(FILE * in, const mesh * m)
   m_bd = (matrix_sparse **) malloc(sizeof(matrix_sparse *) * m_dim);
   if (m_bd == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for m_bd\n",
       sizeof(matrix_sparse *) * m_dim);
@@ -105,7 +105,7 @@ matrix_sparse ** mesh_file_scan_boundary(FILE * in, const mesh * m)
     m_bd[p - 1] = mesh_file_scan_boundary_p(in, m, p);
     if (m_bd[p - 1] == NULL)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot scan m_bd[%d]\n", p - 1);
       matrix_sparse_array_free(m_bd, p - 1);
       return NULL;

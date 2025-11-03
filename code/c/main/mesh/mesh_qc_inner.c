@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "double_array2.h"
 #include "mesh_qc.h"
@@ -23,7 +23,7 @@ static void mesh_qc_inner_file_print_raw(
     m_inner_p = mesh_qc_inner_p(m, m_vol_d, p, m_metric[p]);
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot calculate m_inner[%d]\n", p);
       return;
     }
@@ -47,7 +47,7 @@ int main(int argc, char ** argv)
 
   if (argc != 4)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "number of command line arguments must be 4\n");
     errno = EINVAL;
     goto end;
@@ -56,7 +56,7 @@ int main(int argc, char ** argv)
   m_file = fopen(argv[1], "r");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot open mesh file %s: %s\n", argv[1], strerror(errno));
     goto end;
   }
@@ -64,7 +64,7 @@ int main(int argc, char ** argv)
   m = mesh_file_scan(m_file, "--raw");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m\n", stderr);
     fclose(m_file);
     goto end;
@@ -74,7 +74,7 @@ int main(int argc, char ** argv)
   m->fc = mesh_fc(m);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->fc\n", stderr);
     fclose(m_file);
     goto m_free;
@@ -83,7 +83,7 @@ int main(int argc, char ** argv)
   m_bd = mesh_file_scan_boundary(m_file, m);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m_bd\n", stderr);
     fclose(m_file);
     goto m_free;
@@ -94,7 +94,7 @@ int main(int argc, char ** argv)
   m_vol = double_array2_file_scan_by_name(argv[2], d + 1, m->cn, "--raw");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m_vol\n", stderr);
     goto m_bd_free;
   }
@@ -102,7 +102,7 @@ int main(int argc, char ** argv)
   m_metric_file = fopen(argv[3], "r");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot open mesh file %s: %s\n", argv[3], strerror(errno));
     goto m_vol_free;
   }
@@ -110,7 +110,7 @@ int main(int argc, char ** argv)
   m_metric = mesh_qc_metric_file_scan(m_metric_file, m);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m_metric\n", stderr);
     fclose(m_metric_file);
     goto m_vol_free;
@@ -121,7 +121,7 @@ int main(int argc, char ** argv)
   mesh_qc_inner_file_print_raw(stdout, m, m_vol[d], m_metric);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot print m_inner\n", stderr);
     goto m_metric_free;
   }

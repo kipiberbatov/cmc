@@ -2,11 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "diffusion_steady_state_discrete_mixed_weak.h"
 #include "double_array.h"
 #include "double_array2.h"
-#include "cmc_error_message.h"
 #include "int.h"
 #include "mesh_qc.h"
 
@@ -25,7 +24,7 @@ int main(int argc, char ** argv)
 #define ARGC 7
   if (argc != ARGC)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_number_of_command_line_arguments_mismatch(ARGC, argc);
     errno = EINVAL;
     goto end;
@@ -41,7 +40,7 @@ int main(int argc, char ** argv)
   m_file = fopen(m_name, "r");
   if (m_file == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot open mesh file %s: %s\n", m_name, strerror(errno));
     goto end;
   }
@@ -49,7 +48,7 @@ int main(int argc, char ** argv)
   m = mesh_file_scan_by_name(m_name, m_format);
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan mesh m from file %s in format %s\n", m_name, m_format);
     goto end;
@@ -61,7 +60,7 @@ int main(int argc, char ** argv)
   m->fc = mesh_fc(m);
   if (m->fc == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->fc\n", stderr);
     goto m_free;
   }
@@ -70,7 +69,7 @@ int main(int argc, char ** argv)
     m_vol_name, d + 1, m_cn, m_vol_format);
   if (m_vol == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan cells' measures from file %s in format %s\n",
       m_vol_name, m_vol_format);
@@ -80,7 +79,7 @@ int main(int argc, char ** argv)
   data_file = fopen(data_name, "r");
   if (data_file == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot open problem data file %s: %s\n", data_name, strerror(errno));
     goto m_vol_free;
@@ -88,7 +87,7 @@ int main(int argc, char ** argv)
   data = diffusion_steady_state_discrete_mixed_weak_file_scan_raw(data_file);
   if (data == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot scan problem data from file %s\n", data_name);
     fclose(data_file);
     goto m_vol_free;
@@ -98,7 +97,7 @@ int main(int argc, char ** argv)
   solution_file = fopen(solution_name, "r");
   if (solution_file == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot open problem solution file %s: %s\n",
       solution_name, strerror(errno));
@@ -110,7 +109,7 @@ int main(int argc, char ** argv)
   flow_rate = double_array_file_scan(solution_file, m_cn_dm1, "--raw");
   if (flow_rate == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan flow_rate from file in format --raw %s\n", solution_name);
     fclose(solution_file);
@@ -121,7 +120,7 @@ int main(int argc, char ** argv)
   dual_potential = double_array_file_scan(solution_file, m_cn_d, "--raw");
   if (dual_potential == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan dual_potential from file in format --raw %s\n",
       solution_name);
@@ -133,7 +132,7 @@ int main(int argc, char ** argv)
   potential = (double *) malloc(sizeof(double) * m->cn[0]);
   if (potential == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m->cn[0], "potential");
     goto dual_potential_free;
   }

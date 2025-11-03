@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double.h"
 #include "int.h"
 #include "mesh_brick.h"
@@ -17,7 +17,7 @@ static void mesh_brick_file_print_raw(
   m = mesh_brick(d, brick_lengths, partitions);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate mesh m\n", stderr);
     goto end;
   }
@@ -29,7 +29,7 @@ static void mesh_brick_file_print_raw(
   m_bd = mesh_brick_boundary(m->dim, partitions, m_bd_sizes);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->bd\n", stderr);
     goto m_free;
   }
@@ -52,7 +52,7 @@ int main(int argc, char ** argv)
 
   if (argc == 1)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs(
       "there are no command line arguments, but dimension must be specified\n",
       stderr);
@@ -62,14 +62,14 @@ int main(int argc, char ** argv)
   d = int_string_scan(argv[1]);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot scan dimension d from string %s\n", argv[1]);
     return errno;
   }
 
   if (d > MAX_DIM || d < 0)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     if (d > MAX_DIM)
       fprintf(stderr, "dimension %d is too big; limit is %d\n", d, MAX_DIM);
     else
@@ -80,7 +80,7 @@ int main(int argc, char ** argv)
 
   if (argc < 2 * d + 2)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "the number of command line arguments should be at least %d: use as\n"
       "%s %d brick_lengths[%d] axes_partitions[%d]",
@@ -93,7 +93,7 @@ int main(int argc, char ** argv)
     brick_lengths[p] = double_string_scan(argv[2 + p]);
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot scan brick_lengths[%d] from string %s\n",
         p, argv[2 + p]);
       return errno;
@@ -105,7 +105,7 @@ int main(int argc, char ** argv)
     partitions[p] = int_string_scan(argv[2 + d + p]);
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot scan partitions[%d] from string %s\n",
         p, argv[2 + d + p]);
       return errno;
@@ -115,7 +115,7 @@ int main(int argc, char ** argv)
   mesh_brick_file_print_raw(stdout, d, brick_lengths, partitions);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate and print m->bd\n", stderr);
     return errno;
   }

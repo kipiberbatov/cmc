@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "cmc_graphics_mesh_2d_1_cochain_sequence.h"
 #include "cmc_graphics_mesh_2d_1_cochain_sequence_draw_functions.h"
 #include "cmc_graphics_mesh_2d_edge.h"
@@ -52,7 +52,7 @@ void cmc_graphics_mesh_2d_1_cochain_sequence_draw_values(
   functions->check_color_scheme(status, total_colors);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot create color scheme with %d colors\n",
       total_colors);
@@ -62,7 +62,7 @@ void cmc_graphics_mesh_2d_1_cochain_sequence_draw_values(
   functions->allocate_color(&(edge.color), status);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot allocate color\n", stderr);
     return;
   }
@@ -84,7 +84,7 @@ void cmc_graphics_mesh_2d_1_cochain_sequence_draw_values(
       draw_oriented_edge(canvas, status, &edge, get_color);
       if (*status)
       {
-        color_error_position(__FILE__, __LINE__);
+        cmc_error_message_position_in_code(__FILE__, __LINE__);
         fputs("cannot paint an edge\n", stderr);
         goto color_free;
       }

@@ -4,7 +4,7 @@
 
 #include <dlfcn.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array2.h"
 #include "diffusion_transient_discrete_mixed_weak.h"
 #include "cmc_command_line.h"
@@ -74,7 +74,7 @@ int main(int argc, char ** argv)
   cmc_command_line_parse(options, &status, size, argc, argv);
   if (status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot parse command line options\n", stderr);
     return status;
   }
@@ -82,7 +82,7 @@ int main(int argc, char ** argv)
   m_file = fopen(m_name, "r");
   if (m_file == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot open mesh file %s: %s\n",
       m_name, strerror(errno));
@@ -92,7 +92,7 @@ int main(int argc, char ** argv)
   m = mesh_file_scan(m_file, m_format);
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan mesh m from file %s in format %s\n",
       m_name, m_format);
@@ -103,7 +103,7 @@ int main(int argc, char ** argv)
   m_bd_1 = mesh_file_scan_boundary_p(m_file, m, 1);
   if (m_bd_1 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan mesh m_bd_1 from file %s in format %s\n",
       m_name, m_format);
@@ -115,7 +115,7 @@ int main(int argc, char ** argv)
   m->fc = mesh_fc(m);
   if (m->fc == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->fc\n", stderr);
     goto m_bd_1_free;
   }
@@ -127,7 +127,7 @@ int main(int argc, char ** argv)
     m_vol_name, d + 1, m_cn, m_vol_format);
   if (m_vol == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan measures m_vol from file %s in format %s\n",
       m_vol_name, m_vol_format);
@@ -138,7 +138,7 @@ int main(int argc, char ** argv)
     m_hodge_name, d + 1, m_hodge_format);
   if (m_hodge == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan measures m_hodge from file %s in format %s\n",
       m_hodge_name, m_hodge_format);
@@ -149,7 +149,7 @@ int main(int argc, char ** argv)
   error = dlerror();
   if (error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "%s\n", error);
     goto m_hodge_free;
   }
@@ -158,7 +158,7 @@ int main(int argc, char ** argv)
   error = dlerror();
   if (error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "%s\n", error);
     goto lib_close;
   }
@@ -167,7 +167,7 @@ int main(int argc, char ** argv)
     m, m_vol[d - 1], m_vol[d], m_bd_1, m_hodge[1], data_continuous);
   if (data_discrete == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot discretize continuous data %s\n", stderr);
     goto lib_close;
   }

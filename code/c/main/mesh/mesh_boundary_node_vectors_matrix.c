@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "matrix.h"
 #include "mesh.h"
 
@@ -22,7 +22,7 @@ int main(void)
   m = mesh_file_scan(stdin, "--raw");
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan input mesh m from stdin in format '--raw'\n", stderr);
     goto end;
   }
@@ -31,7 +31,7 @@ int main(void)
   m->fc = mesh_fc(m);
   if (m->fc == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->fc\n", stderr);
     goto m_free;
   }
@@ -40,7 +40,7 @@ int main(void)
   m_boundary_nodes = mesh_boundary_nodes_from_constraint(m, x1_axis_constant);
   if (m_boundary_nodes == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m_boundary_nodes\n", stderr);
     goto m_free;
   }
@@ -53,7 +53,7 @@ int main(void)
     result = mesh_boundary_node_vectors_matrix(m, i);
     if (result == NULL)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot calculate the neighbors of N_%d\n", i);
       goto m_boundary_nodes_free;
     }

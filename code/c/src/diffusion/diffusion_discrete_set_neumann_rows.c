@@ -2,10 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "diffusion_discrete_set_neumann_rows.h"
-#include "cmc_error_message.h"
 #include "matrix.h"
 #include "mesh.h"
 
@@ -38,7 +37,7 @@ void diffusion_discrete_set_neumann_rows(
   boundary_hyperfaces = mesh_boundary_hyperfaces(m);
   if (boundary_hyperfaces == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate oundary_hyperfaces\n", stderr);
     goto end;
   }
@@ -49,7 +48,7 @@ void diffusion_discrete_set_neumann_rows(
   hyperface_normals = (double *) malloc(sizeof(double) * d * size_max_dm1);
   if (hyperface_normals == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * d * size_max_dm1,
       "hyperface_normals");
     goto boundary_hyperfaces_free;
@@ -59,7 +58,7 @@ void diffusion_discrete_set_neumann_rows(
   l = (double *) malloc(sizeof(double) * m_dim_embedded * size_max);
   if (l == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m_dim_embedded * size_max, "l");
     goto hyperface_normals_free;
   }
@@ -67,7 +66,7 @@ void diffusion_discrete_set_neumann_rows(
   l_inverse = (double *) malloc(sizeof(double) * size_max * m_dim_embedded);
   if (l_inverse == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * size_max * m_dim_embedded,
       "l_inverse");
     goto l_free;
@@ -76,7 +75,7 @@ void diffusion_discrete_set_neumann_rows(
   coefficients = (double *) malloc(sizeof(double) * size_max);
   if (coefficients == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * size_max, "coefficients");
     goto l_inverse_free;
   }
@@ -84,7 +83,7 @@ void diffusion_discrete_set_neumann_rows(
   neighbors = (int *) malloc(sizeof(int) * size_max);
   if (neighbors == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(int) * size_max, "neighbors");
     goto coefficients_free;
   }

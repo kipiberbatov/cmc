@@ -1,6 +1,6 @@
 #include <errno.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "mesh_qc.h"
 
 void mesh_qc_boundary_layer_0_1_nodes_file_print_raw(FILE * out, const mesh * m)
@@ -12,7 +12,7 @@ void mesh_qc_boundary_layer_0_1_nodes_file_print_raw(FILE * out, const mesh * m)
   m_bd_layer_0_hyperfaces = mesh_qc_boundary_layer_0_hyperfaces(m);
   if (m_bd_layer_0_hyperfaces == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m_bd_layer_0_hyperfaces\n", stderr);
     return;
   }
@@ -21,7 +21,7 @@ void mesh_qc_boundary_layer_0_1_nodes_file_print_raw(FILE * out, const mesh * m)
     m, m_bd_layer_0_hyperfaces);
   if (m_bd_layer_0_cells == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m_bd_layer_0_cells\n", stderr);
     goto m_bd_layer_0_hyperfaces_free;
   }
@@ -30,7 +30,7 @@ void mesh_qc_boundary_layer_0_1_nodes_file_print_raw(FILE * out, const mesh * m)
     m, m_bd_layer_0_cells);
   if (m_bd_layer_0_1_nodes == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m_bd_layer_0_1_nodes\n", stderr);
     goto m_bd_layer_0_cells_free;
   }
@@ -55,7 +55,7 @@ int main(void)
   m = mesh_file_scan(in, "--raw");
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan mesh m in format --raw\n", stderr);
     goto end;
   }
@@ -63,7 +63,7 @@ int main(void)
   m->fc = mesh_fc(m);
   if (m->fc == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->fc\n", stderr);
     goto m_free;
   }
@@ -71,7 +71,7 @@ int main(void)
   mesh_qc_boundary_layer_0_1_nodes_file_print_raw(out, m);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate and print boundary layer 0 -> 1\n", stderr);
     goto m_free;
   }

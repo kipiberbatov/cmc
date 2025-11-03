@@ -2,7 +2,6 @@
 #include <stdlib.h>
 
 #include "cmc_error_message.h"
-#include "color.h"
 #include "double_array2.h"
 #include "mesh_qc.h"
 #include "vector_sparse.h"
@@ -18,7 +17,7 @@ double * mesh_qc_inner_p(const mesh_qc * m, const double * m_vol_d,
   m_inner_p = (double *) malloc(sizeof(double) * m_cn_p);
   if (m_inner_p == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m_cn_p, "m_inner_p");
     return NULL;
   }
@@ -40,7 +39,7 @@ double ** mesh_qc_inner(
   m_inner = (double **) malloc(sizeof(double *) * (m_dim + 1));
   if (m_inner == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * (m_dim + 1), "m_inner");
     return NULL;
   }
@@ -50,7 +49,7 @@ double ** mesh_qc_inner(
     m_inner[p] = mesh_qc_inner_p(m, m_vol_d, p, m_metric[p]);
     if (m_inner[p] == NULL)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot calculate m_inner[%s%d%s]\n",
         color_variable, p, color_none);
       double_array2_free(m_inner, p);

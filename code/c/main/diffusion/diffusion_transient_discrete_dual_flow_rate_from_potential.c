@@ -4,12 +4,11 @@
 
 #include <dlfcn.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "double_matrix.h"
 #include "diffusion_transient_continuous.h"
 #include "diffusion_transient_discrete_dual_flow_rate_from_potential.h"
-#include "cmc_error_message.h"
 #include "int.h"
 #include "unsigned_approximation.h"
 
@@ -29,7 +28,7 @@ int main(int argc, char ** argv)
 #define ARGC 10
   if (argc != ARGC)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_number_of_command_line_arguments_mismatch(ARGC, argc);
     return EINVAL;
   }
@@ -47,7 +46,7 @@ int main(int argc, char ** argv)
   m_file = fopen(m_name, "r");
   if (m_file == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot open mesh file %s for reading: %s\n",
       m_name, strerror(errno));
@@ -56,7 +55,7 @@ int main(int argc, char ** argv)
   m = mesh_file_scan(m_file, m_format);
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan mesh m from file %s in format %s\n",
       m_name, m_format);
@@ -69,7 +68,7 @@ int main(int argc, char ** argv)
     m_bd_1 = mesh_file_scan_boundary_p(m_file, m, 1);
     if (m_bd_1 == NULL)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
         "cannot scan boundary matrix m_bd_1 from mesh file %s\n",
         m_name);
@@ -83,7 +82,7 @@ int main(int argc, char ** argv)
     m_bd_1_file = fopen(m_bd_1_name, "r");
     if (m_bd_1_file == NULL)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
         "cannot open mesh file %s for reading: %s\n",
         m_bd_1_name, strerror(errno));
@@ -92,7 +91,7 @@ int main(int argc, char ** argv)
     m_bd_1 = mesh_file_scan_boundary_p(m_bd_1_file, m, 1);
     if (m_bd_1)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fputs("cannot scan sparse matrix m_bd_1\n", stderr);
       fclose(m_bd_1_file);
       goto m_free;
@@ -103,7 +102,7 @@ int main(int argc, char ** argv)
   lib_handle = dlopen(lib_name, RTLD_LAZY);
   if (!lib_handle)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot open library %s\n", lib_name);
     goto m_bd_1_free;
   }
@@ -114,7 +113,7 @@ int main(int argc, char ** argv)
   error = dlerror();
   if (error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot read %s: %s\n", data_name, error);
     goto lib_close;
   }
@@ -122,7 +121,7 @@ int main(int argc, char ** argv)
   number_of_steps = int_string_scan(number_of_steps_name);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan number_of_steps\n", stderr);
     goto m_free;
   }
@@ -131,7 +130,7 @@ int main(int argc, char ** argv)
     potential_name, m->cn[0] * (number_of_steps + 1), potential_format);
   if (potential == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan potential from file %s in format %s\n",
       potential_name, potential_format);
@@ -141,7 +140,7 @@ int main(int argc, char ** argv)
   kappa_1 = (double *) malloc(sizeof(double) * m->cn[1]);
   if (kappa_1 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m->cn[1], "kappa_1");
     goto potential_free;
   }
@@ -151,7 +150,7 @@ int main(int argc, char ** argv)
     sizeof(double) * m->cn[1] * (number_of_steps + 1));
   if (dual_flow_rate == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m->cn[1] * (number_of_steps + 1),
       "dual_flow_rate");
     goto kappa_1_free;
@@ -164,7 +163,7 @@ int main(int argc, char ** argv)
     number_of_steps + 1, m->cn[1], dual_flow_rate, dual_flow_rate_format);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot print dual_flow_rate in format %s\n",
       dual_flow_rate_format);
   }

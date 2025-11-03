@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "double_array2.h"
 #include "mesh_private.h"
@@ -39,7 +39,7 @@ double * mesh_qc_vol_p(const mesh_qc * m, int p)
   m_vol_p = (double *) malloc(sizeof(double) * m->cn[p]);
   if (m_vol_p == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for m_vol[%d]\n",
       sizeof(double) * m->cn[p], p);
@@ -64,7 +64,7 @@ double ** mesh_qc_vol(const mesh_qc * m)
   m_vol = (double **) malloc(sizeof(double *) * (d + 1));
   if (m_vol == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for m_vol\n",
       sizeof(double *) * (d + 1));
@@ -76,7 +76,7 @@ double ** mesh_qc_vol(const mesh_qc * m)
     m_vol[p] = mesh_qc_vol_p(m, p);
     if (m_vol[p] == NULL)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot calculate m_vol[%d]\n", p);
       double_array2_free(m_vol, p);
       return NULL;

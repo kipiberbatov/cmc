@@ -2,7 +2,6 @@
 #include <stdlib.h>
 
 #include "cmc_error_message.h"
-#include "color.h"
 #include "double.h"
 #include "mesh.h"
 
@@ -46,7 +45,7 @@ jagged1 * mesh_boundary_nodes(const mesh * m)
   m_node_curvature = mesh_node_curvature(m);
   if (m_node_curvature == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_cannot_calculate("m_node_curvature");
     return NULL;
   }
@@ -54,7 +53,7 @@ jagged1 * mesh_boundary_nodes(const mesh * m)
   m_bd_nodes = (jagged1 *) malloc(sizeof(jagged1));
   if (m_bd_nodes == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(jagged1), "m_bd_nodes");
     free(m_node_curvature);
     return NULL;
@@ -65,7 +64,7 @@ jagged1 * mesh_boundary_nodes(const mesh * m)
   m_bd_nodes->a1 = (int *) malloc(sizeof(int) * m_bd_nodes->a0);
   if (m_bd_nodes->a1 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(int) * m_bd_nodes->a0, "m_bd_nodes->a1");
     free(m_bd_nodes);
     free(m_node_curvature);

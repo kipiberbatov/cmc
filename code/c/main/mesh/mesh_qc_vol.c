@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "mesh_qc.h"
 
@@ -18,7 +18,7 @@ static void mesh_qc_vol_file_print_raw(FILE * out, const mesh_qc * m)
     m_vol_p = mesh_qc_vol_p(m, p);
     if (m_vol_p == NULL)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot calculate m_col[%d]\n", p);
       return;
     }
@@ -38,7 +38,7 @@ int main(void)
   m = mesh_file_scan(in, "--raw");
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan mesh m in format --raw\n", stderr);
     return errno;
   }
@@ -46,7 +46,7 @@ int main(void)
   mesh_qc_vol_file_print_raw(out, m);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate mesh measures and print them\n", stderr);
   }
 

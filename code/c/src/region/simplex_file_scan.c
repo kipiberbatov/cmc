@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "int.h"
 #include "simplex.h"
@@ -13,7 +13,7 @@ simplex * simplex_file_scan(FILE * in)
   s = (simplex *) malloc(sizeof(simplex));
   if (s == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for s\n",
       sizeof(simplex));
@@ -23,7 +23,7 @@ simplex * simplex_file_scan(FILE * in)
   s->dim_embedded = int_file_scan(in);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan s->dim_embedded\n", stderr);
     goto end;
   }
@@ -31,7 +31,7 @@ simplex * simplex_file_scan(FILE * in)
   s->dim = int_file_scan(in);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan s->dim\n", stderr);
     goto end;
   }
@@ -40,7 +40,7 @@ simplex * simplex_file_scan(FILE * in)
     in, s->dim_embedded * (1 + s->dim), "--raw");
   if (s->coord == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan s->coord\n", stderr);
     goto s_free;
   }

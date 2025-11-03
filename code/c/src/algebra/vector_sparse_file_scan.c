@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "vector_sparse_private.h"
 
 vector_sparse * vector_sparse_file_scan(FILE * in, const char * format)
@@ -12,7 +12,7 @@ vector_sparse * vector_sparse_file_scan(FILE * in, const char * format)
     a = vector_sparse_file_scan_raw(in);
   else
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     errno = EINVAL;
     fprintf(stderr, "format %s%s%s is not supported\n",
       color_variable, format, color_none);
@@ -21,7 +21,7 @@ vector_sparse * vector_sparse_file_scan(FILE * in, const char * format)
 
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan input\n", stderr);
   }
   return a;

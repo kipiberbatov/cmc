@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "double_array2.h"
 #include "mesh_qc.h"
@@ -22,7 +22,7 @@ static void mesh_qc_metric_corrected_file_print_only_values(
     m_metric_p = mesh_qc_metric_corrected_p(m, p, m_vol[p], node_curvatures);
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot calculate m_metric[%d]\n", p);
       return;
     }
@@ -45,7 +45,7 @@ int main(int argc, char ** argv)
 
   if (argc != 4)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "number of command line arguments must be 4\n");
     errno = EINVAL;
     goto end;
@@ -61,7 +61,7 @@ int main(int argc, char ** argv)
   m = mesh_file_scan(m_file, "--raw");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m\n", stderr);
     fclose(m_file);
     goto end;
@@ -71,7 +71,7 @@ int main(int argc, char ** argv)
   m->fc = mesh_fc(m);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->fc\n", stderr);
     fclose(m_file);
     goto m_free;
@@ -80,7 +80,7 @@ int main(int argc, char ** argv)
   m_bd = mesh_file_scan_boundary(m_file, m);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m_bd\n", stderr);
     fclose(m_file);
     goto m_free;
@@ -91,7 +91,7 @@ int main(int argc, char ** argv)
   m_vol = double_array2_file_scan_by_name(argv[2], d + 1, m->cn, "--raw");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m_vol\n", stderr);
     goto m_bd_free;
   }
@@ -99,7 +99,7 @@ int main(int argc, char ** argv)
   node_curvatures = double_array_file_scan_by_name(argv[3], m->cn[0], "--raw");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan node_curvature\n", stderr);
     goto m_vol_free;
   }
@@ -108,7 +108,7 @@ int main(int argc, char ** argv)
     stdout, m, m_vol, node_curvatures);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot print m_metric\n", stderr);
     goto node_curvatures_free;
   }

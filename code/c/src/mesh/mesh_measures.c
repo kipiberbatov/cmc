@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "mesh_measures.h"
 
 struct mesh;
@@ -24,7 +24,7 @@ void mesh_measures(double *** m_measures, int * status,
 
   if (measurer == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "method %s is not supported\n", method);
     *status = 1;
     return;
@@ -33,7 +33,7 @@ void mesh_measures(double *** m_measures, int * status,
   measurer(m_measures, status, m);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot calculate m_measures using method %s\n", method);
   }
 }

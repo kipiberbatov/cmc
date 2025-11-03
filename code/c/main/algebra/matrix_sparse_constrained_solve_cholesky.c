@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "matrix_sparse.h"
 
@@ -14,7 +14,7 @@ static void matrix_sparse_constrained_solve_cholesky_file_print(
   x = matrix_sparse_constrained_solve_cholesky(a, b, rows);
   if (x == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot find x\n", stderr);
     return;
   }
@@ -40,7 +40,7 @@ int main(void)
   b = double_array_file_scan(in, b_m, "--raw");
   if (b == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan right-hand side b\n", stderr);
     goto end;
   }
@@ -48,7 +48,7 @@ int main(void)
   rows = jagged1_file_scan(in, "--raw");
   if (rows == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan rows for deletion in format --raw\n", stderr);
     goto b_free;
   }
@@ -56,7 +56,7 @@ int main(void)
   a = matrix_sparse_file_scan(in, "--raw");
   if (a == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan left-hand side a in format --raw\n", stderr);
     goto rows_free;
   }
@@ -64,7 +64,7 @@ int main(void)
   matrix_sparse_constrained_solve_cholesky_file_print(out, a, b, rows);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot restrict, solve and print\n", stderr);
     goto a_free;
   }

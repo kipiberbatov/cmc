@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "int.h"
 #include "mesh_disk_polar.h"
@@ -14,7 +14,7 @@ int main(int argc, char ** argv)
 
   if (argc != 3)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "number of command-line arguments should be 3;"
       "instead it is %d\n", argc);
@@ -24,7 +24,7 @@ int main(int argc, char ** argv)
   na = int_string_scan(argv[1]);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan number of angles na\n", stderr);
     goto end;
   }
@@ -32,7 +32,7 @@ int main(int argc, char ** argv)
   nd = int_string_scan(argv[2]);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan number of disks nd\n", stderr);
     goto end;
   }
@@ -40,7 +40,7 @@ int main(int argc, char ** argv)
   m = mesh_disk_polar(na, nd, 1, 0, 0);
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan number of disks nd\n", stderr);
     goto end;
   }
@@ -49,7 +49,7 @@ int main(int argc, char ** argv)
   m_bd_values = (double *) malloc(sizeof(double) * m_bd_values_size);
   if (m_bd_values == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for m_bd_values\n",
       sizeof(double) * m_bd_values_size);

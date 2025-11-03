@@ -1,6 +1,6 @@
 #include <errno.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "diffusion_steady_state_continuous.h"
 #include "diffusion_steady_state_discrete_primal_strong.h"
 #include "mesh.h"
@@ -19,7 +19,7 @@ double * diffusion_steady_state_continuous_primal_strong_cochain_solve(
     m, data_continuous);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot discretize continuous data\n", stderr);
     goto end;
   }
@@ -28,7 +28,7 @@ double * diffusion_steady_state_continuous_primal_strong_cochain_solve(
     m, m_cbd_0, m_cbd_star_1, data_discrete);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot find discretized result\n");
     goto data_discrete_free;
   }

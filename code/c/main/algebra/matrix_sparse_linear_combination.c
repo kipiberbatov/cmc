@@ -1,9 +1,8 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
-#include "double.h"
 #include "cmc_error_message.h"
+#include "double.h"
 #include "matrix_sparse.h"
 
 int main(int argc, char ** argv)
@@ -16,7 +15,7 @@ int main(int argc, char ** argv)
 #define ARGC 8
   if (argc != ARGC)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_number_of_command_line_arguments_mismatch(ARGC, argc);
     return EINVAL;
   }
@@ -32,7 +31,7 @@ int main(int argc, char ** argv)
   alpha = double_string_scan(alpha_name);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot scan alpha from string %s\n", alpha_name);
     goto end;
   }
@@ -40,7 +39,7 @@ int main(int argc, char ** argv)
   beta = double_string_scan(beta_name);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot scan beta from string %s\n", beta_name);
     goto end;
   }
@@ -48,7 +47,7 @@ int main(int argc, char ** argv)
   a = matrix_sparse_file_scan_by_name(a_name, a_format);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan matrix a from file %s in format %s\n",
       a_name, a_format);
@@ -58,7 +57,7 @@ int main(int argc, char ** argv)
   b = matrix_sparse_file_scan_by_name(b_name, b_format);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan matrix b from file %s in format %s\n",
       b_name, b_format);
@@ -68,7 +67,7 @@ int main(int argc, char ** argv)
   c = matrix_sparse_linear_combination(a, b, alpha, beta);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot calculate c = %g a + %g b\n", alpha, beta);
     goto b_free;
   }
@@ -76,7 +75,7 @@ int main(int argc, char ** argv)
   matrix_sparse_file_print(stdout, c, out_format);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot print c in format %s\n", out_format);
     goto c_free;
   }

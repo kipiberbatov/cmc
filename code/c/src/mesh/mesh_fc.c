@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "int.h"
 #include "mesh.h"
 
@@ -79,7 +79,7 @@ static void mesh_fc_a4(int * m_fc_a4, const mesh * m, int * m_fc_a3)
       ind_current = (int *) calloc(m_cn_q, sizeof(int));
       if (ind_current == NULL)
       {
-        color_error_position(__FILE__, __LINE__);
+        cmc_error_message_position_in_code(__FILE__, __LINE__);
         fprintf(stderr,
           "cannot allocate %ld bytes of memory for ind_current\n",
           sizeof(int) * m_cn_q);
@@ -114,7 +114,7 @@ jagged4 * mesh_fc(const mesh * m)
   m_fc = (jagged4 *) malloc(sizeof(jagged4));
   if (m_fc == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for m_fc\n",
       sizeof(jagged4));
@@ -125,7 +125,7 @@ jagged4 * mesh_fc(const mesh * m)
   m_fc->a1 = (int *) malloc(sizeof(int) * m->dim);
   if (m_fc->a1 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for m_fc->a1\n",
       sizeof(int) * m->dim);
@@ -137,7 +137,7 @@ jagged4 * mesh_fc(const mesh * m)
   m_fc->a2 = (int *) malloc(sizeof(int) * m_fc_a2_size);
   if (m_fc->a2 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for m_fc->a2\n",
       sizeof(int) *  m_fc_a2_size);
@@ -149,7 +149,7 @@ jagged4 * mesh_fc(const mesh * m)
   m_fc->a3 = (int *) calloc(m_fc_a3_size, sizeof(int));
   if (m_fc->a3 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for m_fc->a3\n",
       sizeof(int) *  m_fc_a3_size);
@@ -161,7 +161,7 @@ jagged4 * mesh_fc(const mesh * m)
   m_fc->a4 = (int *) malloc(sizeof(int) * m_fc_a4_size);
   if (m_fc->a4 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for m_fc->a4\n",
       sizeof(int) *  m_fc_a4_size);
@@ -170,7 +170,7 @@ jagged4 * mesh_fc(const mesh * m)
   mesh_fc_a4(m_fc->a4, m, m_fc->a3);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate for m->fc->a4\n", stderr);
     goto m_fc_a4_free;
   }

@@ -1,7 +1,6 @@
 #include <stdlib.h>
 
 #include "cmc_error_message.h"
-#include "color.h"
 #include "mesh_qc_private.h"
 
 matrix_sparse * mesh_qc_hodge_p(
@@ -16,7 +15,7 @@ matrix_sparse * mesh_qc_hodge_p(
   m_hodge_p = (matrix_sparse *) malloc(sizeof(matrix_sparse));
   if (m_hodge_p == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(matrix_sparse), "m_hodge_p");
     goto end;
   }
@@ -27,7 +26,7 @@ matrix_sparse * mesh_qc_hodge_p(
   m_hodge_p->cols_total = (int *) malloc(sizeof(int) * (m->cn[p] + 1));
   if (m_hodge_p->cols_total == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(
       sizeof(int) * (m->cn[p] + 1), "m_hodge_p->cols_total");
     goto m_hodge_p_free;
@@ -39,7 +38,7 @@ matrix_sparse * mesh_qc_hodge_p(
   m_hodge_p->row_indices = (int *) malloc(sizeof(int) * m_hodge_p_nonzero_max);
   if (m_hodge_p->row_indices == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(
       sizeof(int) * m_hodge_p_nonzero_max, "m_hodge_p->row_indices");
     goto m_hodge_p_cols_total_free;
@@ -49,7 +48,7 @@ matrix_sparse * mesh_qc_hodge_p(
   m_hodge_p->values = (double *) malloc(sizeof(double) * m_hodge_p_nonzero_max);
   if (m_hodge_p->values == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(
       sizeof(double) * m_hodge_p_nonzero_max, "m_hodge_p->values");
     goto m_hodge_p_row_indices_free;
@@ -80,7 +79,7 @@ matrix_sparse ** mesh_qc_hodge(const mesh_qc * m, matrix_sparse ** m_bd,
   m_hodge = (matrix_sparse **) malloc(sizeof(matrix_sparse *) * (m_dim + 1));
   if (m_hodge == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(matrix_sparse *) * (m_dim + 1), "m_hodge");
     return NULL;
   }
@@ -91,7 +90,7 @@ matrix_sparse ** mesh_qc_hodge(const mesh_qc * m, matrix_sparse ** m_bd,
     m_hodge[p] = mesh_qc_hodge_p(m, m_bd, p, m_inner[q], m_coeff[q]);
     if (m_hodge[p] == NULL)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot calculate m->hodge[%s%d%s]\n",
         color_variable, p, color_none);
       matrix_sparse_array_free(m_hodge, p);

@@ -1,4 +1,4 @@
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "int.h"
 #include "mesh_brick.h"
@@ -14,7 +14,7 @@ mesh * mesh_brick_regular(int d, int n)
   m = mesh_brick(d, brick_lengths, partitions);
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m\n", stderr);
     return NULL;
   }

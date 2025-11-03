@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double.h"
 #include "diffusion_steady_state_continuous.h"
 #include "diffusion_steady_state_discrete_mixed_weak.h"
@@ -24,7 +24,7 @@ void diffusion_steady_state_continuous_mixed_weak_cochain_solve(
     m, m_vol_dm1, m_vol_d, data_continuous);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot discretize continuous data\n", stderr);
     return;
   }
@@ -34,7 +34,7 @@ void diffusion_steady_state_continuous_mixed_weak_cochain_solve(
     m, m_cbd_dm1, m_inner_dm1, m_inner_d, data_discrete);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot solve discretized problem\n", stderr);
     goto data_discrete_free;
   }

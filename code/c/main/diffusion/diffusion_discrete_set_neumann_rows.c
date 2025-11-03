@@ -1,10 +1,9 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "diffusion_discrete_set_neumann_rows.h"
-#include "cmc_error_message.h"
 #include "mesh.h"
 
 static int x1_axis_constant(const double * x)
@@ -23,7 +22,7 @@ int main(int argc, char ** argv)
 #define ARGC 5
   if (argc != ARGC)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_number_of_command_line_arguments_mismatch(ARGC, argc);
     return EINVAL;
   }
@@ -36,7 +35,7 @@ int main(int argc, char ** argv)
   m = mesh_file_scan_by_name(m_name, m_format);
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan mesh m from file %s in format %s\n",
       m_name, m_format);
@@ -46,7 +45,7 @@ int main(int argc, char ** argv)
   m->fc = mesh_fc(m);
   if (m->fc == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->fc\n", stderr);
     goto m_free;
   }
@@ -55,7 +54,7 @@ int main(int argc, char ** argv)
     m_laplacian_0_name, m_laplacian_0_format);
   if (m_laplacian_0 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan m_laplacian[0] from file %s in format %s\n",
       m_laplacian_0_name, m_laplacian_0_format);
@@ -65,7 +64,7 @@ int main(int argc, char ** argv)
   neumann_nodes = mesh_boundary_nodes_from_constraint(m, x1_axis_constant);
   if (neumann_nodes == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate neumann_nodes\n", stderr);
     goto m_laplacian_0_free;
   }
@@ -73,7 +72,7 @@ int main(int argc, char ** argv)
   kappa_1 = malloc(sizeof(double) * m_laplacian_0->cols);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m_laplacian_0->cols, "kappa_1");
     goto neumann_node_free;
   }
@@ -82,7 +81,7 @@ int main(int argc, char ** argv)
   diffusion_discrete_set_neumann_rows(m_laplacian_0, m, neumann_nodes, kappa_1);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m_laplacian_0\n", stderr);
     goto kappa_1_free;
   }

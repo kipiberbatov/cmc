@@ -1,9 +1,8 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
-#include "double_array.h"
 #include "cmc_error_message.h"
+#include "double_array.h"
 #include "int.h"
 #include "jagged.h"
 #include "vector_sparse_private.h"
@@ -47,7 +46,7 @@ vector_sparse * vector_sparse_file_scan_raw(FILE * in)
   a = (vector_sparse *) malloc(sizeof(vector_sparse));
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(vector_sparse), "a");
     goto end;
   }
@@ -55,13 +54,13 @@ vector_sparse * vector_sparse_file_scan_raw(FILE * in)
   a->length = int_file_scan(in);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan a->length\n", stderr);
     goto a_free;
   }
   if (a->length <= 0)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("a->length is nonpositive\n", stderr);
     errno = EINVAL;
     goto a_free;
@@ -70,13 +69,13 @@ vector_sparse * vector_sparse_file_scan_raw(FILE * in)
   a->nonzero_max = int_file_scan(in);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan a->nonzero_max\n", stderr);
     goto a_free;
   }
   if (a->nonzero_max <= 0 || a->nonzero_max > a->length)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "a->nonzero_max = %d is not in [0, %d)\n",
       a->nonzero_max, a->length);
@@ -87,13 +86,13 @@ vector_sparse * vector_sparse_file_scan_raw(FILE * in)
   a->positions = int_array_file_scan(in, a->nonzero_max, "--raw");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan a->positions in format --raw\n", stderr);
     goto a_free;
   }
   if(!vector_sparse_positions_possible(a->length, a->nonzero_max, a->positions))
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("a->positions is impossible\n", stderr);
     errno = EINVAL;
     goto a_positions_free;
@@ -102,7 +101,7 @@ vector_sparse * vector_sparse_file_scan_raw(FILE * in)
   a->values = double_array_file_scan(in, a->nonzero_max, "--raw");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan a->values in format --raw\n", stderr);
     goto a_positions_free;
   }

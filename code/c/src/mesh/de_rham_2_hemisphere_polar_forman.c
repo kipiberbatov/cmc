@@ -1,8 +1,7 @@
 #include <math.h>
 
-#include "color.h"
-#include "double_array.h"
 #include "cmc_error_message.h"
+#include "double_array.h"
 #include "mesh.h"
 #include "mesh_measures.h"
 

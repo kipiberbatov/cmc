@@ -3,6 +3,8 @@
 
 #include <stddef.h>
 
+#include "color.h"
+
 void cmc_error_message_position_in_code(const char * file, int line);
 void cmc_error_message_memory_allocate(const char * name);
 void cmc_error_message_cannot_calculate(const char * name);

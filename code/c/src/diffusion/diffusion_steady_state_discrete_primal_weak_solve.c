@@ -2,10 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "diffusion_steady_state_discrete_primal_weak.h"
 #include "double.h"
-#include "cmc_error_message.h"
 #include "mesh_qc.h"
 
 static double * matrix_sparse_symmetric_constrained_solve(
@@ -30,7 +29,7 @@ static double * matrix_sparse_symmetric_constrained_solve(
   u = (double *) malloc(sizeof(double) * a->cols);
   if (u == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * a->cols, "u");
     return NULL;
   }
@@ -39,7 +38,7 @@ static double * matrix_sparse_symmetric_constrained_solve(
   matrix_sparse_linear_solve(a, u, "--lu");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot solve linear system using LU decomposition\n", stderr);
     free(u);
     return NULL;
@@ -64,7 +63,7 @@ double * diffusion_steady_state_discrete_primal_weak_solve(
     m, m_inner_1, data->kappa_1);
   if (a == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate a\n", stderr);
     goto end;
   }
@@ -72,7 +71,7 @@ double * diffusion_steady_state_discrete_primal_weak_solve(
   f = (double *) malloc(sizeof(double) * m_cn_0);
   if (f == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m_cn_0, "f");
     goto a_free;
   }
@@ -87,7 +86,7 @@ double * diffusion_steady_state_discrete_primal_weak_solve(
     a, f, data->boundary_dirichlet, data->g_dirichlet);
   if (u == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot solve constrained system\n", stderr);
     goto f_free;
   }

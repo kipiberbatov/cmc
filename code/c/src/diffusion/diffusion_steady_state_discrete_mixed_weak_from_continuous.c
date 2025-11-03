@@ -3,7 +3,7 @@
 
 #include "boundary_scalar_field_discretize.h"
 #include "boundary_pseudoscalar_field_discretize.h"
-#include "color.h"
+#include "cmc_error_message.h"
 #include "de_rham.h"
 #include "diffusion_steady_state_continuous.h"
 #include "diffusion_steady_state_discrete_mixed_weak.h"

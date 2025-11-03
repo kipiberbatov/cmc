@@ -1,9 +1,8 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
-#include "double_array.h"
 #include "cmc_error_message.h"
+#include "double_array.h"
 #include "matrix_sparse.h"
 
 /* read a sparse matrix and vector from a file, multiply and print them */
@@ -17,7 +16,7 @@ int main(int argc, char ** argv)
 #define ARGC 3
   if (argc != ARGC)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_number_of_command_line_arguments_mismatch(ARGC, argc);
     return EINVAL;
   }
@@ -28,7 +27,7 @@ int main(int argc, char ** argv)
   a = matrix_sparse_file_scan_by_name(a_name, "--raw");
   if (a == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan sparse matrix a from file %s in format --raw\n",
       a_name);
@@ -41,7 +40,7 @@ int main(int argc, char ** argv)
   x = double_array_file_scan_by_name(x_name, n, "--raw");
   if (x == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan vector x of length %d from file %s in format --raw\n",
       n, x_name);
@@ -51,7 +50,7 @@ int main(int argc, char ** argv)
   y = (double *) calloc(m, sizeof(double));
   if (y == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m, "y");
     goto x_free;
   }

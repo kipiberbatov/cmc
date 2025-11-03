@@ -1,7 +1,6 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
 #include "cmc_error_message.h"
 #include "mesh_disk_polar.h"
 #include "mesh_hemisphere_polar.h"
@@ -15,7 +14,7 @@ mesh * mesh_hemisphere_polar(
   m = (mesh *) malloc(sizeof(mesh));
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(mesh), "m");
     goto end;
   }
@@ -23,7 +22,7 @@ mesh * mesh_hemisphere_polar(
   mesh_disk_polar_only_topology(m, na, nd);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot calculate polar mesh topology for na = %d, nd = %d\n", na, nd);
     goto m_free;
@@ -33,7 +32,7 @@ mesh * mesh_hemisphere_polar(
   m->coord = (double *) malloc(sizeof(double) * 3 * m->cn[0]);
   if (m->coord == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * 3 * m->cn[0], "m->coord");
     goto m_topology_free;
   }

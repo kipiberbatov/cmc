@@ -4,14 +4,13 @@
 #include <string.h>
 
 /* internal headers */
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "double_matrix.h"
 #include "frame.h"
 #include "cmc_animation.h"
 #include "cmc_animation_generic_data.h"
 #include "cmc_command_line.h"
-#include "cmc_error_message.h"
 #include "cmc_graphics_mesh_2d_1_cochain_sequence.h"
 #include "mesh.h"
 
@@ -158,7 +157,7 @@ int main(int argc, char ** argv)
   cmc_command_line_parse(options, &status, size, argc, argv);
   if (status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot parse command line options\n", stderr);
     goto end;
   }
@@ -169,7 +168,7 @@ int main(int argc, char ** argv)
   cmc_animation_check_input(&status, &animation);
   if (status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("bad input\n", stderr);
     goto end;
   }
@@ -179,14 +178,14 @@ int main(int argc, char ** argv)
   m_file = fopen(m_name, "r");
   if (m_file == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot open mesh file %s: %s\n", m_name, strerror(errno));
     goto end;
   }
   m = mesh_file_scan(m_file, m_format);
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot scan mesh m from file %s in format %s\n",
       m_name, m_format);
     fclose(m_file);
@@ -196,7 +195,7 @@ int main(int argc, char ** argv)
   m_bd_1 = mesh_file_scan_boundary_p(m_file, m, 1);
   if (m_bd_1 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot scan m_bd_1 m from file %s\n", m_name);
     fclose(m_file);
     goto m_free;
@@ -208,7 +207,7 @@ int main(int argc, char ** argv)
   u = double_matrix_file_scan_by_name(u_name, n, m->cn[1], u_format);
   if (u == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan cochain sequence u from file %s in format %s\n",
       u_name, u_format);
@@ -219,7 +218,7 @@ int main(int argc, char ** argv)
   new_coordinates = (double *) malloc(sizeof(double) * 2 * m->cn[0]);
   if (new_coordinates == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * 2 * m->cn[0], "new_coordinates");
     status = 1;
     goto u_free;
@@ -236,7 +235,7 @@ int main(int argc, char ** argv)
     double * m_coord_2d = malloc(sizeof(double) * 2 * m->cn[0]);
     if (m_coord_2d == NULL)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       cmc_error_message_malloc(sizeof(double) * 2 * m->cn[0], "m_coord_2d");
       status = 1;
       goto new_coordinates_free;
@@ -285,7 +284,7 @@ int main(int argc, char ** argv)
     canvas_library, canvas_backend, animation_library, animation_backend);
   if (status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot read and apply backends\n", stderr);
   }
 

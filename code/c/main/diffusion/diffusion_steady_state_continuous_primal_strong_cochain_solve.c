@@ -5,7 +5,7 @@
 
 #include <dlfcn.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "diffusion_steady_state_continuous.h"
 #include "int.h"
@@ -24,7 +24,7 @@ int main(int argc, char ** argv)
 
   if (argc != 7)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("the number of command-line arguments must be 8\n", stderr);
     errno = EINVAL;
     goto end;
@@ -35,7 +35,7 @@ int main(int argc, char ** argv)
   m = mesh_file_scan_by_name(m_name, m_format);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m\n", stderr);
     goto end;
   }
@@ -43,7 +43,7 @@ int main(int argc, char ** argv)
   m->fc = mesh_fc(m);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->fc\n", stderr);
     goto m_free;
   }
@@ -53,7 +53,7 @@ int main(int argc, char ** argv)
   m_cbd_0 = matrix_sparse_file_scan_by_name(m_cbd_0_name, "--raw");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m_cbd_0\n", stderr);
     goto m_free;
   }
@@ -63,7 +63,7 @@ int main(int argc, char ** argv)
   m_cbd_star_1_file = fopen(m_cbd_star_1_name, "r");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot open file %s: %s\n",
       m_cbd_star_1_name, strerror(errno));
@@ -72,7 +72,7 @@ int main(int argc, char ** argv)
   m_cbd_star_1 = mesh_file_scan_boundary_p(m_cbd_star_1_file, m, 1);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m_cbd_star_1\n", stderr);
     fclose(m_cbd_star_1_file);
     goto m_cbd_0_free;
@@ -83,7 +83,7 @@ int main(int argc, char ** argv)
   lib_handle = dlopen(lib_name, RTLD_LAZY);
   if (!lib_handle)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot open libshared\n", stderr);
     goto m_cbd_star_1_free;
   }
@@ -104,7 +104,7 @@ int main(int argc, char ** argv)
     m, m_cbd_0, m_cbd_star_1, data);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate result\n", stderr);
     goto lib_close;
   }

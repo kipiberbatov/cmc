@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "matrix_sparse_private.h"
 
 void matrix_sparse_linear_solve(
@@ -13,7 +13,7 @@ void matrix_sparse_linear_solve(
     matrix_sparse_linear_solve_lu(a, b);
   else
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "method %s is not supported\n", method);
     errno = EINVAL;
     return;
@@ -21,7 +21,7 @@ void matrix_sparse_linear_solve(
 
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot solve linear system using method %s\n", method);
   }
 }

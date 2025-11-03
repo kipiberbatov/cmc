@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "int.h"
 #include "matrix_sparse.h"
@@ -25,7 +25,7 @@ static double * double_array_constrain(
   b_restrict = (double *) malloc(sizeof(double) * rows_complement_a0);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for b_restrict\n",
       sizeof(double) * rows_complement_a0);
@@ -59,7 +59,7 @@ double * matrix_sparse_constrained_solve_cholesky(
   rows_complement = jagged1_complement(a_m, rows);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate rows_complement\n", stderr);
     goto end;
   }
@@ -67,7 +67,7 @@ double * matrix_sparse_constrained_solve_cholesky(
   a_restrict = matrix_sparse_remove(a, rows_complement, rows_complement);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate a_restrict\n", stderr);
    goto rows_complement_free;
   }
@@ -89,7 +89,7 @@ double * matrix_sparse_constrained_solve_cholesky(
   x = (double *) malloc(sizeof(double) * a_m);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory forx\n",
       sizeof(double) * a_m);

@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_matrix.h"
 #include "double_matrix_private.h"
 
@@ -14,7 +14,7 @@ void double_matrix_file_print(
     double_matrix_file_print_curly(out, m, n, a);
   else
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "format %s is not supported\n", format);
     errno = EINVAL;
   }

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array2.h"
 #include "double_matrix.h"
 #include "diffusion_transient_discrete_primal_weak.h"
@@ -68,21 +68,21 @@ int main(int argc, char ** argv)
   cmc_command_line_parse(options, &status, size, argc, argv);
   if (status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot parse command line options\n", stderr);
     return status;
   }
 
   if (time_step <= 0.)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "the time step is %g but it must be positive\n", time_step);
     goto end;
   }
 
   if (number_of_steps < 0)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "the number of steps is %d but it must be at least 0\n",
       number_of_steps);
@@ -92,7 +92,7 @@ int main(int argc, char ** argv)
   m = mesh_file_scan_by_name(m_name, m_format);
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan mesh m from file %s in format %s\n",
       m_name, m_format);
@@ -102,7 +102,7 @@ int main(int argc, char ** argv)
   m->fc = mesh_fc(m);
   if (m->fc == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->fc\n", stderr);
     goto m_free;
   }
@@ -114,7 +114,7 @@ int main(int argc, char ** argv)
     m_inner_name, d + 1, m_cn, m_inner_format);
   if (m_inner == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan inner products from file %s in format %s\n",
       m_inner_name, m_inner_format);
@@ -124,7 +124,7 @@ int main(int argc, char ** argv)
   data_file = fopen(data_name, "r");
   if (data_file == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot open problem data file %s for reading: %s\n",
       data_name, strerror(errno));
@@ -133,7 +133,7 @@ int main(int argc, char ** argv)
   data = diffusion_transient_discrete_primal_weak_file_scan_raw(data_file);
   if (data == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot scan problem data from file %s\n", data_name);
     fclose(data_file);
     goto m_inner_free;
@@ -144,7 +144,7 @@ int main(int argc, char ** argv)
     m, m_inner[0], m_inner[1], data, time_step, number_of_steps);
   if (potential == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot find potential\n", stderr);
     goto data_free;
   }

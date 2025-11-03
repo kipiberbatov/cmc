@@ -2,9 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
-#include "double_array2.h"
 #include "cmc_error_message.h"
+#include "double_array2.h"
 #include "int.h"
 #include "matrix_sparse.h"
 
@@ -21,7 +20,7 @@ int main(int argc, char ** argv)
 #define ARGC 7
   if (argc != ARGC)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_number_of_command_line_arguments_mismatch(ARGC, argc);
     errno = EIO;
     goto end;
@@ -30,7 +29,7 @@ int main(int argc, char ** argv)
   d = int_string_scan(argv[1]);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot scan dimension d from string %s\n", argv[1]);
     goto end;
   }
@@ -40,7 +39,7 @@ int main(int argc, char ** argv)
   m_laplacian_file = fopen(m_laplacian_name, "r");
   if (m_laplacian_file == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot open file %s for reading: %s\n",
       m_laplacian_name, strerror(errno));
@@ -50,7 +49,7 @@ int main(int argc, char ** argv)
     m_laplacian_file, d + 1, m_laplacian_format);
   if (m_laplacian == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan m_laplacian from file %s in format %s\n",
       m_laplacian_name, m_laplacian_format);
@@ -60,7 +59,7 @@ int main(int argc, char ** argv)
   m_cn = (int *) malloc(sizeof(int) * (d + 1));
   if (m_cn == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(int) * (d + 1), "m_cn");
     goto m_laplacian_free;
   }
@@ -72,7 +71,7 @@ int main(int argc, char ** argv)
   m_inner_file = fopen(m_inner_name, "r");
   if (m_inner_file == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot open file %s for reading: %s\n",
       m_inner_name, strerror(errno));
@@ -81,7 +80,7 @@ int main(int argc, char ** argv)
   m_inner = double_array2_file_scan(m_inner_file, d + 1, m_cn, m_inner_format);
   if (m_inner == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan m_inner from file %s in format %s\n",
       m_inner_name, m_inner_format);

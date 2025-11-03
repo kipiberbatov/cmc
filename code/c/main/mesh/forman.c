@@ -1,6 +1,6 @@
 #include <errno.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "forman.h"
 
 int main(int argc, char ** argv)
@@ -10,7 +10,7 @@ int main(int argc, char ** argv)
 
   if (argc != 5)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "number of command line arguments should be 5; instead it is %d\n", argc);
     errno = EINVAL;
@@ -25,7 +25,7 @@ int main(int argc, char ** argv)
   m = mesh_file_scan_by_name(m_name, m_format);
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan mesh m in from file %s in fromat %s\n",
       m_name, m_format);
@@ -35,7 +35,7 @@ int main(int argc, char ** argv)
   m_forman = forman(m, new_coordinates_format);
   if (m_forman == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot calculate m_forman in new coordinates format %s\n",
       new_coordinates_format);
     goto m_free;

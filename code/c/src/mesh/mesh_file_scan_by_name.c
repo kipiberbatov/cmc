@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "mesh.h"
 
 mesh * mesh_file_scan_by_name(const char * name, const char * format)
@@ -12,7 +12,7 @@ mesh * mesh_file_scan_by_name(const char * name, const char * format)
   in = fopen(name, "r");
   if (in == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot open file %s%s%s for reading: %s%s%s\n",
       color_variable, name, color_none,
@@ -23,7 +23,7 @@ mesh * mesh_file_scan_by_name(const char * name, const char * format)
   m = mesh_file_scan(in, format);
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan mesh m from file %s%s%s in format %s%s%s\n",
       color_variable, name, color_none,

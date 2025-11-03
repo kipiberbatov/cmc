@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "cmc_animation.h"
 #include "cmc_animation_generic_data.h"
 #include "cmc_graphics_mesh_2d_0_cochain_sequence.h"
@@ -27,7 +27,7 @@ void cmc_graphics_mesh_2d_0_cochain_sequence_draw_snapshot(
   functions->set_background_color(canvas, status);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot set set background color %d\n", stderr);
     return;
   }
@@ -40,7 +40,7 @@ void cmc_graphics_mesh_2d_0_cochain_sequence_draw_snapshot(
     functions->draw_black_edge);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot draw skeleton %d\n", stderr);
     return;
   }
@@ -54,7 +54,7 @@ void cmc_graphics_mesh_2d_0_cochain_sequence_draw_snapshot(
     functions);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot draw values %d\n", stderr);
     return;
   }

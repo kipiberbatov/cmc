@@ -2,7 +2,7 @@
 
 #include <dlfcn.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "cmc_animation.h"
 #include "cmc_animation_generic_data.h"
 #include "cmc_command_line.h"
@@ -94,7 +94,7 @@ int main(int argc, char ** argv)
   cmc_command_line_parse(options, &status, size, argc, argv);
   if (status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot parse command line options\n", stderr);
     goto end;
   }
@@ -107,7 +107,7 @@ int main(int argc, char ** argv)
     direction = cmc_graphics_colorbar_direction_vertical;
   else
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "direction must be %s%s%s or %s%s%s; instead it is %s%s%s\n",
       color_magenta, "horizontal", color_none,
@@ -124,7 +124,7 @@ int main(int argc, char ** argv)
   cmc_animation_check_input(&status, &animation);
   if (status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("bad input\n", stderr);
     goto end;
   }
@@ -135,7 +135,7 @@ int main(int argc, char ** argv)
     canvas_library, canvas_backend, animation_library, animation_backend);
   if (status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot read and apply backends\n", stderr);
     goto end;
   }

@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "diffusion_transient_discrete_mixed_weak.h"
 #include "diffusion_transient_discrete_mixed_weak_solve_trapezoidal_next.h"
 #include "diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data.h"

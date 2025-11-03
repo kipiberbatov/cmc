@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "double_array2.h"
 #include "mesh.h"
@@ -51,7 +51,7 @@ double ** mesh_displacement(
   result = (double **) calloc(m_cn_0, sizeof(double *));
   if (result == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for result\n",
       sizeof(double *) * m_cn_0);
@@ -63,7 +63,7 @@ double ** mesh_displacement(
     result[i] = (double *) calloc(m_dim_embedded, sizeof(double));
     if (result[i] == NULL)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
         "cannot allocate %ld bytes of memory for result[%d]\n",
         sizeof(double) * m_dim_embedded, i);

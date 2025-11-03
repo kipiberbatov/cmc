@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "cmc_animation.h"
 #include "cmc_graphics_mesh_2d_skeleton.h"
 #include "cmc_graphics_mesh_2d_skeleton_draw_functions.h"
@@ -24,7 +24,7 @@ void cmc_graphics_mesh_2d_skeleton_draw_snapshot(
     functions->draw_black_edge);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot draw skeleton %d\n", stderr);
     return;
   }

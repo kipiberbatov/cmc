@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double.h"
 #include "int.h"
 #include "mesh_file_scan_tess_private.h"
@@ -18,7 +18,7 @@ void mesh_file_scan_tess_get_boundary_values(double * bd_values_2,
     int_file_scan(in); /* c_i; */
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot scan integer for i = %d\n", i);
       return;
     }
@@ -27,13 +27,13 @@ void mesh_file_scan_tess_get_boundary_values(double * bd_values_2,
     faces_number_of_sides_i = int_file_scan(in);
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot scan faces_number_of_sides[%d]\n", i);
       return;
     }
     if (faces_number_of_sides_i <= 2)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
         "faces_number_of_sides[%d] should be at least 3; instead it is %d\n",
         i, faces_number_of_sides_i);
@@ -44,7 +44,7 @@ void mesh_file_scan_tess_get_boundary_values(double * bd_values_2,
       int_file_scan(in);
       if (errno)
       {
-        color_error_position(__FILE__, __LINE__);
+        cmc_error_message_position_in_code(__FILE__, __LINE__);
         fprintf(stderr, "unable to skip garbage value[%d]\n", j);
         return;
       }
@@ -53,13 +53,13 @@ void mesh_file_scan_tess_get_boundary_values(double * bd_values_2,
     faces_number_of_sides_i = int_file_scan(in);
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot scan faces_number_of_sides[%d]\n", i);
       return;
     }
     if (faces_number_of_sides_i <= 2)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
         "faces_number_of_sides[%d] should be at least 3; instead it is %d\n",
         i, faces_number_of_sides_i);
@@ -74,7 +74,7 @@ void mesh_file_scan_tess_get_boundary_values(double * bd_values_2,
         bd_values_2[index] = 1;
       if (errno)
       {
-        color_error_position(__FILE__, __LINE__);
+        cmc_error_message_position_in_code(__FILE__, __LINE__);
         fprintf(stderr, "cannot scan orientation index (%d\n, %d)", i, j);
         return;
       }
@@ -87,7 +87,7 @@ void mesh_file_scan_tess_get_boundary_values(double * bd_values_2,
       double_file_scan(in);
       if (errno)
       {
-        color_error_position(__FILE__, __LINE__);
+        cmc_error_message_position_in_code(__FILE__, __LINE__);
         fprintf(stderr, "unable to skip garbage value[%d]\n", j);
         return;
       }

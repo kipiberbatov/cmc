@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double.h"
 #include "int.h"
 #include "mesh_file_scan_tess_private.h"
@@ -18,7 +18,7 @@ void mesh_file_scan_tess_get_faces_to_subfaces(int * faces_to_subfaces,
     int_file_scan(in); /* c_i; */
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot scan integer for i = %d\n", i);
       return;
     }
@@ -26,13 +26,13 @@ void mesh_file_scan_tess_get_faces_to_subfaces(int * faces_to_subfaces,
     faces_number_of_sides_i = int_file_scan(in);
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot scan faces_number_of_sides[%d]\n", i);
       return;
     }
     if (faces_number_of_sides_i <= 2)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
         "faces_number_of_sides[%d] should be at least 3; instead it is %d\n",
         i, faces_number_of_sides_i);
@@ -43,7 +43,7 @@ void mesh_file_scan_tess_get_faces_to_subfaces(int * faces_to_subfaces,
       faces_to_subfaces[index] = int_file_scan(in) - 1;
       if (errno)
       {
-        color_error_position(__FILE__, __LINE__);
+        cmc_error_message_position_in_code(__FILE__, __LINE__);
         fprintf(stderr, "cannot scan faces_to_subfaces[%d]\n", index);
         return;
       }
@@ -53,7 +53,7 @@ void mesh_file_scan_tess_get_faces_to_subfaces(int * faces_to_subfaces,
     faces_number_of_sides_i = int_file_scan(in);
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot scan faces_number_of_sides[%d]\n", i);
       return;
     }
@@ -62,7 +62,7 @@ void mesh_file_scan_tess_get_faces_to_subfaces(int * faces_to_subfaces,
       faces_to_subfaces[index] = abs(int_file_scan(in)) - 1;
       if (errno)
       {
-        color_error_position(__FILE__, __LINE__);
+        cmc_error_message_position_in_code(__FILE__, __LINE__);
         fprintf(stderr, "cannot scan faces_to_subfaces[%d]\n", index);
         return;
       }
@@ -74,7 +74,7 @@ void mesh_file_scan_tess_get_faces_to_subfaces(int * faces_to_subfaces,
       double_file_scan(in);
       if (errno)
       {
-        color_error_position(__FILE__, __LINE__);
+        cmc_error_message_position_in_code(__FILE__, __LINE__);
         fprintf(stderr, "unable to skip garbage value[%d]\n", j);
         return;
       }

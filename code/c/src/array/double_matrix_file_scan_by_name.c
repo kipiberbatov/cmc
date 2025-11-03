@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_matrix.h"
 
 double * double_matrix_file_scan_by_name(
@@ -14,7 +14,7 @@ double * double_matrix_file_scan_by_name(
   in = fopen(name, "r");
   if (in == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot open file %s: %s\n", name, strerror(errno));
     goto end;
   }
@@ -22,7 +22,7 @@ double * double_matrix_file_scan_by_name(
   a = double_matrix_file_scan(in, m, n, format);
   if (a == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan matrix a from file %s in format %s\n",
       name, format);

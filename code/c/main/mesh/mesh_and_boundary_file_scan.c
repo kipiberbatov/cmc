@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "cmc_command_line.h"
 #include "mesh_and_boundary.h"
@@ -35,7 +35,7 @@ int main(int argc, char ** argv)
   cmc_command_line_parse(options, &status, total_options, argc, argv);
   if (status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot parse command line options\n", stderr);
     return status;
   }
@@ -43,7 +43,7 @@ int main(int argc, char ** argv)
   m_and_bd_file = fopen(m_name, "r");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot open mesh file %s%s%s for reading:%s\n",
       color_variable, m_format, color_none, strerror(errno));
@@ -53,7 +53,7 @@ int main(int argc, char ** argv)
   m_and_bd = mesh_and_boundary_file_scan(m_and_bd_file, m_format);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan mesh and boundary in format %s%s%s\n",
       color_variable, m_format, color_none);

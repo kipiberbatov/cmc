@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double.h"
 #include "double_array.h"
 #include "double_matrix.h"
@@ -49,7 +49,7 @@ int main(int argc, char ** argv)
 
   if (argc != 10)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("the number of command line arguments must be 10\n", stderr);
     errno = EINVAL;
     goto end;
@@ -60,7 +60,7 @@ int main(int argc, char ** argv)
   m = mesh_file_scan_by_name(m_name, m_format);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m\n", stderr);
     goto end;
   }
@@ -68,7 +68,7 @@ int main(int argc, char ** argv)
   m->fc = mesh_fc(m);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->fc\n", stderr);
     goto m_free;
   }
@@ -76,7 +76,7 @@ int main(int argc, char ** argv)
   m_nodes_bd = mesh_boundary_nodes(m);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m_nodes_bd\n", stderr);
     goto m_free;
   }
@@ -88,7 +88,7 @@ int main(int argc, char ** argv)
     matrix_sparse_file_scan_by_name(m_laplacian_0_name, m_laplacian_0_format);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m_laplacian[0]\n", stderr);
     goto m_nodes_bd_free;
   }
@@ -99,7 +99,7 @@ int main(int argc, char ** argv)
     double_array_file_scan_by_name(m_inner_0_name, m->cn[0], m_inner_0_format);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m_inner\n", stderr);
     goto m_laplacian_0_free;
   }
@@ -107,7 +107,7 @@ int main(int argc, char ** argv)
   tau = double_string_scan(argv[7]);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan tau\n", stderr);
     goto m_inner_0_free;
   }
@@ -115,7 +115,7 @@ int main(int argc, char ** argv)
   N = int_string_scan(argv[8]);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan N\n", stderr);
     goto m_inner_0_free;
   }
@@ -125,7 +125,7 @@ int main(int argc, char ** argv)
       u_0, tau, N);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate x\n", stderr);
     goto m_inner_0_free;
   }

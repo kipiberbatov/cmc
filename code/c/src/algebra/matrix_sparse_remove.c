@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "matrix_sparse.h"
 
 static void jagged1_intersection_indices(
@@ -88,7 +88,7 @@ matrix_sparse * matrix_sparse_restrict(
   b = (matrix_sparse *) malloc(sizeof(matrix_sparse));
   if (b == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for b\n",
       sizeof(matrix_sparse));
@@ -101,7 +101,7 @@ matrix_sparse * matrix_sparse_restrict(
   b->cols_total = (int *) malloc(sizeof(int) * (b->cols + 1));
   if (b->cols_total == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for b->cols_total\n",
       sizeof(int) * (b->cols + 1));
@@ -115,7 +115,7 @@ matrix_sparse * matrix_sparse_restrict(
   b->row_indices = (int *) malloc(sizeof(int) * b_nonzero_max);
   if (b->row_indices == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for b->row_indices\n",
       sizeof(int) * b_nonzero_max);
@@ -127,7 +127,7 @@ matrix_sparse * matrix_sparse_restrict(
   b->values = (double *) malloc(sizeof(double) * b_nonzero_max);
   if (b->values == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for b->values\n",
       sizeof(double) * b_nonzero_max);
@@ -164,7 +164,7 @@ matrix_sparse * matrix_sparse_remove(
   rows_complement = jagged1_complement(a->rows, rows);
   if (rows_complement == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate rows_complement\n", stderr);
     goto end;
   }
@@ -172,7 +172,7 @@ matrix_sparse * matrix_sparse_remove(
   cols_complement = jagged1_complement(a->cols, cols);
   if (cols_complement == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate cols_complement\n", stderr);
     goto rows_complement_free;
   }
@@ -180,7 +180,7 @@ matrix_sparse * matrix_sparse_remove(
   b = matrix_sparse_restrict(a, rows_complement, cols_complement);
   if (b == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate b\n", stderr);
     goto cols_complement_free;
   }
@@ -202,14 +202,14 @@ matrix_sparse * matrix_sparse_remove_symmetric(
   rows_complement = jagged1_complement(a->rows, rows);
   if (rows_complement == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate rows_complement\n", stderr);
     goto end;
   }
   b = matrix_sparse_restrict_symmetric(a, rows_complement);
   if (b == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate b\n", stderr);
     goto rows_complement_free;
   }

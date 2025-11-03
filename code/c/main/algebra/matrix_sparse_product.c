@@ -1,6 +1,5 @@
 #include <errno.h>
 
-#include "color.h"
 #include "cmc_error_message.h"
 #include "matrix_sparse.h"
 
@@ -12,7 +11,7 @@ int main(int argc, char ** argv)
 #define ARGC 6
   if (argc != ARGC)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_number_of_command_line_arguments_mismatch(ARGC, argc);
     errno = EIO;
     goto end;
@@ -23,7 +22,7 @@ int main(int argc, char ** argv)
   a = matrix_sparse_file_scan_by_name(a_name, a_format);
   if (a == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan the first matrix a from file %s in format %s\n",
       a_name, a_format);
@@ -35,7 +34,7 @@ int main(int argc, char ** argv)
   b = matrix_sparse_file_scan_by_name(b_name, b_format);
   if (b == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan the second matrix b from file %s in format %s\n",
       b_name, b_format);
@@ -45,7 +44,7 @@ int main(int argc, char ** argv)
   c = matrix_sparse_product(a, b);
   if (c == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate the matrix product c = a . b\n", stderr);
     goto b_free;
   }

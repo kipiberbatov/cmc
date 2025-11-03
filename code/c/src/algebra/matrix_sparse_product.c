@@ -1,4 +1,4 @@
-#include "color.h"
+#include "cmc_error_message.h"
 #include "matrix_sparse_private.h"
 
 matrix_sparse * matrix_sparse_product(
@@ -14,7 +14,7 @@ matrix_sparse * matrix_sparse_product(
   result0 = cs_multiply(&a0, &b0);
   if (result0 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot find matrix product via cs_multiply\n", stderr);
     goto end;
   }
@@ -22,7 +22,7 @@ matrix_sparse * matrix_sparse_product(
   result = (matrix_sparse *) malloc(sizeof(matrix_sparse));
   if (result == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for result\n",
       sizeof(matrix_sparse));

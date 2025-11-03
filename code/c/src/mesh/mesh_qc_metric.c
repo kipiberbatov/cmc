@@ -2,7 +2,6 @@
 #include <string.h>
 
 #include "cmc_error_message.h"
-#include "color.h"
 #include "double_array.h"
 #include "int.h"
 #include "mesh_qc.h"
@@ -16,7 +15,7 @@ static vector_sparse * mesh_qc_metric_p_i(
   m_metric_p_i = (vector_sparse *) malloc(sizeof(vector_sparse));
   if (m_metric_p_i == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(vector_sparse), "m_metric_p_i");
     goto end;
   }
@@ -28,7 +27,7 @@ static vector_sparse * mesh_qc_metric_p_i(
     (int *) malloc(sizeof(int) * m_metric_p_i->nonzero_max);
   if (m_metric_p_i->positions == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(
       sizeof(int) * m_metric_p_i->nonzero_max, "m_metric_p_i->positions");
     goto m_metric_p_i_free;
@@ -40,7 +39,7 @@ static vector_sparse * mesh_qc_metric_p_i(
     (double *) malloc(sizeof(double) * m_metric_p_i->nonzero_max);
   if (m_metric_p_i->values == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(
       sizeof(double) * m_metric_p_i->nonzero_max, "m_metric_p_i->values");
     goto m_metric_p_i_positions_free;
@@ -84,7 +83,7 @@ vector_sparse ** mesh_qc_metric_p(
     m_metric_p[i] = mesh_qc_metric_p_i(m_cn[0], &m_cf_p_0_i, p, i, m_vol_p[i]);
     if (m_metric_p[i] == NULL)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot calculate m_metric_p[%s%d%s]\n",
         color_variable, i, color_none);
       vector_sparse_array_free(m_metric_p, i);
@@ -105,7 +104,7 @@ vector_sparse *** mesh_qc_metric(const mesh_qc * m, double ** m_vol)
   m_metric = (vector_sparse ***) malloc(sizeof(vector_sparse **) * (m_dim + 1));
   if (m_metric == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(
       sizeof(vector_sparse **) * (m_dim + 1), "m_metric");
     return NULL;
@@ -116,7 +115,7 @@ vector_sparse *** mesh_qc_metric(const mesh_qc * m, double ** m_vol)
     m_metric[p] = mesh_qc_metric_p(m, p, m_vol[p]);
     if (m_metric[p] == NULL)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
         "cannot calculate m_metric[%s%d%s]\n", color_variable, p, color_none);
       vector_sparse_array2_free(m_metric, p, m->cn);
@@ -135,7 +134,7 @@ static vector_sparse * mesh_qc_metric_p_i_file_scan(
   m_metric_p_i = (vector_sparse *) malloc(sizeof(vector_sparse));
   if (m_metric_p_i == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(vector_sparse), "m_metric_p_i");
     goto end;
   }
@@ -147,7 +146,7 @@ static vector_sparse * mesh_qc_metric_p_i_file_scan(
     (int *) malloc(sizeof(int) * m_metric_p_i->nonzero_max);
   if (m_metric_p_i->positions == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(
       sizeof(int) * m_metric_p_i->nonzero_max, "m_metric_p_i->positions");
     goto m_metric_p_i_free;
@@ -159,7 +158,7 @@ static vector_sparse * mesh_qc_metric_p_i_file_scan(
     double_array_file_scan(in, m_metric_p_i->nonzero_max, "--raw");
   if (m_metric_p_i->values == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot scan_p_i->values\n");
     free(m_metric_p_i->positions);
     goto m_metric_p_i_positions_free;
@@ -189,7 +188,7 @@ vector_sparse ** mesh_qc_metric_p_file_scan(FILE * in, const mesh_qc * m, int p)
   m_metric_p = (vector_sparse **) malloc(sizeof(vector_sparse *) * m_cn_p);
   if (m_metric_p == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(vector_sparse *) * m_cn_p, "m_metric_p");
     return NULL;
   }
@@ -200,7 +199,7 @@ vector_sparse ** mesh_qc_metric_p_file_scan(FILE * in, const mesh_qc * m, int p)
     m_metric_p[i] = mesh_qc_metric_p_i_file_scan(in, m_cn[0], &m_cf_p_0_i, p, i);
     if (m_metric_p[i] == NULL)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot scan m_metric_p[%s%d%s]\n",
         color_variable, i, color_none);
       vector_sparse_array_free(m_metric_p, i);
@@ -221,7 +220,7 @@ vector_sparse *** mesh_qc_metric_file_scan(FILE * in, const mesh_qc * m)
   m_metric = (vector_sparse ***) malloc(sizeof(vector_sparse **) * (m_dim + 1));
   if (m_metric == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(
       sizeof(vector_sparse **) * (m_dim + 1), "m_metric");
     return NULL;
@@ -232,7 +231,7 @@ vector_sparse *** mesh_qc_metric_file_scan(FILE * in, const mesh_qc * m)
     m_metric[p] = mesh_qc_metric_p_file_scan(in, m, p);
     if (m_metric[p] == NULL)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot scan m_metric[%s%d%s]\n",
         color_variable, p, color_none);
       vector_sparse_array2_free(m_metric, p, m->cn);

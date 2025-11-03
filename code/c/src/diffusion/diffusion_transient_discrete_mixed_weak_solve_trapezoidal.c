@@ -1,11 +1,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "diffusion_transient_discrete_mixed_weak.h"
 #include "diffusion_transient_discrete_mixed_weak_solve_trapezoidal_next.h"
 #include "diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data.h"
-#include "cmc_error_message.h"
 #include "mesh_qc.h"
 
 static void loop(
@@ -60,7 +59,7 @@ void diffusion_transient_discrete_mixed_weak_solve_trapezoidal(
     m, m_cbd_dm1, m_inner_dm1, m_inner_d, data, time_step);
   if (input == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot initialize constant input for loop\n", stderr);
     return;
   }
@@ -68,7 +67,7 @@ void diffusion_transient_discrete_mixed_weak_solve_trapezoidal(
   y = (double *) malloc(sizeof(double) * m_cn_d);
   if (y == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m_cn_d, "y");
     goto input_free;
   }
@@ -76,7 +75,7 @@ void diffusion_transient_discrete_mixed_weak_solve_trapezoidal(
   flow_rate_reduced = (double *) malloc(sizeof(double) * m_cn_dm1_bar);
   if (flow_rate_reduced == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * m_cn_dm1_bar,
                               "flow_rate_reduced");
     goto y_free;

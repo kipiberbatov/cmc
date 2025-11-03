@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "cmc_animation.h"
 #include "cmc_animation_generic_data.h"
 #include "cmc_graphics_colorbar_direction.h"
@@ -24,7 +24,7 @@ void cmc_graphics_colorbar_draw_snapshot(
   functions->check_color_scheme(status, total_colors);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot create color scheme with %s%d%s colors\n",
       color_variable, total_colors, color_none);
@@ -34,7 +34,7 @@ void cmc_graphics_colorbar_draw_snapshot(
   functions->allocate_color(&(rectangle.color), status);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot allocate color\n", stderr);
     return;
   }
@@ -50,7 +50,7 @@ void cmc_graphics_colorbar_draw_snapshot(
     functions);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot draw values %d\n", stderr);
     goto color_free;
   }

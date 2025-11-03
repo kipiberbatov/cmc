@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "int.h"
 #include "mesh.h"
 #include "mesh_file_scan_tess_private.h"
@@ -79,7 +79,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   mesh_file_scan_tess_check_preamble(in, error);
   if (*error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("incorrect preamble\n", stderr);
     goto clean_on_failure;
   }
@@ -87,7 +87,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   d = mesh_file_scan_tess_get_dimension(in, error);
   if (*error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan mesh dimension\n", stderr);
     goto clean_on_failure;
   }
@@ -95,7 +95,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   mesh_file_scan_tess_check_text_for_cell(in, error);
   if (*error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("incorrect text for cell\n", stderr);
     goto clean_on_failure;
   }
@@ -103,7 +103,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   m = (mesh *) malloc(sizeof(mesh));
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for m\n",
       sizeof(mesh));
@@ -116,7 +116,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   cn = (int *) malloc(sizeof(int) * (d + 1));
   if (cn == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for cn\n",
       sizeof(int) * (d + 1));
@@ -128,7 +128,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   cn[d] = mesh_file_scan_tess_get_number_of_maximal_cells(in, error);
   if (*error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan number of maximal cells\n", stderr);
     goto clean_on_failure;
   }
@@ -137,7 +137,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   mesh_file_scan_tess_check_text_for_id(in, error);
   if (*error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("incorrect text for IDs\n", stderr);
     goto clean_on_failure;
   }
@@ -146,7 +146,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   c = (int *) malloc(sizeof(int) * cn[d]);
   if (c == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for c\n",
       sizeof(int) * cn[d]);
@@ -158,7 +158,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   mesh_file_scan_tess_get_id(c, in, error, cn[d]);
   if (*error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("incorrect cell IDs\n", stderr);
     goto clean_on_failure;
   }
@@ -167,7 +167,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   mesh_file_scan_tess_check_text_for_crysym(in, error);
   if (*error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("incorrect text for crystal symmetry field\n", stderr);
     goto clean_on_failure;
   }
@@ -175,7 +175,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   mesh_file_scan_tess_skip_seed(in, error, cn[d], c);
   if (*error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("incorrect seed values\n", stderr);
     goto clean_on_failure;
   }
@@ -184,7 +184,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   mesh_file_scan_tess_check_text_for_ori(in, error);
   if (*error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("incorrect text for orientation field\n", stderr);
     goto clean_on_failure;
   }
@@ -193,7 +193,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   mesh_file_scan_tess_skip_ori(in, error, cn[d]);
   if (*error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("incorrect orientation values\n", stderr);
     goto clean_on_failure;
   }
@@ -203,7 +203,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   mesh_file_scan_tess_check_text_for_vertex(in, error);
   if (*error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("incorrect text for vertex field\n", stderr);
     goto clean_on_failure;
   }
@@ -212,7 +212,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   cn[0] = mesh_file_scan_tess_get_number_of_nodes(in, error);
   if (*error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan number of nodes\n", stderr);
     goto clean_on_failure;
   }
@@ -221,7 +221,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   coordinates = (double *) malloc(sizeof(double) * cn[0] * d);
   if (coordinates == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for coordinates\n",
       sizeof(double) * cn[0] * d);
@@ -233,7 +233,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   mesh_file_scan_tess_get_coordinates(coordinates, in, error, d, cn[0]);
   if (*error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan coordinates\n", stderr);
     goto clean_on_failure;
   }
@@ -242,7 +242,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   mesh_file_scan_tess_check_text_for_edge(in, error);
   if (*error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("incorrect text for edge field\n", stderr);
     goto clean_on_failure;
   }
@@ -251,7 +251,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   cn[1] = mesh_file_scan_tess_get_number_of_edges(in, error);
   if (*error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan cn[1]\n", stderr);
     goto clean_on_failure;
   }
@@ -260,7 +260,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   edges_to_nodes = (int *) malloc(sizeof(int) * 2 * cn[1]);
   if (edges_to_nodes == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for edges_to_nodes\n",
       sizeof(int) * 2 * cn[1]);
@@ -272,7 +272,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   mesh_file_scan_tess_get_edges_to_nodes(edges_to_nodes, in, error, cn[1]);
   if (*error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan edges_to_nodes\n", stderr);
     goto clean_on_failure;
   }
@@ -283,7 +283,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   mesh_file_scan_tess_check_text_for_face(in, error);
   if (*error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("incorrect text for face field\n", stderr);
     goto clean_on_failure;
   }
@@ -292,7 +292,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   cn[2] = mesh_file_scan_tess_get_number_of_faces(in, error);
   if (*error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan cn[2]\n", stderr);
     goto clean_on_failure;
   }
@@ -300,7 +300,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   faces_number_of_sides = (int * ) malloc(sizeof(int) * cn[2]);
   if (faces_number_of_sides == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for faces_number_of_sides\n",
       sizeof(int) * cn[2]);
@@ -313,7 +313,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
     in, error, cn[2]);
   if (*error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan faces_number_of_sides\n", stderr);
     goto clean_on_failure;
   }
@@ -324,7 +324,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   faces_to_subfaces = (int * ) malloc(sizeof(int) * 2 * faces_total_edges);
   if (faces_to_subfaces == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for faces_to_subfaces\n",
       sizeof(int) * 2 * faces_total_edges);
@@ -338,7 +338,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   cf = (jagged4 *) malloc(sizeof(jagged4));
   if (cf == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for cf\n",
       sizeof(jagged4));
@@ -350,7 +350,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   cf->a1 = (int *) malloc(sizeof(int) * cf->a0);
   if (cf->a1 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for cf->a1\n",
       sizeof(int) * cf->a0);
@@ -363,7 +363,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   cf->a2 = (int *) malloc(sizeof(int) * cf_a2_size);
   if (cf->a2 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for cf->a2\n",
       sizeof(int) * cf_a2_size);
@@ -376,7 +376,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   cf->a3 = (int *) malloc(sizeof(int) * cf_a3_size);
   if (cf->a3 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for cf->a3\n",
       sizeof(int) * cf_a3_size);
@@ -389,7 +389,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   cf->a4 = (int *) malloc(sizeof(int) * cf_a4_size);
   if (cf->a4 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for cf->a4\n",
       sizeof(int) * cf_a4_size);
@@ -402,7 +402,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   m->c = (int *) malloc(sizeof(int) * m_c_size);
   if (m->c == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for m->c\n",
       sizeof(int) * m_c_size);

@@ -1,6 +1,5 @@
 #include <stdlib.h>
 
-#include "color.h"
 #include "cmc_error_message.h"
 #include "int.h"
 #include "mesh_disk_polar.h"
@@ -23,7 +22,7 @@ void mesh_disk_polar_only_topology(mesh * m, int na, int nd)
   m->cn = (int *) malloc(sizeof(int) * 3);
   if (m->cn == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(int) * 3, "m->cn");
     goto end;
   }
@@ -33,7 +32,7 @@ void mesh_disk_polar_only_topology(mesh * m, int na, int nd)
   m->c = (int *) malloc(sizeof(int) * m_c_size);
   if (m->c == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(int) * m_c_size, "m->c");
     goto m_cn_free;
   }
@@ -42,7 +41,7 @@ void mesh_disk_polar_only_topology(mesh * m, int na, int nd)
   m->cf = mesh_disk_polar_cells_to_faces(na, nd, m->cn);
   if (m->cf == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->cf\n", stderr);
     goto m_c_free;
   }

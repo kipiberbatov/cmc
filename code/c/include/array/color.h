@@ -13,10 +13,4 @@
 #define color_variable color_green
 #define color_stdlib color_magenta
 
-#define color_error_position(file, line)\
-fprintf(stderr, "%s%s%s:%s%d%s: %serror%s: ",\
-  color_bright_cyan, file, color_none,\
-  color_yellow, line, color_none,\
-  color_red, color_none)
-
 #endif /* _color_h */

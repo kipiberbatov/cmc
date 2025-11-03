@@ -3,7 +3,7 @@
 #include <string.h>
 
 #include "array_indexed.h"
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "int.h"
 #include "jagged.h"
@@ -19,7 +19,7 @@ void vector_sparse_rearrange(vector_sparse * b)
   positions.a1 = (int *) malloc(sizeof(int) * positions.a0);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannnot allocate %ld bytes of memory for for positions.a1\n",
       sizeof(int) * positions.a0);
@@ -33,7 +33,7 @@ void vector_sparse_rearrange(vector_sparse * b)
   array_indexed_merge_sort(&a, positions.a0);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannnot merge sort a\n");
     goto positions_a1_free;
   }
@@ -41,7 +41,7 @@ void vector_sparse_rearrange(vector_sparse * b)
   b_values_new = (double *) malloc(sizeof(double) * b->nonzero_max);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannnot allocate %ld bytes of memory for for b_values_new\n",
       sizeof(double) * positions.a0);

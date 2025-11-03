@@ -1,7 +1,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "mesh.h"
 
@@ -187,7 +187,7 @@ double * mesh_node_curvature(const mesh * m)
   m_node_curvatures = (double *) malloc(sizeof(double) * m_cn_0);
   if (m_node_curvatures == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for m_node_curvatures\n",
       sizeof(double) * m_cn_0);

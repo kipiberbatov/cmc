@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "jagged.h"
 
 static int int_compare(const void * a, const void * b)
@@ -25,7 +25,7 @@ jagged1 * jagged1_delete_duplicates(jagged1 * arr)
   result = (jagged1 *) malloc(sizeof(jagged1));
   if (result == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for result\n",
       sizeof(jagged1));
@@ -42,7 +42,7 @@ jagged1 * jagged1_delete_duplicates(jagged1 * arr)
   result_a1 = (int *) malloc(sizeof(int) * result_a0);
   if (result_a1 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for result_a1\n",
       sizeof(int) * result_a0);

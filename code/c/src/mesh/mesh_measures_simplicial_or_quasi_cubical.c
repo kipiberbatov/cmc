@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "color.h"
 #include "cmc_error_message.h"
 #include "mesh_measures.h"
 #include "mesh_qc.h"
@@ -18,7 +17,7 @@ void mesh_measures_simplicial_or_quasi_cubical(
   *m_measures = (double **) malloc(sizeof(double *) * (d + 1));
   if (*m_measures == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double *) * (d + 1), "*m_measures");
     *status = 1;
     return;
@@ -30,7 +29,7 @@ void mesh_measures_simplicial_or_quasi_cubical(
     vol[p] = (double *) malloc(sizeof(double) * m_cn[p]);
     if (vol[p] == NULL)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
         "cannot allocate %s%ld%s bytes of memory for %s%s[%d]%s\n",
          color_variable, sizeof(double) * m_cn[p], color_none,

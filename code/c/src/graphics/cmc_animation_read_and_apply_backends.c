@@ -2,7 +2,7 @@
 
 #include <dlfcn.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "cmc_animation.h"
 
 void cmc_animation_read_and_apply_backends(
@@ -24,7 +24,7 @@ void cmc_animation_read_and_apply_backends(
   error = dlerror();
   if (error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "%s\n", error);
     *status = 1;
     goto end;
@@ -34,7 +34,7 @@ void cmc_animation_read_and_apply_backends(
   error = dlerror();
   if (error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "%s\n", error);
     *status = 1;
     goto lib_canvas_close;
@@ -44,7 +44,7 @@ void cmc_animation_read_and_apply_backends(
   error = dlerror();
   if (error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "%s\n", error);
     *status = 1;
     goto lib_canvas_close;
@@ -54,7 +54,7 @@ void cmc_animation_read_and_apply_backends(
   error = dlerror();
   if (error)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "%s\n", error);
     *status = 1;
     goto lib_animation_close;
@@ -63,7 +63,7 @@ void cmc_animation_read_and_apply_backends(
   render(animation, status, argc, argv, output_name);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot draw animation\n", stderr);
     goto lib_animation_close;
   }

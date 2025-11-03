@@ -3,7 +3,7 @@
 
 #include <dlfcn.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "double_array2.h"
 #include "diffusion_steady_state_continuous.h"
@@ -22,7 +22,7 @@ int main(int argc, char ** argv)
   if (argc != 7)
   {
     errno = EINVAL;
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("the number of command-line arguments must be 8\n", stderr);
     goto end;
   }
@@ -32,7 +32,7 @@ int main(int argc, char ** argv)
   m = mesh_file_scan_by_name(m_name, m_format);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m\n", stderr);
     goto end;
   }
@@ -40,7 +40,7 @@ int main(int argc, char ** argv)
   m->fc = mesh_fc(m);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->fc\n", stderr);
     goto m_free;
   }
@@ -50,7 +50,7 @@ int main(int argc, char ** argv)
     m_vol_name, m->dim + 1, m->cn, "--raw");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m_vol\n", stderr);
     goto m_free;
   }
@@ -60,7 +60,7 @@ int main(int argc, char ** argv)
     m_inner_name, m->dim + 1, m->cn, "--raw");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m_vol\n", stderr);
     goto m_vol_free;
   }
@@ -69,7 +69,7 @@ int main(int argc, char ** argv)
   lib_handle = dlopen(lib_name, RTLD_LAZY);
   if (!lib_handle)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot open libshared\n", stderr);
     goto m_inner_free;
   }
@@ -90,7 +90,7 @@ int main(int argc, char ** argv)
     m, m_vol[m->dim - 1], m_vol[m->dim], m_inner[1], data);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate result\n", stderr);
     goto lib_close;
   }

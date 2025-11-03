@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array2.h"
 #include "mesh_qc.h"
 
@@ -20,7 +20,7 @@ static void mesh_qc_hodge_file_print_raw(
     m_hodge_p = mesh_qc_hodge_p(m, m_bd, p, m_inner[q], m_coeff[q]);
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot calculate m_hodge[%d]\n", p);
       return;
     }
@@ -41,7 +41,7 @@ int main(int argc, char ** argv)
 
   if (argc != 4)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "Number of command line arguments must be 4\n");
     errno = EINVAL;
     return errno;
@@ -50,7 +50,7 @@ int main(int argc, char ** argv)
   m_file = fopen(argv[1], "r");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot open mesh file %s: %s\n", argv[1], strerror(errno));
     goto end;
   }
@@ -58,7 +58,7 @@ int main(int argc, char ** argv)
   m = mesh_file_scan(m_file, "--raw");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m\n", stderr);
     fclose(m_file);
     goto end;
@@ -68,7 +68,7 @@ int main(int argc, char ** argv)
   m->fc = mesh_fc(m);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->fc\n", stderr);
     fclose(m_file);
     goto m_free;
@@ -77,7 +77,7 @@ int main(int argc, char ** argv)
   m_bd = mesh_file_scan_boundary(m_file, m);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m_bd\n", stderr);
     fclose(m_file);
     goto m_free;
@@ -88,7 +88,7 @@ int main(int argc, char ** argv)
   m_inner = double_array2_file_scan_by_name(argv[2], d + 1, m->cn, "--raw");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m_vol\n", stderr);
     goto m_bd_free;
   }
@@ -96,7 +96,7 @@ int main(int argc, char ** argv)
   m_coeff = double_array2_file_scan_by_name(argv[3], d + 1, m->cn, "--raw");
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m_coeff\n", stderr);
     goto m_inner_free;
   }
@@ -104,7 +104,7 @@ int main(int argc, char ** argv)
   mesh_qc_hodge_file_print_raw(stdout, m, m_bd, m_inner, m_coeff);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate and print m_hodge\n", stderr);
     goto m_coeff_free;
   }

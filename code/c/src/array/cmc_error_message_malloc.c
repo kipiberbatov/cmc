@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-#include "color.h"
 #include "cmc_error_message.h"
 
 void cmc_error_message_malloc(size_t size, const char * name)

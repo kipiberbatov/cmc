@@ -2,12 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "diffusion_discrete_set_neumann_rows.h"
 #include "diffusion_transient_discrete_primal_strong.h"
 #include "diffusion_transient_discrete_primal_strong_trapezoidal_loop_data.h"
 #include "double_array.h"
-#include "cmc_error_message.h"
 #include "mesh.h"
 
 struct diffusion_transient_discrete_primal_strong_trapezoidal_loop_data *
@@ -28,7 +27,7 @@ diffusion_transient_discrete_primal_strong_trapezoidal_loop_data_initialize(
   *(void **) (&result) = malloc(sizeof(*result));
   if (result == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(*result), "result");
     goto end;
   }
@@ -39,7 +38,7 @@ diffusion_transient_discrete_primal_strong_trapezoidal_loop_data_initialize(
   b = matrix_sparse_material_product(m_cbd_0, data->kappa_1, m_cbd_star_1);
   if (b == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate matrix b\n", stderr);
     goto result_free;
   }
@@ -48,7 +47,7 @@ diffusion_transient_discrete_primal_strong_trapezoidal_loop_data_initialize(
   lhs = matrix_sparse_copy(b);
   if (lhs == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot initialize matrix lhs\n", stderr);
     goto b_free;
   }
@@ -64,7 +63,7 @@ diffusion_transient_discrete_primal_strong_trapezoidal_loop_data_initialize(
   free_part = (double *) malloc(sizeof(double) * n);
   if (free_part == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double) * n, "free_part");
     goto lhs_free;
   }
@@ -79,7 +78,7 @@ diffusion_transient_discrete_primal_strong_trapezoidal_loop_data_initialize(
     lhs, m, data->boundary_neumann, data->kappa_1);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot apply Neumann boundary condition\n", stderr);
     goto free_part_free;
   }

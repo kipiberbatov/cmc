@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "cmc_animation.h"
 #include "cmc_animation_generic_data.h"
 #include "cmc_cairo_animation_draw_to_file.h"
@@ -11,7 +11,7 @@ static void cmc_cairo_animation_draw_page_to_cairo_context(
   animation->draw_snapshot((void *) cr, status, animation);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot draw to Cairo context\n", stderr);
     return;
   }
@@ -19,7 +19,7 @@ static void cmc_cairo_animation_draw_page_to_cairo_context(
   *status = cairo_status(cr);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot render with Cairo: %s\n",
       cairo_status_to_string(*status));
@@ -43,7 +43,7 @@ static void cmc_cairo_animation_draw_to_cairo_surface(
     *status = cairo_status(cr);
     if (*status)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
         "cannot create Cairo context from Cairo surface: %s\n",
         cairo_status_to_string(*status));
@@ -53,7 +53,7 @@ static void cmc_cairo_animation_draw_to_cairo_surface(
     cmc_cairo_animation_draw_page_to_cairo_context(cr, status, animation);
     if (*status)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
         "cannot render snapshot %s%d%s to Cairo context\n",
         color_variable, i, color_none);
@@ -84,7 +84,7 @@ void cmc_cairo_animation_draw_to_file(
   *status = cairo_surface_status(surface);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot create Cairo PDF surface from filename %s%s%s: %s\n",
       color_variable, filename, color_none,
@@ -98,7 +98,7 @@ void cmc_cairo_animation_draw_to_file(
   cmc_cairo_animation_draw_to_cairo_surface(surface, animation, status);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot draw animation to PDF Cairo surface\n", stderr);
     return;
   }

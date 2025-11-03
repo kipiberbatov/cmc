@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double.h"
 #include "cmc_command_line.h"
 
@@ -14,7 +14,7 @@ double_file_scan_by_name(double * a, int * status, const char * name)
   in = fopen(name, "r");
   if (in == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot open file %s%s%s for reading\n",
       color_variable, name, color_none);
@@ -25,7 +25,7 @@ double_file_scan_by_name(double * a, int * status, const char * name)
   *a = double_file_scan(in);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot read a 64-bit float from file %s%s%s\n",
       color_variable, name, color_none);
@@ -71,7 +71,7 @@ int main(int argc, char ** argv)
   cmc_command_line_parse(options, &status, size, argc, argv);
   if (status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot parse command line options\n", stderr);
     return status;
   }
@@ -79,7 +79,7 @@ int main(int argc, char ** argv)
   double_file_scan_by_name(&a, &status, a_name);
   if (status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot read numerator\n", stderr);
     return status;
   }
@@ -87,14 +87,14 @@ int main(int argc, char ** argv)
   double_file_scan_by_name(&b, &status, b_name);
   if (status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot read denominator\n", stderr);
     return status;
   }
 
   if (b == 0)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("the denominator cannot be 0\n", stderr);
     status = 1;
     return status;
@@ -103,7 +103,7 @@ int main(int argc, char ** argv)
   output = fopen(output_name, "w");
   if (output == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot open file %s%s%s for writing\n",
       color_variable, output_name, color_none);

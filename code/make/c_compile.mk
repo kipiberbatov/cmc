@@ -386,7 +386,8 @@ build/$(MODE)/lib/plugins/libdiffusion$(.DLL): $(_obj_plugins_diffusion)\
   | build/$(MODE)/lib/plugins
 	$(CC) -o $@ -fPIC -shared $^ $(LDLIBS)
 
-build/$(MODE)/lib/plugins/libanimation$(.DLL):  $(_obj_plugins_animation)\
+build/$(MODE)/lib/plugins/libanimation$(.DLL): $(_obj_plugins_animation)\
+  build/$(MODE)/obj/src/cmc_error_message_position_in_code$(.OBJ)\
   | build/$(MODE)/lib/plugins
 	$(CC) -o $@ -fPIC -shared $^\
 	  $(shell pkg-config --libs gtk+-3.0) $(LDLIBS)
@@ -415,6 +416,7 @@ build/$(MODE)/lib/plugins/libcanvas$(.DLL): $(_obj_plugins_canvas)\
   build/$(MODE)/obj/src/jagged4_part2$(.OBJ)\
   build/$(MODE)/obj/src/int_array_total_sum$(.OBJ)\
   build/$(MODE)/obj/src/cmc_error_message_malloc$(.OBJ)\
+  build/$(MODE)/obj/src/cmc_error_message_position_in_code$(.OBJ)\
   | build/$(MODE)/lib/plugins
 	$(CC) -o $@ -fPIC -shared $^\
 	  $(shell pkg-config --libs cairo) $(LDLIBS)

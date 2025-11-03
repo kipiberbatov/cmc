@@ -1,6 +1,6 @@
 #include <errno.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "simplex.h"
 
@@ -32,7 +32,7 @@ int main(void)
   r = simplex_file_scan(in);
   if (r == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan simplex r\n", stderr);
     return errno;
   }

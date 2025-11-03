@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "mesh_qc.h"
 
 static void
@@ -97,7 +97,7 @@ mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_cup_kappa_1_delta_basis_0(
   a = (matrix_sparse *) malloc(sizeof(matrix_sparse));
   if (a == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for a\n",
       sizeof(matrix_sparse));
@@ -110,7 +110,7 @@ mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_cup_kappa_1_delta_basis_0(
   a->cols_total = (int *) malloc(sizeof(int) * (a->cols + 1));
   if (a->cols_total == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for a->cols_total\n",
       sizeof(int) * (a->cols + 1));
@@ -124,7 +124,7 @@ mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_cup_kappa_1_delta_basis_0(
   a->row_indices = (int *) malloc(sizeof(int) * nonzero_max);
   if (a->row_indices == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for a->row_indices\n",
       sizeof(int) * nonzero_max);
@@ -136,7 +136,7 @@ mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_cup_kappa_1_delta_basis_0(
   a->values = (double *) malloc(sizeof(double) * nonzero_max);
   if (a->values == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for a->values\n",
       sizeof(double) * nonzero_max);

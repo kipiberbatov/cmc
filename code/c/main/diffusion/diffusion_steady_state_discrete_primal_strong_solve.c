@@ -2,10 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "diffusion_steady_state_discrete_primal_strong.h"
-#include "cmc_error_message.h"
 #include "mesh.h"
 
 int main(int argc, char ** argv)
@@ -20,7 +19,7 @@ int main(int argc, char ** argv)
 #define ARGC 6
   if (argc != ARGC)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_number_of_command_line_arguments_mismatch(ARGC, argc);
     errno = EINVAL;
     goto end;
@@ -35,7 +34,7 @@ int main(int argc, char ** argv)
   m = mesh_file_scan_by_name(m_name, m_format);
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan mesh m from file %s in format %s\n", m_name, m_format);
     goto end;
@@ -44,7 +43,7 @@ int main(int argc, char ** argv)
   m->fc = mesh_fc(m);
   if (m->fc == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->fc\n", stderr);
     goto m_free;
   }
@@ -52,7 +51,7 @@ int main(int argc, char ** argv)
   m_cbd_0 = matrix_sparse_file_scan_by_name(m_cbd_0_name, "--raw");
   if (m_cbd_0 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan m_cbd_0\n", stderr);
     goto m_free;
   }
@@ -60,7 +59,7 @@ int main(int argc, char ** argv)
   m_cbd_star_1_file = fopen(m_cbd_star_1_name, "r");
   if (m_cbd_star_1_file == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot open adjoint coboundary matrix file %s for reading: %s\n",
       m_cbd_star_1_name, strerror(errno));
@@ -69,7 +68,7 @@ int main(int argc, char ** argv)
   m_cbd_star_1 = mesh_file_scan_boundary_p(m_cbd_star_1_file, m, 1);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan m_cbd_star_1 from file %s\n", m_cbd_star_1_name);
     fclose(m_cbd_star_1_file);
@@ -80,7 +79,7 @@ int main(int argc, char ** argv)
   data_file = fopen(data_name, "r");
   if (data_file == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot open problem data file %s: %s\n", data_name, strerror(errno));
     goto m_cbd_star_1_free;
@@ -88,7 +87,7 @@ int main(int argc, char ** argv)
   data = diffusion_steady_state_discrete_primal_strong_file_scan_raw(data_file);
   if (data == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot scan problem data from file %s\n", data_name);
     fclose(data_file);
     goto m_cbd_star_1_free;
@@ -99,7 +98,7 @@ int main(int argc, char ** argv)
     m, m_cbd_0, m_cbd_star_1, data);
   if (potential == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate potential\n", stderr);
     goto data_free;
   }

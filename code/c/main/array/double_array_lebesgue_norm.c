@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "cmc_command_line.h"
 
@@ -52,14 +52,14 @@ int main(int argc, char ** argv)
   cmc_command_line_parse(options, &status, size, argc, argv);
   if (status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot parse command line options\n", stderr);
     return status;
   }
 
   if (n < 0)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "the vector length is %s%d%s but it must be at least 0\n",
       color_variable, n, color_none);
@@ -69,7 +69,7 @@ int main(int argc, char ** argv)
 
   if (p < 0)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "the order of the l^p norm is %s%d%s but it must be at least 0\n",
       color_variable, n, color_none);
@@ -80,7 +80,7 @@ int main(int argc, char ** argv)
   a = double_array_file_scan_by_name(a_name, n, a_format);
   if (a == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot scan array of size %s%d%s from file %s%s%s in format %s%s%s\n",
       color_variable, n, color_none,
@@ -96,7 +96,7 @@ int main(int argc, char ** argv)
   output = fopen(output_name, "w");
   if (output == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot open file %s%s%s for writing\n",
       color_variable, output_name, color_none);

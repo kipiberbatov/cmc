@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "mesh_file_scan_tess_private.h"
 #include "string_private.h"
 
@@ -18,7 +18,7 @@ int mesh_file_scan_tess_get_dimension(FILE * in, int * error)
     d = 3;
   else
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan dimension: it should be 1, 2, or 3\n", stderr);
     *error = 1;
     return -1;

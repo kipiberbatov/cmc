@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "cmc_cairo.h"
 #include "cmc_rgb.h"
 
@@ -14,7 +14,7 @@ cmc_cairo_paint_rgb(cairo_t * cr, int * status, const struct cmc_rgb * color)
   *status = cairo_status(cr);
   if (*status)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot draw with Cairo: %s\n",
       cairo_status_to_string(*status));

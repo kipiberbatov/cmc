@@ -1,6 +1,6 @@
 #include <errno.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "int.h"
 
 int int_file_scan(FILE * in)
@@ -10,7 +10,7 @@ int int_file_scan(FILE * in)
   correct = fscanf(in, "%d", &a);
   if (correct <= 0)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     if (correct == 0)
       fputs("input is not a valid integer\n", stderr);
     else

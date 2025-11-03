@@ -1,7 +1,6 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
 #include "cmc_error_message.h"
 #include "mesh.h"
 
@@ -13,7 +12,7 @@ matrix_sparse * mesh_qc_hodge_codifferential_p(
   tmp = matrix_sparse_product(m_cbd_d_minus_p, m_hodge[p]);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot calculate delta_%d *_%d\n", d - p, p);
     matrix_sparse_free(tmp);
     return NULL;
@@ -22,7 +21,7 @@ matrix_sparse * mesh_qc_hodge_codifferential_p(
   m_hodge_codifferential_p = matrix_sparse_product(m_hodge[d - p + 1], tmp);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot calculate *_%d tmp\n", d - p + 1);
     matrix_sparse_free(m_hodge_codifferential_p);
     matrix_sparse_free(tmp);
@@ -42,7 +41,7 @@ matrix_sparse ** mesh_qc_hodge_codifferential(
     sizeof(matrix_sparse *) * d);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(matrix_sparse *) * d,
                               "m_hodge_codifferential");
     return NULL;
@@ -53,7 +52,7 @@ matrix_sparse ** mesh_qc_hodge_codifferential(
       mesh_qc_hodge_codifferential_p(d, p, m_cbd[d - p], m_hodge);
     if (errno)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
         "cannot calculate *_%d delta_%d *_%d\n",
         d - p + 1, d - p, p);

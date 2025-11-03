@@ -2,9 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "color.h"
-#include "double_array.h"
 #include "cmc_error_message.h"
+#include "double_array.h"
 #include "mesh.h"
 #include "mesh_measures.h"
 
@@ -169,7 +168,7 @@ void mesh_measures_hemisphere_polar_forman(
   *m_measures = (double **) malloc(sizeof(double *) * 3);
   if (*m_measures == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(double *) * 3, "*m_measures");
     *status = 1;
     return;
@@ -182,7 +181,7 @@ void mesh_measures_hemisphere_polar_forman(
     vol[p] = (double *) malloc(sizeof(double) * m_cn[p]);
     if (vol[p] == NULL)
     {
-      color_error_position(__FILE__, __LINE__);
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
         "cannot allocate %s%ld%s bytes of memory for %s%s[%d]%s\n",
          color_variable, sizeof(double) * m_cn[p], color_none,

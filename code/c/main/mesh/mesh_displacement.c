@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "mesh_qc.h"
 
@@ -16,7 +16,7 @@ static void mesh_displacement_file_print_raw(
   m_displacement = mesh_displacement(m, m_bd_0, u);
   if (m_displacement == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m_displacement\n", stderr);
     return;
   }
@@ -37,7 +37,7 @@ mesh_displacement_unit_cochain_file_print_file_scan(FILE * out, FILE * in)
   m = mesh_file_scan(in, "--raw");
   if (m == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan mesh m in format --raw\n", stderr);
     return;
   }
@@ -45,7 +45,7 @@ mesh_displacement_unit_cochain_file_print_file_scan(FILE * out, FILE * in)
   m->fc = mesh_fc(m);
   if (m->fc == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m->fc\n", stderr);
     goto m_free;
   }
@@ -53,7 +53,7 @@ mesh_displacement_unit_cochain_file_print_file_scan(FILE * out, FILE * in)
   m_bd = mesh_file_scan_boundary(in, m);
   if (m_bd == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan boundary matrices m_bd from mesh file\n", stderr);
     goto m_free;
   }
@@ -61,7 +61,7 @@ mesh_displacement_unit_cochain_file_print_file_scan(FILE * out, FILE * in)
   u = (double *) malloc(sizeof(double) * m->cn[1]);
   if (u == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate memory %ld bytes of memory for 1-cochain u\n",
       sizeof(double) * m->cn[1]);
@@ -72,7 +72,7 @@ mesh_displacement_unit_cochain_file_print_file_scan(FILE * out, FILE * in)
   mesh_displacement_file_print_raw(out, m, m_bd[0], u);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate m_displacement\n", stderr);
   }
 
@@ -88,7 +88,7 @@ int main(void)
   mesh_displacement_unit_cochain_file_print_file_scan(stdout, stdin);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("unsuccessful run\n", stderr);
   }
   return errno;

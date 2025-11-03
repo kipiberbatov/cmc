@@ -1,4 +1,4 @@
-#include "color.h"
+#include "cmc_error_message.h"
 #include "matrix_sparse_private.h"
 
 matrix_sparse * matrix_sparse_linear_combination(
@@ -13,14 +13,14 @@ matrix_sparse * matrix_sparse_linear_combination(
   result0 = cs_add(&a0, &b0, alpha, beta);
   if (result0 == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot find linear combination via cs_add\n", stderr);
     goto end;
   }
   result = (matrix_sparse *) malloc(sizeof(matrix_sparse));
   if (result == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for result\n",
       sizeof(matrix_sparse));

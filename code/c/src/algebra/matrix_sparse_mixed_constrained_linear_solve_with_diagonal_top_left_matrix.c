@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array.h"
 #include "matrix_sparse.h"
 
@@ -62,7 +62,7 @@ void matrix_sparse_mixed_constrained_linear_solve_with_diagonal_top_left_matrix(
   boundary_neumann_complement = jagged1_complement(b->cols, boundary_neumann);
   if (boundary_neumann_complement == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate boundary_neumann_complement\n", stderr);
     return;
   }
@@ -71,7 +71,7 @@ void matrix_sparse_mixed_constrained_linear_solve_with_diagonal_top_left_matrix(
   a_restrict = (double *) malloc(sizeof(double) * restrict_size);
   if (a == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for a_restrict\n",
       sizeof(double) * restrict_size);
@@ -83,7 +83,7 @@ void matrix_sparse_mixed_constrained_linear_solve_with_diagonal_top_left_matrix(
   b_restrict = matrix_sparse_columns_restrict(b, boundary_neumann_complement);
   if (b_restrict == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot calculate b_restrict\n", stderr);
     goto a_restrict_free;
   }
@@ -91,7 +91,7 @@ void matrix_sparse_mixed_constrained_linear_solve_with_diagonal_top_left_matrix(
   g_new_restrict = (double *) malloc(sizeof(double) * restrict_size);
   if (g_new_restrict == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for g_new_restrict\n",
       sizeof(double) * restrict_size);
@@ -103,7 +103,7 @@ void matrix_sparse_mixed_constrained_linear_solve_with_diagonal_top_left_matrix(
   f_new = (double *) malloc(sizeof(double) * b->rows);
   if (f_new == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for f_new\n",
       sizeof(double) * b->rows);
@@ -114,7 +114,7 @@ void matrix_sparse_mixed_constrained_linear_solve_with_diagonal_top_left_matrix(
   flow_rate_restrict = (double *) malloc(sizeof(double) * restrict_size);
   if (flow_rate_restrict == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for flow_rate_restrict\n",
       sizeof(double) * restrict_size);
@@ -126,7 +126,7 @@ void matrix_sparse_mixed_constrained_linear_solve_with_diagonal_top_left_matrix(
     a_restrict, b_restrict, g_new_restrict, f_new);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot solve restricted mixed linear system\n", stderr);
     goto flow_rate_restrict_free;
   }

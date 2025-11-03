@@ -1,7 +1,6 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "color.h"
 #include "cmc_error_message.h"
 #include "mesh.h"
 
@@ -80,7 +79,7 @@ jagged1 * mesh_boundary_lower_subfaces(
   result = (jagged1 *) malloc(sizeof(jagged1));
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(jagged1), "result");
     return NULL;
   }
@@ -89,7 +88,7 @@ jagged1 * mesh_boundary_lower_subfaces(
   result->a1 = (int *) malloc(sizeof(int) * result->a0);
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_malloc(sizeof(int) * result->a0, "result->a1");
     free(result);
     return NULL;

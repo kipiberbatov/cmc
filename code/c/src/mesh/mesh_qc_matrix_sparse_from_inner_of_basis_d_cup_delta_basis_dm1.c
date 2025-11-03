@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "mesh_qc.h"
 
 static void
@@ -37,7 +37,7 @@ mesh_qc_matrix_sparse_from_inner_of_basis_d_cup_delta_basis_dm1(
   b = (matrix_sparse *) malloc(sizeof(matrix_sparse));
   if (b == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for b\n", sizeof(matrix_sparse));
     return NULL;
@@ -49,7 +49,7 @@ mesh_qc_matrix_sparse_from_inner_of_basis_d_cup_delta_basis_dm1(
   b->values = (double *) malloc(sizeof(double) * nonzero_max);
   if (b->values == NULL)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
       "cannot allocate %ld bytes of memory for b->values\n",
       sizeof(double) * nonzero_max);

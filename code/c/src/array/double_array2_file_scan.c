@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <string.h>
 
-#include "color.h"
+#include "cmc_error_message.h"
 #include "double_array2.h"
 #include "double_array2_private.h"
 
@@ -14,7 +14,7 @@ double ** double_array2_file_scan(
     a = double_array2_file_scan_raw(in, a0, a1);
   else
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "format %s is not supported\n", format);
     errno = EINVAL;
     return NULL;
@@ -22,7 +22,7 @@ double ** double_array2_file_scan(
 
   if (errno)
   {
-    color_error_position(__FILE__, __LINE__);
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan input\n", stderr);
   }
   return a;
