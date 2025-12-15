@@ -16,7 +16,7 @@ jobs:
         run: sudo apt-get update
 
       - name: Set up Git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Compile files without external dependecies
         run: |

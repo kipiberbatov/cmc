@@ -15,7 +15,7 @@ jobs:
       enabled: ${{ steps.check-pages.outputs.enabled }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Check if GitHub Pages is enabled
         id: check-pages
