@@ -160,7 +160,6 @@ static vector_sparse * mesh_qc_metric_p_i_file_scan(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "cannot scan_p_i->values\n");
-    free(m_metric_p_i->positions);
     goto m_metric_p_i_positions_free;
   }
 
