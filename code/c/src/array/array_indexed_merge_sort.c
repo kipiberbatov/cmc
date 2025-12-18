@@ -64,7 +64,7 @@ void array_indexed_merge_sort(array_indexed * a, int n)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for b.positions\n",
+      "cannot allocate %zu bytes of memory for b.positions\n",
       sizeof(int) * n);
     goto end;
   }
@@ -74,7 +74,7 @@ void array_indexed_merge_sort(array_indexed * a, int n)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for b.values\n",
+      "cannot allocate %zu bytes of memory for b.values\n",
       sizeof(int) * n);
     goto b_positions_free;
   }

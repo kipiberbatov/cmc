@@ -17,7 +17,7 @@ jagged1 * jagged1_difference(const jagged1 * y, const jagged1 * x)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for z\n", sizeof(jagged1));
+      "cannot allocate %zu bytes of memory for z\n", sizeof(jagged1));
     return NULL;
   }
 
@@ -31,7 +31,7 @@ jagged1 * jagged1_difference(const jagged1 * y, const jagged1 * x)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for z_a1\n", sizeof(int) * z_a0);
+      "cannot allocate %zu bytes of memory for z_a1\n", sizeof(int) * z_a0);
     free(z);
     return NULL;
   }

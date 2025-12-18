@@ -81,7 +81,7 @@ static void mesh_fc_a4(int * m_fc_a4, const mesh * m, int * m_fc_a3)
       {
         cmc_error_message_position_in_code(__FILE__, __LINE__);
         fprintf(stderr,
-          "cannot allocate %ld bytes of memory for ind_current\n",
+          "cannot allocate %zu bytes of memory for ind_current\n",
           sizeof(int) * m_cn_q);
         return;
       }
@@ -116,7 +116,7 @@ jagged4 * mesh_fc(const mesh * m)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for m_fc\n",
+      "cannot allocate %zu bytes of memory for m_fc\n",
       sizeof(jagged4));
     goto end;
   }
@@ -127,7 +127,7 @@ jagged4 * mesh_fc(const mesh * m)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for m_fc->a1\n",
+      "cannot allocate %zu bytes of memory for m_fc->a1\n",
       sizeof(int) * m->dim);
     goto m_fc_free;
   }
@@ -139,7 +139,7 @@ jagged4 * mesh_fc(const mesh * m)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for m_fc->a2\n",
+      "cannot allocate %zu bytes of memory for m_fc->a2\n",
       sizeof(int) *  m_fc_a2_size);
     goto m_fc_a1_free;
   }
@@ -151,7 +151,7 @@ jagged4 * mesh_fc(const mesh * m)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for m_fc->a3\n",
+      "cannot allocate %zu bytes of memory for m_fc->a3\n",
       sizeof(int) *  m_fc_a3_size);
     goto m_fc_a2_free;
   }
@@ -163,7 +163,7 @@ jagged4 * mesh_fc(const mesh * m)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for m_fc->a4\n",
+      "cannot allocate %zu bytes of memory for m_fc->a4\n",
       sizeof(int) *  m_fc_a4_size);
     goto m_fc_a3_free;
   }

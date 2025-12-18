@@ -22,7 +22,7 @@ double * mesh_boundary_node_vectors_matrix(const mesh * m, int i)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes memory for result\n",
+      "cannot allocate %zu bytes memory for result\n",
       sizeof(double) * m_fc_0_1_i.a0 * d);
     return NULL;
   }

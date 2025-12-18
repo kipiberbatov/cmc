@@ -39,7 +39,7 @@ mesh_qc_matrix_sparse_from_inner_of_basis_d_cup_delta_basis_dm1(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for b\n", sizeof(matrix_sparse));
+      "cannot allocate %zu bytes of memory for b\n", sizeof(matrix_sparse));
     return NULL;
   }
 
@@ -51,7 +51,7 @@ mesh_qc_matrix_sparse_from_inner_of_basis_d_cup_delta_basis_dm1(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for b->values\n",
+      "cannot allocate %zu bytes of memory for b->values\n",
       sizeof(double) * nonzero_max);
     free(b);
     return NULL;

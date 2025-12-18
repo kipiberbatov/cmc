@@ -21,7 +21,7 @@ void vector_sparse_rearrange(vector_sparse * b)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannnot allocate %ld bytes of memory for for positions.a1\n",
+      "cannnot allocate %zu bytes of memory for for positions.a1\n",
       sizeof(int) * positions.a0);
     goto end;
   }
@@ -43,7 +43,7 @@ void vector_sparse_rearrange(vector_sparse * b)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannnot allocate %ld bytes of memory for for b_values_new\n",
+      "cannnot allocate %zu bytes of memory for for b_values_new\n",
       sizeof(double) * positions.a0);
     goto positions_a1_free;
   }

@@ -20,7 +20,7 @@ matrix_sparse * matrix_sparse_transpose(const matrix_sparse * a)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for b\n",
+      "cannot allocate %zu bytes of memory for b\n",
       sizeof(matrix_sparse));
     goto b0_free;
   }

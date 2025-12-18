@@ -90,7 +90,7 @@ matrix_sparse * matrix_sparse_restrict(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for b\n",
+      "cannot allocate %zu bytes of memory for b\n",
       sizeof(matrix_sparse));
     goto end;
   }
@@ -103,7 +103,7 @@ matrix_sparse * matrix_sparse_restrict(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for b->cols_total\n",
+      "cannot allocate %zu bytes of memory for b->cols_total\n",
       sizeof(int) * (b->cols + 1));
     goto b_free;
   }
@@ -117,7 +117,7 @@ matrix_sparse * matrix_sparse_restrict(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for b->row_indices\n",
+      "cannot allocate %zu bytes of memory for b->row_indices\n",
       sizeof(int) * b_nonzero_max);
     goto b_cols_total_free;
   }
@@ -129,7 +129,7 @@ matrix_sparse * matrix_sparse_restrict(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for b->values\n",
+      "cannot allocate %zu bytes of memory for b->values\n",
       sizeof(double) * b_nonzero_max);
     goto b_row_indices_free;
   }

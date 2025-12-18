@@ -12,7 +12,7 @@ void cmc_memory_reallocate(void ** new, int * status, void * old, size_t size)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot reallocate %s%ld%s bytes of memory\n",
+      "cannot reallocate %s%zu%s bytes of memory\n",
       color_variable, size, color_none);
     *status = ENOMEM;
   }

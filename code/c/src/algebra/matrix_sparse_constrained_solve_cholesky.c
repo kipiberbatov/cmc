@@ -27,7 +27,7 @@ static double * double_array_constrain(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for b_restrict\n",
+      "cannot allocate %zu bytes of memory for b_restrict\n",
       sizeof(double) * rows_complement_a0);
     return NULL;
   }
@@ -91,7 +91,7 @@ double * matrix_sparse_constrained_solve_cholesky(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory forx\n",
+      "cannot allocate %zu bytes of memory forx\n",
       sizeof(double) * a_m);
     goto b_restrict_free;
   }

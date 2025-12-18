@@ -31,7 +31,7 @@ void mesh_measures_simplicial_or_quasi_cubical(
     {
       cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
-        "cannot allocate %s%ld%s bytes of memory for %s%s[%d]%s\n",
+        "cannot allocate %s%zu%s bytes of memory for %s%s[%d]%s\n",
          color_variable, sizeof(double) * m_cn[p], color_none,
          color_variable, "vol", p, color_none);
       *status = 1;

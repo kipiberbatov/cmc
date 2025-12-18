@@ -53,7 +53,7 @@ int ** mesh_brick_boundary(int d, const int * n, const int * m_bd_sizes)
     {
       cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
-        "cannot allocate %s%ld%s bytes of memory for m->bd[%s%d%s]\n",
+        "cannot allocate %s%zu%s bytes of memory for m->bd[%s%d%s]\n",
         color_variable, sizeof(int) * m_bd_sizes[p - 1], color_none,
         color_variable, p - 1, color_none);
       int_array2_free(m_bd, p - 1);

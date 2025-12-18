@@ -197,7 +197,7 @@ static void cmc_command_line_allocate_arguments(
         {
           cmc_error_message_position_in_code(__FILE__, __LINE__);
           fprintf(stderr,
-            "cannot allocate %ld bytes of memory for option %s%s%s",
+            "cannot allocate %zu bytes of memory for option %s%s%s",
             option_j->type_size * total_j,
             color_variable, option_j->name, color_none);
           *status = 1;

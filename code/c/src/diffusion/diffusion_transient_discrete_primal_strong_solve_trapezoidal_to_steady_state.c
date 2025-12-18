@@ -46,7 +46,7 @@ static void loop(
     {
       cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
-        "loop: cannot allocate %s%ld%s bytes of memory for "
+        "loop: cannot allocate %s%zu%s bytes of memory for "
         "potential->values[%s%d%s]\n",
         color_variable, sizeof(double) * n, color_none,
         color_variable, i + 1, color_none);

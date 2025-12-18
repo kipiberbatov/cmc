@@ -211,7 +211,7 @@ mesh_and_boundary_file_scan_tess_private(int * error, FILE * in)
   {
     *error = 1;
     fprintf(stderr,
-      "%s:%d: cannot allocate %ld bytes of memory for bd_values\n",
+      "%s:%d: cannot allocate %zu bytes of memory for bd_values\n",
       __FILE__, __LINE__, sizeof(double *) * d);
     goto clean_on_failure;
   }
@@ -221,7 +221,7 @@ mesh_and_boundary_file_scan_tess_private(int * error, FILE * in)
   {
     *error = 1;
     fprintf(stderr,
-      "%s:%d: cannot allocate %ld bytes of memory for bd_values_1\n",
+      "%s:%d: cannot allocate %zu bytes of memory for bd_values_1\n",
       __FILE__, __LINE__, sizeof(double) * 2 * cn[1]);
     goto clean_on_failure;
   }

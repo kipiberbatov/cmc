@@ -51,7 +51,7 @@ int main(int argc, char ** argv)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for m_bd_values\n",
+      "cannot allocate %zu bytes of memory for m_bd_values\n",
       sizeof(double) * m_bd_values_size);
     goto m_free;
   }

@@ -62,7 +62,7 @@ double * matrix_sparse_laplace_equation_solve_non_grid(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for b_bd\n",
+      "cannot allocate %zu bytes of memory for b_bd\n",
       sizeof(double) * m_nodes_bd->a0);
     goto end;
   }
@@ -81,7 +81,7 @@ double * matrix_sparse_laplace_equation_solve_non_grid(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for b_in\n",
+      "cannot allocate %zu bytes of memory for b_in\n",
       sizeof(double) * m_nodes_in->a0);
     goto m_nodes_in_free;
   }
@@ -112,7 +112,7 @@ double * matrix_sparse_laplace_equation_solve_non_grid(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for x\n",
+      "cannot allocate %zu bytes of memory for x\n",
       sizeof(double) * m_laplacian->rows);
     goto m_laplacian_in_free;
   }

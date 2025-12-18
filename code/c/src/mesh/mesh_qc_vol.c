@@ -41,7 +41,7 @@ double * mesh_qc_vol_p(const mesh_qc * m, int p)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for m_vol[%d]\n",
+      "cannot allocate %zu bytes of memory for m_vol[%d]\n",
       sizeof(double) * m->cn[p], p);
     return NULL;
   }
@@ -66,7 +66,7 @@ double ** mesh_qc_vol(const mesh_qc * m)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for m_vol\n",
+      "cannot allocate %zu bytes of memory for m_vol\n",
       sizeof(double *) * (d + 1));
     return NULL;
   }

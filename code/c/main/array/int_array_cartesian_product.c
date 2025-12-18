@@ -16,7 +16,7 @@ int_array_cartesian_product_file_print(FILE * out, int d, const int * n)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for a\n",
+      "cannot allocate %zu bytes of memory for a\n",
       sizeof(int) * d);
     return;
   }
@@ -45,7 +45,7 @@ int main(int argc, char ** argv)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for n\n",
+      "cannot allocate %zu bytes of memory for n\n",
       sizeof(int) * d);
     goto end;
   }

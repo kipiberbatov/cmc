@@ -27,7 +27,7 @@ jagged1 * jagged1_delete_duplicates(jagged1 * arr)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for result\n",
+      "cannot allocate %zu bytes of memory for result\n",
       sizeof(jagged1));
     return NULL;
   }
@@ -44,7 +44,7 @@ jagged1 * jagged1_delete_duplicates(jagged1 * arr)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for result_a1\n",
+      "cannot allocate %zu bytes of memory for result_a1\n",
       sizeof(int) * result_a0);
     free(result);
     return NULL;

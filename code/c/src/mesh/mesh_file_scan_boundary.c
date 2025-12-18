@@ -30,7 +30,7 @@ matrix_sparse * mesh_file_scan_boundary_p(FILE * in, const mesh * m, int p)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for m->bd[%d]\n",
+      "cannot allocate %zu bytes of memory for m->bd[%d]\n",
       sizeof(matrix_sparse), p);
     goto end;
   }
@@ -43,7 +43,7 @@ matrix_sparse * mesh_file_scan_boundary_p(FILE * in, const mesh * m, int p)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for m->bd[%d]->cols_total\n",
+      "cannot allocate %zu bytes of memory for m->bd[%d]->cols_total\n",
       sizeof(int) * (m_bd_p->cols + 1), p);
     goto m_bd_p_free;
   }
@@ -56,7 +56,7 @@ matrix_sparse * mesh_file_scan_boundary_p(FILE * in, const mesh * m, int p)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for m->bd[%d]->row_indices\n",
+      "cannot allocate %zu bytes of memory for m->bd[%d]->row_indices\n",
       sizeof(int) * m_bd_p_nonzero_max, p);
     goto m_bd_p_cols_total_free;
   }
@@ -95,7 +95,7 @@ matrix_sparse ** mesh_file_scan_boundary(FILE * in, const mesh * m)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for m_bd\n",
+      "cannot allocate %zu bytes of memory for m_bd\n",
       sizeof(matrix_sparse *) * m_dim);
     return NULL;
   }

@@ -43,7 +43,7 @@ void matrix_sparse_mixed_linear_solve_with_diagonal_top_left_matrix(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for b_times_inverse_a.values\n",
+      "cannot allocate %zu bytes of memory for b_times_inverse_a.values\n",
       sizeof(double) * b_nonzero_max);
     return;
   }

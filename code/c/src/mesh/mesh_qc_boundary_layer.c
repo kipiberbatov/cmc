@@ -17,7 +17,7 @@ jagged1 * mesh_qc_boundary_layer_0_hyperfaces(const mesh * m)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for m_bd_layer_0_hyperfaces\n",
+      "cannot allocate %zu bytes of memory for m_bd_layer_0_hyperfaces\n",
       sizeof(jagged1));
     return NULL;
   }
@@ -34,7 +34,7 @@ jagged1 * mesh_qc_boundary_layer_0_hyperfaces(const mesh * m)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for m_bd_layer_0_hyperfaces_a0\n",
+      "cannot allocate %zu bytes of memory for m_bd_layer_0_hyperfaces_a0\n",
       sizeof(int) * m_bd_layer_0_hyperfaces_a0);
     free(m_bd_layer_0_hyperfaces);
     return NULL;
@@ -69,7 +69,7 @@ jagged1 * mesh_qc_boundary_layer_0_cells(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for m_bd_layer_0_cells_duplicated\n",
+      "cannot allocate %zu bytes of memory for m_bd_layer_0_cells_duplicated\n",
       sizeof(jagged1));
     return NULL;
   }
@@ -83,7 +83,7 @@ jagged1 * mesh_qc_boundary_layer_0_cells(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for "
+      "cannot allocate %zu bytes of memory for "
       "m_bd_layer_0_cells_duplicated_a1\n",
       sizeof(int) * m_bd_layer_0_cells_duplicated_a0);
     free(m_bd_layer_0_cells_duplicated);
@@ -127,7 +127,7 @@ jagged1 * mesh_qc_boundary_layer_0_1_nodes(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for m_bd_layer_0_1_nodes_original\n",
+      "cannot allocate %zu bytes of memory for m_bd_layer_0_1_nodes_original\n",
       sizeof(jagged1));
     return NULL;
   }
@@ -148,7 +148,7 @@ jagged1 * mesh_qc_boundary_layer_0_1_nodes(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for "
+      "cannot allocate %zu bytes of memory for "
       "m_bd_layer_0_cells_duplicated_a1\n",
       sizeof(int) * m_bd_layer_0_1_nodes_original_a0);
     free(m_bd_layer_0_1_nodes_original);

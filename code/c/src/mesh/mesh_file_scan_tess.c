@@ -105,7 +105,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for m\n",
+      "cannot allocate %zu bytes of memory for m\n",
       sizeof(mesh));
     *error = 1;
     goto clean_on_failure;
@@ -118,7 +118,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for cn\n",
+      "cannot allocate %zu bytes of memory for cn\n",
       sizeof(int) * (d + 1));
     *error = 1;
     goto clean_on_failure;
@@ -148,7 +148,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for c\n",
+      "cannot allocate %zu bytes of memory for c\n",
       sizeof(int) * cn[d]);
     *error = 1;
     goto clean_on_failure;
@@ -223,7 +223,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for coordinates\n",
+      "cannot allocate %zu bytes of memory for coordinates\n",
       sizeof(double) * cn[0] * d);
     *error = 1;
     goto clean_on_failure;
@@ -262,7 +262,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for edges_to_nodes\n",
+      "cannot allocate %zu bytes of memory for edges_to_nodes\n",
       sizeof(int) * 2 * cn[1]);
     *error = 1;
     goto clean_on_failure;
@@ -302,7 +302,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for faces_number_of_sides\n",
+      "cannot allocate %zu bytes of memory for faces_number_of_sides\n",
       sizeof(int) * cn[2]);
     *error = 1;
     goto clean_on_failure;
@@ -326,7 +326,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for faces_to_subfaces\n",
+      "cannot allocate %zu bytes of memory for faces_to_subfaces\n",
       sizeof(int) * 2 * faces_total_edges);
     *error = 1;
     goto clean_on_failure;
@@ -340,7 +340,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for cf\n",
+      "cannot allocate %zu bytes of memory for cf\n",
       sizeof(jagged4));
     *error = 1;
     goto clean_on_failure;
@@ -352,7 +352,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for cf->a1\n",
+      "cannot allocate %zu bytes of memory for cf->a1\n",
       sizeof(int) * cf->a0);
     *error = 1;
     goto clean_on_failure;
@@ -365,7 +365,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for cf->a2\n",
+      "cannot allocate %zu bytes of memory for cf->a2\n",
       sizeof(int) * cf_a2_size);
     *error = 1;
     goto clean_on_failure;
@@ -378,7 +378,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for cf->a3\n",
+      "cannot allocate %zu bytes of memory for cf->a3\n",
       sizeof(int) * cf_a3_size);
     *error = 1;
     goto clean_on_failure;
@@ -391,7 +391,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for cf->a4\n",
+      "cannot allocate %zu bytes of memory for cf->a4\n",
       sizeof(int) * cf_a4_size);
     *error = 1;
     goto clean_on_failure;
@@ -404,7 +404,7 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for m->c\n",
+      "cannot allocate %zu bytes of memory for m->c\n",
       sizeof(int) * m_c_size);
     *error = 1;
     goto clean_on_failure;

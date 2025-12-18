@@ -21,7 +21,7 @@ mesh_qc_inner_direct_d(const mesh_qc * m, const double * m_vol_d)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for m_inner[%d]\n",
+      "cannot allocate %zu bytes of memory for m_inner[%d]\n",
       sizeof(double) * m_cn_d, d);
     return NULL;
   }
@@ -49,7 +49,7 @@ mesh_qc_inner_direct_0(const mesh_qc * m, const double * m_vol_d)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for m_inner[0]\n",
+      "cannot allocate %zu bytes of memory for m_inner[0]\n",
       sizeof(double) * m_cn_0);
     return NULL;
   }
@@ -94,7 +94,7 @@ static double * mesh_qc_inner_direct_nontrivial(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for m_inner[%d]\n",
+      "cannot allocate %zu bytes of memory for m_inner[%d]\n",
       sizeof(double) * m_cn_p, p);
     return NULL;
   }
@@ -152,7 +152,7 @@ double ** mesh_qc_inner_direct(const mesh_qc * m)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for m_inner\n",
+      "cannot allocate %zu bytes of memory for m_inner\n",
       sizeof(double *) * (d + 1));
     goto m_vol_free;
   }

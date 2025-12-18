@@ -32,7 +32,7 @@ int main(void)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for a.positions\n",
+      "cannot allocate %zu bytes of memory for a.positions\n",
       sizeof(int) * n);
     goto arr_free;
   }
@@ -43,7 +43,7 @@ int main(void)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for a.positions\n",
+      "cannot allocate %zu bytes of memory for a.positions\n",
       sizeof(int) * n);
     goto a_positions_free;
   }

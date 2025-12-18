@@ -15,7 +15,7 @@ quasi_cube * quasi_cube_file_scan(FILE * in)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for s\n",
+      "cannot allocate %zu bytes of memory for s\n",
       sizeof(quasi_cube));
     goto end;
   }

@@ -69,7 +69,7 @@ matrix_sparse * matrix_sparse_file_scan_raw(FILE * in)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for a\n",
+      "cannot allocate %zu bytes of memory for a\n",
       sizeof(matrix_sparse));
     goto end;
   }

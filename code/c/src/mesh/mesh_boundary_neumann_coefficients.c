@@ -34,7 +34,7 @@ double * mesh_boundary_neumann_coefficients(const mesh * m, int i)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for l_inverse\n",
+      "cannot allocate %zu bytes of memory for l_inverse\n",
       sizeof(double) * size * d);
     result = NULL;
     goto l_free;
@@ -45,7 +45,7 @@ double * mesh_boundary_neumann_coefficients(const mesh * m, int i)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for result\n",
+      "cannot allocate %zu bytes of memory for result\n",
       sizeof(double) * size);
     goto l_inverse_free;
   }

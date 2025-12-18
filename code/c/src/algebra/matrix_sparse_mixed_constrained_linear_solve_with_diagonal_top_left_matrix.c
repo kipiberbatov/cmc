@@ -73,7 +73,7 @@ void matrix_sparse_mixed_constrained_linear_solve_with_diagonal_top_left_matrix(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for a_restrict\n",
+      "cannot allocate %zu bytes of memory for a_restrict\n",
       sizeof(double) * restrict_size);
     goto boundary_neumann_complement_free;
   }
@@ -93,7 +93,7 @@ void matrix_sparse_mixed_constrained_linear_solve_with_diagonal_top_left_matrix(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for g_new_restrict\n",
+      "cannot allocate %zu bytes of memory for g_new_restrict\n",
       sizeof(double) * restrict_size);
     goto b_restrict_free;
   }
@@ -105,7 +105,7 @@ void matrix_sparse_mixed_constrained_linear_solve_with_diagonal_top_left_matrix(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for f_new\n",
+      "cannot allocate %zu bytes of memory for f_new\n",
       sizeof(double) * b->rows);
     goto g_new_restrict_free;
   }
@@ -116,7 +116,7 @@ void matrix_sparse_mixed_constrained_linear_solve_with_diagonal_top_left_matrix(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for flow_rate_restrict\n",
+      "cannot allocate %zu bytes of memory for flow_rate_restrict\n",
       sizeof(double) * restrict_size);
     goto f_new_free;
   }

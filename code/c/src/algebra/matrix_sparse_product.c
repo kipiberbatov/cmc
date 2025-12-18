@@ -24,7 +24,7 @@ matrix_sparse * matrix_sparse_product(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for result\n",
+      "cannot allocate %zu bytes of memory for result\n",
       sizeof(matrix_sparse));
     goto result0_free;
   }

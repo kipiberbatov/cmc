@@ -15,7 +15,7 @@ int * int_array_file_scan_raw(FILE * in, int n)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for a\n",
+      "cannot allocate %zu bytes of memory for a\n",
       sizeof(int) * n);
     return NULL;
   }

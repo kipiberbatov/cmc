@@ -83,7 +83,7 @@ matrix_sparse ** matrix_sparse_laplacian(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for delta\n",
+      "cannot allocate %zu bytes of memory for delta\n",
       sizeof(matrix_sparse *) * (d + 1));
     return NULL;
   }

@@ -12,7 +12,7 @@ void cmc_memory_allocate_zeros(void ** data, int * status, size_t size)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %s%ld%s bytes of zeros\n",
+      "cannot allocate %s%zu%s bytes of zeros\n",
       color_variable, size, color_none);
     *status = ENOMEM;
   }

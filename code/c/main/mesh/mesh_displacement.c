@@ -63,7 +63,7 @@ mesh_displacement_unit_cochain_file_print_file_scan(FILE * out, FILE * in)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate memory %ld bytes of memory for 1-cochain u\n",
+      "cannot allocate memory %zu bytes of memory for 1-cochain u\n",
       sizeof(double) * m->cn[1]);
     goto m_bd_free;
   }

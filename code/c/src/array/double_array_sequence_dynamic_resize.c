@@ -12,7 +12,7 @@ void double_array_sequence_dynamic_resize(double_array_sequence_dynamic * a)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot reallocate %s%ld%s bytes of memory for tmp\n",
+      "cannot reallocate %s%zu%s bytes of memory for tmp\n",
       color_variable, sizeof(double *) * 2 * a->capacity, color_none);
     return;
   }

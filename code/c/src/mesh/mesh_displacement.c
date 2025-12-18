@@ -53,7 +53,7 @@ double ** mesh_displacement(
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
-      "cannot allocate %ld bytes of memory for result\n",
+      "cannot allocate %zu bytes of memory for result\n",
       sizeof(double *) * m_cn_0);
     return NULL;
   }
@@ -65,7 +65,7 @@ double ** mesh_displacement(
     {
       cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
-        "cannot allocate %ld bytes of memory for result[%d]\n",
+        "cannot allocate %zu bytes of memory for result[%d]\n",
         sizeof(double) * m_dim_embedded, i);
       double_array2_free(result, i);
       return NULL;
