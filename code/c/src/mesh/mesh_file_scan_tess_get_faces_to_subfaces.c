@@ -36,6 +36,7 @@ void mesh_file_scan_tess_get_faces_to_subfaces(int * faces_to_subfaces,
       fprintf(stderr,
         "faces_number_of_sides[%d] should be at least 3; instead it is %d\n",
         i, faces_number_of_sides_i);
+      errno = 1;
       return;
     }
     for (j = 0; j < faces_number_of_sides_i; ++j)

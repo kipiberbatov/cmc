@@ -158,7 +158,6 @@ mesh_and_boundary_file_scan_tess_private(int * error, FILE * in)
   if (*error)
     goto clean_on_failure;
 
-
   /* check for "\n **vertex\n " */
   mesh_file_scan_tess_check_text_for_vertex(in, error);
   if (*error)
@@ -197,8 +196,9 @@ mesh_and_boundary_file_scan_tess_private(int * error, FILE * in)
   edges_to_nodes = (int *) malloc(sizeof(int) * 2 * cn[1]);
   if (!edges_to_nodes)
   {
+    fprintf(stderr, "%s:%d: cannot allocate memory for edges_to_nodes\n",
+      __FILE__, __LINE__);
     *error = 1;
-    fputs("Unable to allocate memory for edges_to_nodes\n", stderr);
     goto clean_on_failure;
   }
   /* scan edges_to_nodes */
@@ -243,8 +243,9 @@ mesh_and_boundary_file_scan_tess_private(int * error, FILE * in)
   faces_number_of_sides = (int *) malloc(sizeof(int) * cn[2]);
   if (!faces_number_of_sides)
   {
+    fprintf(stderr, "%s:%d: cannot allocate memory for faces_number_of_sides\n",
+      __FILE__, __LINE__);
     *error = 1;
-    fputs("Unable to allocate memory for faces_number_of_sides\n", stderr);
     goto clean_on_failure;
   }
 
@@ -260,25 +261,40 @@ mesh_and_boundary_file_scan_tess_private(int * error, FILE * in)
   faces_to_subfaces = (int *) malloc(sizeof(int) * 2 * faces_total_edges);
   if (!faces_to_subfaces)
   {
+    fprintf(stderr, "%s:%d: cannot allocate memory for faces_to_edges\n",
+      __FILE__, __LINE__);
     *error = 1;
-    fputs("Cannot allocate memory for faces_to_edges\n", stderr);
     goto clean_on_failure;
   }
 
   position = ftell(in);
   mesh_file_scan_tess_get_faces_to_subfaces(faces_to_subfaces,
     in, cn[2], faces_total_edges);
+  if (errno)
+  {
+    fprintf(stderr, "%s:%d: cannot scan faces_to_subfaces\n",
+      __FILE__, __LINE__);
+    *error = 1;
+    goto clean_on_failure;
+  }
   fseek(in, position, SEEK_SET);
 
   bd_values_2 = (double *) malloc(sizeof(double) * faces_total_edges);
   if (!bd_values_2)
   {
+    fprintf(stderr, "%s:%d: cannot allocate memory for bd_values_2\n",
+      __FILE__, __LINE__);
     *error = 1;
-    fputs("Cannot allocate memory for bd_values_2\n", stderr);
     goto clean_on_failure;
   }
   mesh_file_scan_tess_get_boundary_values(bd_values_2,
     in, cn[2], faces_total_edges);
+  if (errno)
+  {
+    fprintf(stderr, "%s:%d: cannot scan bd_values_2\n", __FILE__, __LINE__);
+    *error = 1;
+    goto clean_on_failure;
+  }
   bd_values[1] = bd_values_2;
 
   cf = (jagged4 *) malloc(sizeof(jagged4));
@@ -324,6 +340,12 @@ mesh_and_boundary_file_scan_tess_private(int * error, FILE * in)
   }
   mesh_file_scan_tess_set_cf_a4(cf->a4, cn[1], cn[2], faces_total_edges,
     edges_to_nodes, faces_number_of_sides, faces_to_subfaces);
+  if (errno)
+  {
+    fprintf(stderr, "%s:%d: cannot scan cf->a4\n", __FILE__, __LINE__);
+    *error = 1;
+    goto clean_on_failure;
+  }
   m_c_size = int_array_total_sum(d + 1, cn);
   m->c = (int *) malloc(sizeof(int) * m_c_size);
   if (errno)
