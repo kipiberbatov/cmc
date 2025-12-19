@@ -2,10 +2,6 @@ name: Compile, archive, link, and run the C code
 
 on:
   workflow_call:
-    inputs:
-      retention_days:
-        required: true
-        type: string
 
 jobs:
   build-code:
@@ -68,4 +64,4 @@ jobs:
         with:
           name: linux-release
           path: build/release
-          retention-days: ${{ inputs.retention_days }}
+          retention-days: ${{ github.event.repository.private && 1 || 7 }}
