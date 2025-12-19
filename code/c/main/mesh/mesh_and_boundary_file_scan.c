@@ -40,7 +40,7 @@ int main(int argc, char ** argv)
     return status;
   }
 
-  m_and_bd_file = fopen(m_name, "r");
+  m_and_bd_file = fopen(m_name, "rb");
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
