@@ -3,7 +3,6 @@
 #include <string.h>
 
 #include "cmc_error_message.h"
-#include "diffusion_discrete_set_neumann_rows.h"
 #include "diffusion_transient_discrete_primal_weak.h"
 #include "diffusion_transient_discrete_primal_weak_trapezoidal_loop_data.h"
 #include "double_array.h"

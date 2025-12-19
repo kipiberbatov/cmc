@@ -4,11 +4,11 @@
 
 #include "cmc_error_message.h"
 #include "double_array.h"
-#include "diffusion_discrete_set_neumann_rows.h"
 #include "matrix.h"
 #include "mesh.h"
+#include "mesh_qc_set_neumann_rows.h"
 
-void diffusion_discrete_set_neumann_rows(
+void mesh_qc_set_neumann_rows(
   struct matrix_sparse * lhs,
   const struct mesh * m,
   const struct jagged1 * boundary_neumann_discrete,

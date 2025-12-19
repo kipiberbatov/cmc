@@ -4,9 +4,9 @@
 
 #include "cmc_error_message.h"
 #include "double_array.h"
-#include "diffusion_discrete_set_neumann_rows.h"
 #include "diffusion_steady_state_discrete_primal_strong.h"
 #include "mesh.h"
+#include "mesh_qc_set_neumann_rows.h"
 
 double * diffusion_steady_state_discrete_primal_strong_solve(
   const struct mesh * m,
@@ -42,7 +42,7 @@ double * diffusion_steady_state_discrete_primal_strong_solve(
     result, data->boundary_dirichlet, data->g_dirichlet);
 
   /* apply Neumann boundary conditions */
-  diffusion_discrete_set_neumann_rows(
+  mesh_qc_set_neumann_rows(
     lhs, m, data->boundary_neumann, data->kappa_1);
   if (errno)
   {

@@ -3,8 +3,8 @@
 
 #include "cmc_error_message.h"
 #include "double_array.h"
-#include "diffusion_discrete_set_neumann_rows.h"
 #include "mesh.h"
+#include "mesh_qc_set_neumann_rows.h"
 
 static int x1_axis_constant(const double * x)
 {
@@ -78,7 +78,7 @@ int main(int argc, char ** argv)
   }
   double_array_assign_constant(kappa_1, m_laplacian_0->cols, 1);
 
-  diffusion_discrete_set_neumann_rows(m_laplacian_0, m, neumann_nodes, kappa_1);
+  mesh_qc_set_neumann_rows(m_laplacian_0, m, neumann_nodes, kappa_1);
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);

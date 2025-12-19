@@ -146,7 +146,7 @@ build/$(MODE)/txt/mesh/brick_2d_2_forman_laplacian.txt:\
 	$^ > $@
 
 build/$(MODE)/txt/mesh/brick_2d_2_forman_neumann_modified_laplacian.txt:\
-  build/$(MODE)/bin/diffusion_discrete_set_neumann_rows$(.EXE)\
+  build/$(MODE)/bin/mesh_qc_set_neumann_rows$(.EXE)\
   build/$(MODE)/txt/mesh/brick_2d_2_forman.txt\
   build/$(MODE)/txt/mesh/brick_2d_2_forman_laplacian.txt\
   | build/$(MODE)/txt/mesh

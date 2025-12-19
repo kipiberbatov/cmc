@@ -3,11 +3,11 @@
 #include <string.h>
 
 #include "cmc_error_message.h"
-#include "diffusion_discrete_set_neumann_rows.h"
 #include "diffusion_transient_discrete_primal_strong.h"
 #include "diffusion_transient_discrete_primal_strong_trapezoidal_loop_data.h"
 #include "double_array.h"
 #include "mesh.h"
+#include "mesh_qc_set_neumann_rows.h"
 
 struct diffusion_transient_discrete_primal_strong_trapezoidal_loop_data *
 diffusion_transient_discrete_primal_strong_trapezoidal_loop_data_initialize(
@@ -74,7 +74,7 @@ diffusion_transient_discrete_primal_strong_trapezoidal_loop_data_initialize(
   matrix_sparse_set_identity_rows(lhs, data->boundary_dirichlet);
 
   /* apply Neumann boundary condition on matrix $lhs$ */
-  diffusion_discrete_set_neumann_rows(
+  mesh_qc_set_neumann_rows(
     lhs, m, data->boundary_neumann, data->kappa_1);
   if (errno)
   {
