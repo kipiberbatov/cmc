@@ -23,7 +23,7 @@ build/$(MODE)/gtk/diffusion/transient/continuous_2d_d01_p00/primal_strong_cochai
   | build/$(MODE)/gtk/diffusion/transient/continuous_2d_d01_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=1000\
   --cochain-sequence=$(word 3, $^)\
@@ -45,7 +45,7 @@ build/$(MODE)/gtk/diffusion/transient/continuous_2d_d01_p00/primal_strong_cochai
   | build/$(MODE)/gtk/diffusion/transient/continuous_2d_d01_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=1000\
   --cochain-sequence=$(word 3, $^)\
@@ -67,7 +67,7 @@ build/$(MODE)/gtk/diffusion/transient/continuous_2d_d01_p00/primal_weak_cochain_
   | build/$(MODE)/gtk/diffusion/transient/continuous_2d_d01_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=1000\
   --cochain-sequence=$(word 3, $^)\
@@ -89,7 +89,7 @@ build/$(MODE)/gtk/diffusion/transient/continuous_2d_d01_p00/primal_weak_cochain_
   | build/$(MODE)/gtk/diffusion/transient/continuous_2d_d01_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=1000\
   --cochain-sequence=$(word 3, $^)\
@@ -111,7 +111,7 @@ build/$(MODE)/gtk/diffusion/transient/continuous_2d_d01_p00/mixed_weak_cochain_s
   | build/$(MODE)/gtk/diffusion/transient/continuous_2d_d01_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=1000\
   --cochain-sequence=$(word 3, $^)\
@@ -133,7 +133,7 @@ build/$(MODE)/gtk/diffusion/transient/continuous_2d_d01_p00/mixed_weak_cochain_s
   | build/$(MODE)/gtk/diffusion/transient/continuous_2d_d01_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=1000\
   --cochain-sequence=$(word 3, $^)\

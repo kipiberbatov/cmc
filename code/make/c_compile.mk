@@ -10,6 +10,7 @@ ifeq ($(OS), Windows_NT)
   .DLL := .dll
   .LIB := .lib
   .OBJ := .obj
+  .DEP := .d
 else
   .EXE :=
   .LIB := .a
@@ -332,6 +333,8 @@ build/$(MODE)/lib: | build/$(MODE)
 # (static) libraries for source files
 build/$(MODE)/lib/src: | build/$(MODE)/lib
 	mkdir -p $@
+
+ARFLAGS := rs
 
 build/$(MODE)/lib/src/libarray$(.LIB): $(_obj_src_array) | build/$(MODE)/lib/src
 	$(AR) $(ARFLAGS) $@ $^

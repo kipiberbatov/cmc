@@ -25,7 +25,7 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05/exact_brick_2d_5_
   build/$(MODE)/obj/plugins/diffusion_steady_state_continuous_2d_d00_p05$(.OBJ)\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --raw $(word 2, $^)\
   $(word 2, $|)\
   diffusion_steady_state_continuous_2d_d00_p05_potential\
@@ -37,7 +37,7 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05/exact_brick_2d_5_
   build/$(MODE)/obj/plugins/diffusion_steady_state_continuous_2d_d00_p05$(.OBJ)\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --raw $(word 2, $^)\
   $(word 2, $|)\
   diffusion_steady_state_continuous_2d_d00_p05_flow_rate\
@@ -49,7 +49,7 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05/primal_strong_coc
   build/$(MODE)/obj/plugins/diffusion_steady_state_continuous_2d_d00_p05$(.OBJ)\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --raw $(word 2, $^)\
   $(word 2, $|)\
   diffusion_steady_state_continuous_2d_d00_p05\
@@ -62,7 +62,7 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05/primal_strong_coc
   build/$(MODE)/txt/mesh/brick_2d_5_forman_cbd_star.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05/primal_strong_cochain_brick_2d_5_forman_input.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05
-	$<\
+	$(INTERPRETER) $<\
   --raw $(word 2, $^)\
   $(word 3, $^)\
   $(word 4, $^)\
@@ -76,7 +76,7 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05/primal_strong_coc
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05/primal_strong_cochain_brick_2d_5_forman_input.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05/primal_strong_cochain_brick_2d_5_forman_potential.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05
-	$<\
+	$(INTERPRETER) $<\
   --raw $(word 2, $^)\
   --raw $(word 3, $^)\
   --steady-state-primal-strong-raw $(word 4, $^)\
@@ -90,7 +90,7 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05/primal_weak_cocha
   build/$(MODE)/obj/plugins/diffusion_steady_state_continuous_2d_d00_p05$(.OBJ)\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --raw $(word 2, $^)\
   --raw $(word 3, $^)\
   $(word 2, $|)\
@@ -103,7 +103,7 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05/primal_weak_cocha
   build/$(MODE)/txt/mesh/brick_2d_5_forman_inner.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05/primal_weak_cochain_brick_2d_5_forman_input.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05
-	$<\
+	$(INTERPRETER) $<\
   --raw $(word 2, $^)\
   --raw $(word 3, $^)\
   $(word 4, $^)\
@@ -116,7 +116,7 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05/primal_weak_cocha
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05/primal_weak_cochain_brick_2d_5_forman_input.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05/primal_weak_cochain_brick_2d_5_forman_potential.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05
-	$<\
+	$(INTERPRETER) $<\
   --raw $(word 2, $^)\
   --raw $(word 3, $^)\
   --steady-state-primal-weak-raw $(word 4, $^)\
@@ -130,7 +130,7 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05/mixed_weak_cochai
   build/$(MODE)/obj/plugins/diffusion_steady_state_continuous_2d_d00_p05$(.OBJ)\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --raw $(word 2, $^)\
   --raw $(word 3, $^)\
   $(word 2, $|)\
@@ -143,7 +143,7 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05/mixed_weak_cochai
   build/$(MODE)/txt/mesh/brick_2d_5_forman_inner.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05/mixed_weak_cochain_brick_2d_5_forman_input.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05
-	$<\
+	$(INTERPRETER) $<\
   --raw $(word 2, $^)\
   --raw $(word 3, $^)\
   $(word 4, $^)\
@@ -156,7 +156,7 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05/mixed_weak_cochai
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05/mixed_weak_cochain_brick_2d_5_forman_input.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05/mixed_weak_cochain_brick_2d_5_forman_solution.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p05
-	$<\
+	$(INTERPRETER) $<\
   --raw $(word 2, $^)\
   --raw $(word 3, $^)\
   $(word 4, $^)\

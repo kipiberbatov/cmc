@@ -29,7 +29,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00/exact_disk_polar_
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
   --cochain-sequence=$(word 3, $^)\
@@ -48,7 +48,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00/exact_disk_polar_
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
   --cochain-sequence=$(word 3, $^)\
@@ -67,7 +67,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00/primal_weak_cocha
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
   --cochain-sequence=$(word 3, $^)\
@@ -86,7 +86,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00/primal_weak_cocha
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
   --cochain-sequence=$(word 3, $^)\
@@ -105,7 +105,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00/mixed_weak_cochai
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
   --cochain-sequence=$(word 3, $^)\
@@ -124,7 +124,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00/mixed_weak_cochai
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
   --cochain-sequence-format=--steady-state-mixed-weak-solution-flow-rate-raw\
@@ -144,7 +144,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00/exact_disk_polar_
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
   --cochain-sequence=$(word 3, $^)\
@@ -163,7 +163,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00/exact_disk_polar_
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
   --cochain-sequence=$(word 3, $^)\
@@ -182,7 +182,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00/primal_weak_cocha
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
   --cochain-sequence=$(word 3, $^)\
@@ -201,7 +201,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00/primal_weak_cocha
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
   --cochain-sequence=$(word 3, $^)\
@@ -220,7 +220,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00/mixed_weak_cochai
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
   --cochain-sequence=$(word 3, $^)\
@@ -239,7 +239,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00/mixed_weak_cochai
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d03_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
   --cochain-sequence-format=--steady-state-mixed-weak-solution-flow-rate-raw\

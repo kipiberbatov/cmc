@@ -1,6 +1,8 @@
 #include <stdio.h>
 
+#ifndef _WIN32
 #include <dlfcn.h>
+#endif /* _WIN32 */
 
 #include "cmc_error_message.h"
 #include "cmc_animation.h"
@@ -16,6 +18,7 @@ void cmc_animation_read_and_apply_backends(
   const char * animation_library,
   const char * animation_backend)
 {
+#ifndef _WIN32
   void * lib_animation, * lib_canvas;
   char * error;
   void (*render)(struct cmc_animation *, int *, int, char **, const char *);
@@ -74,4 +77,5 @@ lib_canvas_close:
   dlclose(lib_canvas);
 end:
   return;
+#endif /* _WIN32 */
 }

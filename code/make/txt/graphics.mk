@@ -7,7 +7,7 @@ _txt_graphics := build/$(MODE)/txt/graphics/frame.txt
 
 build/$(MODE)/txt/graphics/frame.txt: build/$(MODE)/bin/frame\
   | build/$(MODE)/txt/graphics
-	$< > $@
+	$(INTERPRETER) $< > $@
 
 txt_graphics: bin_graphics $(_txt_graphics)
 

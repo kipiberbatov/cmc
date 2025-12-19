@@ -7,7 +7,7 @@ build/$(MODE)/txt/mesh/square_pyramid_forman.txt:\
   build/$(MODE)/bin/forman$(.EXE)\
   data/mesh/square_pyramid.txt\
   | build/$(MODE)/txt/mesh
-	$< --raw $(word 2, $^) --standard --raw > $@
+	$(INTERPRETER) $< --raw $(word 2, $^) --standard --raw > $@
 
 txt_mesh_square_pyramid: $(_txt_mesh_square_pyramid)
 

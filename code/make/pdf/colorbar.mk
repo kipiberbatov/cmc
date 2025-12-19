@@ -14,7 +14,7 @@ build/$(MODE)/pdf/colorbar/rainbow_100_horizontal_500_50.pdf:\
   | build/$(MODE)/pdf/colorbar\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --total-colors=100\
   --direction=horizontal\
   --width=500\
@@ -32,7 +32,7 @@ build/$(MODE)/pdf/colorbar/rainbow_100_vertical_50_500.pdf:\
   | build/$(MODE)/pdf/colorbar\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --total-colors=100\
   --direction=vertical\
   --width=50\

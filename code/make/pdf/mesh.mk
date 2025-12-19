@@ -46,7 +46,7 @@ build/$(MODE)/pdf/mesh/brick_2d_1_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
@@ -62,7 +62,7 @@ build/$(MODE)/pdf/mesh/brick_2d_1_forman_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
@@ -78,7 +78,7 @@ build/$(MODE)/pdf/mesh/brick_2d_2_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
@@ -94,7 +94,7 @@ build/$(MODE)/pdf/mesh/brick_2d_2_forman_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
@@ -110,7 +110,7 @@ build/$(MODE)/pdf/mesh/brick_2d_4_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
@@ -126,7 +126,7 @@ build/$(MODE)/pdf/mesh/brick_2d_5_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
@@ -142,7 +142,7 @@ build/$(MODE)/pdf/mesh/brick_2d_5_forman_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
@@ -158,7 +158,7 @@ build/$(MODE)/pdf/mesh/brick_2d_10_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
@@ -174,7 +174,7 @@ build/$(MODE)/pdf/mesh/brick_2d_10_forman_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
@@ -190,7 +190,7 @@ build/$(MODE)/pdf/mesh/rectangle_20_15_brick_5_3_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
@@ -206,7 +206,7 @@ build/$(MODE)/pdf/mesh/rectangle_20_15_brick_5_3_forman_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
@@ -222,7 +222,7 @@ build/$(MODE)/pdf/mesh/parallelogram_20_15_degrees_45_grid_5_3_edge_skeleton.pdf
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --height=250\
   --canvas-library=$(word 2, $|)\
@@ -239,7 +239,7 @@ build/$(MODE)/pdf/mesh/parallelogram_20_15_degrees_45_grid_5_3_forman_edge_skele
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --height=250\
   --canvas-library=$(word 2, $|)\
@@ -256,7 +256,7 @@ build/$(MODE)/pdf/mesh/square_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
@@ -272,7 +272,7 @@ build/$(MODE)/pdf/mesh/square_2_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
@@ -288,7 +288,7 @@ build/$(MODE)/pdf/mesh/square_4_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
@@ -304,7 +304,7 @@ build/$(MODE)/pdf/mesh/square_8_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
@@ -320,7 +320,7 @@ build/$(MODE)/pdf/mesh/pentagon_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
@@ -336,7 +336,7 @@ build/$(MODE)/pdf/mesh/pentagon_forman_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
@@ -352,7 +352,7 @@ build/$(MODE)/pdf/mesh/two_triangles_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
@@ -368,7 +368,7 @@ build/$(MODE)/pdf/mesh/two_triangles_forman_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
@@ -384,7 +384,7 @@ build/$(MODE)/pdf/mesh/triangle_and_square_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
@@ -400,7 +400,7 @@ build/$(MODE)/pdf/mesh/triangle_and_square_forman_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
@@ -416,7 +416,7 @@ build/$(MODE)/pdf/mesh/2d_10_grains_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh-format=tess\
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
@@ -433,7 +433,7 @@ build/$(MODE)/pdf/mesh/2d_10_grains_forman_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
@@ -449,7 +449,7 @@ build/$(MODE)/pdf/mesh/disk_polar_4_3_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton_polar\
@@ -465,7 +465,7 @@ build/$(MODE)/pdf/mesh/disk_polar_4_3_forman_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton_polar_forman\
@@ -481,7 +481,7 @@ build/$(MODE)/pdf/mesh/disk_polar_18_10_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton_polar\
@@ -497,7 +497,7 @@ build/$(MODE)/pdf/mesh/disk_polar_18_10_forman_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton_polar_forman\
@@ -513,7 +513,7 @@ build/$(MODE)/pdf/mesh/hemisphere_polar_4_3_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton_polar\
@@ -529,7 +529,7 @@ build/$(MODE)/pdf/mesh/hemisphere_polar_4_3_forman_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton_polar_forman\
@@ -545,7 +545,7 @@ build/$(MODE)/pdf/mesh/hemisphere_polar_6_6_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton_polar\
@@ -561,7 +561,7 @@ build/$(MODE)/pdf/mesh/hemisphere_polar_6_6_forman_edge_skeleton.pdf:\
   | build/$(MODE)/pdf/mesh\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$< \
+	$(INTERPRETER) $< \
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton_polar_forman\

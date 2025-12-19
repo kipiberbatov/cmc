@@ -13,7 +13,7 @@ build/$(MODE)/gtk/filled_window/rainbow_100.log:\
   | build/$(MODE)/gtk/filled_window\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_filled_window\
   --animation-library=$(word 3, $|)\

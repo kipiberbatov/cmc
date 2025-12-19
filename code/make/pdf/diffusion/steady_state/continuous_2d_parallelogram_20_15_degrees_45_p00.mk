@@ -23,7 +23,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_parallelogram_20_15_degre
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_parallelogram_20_15_degrees_45_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
   --cochain-sequence=$(word 3, $^)\
@@ -43,7 +43,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_parallelogram_20_15_degre
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_parallelogram_20_15_degrees_45_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
   --cochain-sequence=$(word 3, $^)\
@@ -63,7 +63,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_parallelogram_20_15_degre
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_parallelogram_20_15_degrees_45_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
   --cochain-sequence=$(word 3, $^)\
@@ -83,7 +83,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_parallelogram_20_15_degre
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_parallelogram_20_15_degrees_45_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
   --cochain-sequence=$(word 3, $^)\
@@ -103,7 +103,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_parallelogram_20_15_degre
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_parallelogram_20_15_degrees_45_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
   --cochain-sequence=$(word 3, $^)\
@@ -123,7 +123,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_parallelogram_20_15_degre
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_parallelogram_20_15_degrees_45_p00\
     build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
     build/$(MODE)/lib/plugins/libanimation$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
   --cochain-sequence-format=--steady-state-mixed-weak-solution-flow-rate-raw\

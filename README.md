@@ -254,3 +254,36 @@ There are various smaller cleans that will delete certain types of files.
 For instance `make clean` will clean the object files.
 You can look the files in [code/make](/code/make) to see all the cleaning
 options (they end with **_clean** or **_distclean**).
+
+## Building for Windows
+
+### Cross-compiling Windows x86_64 binaries on Unix
+
+At the moment I am working on porting the project to Windows.
+There are two main issues related to that:
+1. Dynamic loading uses Unix API by `dlfcn.h`.
+   This will be fixed by constructing an abstract API and choosing Unix/Windows
+   API depending on the ontext.
+2. Makefiles use Unix path separators and GCC/Clang compiler options.
+   This is currently overcome by using MinGW.
+
+At the moment all internal source files can be compiled by using MinGW.
+Consequently, all demonstrations in modules `{array,algebra,region,mesh}` can
+be run by Wine.
+In order to allow this, a Makefile macro `INTERPRETER` is introduced
+(empty by default).
+On native runs it is not used, but on cross-platform runs (Windows over Unix)
+it needs to be set, e.g., `INTERPRETER=wine`.
+Hence, MinGW and Wine need to be installed.
+With Homebrew this is achieved by running
+```bash
+brew install mingw-w64
+brew innstall --cask wine-stable
+```
+(Note that `wine-stable` is built for the x86_64 architecture.
+Hence, it nrequires Rosetta 2 in order to run on Apple silicon.)
+The full build process is summarised in the Bash script `mingw.sh` that executes
+the cross-platform build (Windows over Unix) by running
+```bash
+bash ./mingw.sh
+```

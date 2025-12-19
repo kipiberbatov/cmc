@@ -23,7 +23,7 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01/primal_strong_cochai
   build/$(MODE)/obj/plugins/diffusion_transient_continuous_2d_d03_p01$(.OBJ)\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --dynamic-library=$(word 2, $|)\
   --input-data=diffusion_transient_continuous_2d_d03_p01\
@@ -36,7 +36,7 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01/primal_strong_cochai
   build/$(MODE)/txt/mesh/disk_polar_4_3_forman_cbd_star.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01/primal_strong_cochain_disk_polar_4_3_forman_input.txt\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --mesh-coboundary-0=$(word 3, $^)\
   --mesh-coboundary-star-1=$(word 4, $^)\
@@ -52,7 +52,7 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01/primal_strong_cochai
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01/primal_strong_cochain_disk_polar_4_3_forman_input.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01/primal_strong_cochain_disk_polar_4_3_forman_trapezoidal_0p05_1000_potential.txt\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --mesh-hodge=$(word 3, $^)\
   --kappa-1-format=transient-primal-strong-raw\
@@ -68,7 +68,7 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01/primal_weak_cochain_
   build/$(MODE)/obj/plugins/diffusion_transient_continuous_2d_d03_p01$(.OBJ)\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --mesh-volumes=$(word 3, $^)\
   --dynamic-library=$(word 2, $|)\
@@ -81,7 +81,7 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01/primal_weak_cochain_
   build/$(MODE)/txt/mesh/disk_polar_4_3_forman_inner.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01/primal_weak_cochain_disk_polar_4_3_forman_input.txt\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --mesh-inner=$(word 3, $^)\
   --input-data=$(word 4, $^)\
@@ -96,7 +96,7 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01/primal_weak_cochain_
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01/primal_weak_cochain_disk_polar_4_3_forman_input.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01/primal_weak_cochain_disk_polar_4_3_forman_trapezoidal_0p05_1000_potential.txt\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --mesh-hodge=$(word 3, $^)\
   --kappa-1-format=transient-primal-weak-raw\
@@ -113,7 +113,7 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01/mixed_weak_cochain_d
   build/$(MODE)/obj/plugins/diffusion_transient_continuous_2d_d03_p01$(.OBJ)\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --mesh-hodge-star=$(word 3, $^)\
   --mesh-volumes=$(word 4, $^)\
@@ -127,7 +127,7 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01/mixed_weak_cochain_d
   build/$(MODE)/txt/mesh/disk_polar_4_3_forman_inner.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01/mixed_weak_cochain_disk_polar_4_3_forman_input.txt\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --mesh-inner=$(word 3, $^)\
   --input-data=$(word 4, $^)\
@@ -142,7 +142,7 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01/mixed_weak_cochain_d
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01/mixed_weak_cochain_disk_polar_4_3_forman_input.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01/mixed_weak_cochain_disk_polar_4_3_forman_trapezoidal_0p05_1000_solution.txt\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d03_p01
-	$<\
+	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --mesh-volumes=$(word 3, $^)\
   --input-data=$(word 4, $^)\
