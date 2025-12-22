@@ -243,88 +243,115 @@ canvas: obj_plugins_canvas lib_plugins_canvas
 build/$(MODE)/obj: | build/$(MODE)
 	mkdir -p $@
 
+build/$(MODE)/dep: | build/$(MODE)
+	mkdir -p $@
+
 # compiling source files
 build/$(MODE)/obj/src: | build/$(MODE)/obj
 	mkdir -p $@
 
+build/$(MODE)/dep/src: | build/$(MODE)/dep
+	mkdir -p $@
+
+# (1): object file
+define dependencies
+$(patsubst build/$(MODE)/obj/%$(.OBJ),build/$(MODE)/dep/%$(.DEP),$(1))
+endef
+
+# $(1): $@ (object file)
+# $(2): $< (source file)
+# $(3): headers
+define compile
+$(CC) -o $(1) $(CPPFLAGS) -MF $(call dependencies,$(1)) $(CFLAGS) $(3) -c $(2)
+endef
+
 $(_obj_src_array): build/$(MODE)/obj/src/%$(.OBJ): code/c/src/array/%.c\
-  | build/$(MODE)/obj/src
-	$(CC) -o $@ $(CPPFLAGS) $(CFLAGS) $(_include_src_array) -c $<
+  | build/$(MODE)/obj/src build/$(MODE)/dep/src
+	$(call compile,$@,$<,$(_include_src_array))
 
 $(_obj_src_algebra): build/$(MODE)/obj/src/%$(.OBJ): code/c/src/algebra/%.c\
-    | build/$(MODE)/obj/src
-	$(CC) -o $@ $(CPPFLAGS) $(CFLAGS) $(_include_src_algebra) -c $<
+    | build/$(MODE)/obj/src build/$(MODE)/dep/src
+	$(call compile,$@,$<,$(_include_src_algebra))
 
 $(_obj_src_region): build/$(MODE)/obj/src/%$(.OBJ): code/c/src/region/%.c\
-    | build/$(MODE)/obj/src
-	$(CC) -o $@ $(CPPFLAGS) $(CFLAGS) $(_include_src_region) -c $<
+    | build/$(MODE)/obj/src build/$(MODE)/dep/src
+	$(call compile,$@,$<,$(_include_src_region))
 
 $(_obj_src_mesh): build/$(MODE)/obj/src/%$(.OBJ): code/c/src/mesh/%.c\
-    | build/$(MODE)/obj/src
-	$(CC) -o $@ $(CPPFLAGS) $(CFLAGS) $(_include_src_mesh) -c $<
+    | build/$(MODE)/obj/src build/$(MODE)/dep/src
+	$(call compile,$@,$<,$(_include_src_mesh))
 
 $(_obj_src_diffusion): build/$(MODE)/obj/src/%$(.OBJ):\
-  code/c/src/diffusion/%.c | build/$(MODE)/obj/src
-	$(CC) -o $@ $(CPPFLAGS) $(CFLAGS) $(_include_src_diffusion) -c $<
+  code/c/src/diffusion/%.c | build/$(MODE)/obj/src build/$(MODE)/dep/src
+	$(call compile,$@,$<,$(_include_src_diffusion))
 
 $(_obj_src_graphics): build/$(MODE)/obj/src/%$(.OBJ): code/c/src/graphics/%.c\
-    | build/$(MODE)/obj/src
-	$(CC) -o $@ $(CPPFLAGS) $(CFLAGS) $(_include_src_graphics) -c $<
+    | build/$(MODE)/obj/src build/$(MODE)/dep/src
+	$(call compile,$@,$<,$(_include_src_graphics))
 
 # include header dependencies for object files from code/c/src
--include build/$(MODE)/obj/src/*$(.DEP)
+-include build/$(MODE)/dep/src/*$(.DEP)
 
 # compiling main files
 build/$(MODE)/obj/main: | build/$(MODE)/obj
 	mkdir -p $@
 
+build/$(MODE)/dep/main: | build/$(MODE)/dep
+	mkdir -p $@
+
 $(_obj_main_array): build/$(MODE)/obj/main/%$(.OBJ): code/c/main/array/%.c\
-  | build/$(MODE)/obj/main
-	$(CC) -o $@ $(CPPFLAGS) $(CFLAGS) $(_include_main_array) -c $<
+  | build/$(MODE)/obj/main build/$(MODE)/dep/main
+	$(call compile,$@,$<,$(_include_main_array))
 
 $(_obj_main_algebra): build/$(MODE)/obj/main/%$(.OBJ):\
-   code/c/main/algebra/%.c | build/$(MODE)/obj/main
-	$(CC) -o $@ $(CPPFLAGS) $(CFLAGS) $(_include_main_algebra) -c $<
+   code/c/main/algebra/%.c | build/$(MODE)/obj/main build/$(MODE)/dep/main
+	$(call compile,$@,$<,$(_include_main_algebra))
 
 $(_obj_main_region): build/$(MODE)/obj/main/%$(.OBJ):\
-   code/c/main/region/%.c | build/$(MODE)/obj/main
-	$(CC) -o $@ $(CPPFLAGS) $(CFLAGS) $(_include_main_region) -c $<
+   code/c/main/region/%.c | build/$(MODE)/obj/main build/$(MODE)/dep/main
+	$(call compile,$@,$<,$(_include_main_region))
 
 $(_obj_main_graphics): build/$(MODE)/obj/main/%$(.OBJ):\
-   code/c/main/graphics/%.c | build/$(MODE)/obj/main
-	$(CC) -o $@ $(CPPFLAGS) $(CFLAGS) $(_include_main_graphics) -c $<
+   code/c/main/graphics/%.c | build/$(MODE)/obj/main build/$(MODE)/dep/main
+	$(call compile,$@,$<,$(_include_main_graphics))
 
 $(_obj_main_mesh): build/$(MODE)/obj/main/%$(.OBJ): code/c/main/mesh/%.c\
-  | build/$(MODE)/obj/main
-	$(CC) -o $@ $(CPPFLAGS) $(CFLAGS) $(_include_main_mesh) -c $<
+  | build/$(MODE)/obj/main build/$(MODE)/dep/main
+	$(call compile,$@,$<,$(_include_main_mesh))
 
 $(_obj_main_diffusion): build/$(MODE)/obj/main/%$(.OBJ):\
-  code/c/main/diffusion/%.c | build/$(MODE)/obj/main
-	$(CC) -o $@ $(CPPFLAGS) $(CFLAGS) $(_include_main_diffusion) -c $<
+  code/c/main/diffusion/%.c | build/$(MODE)/obj/main build/$(MODE)/dep/main
+	$(call compile,$@,$<,$(_include_main_diffusion))
 
 # include header dependencies for object files from code/c/main
--include build/$(MODE)/obj/main/*$(.DEP)
+-include build/$(MODE)/dep/main/*$(.DEP)
 
 # compiling plugin files
 build/$(MODE)/obj/plugins: | build/$(MODE)/obj
 	mkdir -p $@
 
+build/$(MODE)/dep/plugins: | build/$(MODE)/dep
+	mkdir -p $@
+
 $(_obj_plugins_diffusion): build/$(MODE)/obj/plugins/%$(.OBJ):\
-  code/c/plugins/diffusion/%.c | build/$(MODE)/obj/plugins
-	$(CC) -o $@ $(CPPFLAGS) $(CFLAGS) $(_include_plugins_diffusion) -c $<
+  code/c/plugins/diffusion/%.c | build/$(MODE)/obj/plugins\
+  build/$(MODE)/dep/plugins
+	$(call compile,$@,$<,$(_include_plugins_diffusion))
 
 $(_obj_plugins_animation): build/$(MODE)/obj/plugins/%$(.OBJ):\
-  code/c/plugins/animation/%.c | build/$(MODE)/obj/plugins
-	$(CC) -o $@ $(CPPFLAGS) $(CFLAGS) $(_include_plugins_animation)\
-	  $(shell pkg-config --cflags gtk+-3.0) -c $<
+  code/c/plugins/animation/%.c | build/$(MODE)/obj/plugins\
+                                 build/$(MODE)/dep/plugins
+	$(call compile,$@,$<,$(_include_plugins_animation)\
+		             $(shell pkg-config --cflags gtk+-3.0))
 
 $(_obj_plugins_canvas): build/$(MODE)/obj/plugins/%$(.OBJ):\
-  code/c/plugins/canvas/%.c | build/$(MODE)/obj/plugins
-	$(CC) -o $@ $(CPPFLAGS) $(CFLAGS) $(_include_plugins_canvas)\
-	  $(shell pkg-config --cflags cairo) -c $<
+  code/c/plugins/canvas/%.c | build/$(MODE)/obj/plugins\
+                              build/$(MODE)/dep/plugins
+	$(call compile,$@,$<,$(_include_plugins_canvas) \
+		             $(shell pkg-config --cflags cairo))
 
 # include header dependencies for object files from code/c/plugins
--include build/$(MODE)/obj/plugins/*$(.DEP)
+-include build/$(MODE)/dep/plugins/*$(.DEP)
 
 ############################## creating libraries ##############################
 build/$(MODE)/lib: | build/$(MODE)
