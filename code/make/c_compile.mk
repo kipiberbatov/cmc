@@ -274,11 +274,6 @@ $(_obj_src_graphics): build/$(MODE)/obj/src/%$(.OBJ): code/c/src/graphics/%.c\
 # include header dependencies for object files from code/c/src
 -include build/$(MODE)/obj/src/*$(.DEP)
 
-$(_obj_plugins_canvas): build/$(MODE)/obj/plugins/%$(.OBJ):\
-  code/c/plugins/canvas/%.c | build/$(MODE)/obj/plugins
-	$(CC) -o $@ $(CPPFLAGS) $(CFLAGS) $(_include_plugins_canvas)\
-	  $(shell pkg-config --cflags cairo) -c $<
-
 # compiling main files
 build/$(MODE)/obj/main: | build/$(MODE)/obj
 	mkdir -p $@
@@ -322,6 +317,11 @@ $(_obj_plugins_animation): build/$(MODE)/obj/plugins/%$(.OBJ):\
   code/c/plugins/animation/%.c | build/$(MODE)/obj/plugins
 	$(CC) -o $@ $(CPPFLAGS) $(CFLAGS) $(_include_plugins_animation)\
 	  $(shell pkg-config --cflags gtk+-3.0) -c $<
+
+$(_obj_plugins_canvas): build/$(MODE)/obj/plugins/%$(.OBJ):\
+  code/c/plugins/canvas/%.c | build/$(MODE)/obj/plugins
+	$(CC) -o $@ $(CPPFLAGS) $(CFLAGS) $(_include_plugins_canvas)\
+	  $(shell pkg-config --cflags cairo) -c $<
 
 # include header dependencies for object files from code/c/plugins
 -include build/$(MODE)/obj/plugins/*$(.DEP)
