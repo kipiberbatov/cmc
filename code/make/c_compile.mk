@@ -287,7 +287,7 @@ $(_obj_src_diffusion): build/$(MODE)/obj/src/%$(.OBJ):\
 
 $(_obj_src_graphics): build/$(MODE)/obj/src/%$(.OBJ): code/c/src/graphics/%.c\
     | build/$(MODE)/obj/src build/$(MODE)/dep/src
-	$(call compile,$@,$<,$(_include_src_graphics))
+	$(call compile,$@,$<,$(_include_src_graphics) -iquote code/c/include)
 
 # include header dependencies for object files from code/c/src
 -include build/$(MODE)/dep/src/*$(.DEP)
@@ -309,11 +309,11 @@ $(_obj_main_algebra): build/$(MODE)/obj/main/%$(.OBJ):\
 
 $(_obj_main_region): build/$(MODE)/obj/main/%$(.OBJ):\
    code/c/main/region/%.c | build/$(MODE)/obj/main build/$(MODE)/dep/main
-	$(call compile,$@,$<,$(_include_main_region))
+	$(call compile,$@,$<,$(_include_main_region) -iquote code/c/include)
 
 $(_obj_main_graphics): build/$(MODE)/obj/main/%$(.OBJ):\
    code/c/main/graphics/%.c | build/$(MODE)/obj/main build/$(MODE)/dep/main
-	$(call compile,$@,$<,$(_include_main_graphics))
+	$(call compile,$@,$<,$(_include_main_graphics) -iquote code/c/include)
 
 $(_obj_main_mesh): build/$(MODE)/obj/main/%$(.OBJ): code/c/main/mesh/%.c\
   | build/$(MODE)/obj/main build/$(MODE)/dep/main
@@ -321,7 +321,7 @@ $(_obj_main_mesh): build/$(MODE)/obj/main/%$(.OBJ): code/c/main/mesh/%.c\
 
 $(_obj_main_diffusion): build/$(MODE)/obj/main/%$(.OBJ):\
   code/c/main/diffusion/%.c | build/$(MODE)/obj/main build/$(MODE)/dep/main
-	$(call compile,$@,$<,$(_include_main_diffusion))
+	$(call compile,$@,$<,$(_include_main_diffusion) -iquote code/c/include)
 
 # include header dependencies for object files from code/c/main
 -include build/$(MODE)/dep/main/*$(.DEP)
@@ -336,18 +336,18 @@ build/$(MODE)/dep/plugins: | build/$(MODE)/dep
 $(_obj_plugins_diffusion): build/$(MODE)/obj/plugins/%$(.OBJ):\
   code/c/plugins/diffusion/%.c | build/$(MODE)/obj/plugins\
   build/$(MODE)/dep/plugins
-	$(call compile,$@,$<,$(_include_plugins_diffusion))
+	$(call compile,$@,$<,$(_include_plugins_diffusion) -iquote code/c/include)
 
 $(_obj_plugins_animation): build/$(MODE)/obj/plugins/%$(.OBJ):\
   code/c/plugins/animation/%.c | build/$(MODE)/obj/plugins\
                                  build/$(MODE)/dep/plugins
-	$(call compile,$@,$<,$(_include_plugins_animation)\
+	$(call compile,$@,$<,$(_include_plugins_animation) -iquote code/c/include\
 		             $(shell pkg-config --cflags gtk+-3.0))
 
 $(_obj_plugins_canvas): build/$(MODE)/obj/plugins/%$(.OBJ):\
   code/c/plugins/canvas/%.c | build/$(MODE)/obj/plugins\
                               build/$(MODE)/dep/plugins
-	$(call compile,$@,$<,$(_include_plugins_canvas) \
+	$(call compile,$@,$<,$(_include_plugins_canvas) -iquote code/c/include\
 		             $(shell pkg-config --cflags cairo))
 
 # include header dependencies for object files from code/c/plugins

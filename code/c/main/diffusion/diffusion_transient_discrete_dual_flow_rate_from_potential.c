@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <dlfcn.h>
+#include "cmc_dynamic_library.h"
 
 #include "cmc_error_message.h"
 #include "double_array.h"
@@ -99,7 +99,7 @@ int main(int argc, char ** argv)
     fclose(m_bd_1_file);
   }
 
-  lib_handle = dlopen(lib_name, RTLD_LAZY);
+  lib_handle = cmc_dynamic_library_open(lib_name);
   if (!lib_handle)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
@@ -107,10 +107,11 @@ int main(int argc, char ** argv)
     goto m_bd_1_free;
   }
   /* clear any existing errors */
-  dlerror();
+  cmc_dynamic_library_error();
 
-  *(const void **) (&data) = dlsym(lib_handle, data_name);
-  error = dlerror();
+  *(const void **) (&data) = cmc_dynamic_library_get_symbol_address(
+    lib_handle, data_name);
+  error = cmc_dynamic_library_error();
   if (error)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
@@ -174,7 +175,7 @@ kappa_1_free:
 potential_free:
   free(potential);
 lib_close:
-  dlclose(lib_handle);
+  cmc_dynamic_library_close(lib_handle);
 m_bd_1_free:
   matrix_sparse_free(m_bd_1);
 m_free:

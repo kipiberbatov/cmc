@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include <dlfcn.h>
+#include "cmc_dynamic_library.h"
 
 #include "cmc_error_message.h"
 #include "double.h"
@@ -84,7 +84,7 @@ int main(int argc, char ** argv)
     goto m_vol_free;
   }
 
-  lib_handle = dlopen(lib_name, RTLD_LAZY);
+  lib_handle = cmc_dynamic_library_open(lib_name);
   if (lib_handle == NULL)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
@@ -92,10 +92,11 @@ int main(int argc, char ** argv)
     goto m_inner_free;
   }
   /* clear any existing errors */
-  dlerror();
+  cmc_dynamic_library_error();
 
-  *(const void **) (&data) = dlsym(lib_handle, data_name);
-  error = dlerror();
+  *(const void **) (&data) = cmc_dynamic_library_get_symbol_address(
+    lib_handle, data_name);
+  error = cmc_dynamic_library_error();
   if (error)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
@@ -149,7 +150,7 @@ int main(int argc, char ** argv)
 potential_free:
   free(potential);
 lib_close:
-  dlclose(lib_handle);
+  cmc_dynamic_library_close(lib_handle);
 m_inner_free:
   double_array2_free(m_inner, d + 1);
 m_vol_free:

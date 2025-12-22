@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <dlfcn.h>
+#include "cmc_dynamic_library.h"
 
 #include "cmc_error_message.h"
 #include "double_array2.h"
@@ -145,8 +145,8 @@ int main(int argc, char ** argv)
     goto m_vol_free;
   }
 
-  lib_handle = dlopen(lib_name, RTLD_LAZY);
-  error = dlerror();
+  lib_handle = cmc_dynamic_library_open(lib_name);
+  error = cmc_dynamic_library_error();
   if (error)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
@@ -154,8 +154,9 @@ int main(int argc, char ** argv)
     goto m_hodge_free;
   }
 
-  *(const void **) (&data_continuous) = dlsym(lib_handle, data_continuous_name);
-  error = dlerror();
+  *(const void **) (&data_continuous) = cmc_dynamic_library_get_symbol_address(
+    lib_handle, data_continuous_name);
+  error = cmc_dynamic_library_error();
   if (error)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
@@ -177,7 +178,7 @@ int main(int argc, char ** argv)
 
   diffusion_transient_discrete_mixed_weak_free(data_discrete);
 lib_close:
-  dlclose(lib_handle);
+  cmc_dynamic_library_close(lib_handle);
 m_hodge_free:
   matrix_sparse_array_free(m_hodge, d + 1);
 m_vol_free:

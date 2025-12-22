@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <dlfcn.h>
-
 #include "cmc_error_message.h"
 #include "double_matrix.h"
 #include "diffusion_transient_discrete_primal_strong.h"

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <dlfcn.h>
+#include "cmc_dynamic_library.h"
 
 #include "cmc_error_message.h"
 #include "double.h"
@@ -85,7 +85,7 @@ int main(int argc, char ** argv)
   }
   fclose(m_cbd_star_1_file);
 
-  lib_handle = dlopen(lib_name, RTLD_LAZY);
+  lib_handle = cmc_dynamic_library_open(lib_name);
   if (!lib_handle)
   {
         cmc_error_message_position_in_code(__FILE__, __LINE__);
@@ -93,10 +93,11 @@ int main(int argc, char ** argv)
     goto m_cbd_star_1_free;
   }
   /* clear any existing errors */
-  dlerror();
+  cmc_dynamic_library_error();
 
-  *(const void **) (&data) = dlsym(lib_handle, data_name);
-  error = dlerror();
+  *(const void **) (&data) = cmc_dynamic_library_get_symbol_address(
+    lib_handle, data_name);
+  error = cmc_dynamic_library_error();
   if (error)
   {
     fputs(error, stderr);
@@ -140,7 +141,7 @@ int main(int argc, char ** argv)
 
   free(result);
 lib_close:
-  dlclose(lib_handle);
+  cmc_dynamic_library_close(lib_handle);
 m_cbd_star_1_free:
   matrix_sparse_free(m_cbd_star_1);
 m_cbd_0_free:

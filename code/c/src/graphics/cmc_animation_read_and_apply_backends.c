@@ -1,8 +1,6 @@
 #include <stdio.h>
 
-#ifndef _WIN32
-#include <dlfcn.h>
-#endif /* _WIN32 */
+#include "cmc_dynamic_library.h"
 
 #include "cmc_error_message.h"
 #include "cmc_animation.h"
@@ -18,13 +16,12 @@ void cmc_animation_read_and_apply_backends(
   const char * animation_library,
   const char * animation_backend)
 {
-#ifndef _WIN32
   void * lib_animation, * lib_canvas;
   char * error;
   void (*render)(struct cmc_animation *, int *, int, char **, const char *);
 
-  lib_canvas = dlopen(canvas_library, RTLD_LAZY);
-  error = dlerror();
+  lib_canvas = cmc_dynamic_library_open(canvas_library);
+  error = cmc_dynamic_library_error();
   if (error)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
@@ -33,8 +30,8 @@ void cmc_animation_read_and_apply_backends(
     goto end;
   }
 
-  animation->draw_functions = (const void *) dlsym(lib_canvas, canvas_backend);
-  error = dlerror();
+  animation->draw_functions = (const void *) cmc_dynamic_library_get_symbol_address(lib_canvas, canvas_backend);
+  error = cmc_dynamic_library_error();
   if (error)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
@@ -43,8 +40,8 @@ void cmc_animation_read_and_apply_backends(
     goto lib_canvas_close;
   }
 
-  lib_animation = dlopen(animation_library, RTLD_LAZY);
-  error = dlerror();
+  lib_animation = cmc_dynamic_library_open(animation_library);
+  error = cmc_dynamic_library_error();
   if (error)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
@@ -53,8 +50,8 @@ void cmc_animation_read_and_apply_backends(
     goto lib_canvas_close;
   }
 
-  *(void **) (&render) = dlsym(lib_animation, animation_backend);
-  error = dlerror();
+  *(void **) (&render) = cmc_dynamic_library_get_symbol_address(lib_animation, animation_backend);
+  error = cmc_dynamic_library_error();
   if (error)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
@@ -72,10 +69,9 @@ void cmc_animation_read_and_apply_backends(
   }
 
 lib_animation_close:
-  dlclose(lib_animation);
+  cmc_dynamic_library_close(lib_animation);
 lib_canvas_close:
-  dlclose(lib_canvas);
+  cmc_dynamic_library_close(lib_canvas);
 end:
   return;
-#endif /* _WIN32 */
 }

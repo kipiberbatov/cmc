@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <dlfcn.h>
-
 #include "cmc_error_message.h"
 #include "double_array.h"
 #include "double_array2.h"

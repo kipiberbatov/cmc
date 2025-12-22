@@ -1,5 +1,3 @@
-#include <dlfcn.h>
-
 #include "cmc_error_message.h"
 #include "cmc_animation.h"
 #include "cmc_animation_generic_data.h"
