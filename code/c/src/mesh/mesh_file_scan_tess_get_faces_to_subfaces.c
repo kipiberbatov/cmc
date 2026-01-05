@@ -8,7 +8,7 @@
 
 /* error is impossible there, as data is checked on the previous call */
 void mesh_file_scan_tess_get_faces_to_subfaces(int * faces_to_subfaces,
-  FILE * in, int cn_2, int faces_total_edges)
+  FILE * in, int * status, int cn_2, int faces_total_edges)
 {
   int faces_number_of_sides_i, i, index, j;
 
@@ -20,6 +20,7 @@ void mesh_file_scan_tess_get_faces_to_subfaces(int * faces_to_subfaces,
     {
       cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot scan integer for i = %d\n", i);
+      *status = errno;
       return;
     }
 
@@ -28,6 +29,7 @@ void mesh_file_scan_tess_get_faces_to_subfaces(int * faces_to_subfaces,
     {
       cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot scan faces_number_of_sides[%d]\n", i);
+      *status = errno;
       return;
     }
     if (faces_number_of_sides_i <= 2)
@@ -36,7 +38,7 @@ void mesh_file_scan_tess_get_faces_to_subfaces(int * faces_to_subfaces,
       fprintf(stderr,
         "faces_number_of_sides[%d] should be at least 3; instead it is %d\n",
         i, faces_number_of_sides_i);
-      errno = 1;
+      *status = 1;
       return;
     }
     for (j = 0; j < faces_number_of_sides_i; ++j)
@@ -46,6 +48,7 @@ void mesh_file_scan_tess_get_faces_to_subfaces(int * faces_to_subfaces,
       {
         cmc_error_message_position_in_code(__FILE__, __LINE__);
         fprintf(stderr, "cannot scan faces_to_subfaces[%d]\n", index);
+        *status = errno;
         return;
       }
       ++index;
@@ -56,6 +59,7 @@ void mesh_file_scan_tess_get_faces_to_subfaces(int * faces_to_subfaces,
     {
       cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr, "cannot scan faces_number_of_sides[%d]\n", i);
+      *status = errno;
       return;
     }
     for (j = 0; j < faces_number_of_sides_i; ++j)
@@ -65,6 +69,7 @@ void mesh_file_scan_tess_get_faces_to_subfaces(int * faces_to_subfaces,
       {
         cmc_error_message_position_in_code(__FILE__, __LINE__);
         fprintf(stderr, "cannot scan faces_to_subfaces[%d]\n", index);
+        *status = errno;
         return;
       }
       ++index;
@@ -77,6 +82,7 @@ void mesh_file_scan_tess_get_faces_to_subfaces(int * faces_to_subfaces,
       {
         cmc_error_message_position_in_code(__FILE__, __LINE__);
         fprintf(stderr, "unable to skip garbage value[%d]\n", j);
+        *status = errno;
         return;
       }
     }
