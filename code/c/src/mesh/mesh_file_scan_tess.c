@@ -7,6 +7,7 @@
 #include "mesh.h"
 #include "mesh_file_scan_tess_private.h"
 #include "mesh_private.h"
+#include "string_private.h"
 
 static mesh * mesh_file_scan_tess_private(int * error, FILE * in);
 
@@ -18,51 +19,6 @@ mesh * mesh_file_scan_tess(FILE * in)
   m = mesh_file_scan_tess_private(&error, in);
   errno = error;
   return m;
-}
-
-static void mesh_file_scan_tess_set_cf_a4(
-  int * cf_a4,
-  int cn_1,
-  int cn_2,
-  int faces_total_edges,
-  const int * edges_to_nodes,
-  const int * faces_number_of_sides,
-  const int * faces_to_subfaces)
-{
-  int i, index, index_local, j, sides;
-
-  memcpy(cf_a4, edges_to_nodes, sizeof(int) * 2 * cn_1);
-  index = 2 * cn_1;
-  index_local = 0;
-  for (i = 0; i < cn_2; ++i)
-  {
-    sides = faces_number_of_sides[i];
-    for (j = 0; j < sides; ++j)
-    {
-      cf_a4[index + j] = faces_to_subfaces[index_local + j];
-      cf_a4[faces_total_edges + index + j]
-      = faces_to_subfaces[index_local + sides + j];
-    }
-    index += sides;
-    index_local += 2 * sides;
-  }
-}
-
-static void mesh_file_scan_tess_set_cf_a3(int * cf_a3, int cn_1, int cn_2,
-  const int * faces_number_of_sides)
-{
-  int i, index, sides;
-
-  for (i = 0; i < cn_1; ++i)
-    cf_a3[i] = 2;
-  index = cn_1;
-  for (i = 0; i < cn_2; ++i)
-  {
-    sides = faces_number_of_sides[i];
-    cf_a3[index] = sides;
-    cf_a3[index + cn_2] = sides;
-    ++index;
-  }
 }
 
 mesh * mesh_file_scan_tess_private(int * error, FILE * in)
@@ -133,15 +89,6 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
     goto clean_on_failure;
   }
 
-  /* check for "\n  *id\n   " */
-  mesh_file_scan_tess_check_text_for_id(in, error);
-  if (*error)
-  {
-    cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fputs("incorrect text for IDs\n", stderr);
-    goto clean_on_failure;
-  }
-
   /* allocate memory for cell's IDs */
   c = (int *) malloc(sizeof(int) * cn[d]);
   if (c == NULL)
@@ -154,57 +101,11 @@ mesh * mesh_file_scan_tess_private(int * error, FILE * in)
     goto clean_on_failure;
   }
 
-  /* check for cells' IDs correctness */
-  mesh_file_scan_tess_get_id(c, in, error, cn[d]);
+  string_locate_in_file_line(in, error, " **vertex");
   if (*error)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fputs("incorrect cell IDs\n", stderr);
-    goto clean_on_failure;
-  }
-
-  /* check for "\n  *crysym\n   triclinic\n  *seed\n" */
-  mesh_file_scan_tess_check_text_for_crysym(in, error);
-  if (*error)
-  {
-    cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fputs("incorrect text for crystal symmetry field\n", stderr);
-    goto clean_on_failure;
-  }
-
-  mesh_file_scan_tess_skip_seed(in, error, cn[d], c);
-  if (*error)
-  {
-    cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fputs("incorrect seed values\n", stderr);
-    goto clean_on_failure;
-  }
-
-  /* check for "\n  *ori\n   " */
-  mesh_file_scan_tess_check_text_for_ori(in, error);
-  if (*error)
-  {
-    cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fputs("incorrect text for orientation field\n", stderr);
-    goto clean_on_failure;
-  }
-
-  /* ignore orientation values */
-  mesh_file_scan_tess_skip_ori(in, error, cn[d]);
-  if (*error)
-  {
-    cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fputs("incorrect orientation values\n", stderr);
-    goto clean_on_failure;
-  }
-
-
-  /* check for "\n **vertex\n " */
-  mesh_file_scan_tess_check_text_for_vertex(in, error);
-  if (*error)
-  {
-    cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fputs("incorrect text for vertex field\n", stderr);
+    fputs("cannot find the vertex field\n", stderr);
     goto clean_on_failure;
   }
 

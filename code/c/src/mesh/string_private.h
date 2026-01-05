@@ -14,4 +14,11 @@ int string_compare_with_file(FILE * in, int n, const char * s);
 /* like fgets, but does not discriminate against newlines */
 void string_file_scan(FILE * in, char * s, int n);
 
+/*
+Locate a string `s` occupying a full line in `file`.
+Set `status` to 1 if the search is unsucessful.
+The string cannot occupy more than 80 symbols.
+*/
+void string_locate_in_file_line(FILE * file, int * status, const char * s);
+
 #endif /* _string_private_h */
