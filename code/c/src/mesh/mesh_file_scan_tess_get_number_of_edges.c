@@ -4,7 +4,7 @@
 #include "int.h"
 #include "mesh_file_scan_tess_private.h"
 
-int mesh_file_scan_tess_get_number_of_edges(FILE * in, int * error)
+int mesh_file_scan_tess_get_number_of_edges(FILE * in, int * status)
 {
   int cn_1;
 
@@ -13,14 +13,14 @@ int mesh_file_scan_tess_get_number_of_edges(FILE * in, int * error)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan number of edges\n", stderr);
-    *error = errno;
+    *status = errno;
     return -1;
   }
   if (cn_1 <= 0)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "number of edges is %d which is not positive", cn_1);
-    *error = 1;
+    *status = 1;
     return -1;
   }
   return cn_1;

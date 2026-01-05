@@ -4,7 +4,7 @@
 #include "mesh_file_scan_tess_private.h"
 #include "string_private.h"
 
-void mesh_file_scan_tess_check_preamble(FILE * in, int * error)
+void mesh_file_scan_tess_check_preamble(FILE * in, int * status)
 {
   char buffer[30];
   char * str;
@@ -17,7 +17,7 @@ void mesh_file_scan_tess_check_preamble(FILE * in, int * error)
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "expected\n\n%s\n\n", str);
     fprintf(stderr, "Instead, we have\n\n%s\n\n", buffer);
-    *error = 1;
+    *status = 1;
     return;
   }
 
@@ -30,7 +30,7 @@ void mesh_file_scan_tess_check_preamble(FILE * in, int * error)
     fputs("input file's format should be '2.0', '3.3', '3.4', or '3.5'.\n",
       stderr);
     fprintf(stderr, "Instead, it is '%s'.\n", str);
-    *error = 1;
+    *status = 1;
     return;
   }
 
@@ -42,7 +42,7 @@ void mesh_file_scan_tess_check_preamble(FILE * in, int * error)
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "expected\n\n%s\n\n", str);
     fprintf(stderr, "Instead, we have\n\n%s\n\n", buffer);
-    *error = 1;
+    *status = 1;
     return;
   }
 }

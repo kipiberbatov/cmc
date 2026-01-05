@@ -4,7 +4,7 @@
 #include "mesh_file_scan_tess_private.h"
 #include "string_private.h"
 
-int mesh_file_scan_tess_get_dimension(FILE * in, int * error)
+int mesh_file_scan_tess_get_dimension(FILE * in, int * status)
 {
   int d;
   char buffer[3];
@@ -20,7 +20,7 @@ int mesh_file_scan_tess_get_dimension(FILE * in, int * error)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan dimension: it should be 1, 2, or 3\n", stderr);
-    *error = 1;
+    *status = 1;
     return -1;
   }
   return d;
