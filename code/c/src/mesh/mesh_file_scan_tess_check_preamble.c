@@ -21,7 +21,7 @@ void mesh_file_scan_tess_check_preamble(FILE * in, int * error)
     return;
   }
 
-  /* check for format's value (2.0, 3.3 or 3.4) */
+  /* check for format's value (2.0, 3.3, 3.4, or 3.5) */
   string_file_scan(in, buffer, 4);
   if (strcmp(buffer, "2.0") && strcmp(buffer, "3.3") && strcmp(buffer, "3.4")
       && strcmp(buffer, "3.5"))

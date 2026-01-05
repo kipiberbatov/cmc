@@ -1,5 +1,3 @@
-#include <string.h>
-
 #include "mesh_file_scan_tess_private.h"
 
 void mesh_file_scan_tess_set_cf_a3(
