@@ -54,43 +54,48 @@
 \theoremstyle{definition}
 
 \newtheorem{theorem}{Theorem}[section]
+\AddToHook{env/theorem/begin}{\crefalias{section}{theorem}}
 \coloredcomponent{theorem}{blue}
 
 \newtheorem{proposition}[theorem]{Proposition}
+\AddToHook{env/proposition/begin}{\crefalias{theorem}{proposition}}
 \coloredcomponent{proposition}{blue}
 
 \newtheorem{lemma}[theorem]{Lemma}
+\AddToHook{env/lemma/begin}{\crefalias{theorem}{lemma}}
 \coloredcomponent{lemma}{blue}
 
 \newtheorem{corollary}[theorem]{Corollary}
+\AddToHook{env/corollary/begin}{\crefalias{theorem}{corollary}}
 \coloredcomponent{corollary}{blue}
 
-\newtheorem{hypothesis}[theorem]{Hypothesis}
-\coloredcomponent{hypothesis}{red}
-
 \newtheorem{notation}[theorem]{Notation}
+\AddToHook{env/notation/begin}{\crefalias{theorem}{notation}}
 \coloredcomponent{notation}{green}
 
 \newtheorem{definition}[theorem]{Definition}
+\AddToHook{env/definition/begin}{\crefalias{theorem}{definition}}
 \coloredcomponent{definition}{green}
 
 \newtheorem{formulation}[theorem]{Formulation}
+\AddToHook{env/formulation/begin}{\crefalias{theorem}{formulation}}
 \coloredcomponent{formulation}{brown}
 
 \newtheorem{discussion}[theorem]{Discussion}
+\AddToHook{env/discussion/begin}{\crefalias{theorem}{discussion}}
 \coloredcomponent{discussion}{yellow}
 
 \newtheorem{example}[theorem]{Example}
+\AddToHook{env/example/begin}{\crefalias{theorem}{example}}
 \coloredcomponent{example}{purple}
 
 \newtheorem{remark}[theorem]{Remark}
+\AddToHook{env/remark/begin}{\crefalias{theorem}{remark}}
 \coloredcomponent{remark}{orange}
 
 \newtheorem{algorithm}[theorem]{Algorithm}
+\AddToHook{env/algorithm/begin}{\crefalias{theorem}{algorithm}}
 \coloredcomponent{algorithm}{cyan}
-
-\newtheorem{solution}[theorem]{Solution}
-\coloredcomponent{solution}{cyan}
 
 \coloredcomponent{proof}{cyan}
 
@@ -162,7 +167,7 @@
 \title{Combinatorial Mesh Calculus (CMC) \\
        \url{https://github.com/kipiberbatov/cmc}}
 \author{Kiprian Berbatov}
-\date{6 November 2025}
+\date{5 January 2025}
 
 \begin{document}
 
