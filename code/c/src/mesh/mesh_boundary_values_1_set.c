@@ -1,4 +1,4 @@
-#include "mesh_file_scan_tess_private.h"
+#include "mesh_private.h"
 
 void mesh_boundary_values_1_set(double * bd_1_values, int cn_1)
 {
