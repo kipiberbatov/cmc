@@ -30,8 +30,9 @@ int mesh_file_scan_tess_get_cells_number_2(FILE * in, int * status);
 void mesh_file_scan_tess_get_cells_to_faces_number_2_1(
   int * cfn_2_1, FILE * in, int * status, int cn_2);
 
-void mesh_file_scan_tess_get_cells_to_faces_2_1(
-  int * cf_2_1, FILE * in, int * status, int cn_2, int cfn_2_1_total);
+void mesh_file_scan_tess_get_cells_to_faces_2_subfaces_mixed(
+  int * cf_2_subfaces_mixed, FILE * in, int * status,
+  int cn_2, int cfn_2_1_total);
 
 void mesh_file_scan_tess_get_boundary_values_2(double * bd_values_2,
   FILE * in, int * status, int cn_2, int cfn_2_1_total);

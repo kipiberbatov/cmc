@@ -1,3 +1,5 @@
+#include <string.h>
+
 #include "cmc_error_message.h"
 #include "cmc_memory.h"
 #include "int.h"
@@ -12,7 +14,8 @@ void mesh_file_scan_tess_with_options(
 {
   int cfn_2_1_total, d, m_c_size, position;
   int cf_a2_size, cf_a3_size, cf_a4_size;
-  int * cn = NULL, * cf_1_0 = NULL, * cf_2_1 = NULL, * cfn_2_1 = NULL;
+  int * cn = NULL, * cf_1_0 = NULL, * cf_2_subfaces_mixed = NULL,
+      * cfn_2_1 = NULL;
   double * boundary_values_1 = NULL, * boundary_values_2 = NULL,
          * coordinates = NULL;
   double ** boundary_values = NULL;
@@ -126,8 +129,7 @@ void mesh_file_scan_tess_with_options(
     goto coordinates_free;
   }
 
-  cmc_memory_allocate(
-    (void **) &cf_1_0, status, sizeof(int) * 2 * cn[1]);
+  cmc_memory_allocate((void **) &cf_1_0, status, sizeof(int) * 2 * cn[1]);
   if (*status)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
@@ -180,8 +182,7 @@ void mesh_file_scan_tess_with_options(
     goto boundary_values_1_free;
   }
 
-  cmc_memory_allocate(
-    (void **) &cfn_2_1, status, sizeof(int) * cn[2]);
+  cmc_memory_allocate((void **) &cfn_2_1, status, sizeof(int) * cn[2]);
   if (*status)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
@@ -201,22 +202,23 @@ void mesh_file_scan_tess_with_options(
 
   cfn_2_1_total = int_array_total_sum(cn[2], cfn_2_1);
   cmc_memory_allocate(
-    (void **) &cf_2_1, status, sizeof(int) * 2 * cfn_2_1_total);
+    (void **) &cf_2_subfaces_mixed, status, sizeof(int) * 2 * cfn_2_1_total);
   if (*status)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    cmc_error_message_memory_allocate("cf_2_1");
+    cmc_error_message_memory_allocate("cf_2_subfaces_mixed");
     goto cfn_2_1_free;
   }
 
   position = ftell(in);
-  mesh_file_scan_tess_get_cells_to_faces_2_1(cf_2_1, in, status,
+  mesh_file_scan_tess_get_cells_to_faces_2_subfaces_mixed(
+    cf_2_subfaces_mixed, in, status,
     cn[2], cfn_2_1_total);
   if (*status)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fputs("cannot scan faces' edges", stderr);
-    goto cf_2_1_free;
+    goto cf_2_subfaces_mixed_free;
   }
   fseek(in, position, SEEK_SET);
 
@@ -228,7 +230,7 @@ void mesh_file_scan_tess_with_options(
     {
       cmc_error_message_position_in_code(__FILE__, __LINE__);
       cmc_error_message_memory_allocate("boundary_values_2");
-      goto cf_2_1_free;
+      goto cf_2_subfaces_mixed_free;
     }
     mesh_file_scan_tess_get_boundary_values_2(boundary_values_2, in, status,
       cn[2], cfn_2_1_total);
@@ -277,7 +279,9 @@ void mesh_file_scan_tess_with_options(
     cmc_error_message_memory_allocate("cf->a3");
     goto cf_a2_free;
   }
-  mesh_cf_a3(cf->a3, cn[1], cn[2], cfn_2_1);
+  int_array_assign_constant(cf->a3, cn[1], 2);
+  memcpy(cf->a3 + cn[1], cfn_2_1, sizeof(int) * cn[2]);
+  memcpy(cf->a3 + cn[1] + cn[2], cfn_2_1, sizeof(int) * cn[2]);
 
   cf_a4_size = int_array_total_sum(cf_a3_size, cf->a3);
   cmc_memory_allocate((void **) &(cf->a4), status, sizeof(int) * cf_a4_size);
@@ -287,9 +291,9 @@ void mesh_file_scan_tess_with_options(
     cmc_error_message_memory_allocate("cf->a4");
     goto cf_a3_free;
   }
-
-  mesh_cf_a4(cf->a4, cn[1], cn[2], cfn_2_1_total, cf_1_0,
-    cfn_2_1, cf_2_1);
+  memcpy(cf->a4, cf_1_0, sizeof(int) * 2 * cn[1]);
+  mesh_cf_a4_2_set(cf->a4 + 2 * cn[1],
+    cn[2], cfn_2_1_total, cfn_2_1, cf_2_subfaces_mixed);
 
   m_c_size = int_array_total_sum(d + 1, cn);
   cmc_memory_allocate((void **) &(m->c), status, sizeof(int) * m_c_size);
@@ -299,7 +303,7 @@ void mesh_file_scan_tess_with_options(
     cmc_error_message_memory_allocate("m->c");
     goto cf_a4_free;
   }
-  cmc_memory_free(cf_2_1);
+  cmc_memory_free(cf_2_subfaces_mixed);
   cmc_memory_free(cfn_2_1);
   cmc_memory_free(cf_1_0);
 
@@ -328,8 +332,8 @@ cf_free:
   cmc_memory_free(cf);
 boundary_values_2_free:
   cmc_memory_free(boundary_values_2);
-cf_2_1_free:
-  cmc_memory_free(cf_2_1);
+cf_2_subfaces_mixed_free:
+  cmc_memory_free(cf_2_subfaces_mixed);
 cfn_2_1_free:
   cmc_memory_free(cfn_2_1);
 boundary_values_1_free:

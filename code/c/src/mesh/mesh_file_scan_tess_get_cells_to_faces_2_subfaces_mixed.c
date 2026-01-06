@@ -7,8 +7,9 @@
 #include "mesh_file_scan_tess_private.h"
 
 /* error is impossible there, as data is checked on the previous call */
-void mesh_file_scan_tess_get_cells_to_faces_2_1(
-  int * cf_2_1, FILE * in, int * status, int cn_2, int cfn_2_1_total)
+void mesh_file_scan_tess_get_cells_to_faces_2_subfaces_mixed(
+  int * cf_2_subfaces_mixed, FILE * in, int * status,
+  int cn_2, int cfn_2_1_total)
 {
   int cfn_2_1_total_i, i, index, j;
 
@@ -43,11 +44,11 @@ void mesh_file_scan_tess_get_cells_to_faces_2_1(
     }
     for (j = 0; j < cfn_2_1_total_i; ++j)
     {
-      cf_2_1[index] = int_file_scan(in) - 1;
+      cf_2_subfaces_mixed[index] = int_file_scan(in) - 1;
       if (errno)
       {
         cmc_error_message_position_in_code(__FILE__, __LINE__);
-        fprintf(stderr, "cannot scan cf_2_1[%d]\n", index);
+        fprintf(stderr, "cannot scan cf_2_subfaces[%d]\n", index);
         *status = errno;
         return;
       }
@@ -64,11 +65,11 @@ void mesh_file_scan_tess_get_cells_to_faces_2_1(
     }
     for (j = 0; j < cfn_2_1_total_i; ++j)
     {
-      cf_2_1[index] = abs(int_file_scan(in)) - 1;
+      cf_2_subfaces_mixed[index] = abs(int_file_scan(in)) - 1;
       if (errno)
       {
         cmc_error_message_position_in_code(__FILE__, __LINE__);
-        fprintf(stderr, "cannot scan cf_2_1[%d]\n", index);
+        fprintf(stderr, "cannot scan cf_2_subfaces[%d]\n", index);
         *status = errno;
         return;
       }

@@ -9,16 +9,13 @@ void mesh_c(int * m_c, int m_dim, const int * m_cn);
 /********************************** mesh_cf ***********************************/
 void mesh_cf_a1(int * m_cf_a1, int m_dim);
 void mesh_cf_a2(int * m_cf_a2, int m_dim, const int * m_cn);
-void mesh_cf_a3(int * cf_a3, int cn_1, int cn_2, const int * cfn_2_1);
 
-void mesh_cf_a4(
-  int * cf_a4,
-  int cn_1,
+void mesh_cf_a4_2_set(
+  int * cf_a4_2,
   int cn_2,
   int cfn_2_1_total,
-  const int * cf_1_0,
   const int * cfn_2_1,
-  const int * cf_2_1);
+  const int * cf_2_subfaces_mixed);
 
 jagged4 * mesh_cf_file_scan(FILE * in, int m_dim, const int * m_cn);
 
