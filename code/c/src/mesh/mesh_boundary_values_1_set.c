@@ -1,6 +1,6 @@
 #include "mesh_file_scan_tess_private.h"
 
-void mesh_file_scan_tess_set_boundary_values_1(double * bd_1_values, int cn_1)
+void mesh_boundary_values_1_set(double * bd_1_values, int cn_1)
 {
   int i;
 

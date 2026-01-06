@@ -4,8 +4,8 @@
 #include "int.h"
 #include "mesh_file_scan_tess_private.h"
 
-void mesh_file_scan_tess_get_edges_to_nodes(int * edges_to_nodes, FILE * in,
-  int * status, int cn_1)
+void mesh_file_scan_tess_get_cells_to_faces_1_0(
+  int * cf_1_0, FILE * in, int * status, int cn_1)
 {
   int c_i, i, j, x;
 
@@ -28,7 +28,7 @@ void mesh_file_scan_tess_get_edges_to_nodes(int * edges_to_nodes, FILE * in,
     }
     for (j = 0; j <= 1; ++j)
     {
-      edges_to_nodes[2 * i + j] = int_file_scan(in);
+      cf_1_0[2 * i + j] = int_file_scan(in);
       if (errno)
       {
         cmc_error_message_position_in_code(__FILE__, __LINE__);
@@ -36,7 +36,7 @@ void mesh_file_scan_tess_get_edges_to_nodes(int * edges_to_nodes, FILE * in,
         *status = errno;
         return;
       }
-      --edges_to_nodes[2 * i + j];
+      --cf_1_0[2 * i + j];
     }
     x = int_file_scan(in);
     if (errno)
@@ -50,7 +50,7 @@ void mesh_file_scan_tess_get_edges_to_nodes(int * edges_to_nodes, FILE * in,
     {
       cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
-        "i = %d, last values must be zeroes; instead we have %d\n",
+        "i = %d, last values must be zeros; instead we have %d\n",
         i, x);
       *status = 1;
       return;

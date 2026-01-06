@@ -4,7 +4,7 @@
 #include "int.h"
 #include "mesh_file_scan_tess_private.h"
 
-int mesh_file_scan_tess_get_number_of_faces(FILE * in, int * status)
+int mesh_file_scan_tess_get_cells_number_2(FILE * in, int * status)
 {
   int cn_2;
 

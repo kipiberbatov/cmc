@@ -5,8 +5,8 @@
 #include "int.h"
 #include "mesh_file_scan_tess_private.h"
 
-void mesh_file_scan_tess_get_faces_number_of_sides(
-  int * faces_number_of_sides, FILE * in, int * status, int cn_2)
+void mesh_file_scan_tess_get_cells_to_faces_number_2_1(
+  int * cfn_2_1, FILE * in, int * status, int cn_2)
 {
   int c_i, i, j, tmp, x;
 
@@ -28,7 +28,7 @@ void mesh_file_scan_tess_get_faces_number_of_sides(
       return;
     }
 
-    faces_number_of_sides[i] = int_file_scan(in);
+    cfn_2_1[i] = int_file_scan(in);
     if (errno)
     {
       cmc_error_message_position_in_code(__FILE__, __LINE__);
@@ -36,17 +36,17 @@ void mesh_file_scan_tess_get_faces_number_of_sides(
       *status = errno;
       return;
     }
-    if (faces_number_of_sides[i] < 3)
+    if (cfn_2_1[i] < 3)
     {
       cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
         " i = %d, number of sides must be at least 3; instead it is %d\n",
-        i, faces_number_of_sides[i]);
+        i, cfn_2_1[i]);
       *status = 1;
       return;
     }
 
-    for (j = 0; j < faces_number_of_sides[i]; ++j)
+    for (j = 0; j < cfn_2_1[i]; ++j)
     {
       x = int_file_scan(in);
       if (errno)
@@ -75,17 +75,17 @@ void mesh_file_scan_tess_get_faces_number_of_sides(
       *status = errno;
       return;
     }
-    if (faces_number_of_sides[i] != tmp)
+    if (cfn_2_1[i] != tmp)
     {
       cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
         "i = %d, number of sides should be %d; instead it is %d\n",
-        i, tmp, faces_number_of_sides[i]);
+        i, tmp, cfn_2_1[i]);
       *status = 1;
       return;
     }
 
-    for (j = 0; j < faces_number_of_sides[i]; ++j)
+    for (j = 0; j < cfn_2_1[i]; ++j)
     {
       x = int_file_scan(in);
       *status = errno;

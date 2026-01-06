@@ -7,10 +7,10 @@
 #include "mesh_file_scan_tess_private.h"
 
 /* error is impossible there, as data is checked on the previous call */
-void mesh_file_scan_tess_get_boundary_values(double * bd_values_2,
-  FILE * in, int * status, int cn_2, int faces_total_edges)
+void mesh_file_scan_tess_get_boundary_values_2(double * boundary_values_2,
+  FILE * in, int * status, int cn_2, int cfn_2_1_total)
 {
-  int faces_number_of_sides_i, i, index, j, orientation_index;
+  int cfn_2_1_total_i, i, index, j, orientation_index;
 
   index = 0;
   for (i = 0; i < cn_2; ++i)
@@ -25,24 +25,24 @@ void mesh_file_scan_tess_get_boundary_values(double * bd_values_2,
     }
 
     /* skip */
-    faces_number_of_sides_i = int_file_scan(in);
+    cfn_2_1_total_i = int_file_scan(in);
     if (errno)
     {
       cmc_error_message_position_in_code(__FILE__, __LINE__);
-      fprintf(stderr, "cannot scan faces_number_of_sides[%d]\n", i);
+      fprintf(stderr, "cannot scan cfn_2_1_total[%d]\n", i);
       *status = errno;
       return;
     }
-    if (faces_number_of_sides_i <= 2)
+    if (cfn_2_1_total_i <= 2)
     {
       cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
-        "faces_number_of_sides[%d] should be at least 3; instead it is %d\n",
-        i, faces_number_of_sides_i);
+        "cfn_2_1_total[%d] should be at least 3; instead it is %d\n",
+        i, cfn_2_1_total_i);
       *status = 1;
       return;
     }
-    for (j = 0; j < faces_number_of_sides_i; ++j)
+    for (j = 0; j < cfn_2_1_total_i; ++j)
     {
       int_file_scan(in);
       if (errno)
@@ -54,24 +54,24 @@ void mesh_file_scan_tess_get_boundary_values(double * bd_values_2,
       }
     }
 
-    faces_number_of_sides_i = int_file_scan(in);
+    cfn_2_1_total_i = int_file_scan(in);
     if (errno)
     {
       cmc_error_message_position_in_code(__FILE__, __LINE__);
-      fprintf(stderr, "cannot scan faces_number_of_sides[%d]\n", i);
+      fprintf(stderr, "cannot scan cfn_2_1_total[%d]\n", i);
       *status = errno;
       return;
     }
-    if (faces_number_of_sides_i <= 2)
+    if (cfn_2_1_total_i <= 2)
     {
       cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
-        "faces_number_of_sides[%d] should be at least 3; instead it is %d\n",
-        i, faces_number_of_sides_i);
+        "cfn_2_1_total[%d] should be at least 3; instead it is %d\n",
+        i, cfn_2_1_total_i);
       *status = 1;
       return;
     }
-    for (j = 0; j < faces_number_of_sides_i; ++j)
+    for (j = 0; j < cfn_2_1_total_i; ++j)
     {
       /* tess meshes come with clock-wise orientation */
       orientation_index = int_file_scan(in);
@@ -82,7 +82,7 @@ void mesh_file_scan_tess_get_boundary_values(double * bd_values_2,
         *status = errno;
         return;
       }
-      bd_values_2[index] = (orientation_index > 0 ? -1: 1);
+      boundary_values_2[index] = (orientation_index > 0 ? -1: 1);
       ++index;
     }
 

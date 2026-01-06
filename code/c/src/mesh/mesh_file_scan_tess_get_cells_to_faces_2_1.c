@@ -7,10 +7,10 @@
 #include "mesh_file_scan_tess_private.h"
 
 /* error is impossible there, as data is checked on the previous call */
-void mesh_file_scan_tess_get_faces_to_subfaces(int * faces_to_subfaces,
-  FILE * in, int * status, int cn_2, int faces_total_edges)
+void mesh_file_scan_tess_get_cells_to_faces_2_1(
+  int * cf_2_1, FILE * in, int * status, int cn_2, int cfn_2_1_total)
 {
-  int faces_number_of_sides_i, i, index, j;
+  int cfn_2_1_total_i, i, index, j;
 
   index = 0;
   for (i = 0; i < cn_2; ++i)
@@ -24,51 +24,51 @@ void mesh_file_scan_tess_get_faces_to_subfaces(int * faces_to_subfaces,
       return;
     }
 
-    faces_number_of_sides_i = int_file_scan(in);
+    cfn_2_1_total_i = int_file_scan(in);
     if (errno)
     {
       cmc_error_message_position_in_code(__FILE__, __LINE__);
-      fprintf(stderr, "cannot scan faces_number_of_sides[%d]\n", i);
+      fprintf(stderr, "cannot scan cfn_2_1_total[%d]\n", i);
       *status = errno;
       return;
     }
-    if (faces_number_of_sides_i <= 2)
+    if (cfn_2_1_total_i <= 2)
     {
       cmc_error_message_position_in_code(__FILE__, __LINE__);
       fprintf(stderr,
-        "faces_number_of_sides[%d] should be at least 3; instead it is %d\n",
-        i, faces_number_of_sides_i);
+        "cfn_2_1_total[%d] should be at least 3; instead it is %d\n",
+        i, cfn_2_1_total_i);
       *status = 1;
       return;
     }
-    for (j = 0; j < faces_number_of_sides_i; ++j)
+    for (j = 0; j < cfn_2_1_total_i; ++j)
     {
-      faces_to_subfaces[index] = int_file_scan(in) - 1;
+      cf_2_1[index] = int_file_scan(in) - 1;
       if (errno)
       {
         cmc_error_message_position_in_code(__FILE__, __LINE__);
-        fprintf(stderr, "cannot scan faces_to_subfaces[%d]\n", index);
+        fprintf(stderr, "cannot scan cf_2_1[%d]\n", index);
         *status = errno;
         return;
       }
       ++index;
     }
 
-    faces_number_of_sides_i = int_file_scan(in);
+    cfn_2_1_total_i = int_file_scan(in);
     if (errno)
     {
       cmc_error_message_position_in_code(__FILE__, __LINE__);
-      fprintf(stderr, "cannot scan faces_number_of_sides[%d]\n", i);
+      fprintf(stderr, "cannot scan cfn_2_1_total[%d]\n", i);
       *status = errno;
       return;
     }
-    for (j = 0; j < faces_number_of_sides_i; ++j)
+    for (j = 0; j < cfn_2_1_total_i; ++j)
     {
-      faces_to_subfaces[index] = abs(int_file_scan(in)) - 1;
+      cf_2_1[index] = abs(int_file_scan(in)) - 1;
       if (errno)
       {
         cmc_error_message_position_in_code(__FILE__, __LINE__);
-        fprintf(stderr, "cannot scan faces_to_subfaces[%d]\n", index);
+        fprintf(stderr, "cannot scan cf_2_1[%d]\n", index);
         *status = errno;
         return;
       }
