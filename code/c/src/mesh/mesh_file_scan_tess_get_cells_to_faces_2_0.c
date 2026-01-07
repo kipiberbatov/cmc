@@ -1,0 +1,72 @@
+#include <errno.h>
+
+#include "cmc_error_message.h"
+#include "double.h"
+#include "int.h"
+#include "mesh_file_scan_tess_private.h"
+
+void mesh_file_scan_tess_get_cells_to_faces_2_0(
+  int * cf_2_0, FILE * in, int * status, int cn_2, const int * cfn_2_0)
+{
+  int cfn_2_0_i, i, index, j, tmp;
+
+  index = 0;
+  for (i = 0; i < cn_2; ++i)
+  {
+    int_file_scan(in); /* c_i; */
+    if (errno)
+    {
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
+      fprintf(stderr, "cannot scan integer for i = %d\n", i);
+      *status = errno;
+      return;
+    }
+
+    cfn_2_0_i = int_file_scan(in);
+    if (errno)
+    {
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
+      fprintf(stderr, "cannot scan cfn_2_0[%d]\n", i);
+      *status = errno;
+      return;
+    }
+    if (cfn_2_0_i != cfn_2_0[i])
+    {
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
+      fprintf(stderr,
+        "cfn_2_0[%d] = %d but it should be equal to %d\n",
+        i, cfn_2_0_i, cfn_2_0[i]);
+      *status = 1;
+      return;
+    }
+    for (j = 0; j < cfn_2_0_i; ++j)
+    {
+      tmp = int_file_scan(in);
+      if (errno)
+      {
+        cmc_error_message_position_in_code(__FILE__, __LINE__);
+        fprintf(stderr, "cannot scan cf_2_0[%d][%d]\n", i, j);
+        *status = errno;
+        return;
+      }
+      cf_2_0[index] = tmp - 1;
+      ++index;
+    }
+
+    mesh_file_scan_tess_skip_int_array(in, status, cfn_2_0_i + 1);
+    if (*status)
+    {
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
+      fprintf(stderr, "cannot skip cf_2_1_%d\n", i);
+      return;
+    }
+
+    mesh_file_scan_tess_skip_garbage_face_values(in, status, i);
+    if (*status)
+    {
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
+      fprintf(stderr, "cannot skip garbage values for cell %d\n", i);
+      return;
+    }
+  }
+}

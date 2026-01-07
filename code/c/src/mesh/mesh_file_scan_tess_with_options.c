@@ -14,7 +14,7 @@ void mesh_file_scan_tess_with_options(
 {
   int cfn_2_1_total, d, m_c_size, position;
   int cf_a2_size, cf_a3_size, cf_a4_size;
-  int * cn = NULL, * cf_1_0 = NULL, * cf_2_subfaces_mixed = NULL,
+  int * cn = NULL, * cf_1_0 = NULL, * cf_2_0 = NULL, * cf_2_1 = NULL,
       * cfn_2_1 = NULL;
   double * boundary_values_1 = NULL, * boundary_values_2 = NULL,
          * coordinates = NULL;
@@ -201,24 +201,42 @@ void mesh_file_scan_tess_with_options(
   fseek(in, position, SEEK_SET);
 
   cfn_2_1_total = int_array_total_sum(cn[2], cfn_2_1);
-  cmc_memory_allocate(
-    (void **) &cf_2_subfaces_mixed, status, sizeof(int) * 2 * cfn_2_1_total);
+
+  cmc_memory_allocate((void **) &cf_2_0, status, sizeof(int) * cfn_2_1_total);
   if (*status)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    cmc_error_message_memory_allocate("cf_2_subfaces_mixed");
+    cmc_error_message_memory_allocate("cf_2_0");
     goto cfn_2_1_free;
   }
 
   position = ftell(in);
-  mesh_file_scan_tess_get_cells_to_faces_2_subfaces_mixed(
-    cf_2_subfaces_mixed, in, status,
-    cn[2], cfn_2_1_total);
+  mesh_file_scan_tess_get_cells_to_faces_2_0(
+    cf_2_0, in, status, cn[2], cfn_2_1);
   if (*status)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fputs("cannot scan faces' edges", stderr);
-    goto cf_2_subfaces_mixed_free;
+    fputs("cannot scan faces' nodes\n", stderr);
+    goto cfn_2_1_free;
+  }
+  fseek(in, position, SEEK_SET);
+
+  cmc_memory_allocate((void **) &cf_2_1, status, sizeof(int) * cfn_2_1_total);
+  if (*status)
+  {
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
+    cmc_error_message_memory_allocate("cf_2_1");
+    goto cfn_2_1_free;
+  }
+
+  position = ftell(in);
+  mesh_file_scan_tess_get_cells_to_faces_2_1(
+    cf_2_1, in, status, cn[2], cfn_2_1);
+  if (*status)
+  {
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
+    fputs("cannot scan faces' edges\n", stderr);
+    goto cf_2_0_free;
   }
   fseek(in, position, SEEK_SET);
 
@@ -230,7 +248,7 @@ void mesh_file_scan_tess_with_options(
     {
       cmc_error_message_position_in_code(__FILE__, __LINE__);
       cmc_error_message_memory_allocate("boundary_values_2");
-      goto cf_2_subfaces_mixed_free;
+      goto cf_2_1_free;
     }
     mesh_file_scan_tess_get_boundary_values_2(boundary_values_2, in, status,
       cn[2], cfn_2_1_total);
@@ -292,8 +310,9 @@ void mesh_file_scan_tess_with_options(
     goto cf_a3_free;
   }
   memcpy(cf->a4, cf_1_0, sizeof(int) * 2 * cn[1]);
-  mesh_cf_a4_2_set(cf->a4 + 2 * cn[1],
-    cn[2], cfn_2_1_total, cfn_2_1, cf_2_subfaces_mixed);
+  memcpy(cf->a4 + 2 * cn[1], cf_2_0, sizeof(int) * cfn_2_1_total);
+  memcpy(cf->a4 + 2 * cn[1] + cfn_2_1_total,
+    cf_2_1, sizeof(int) * cfn_2_1_total);
 
   m_c_size = int_array_total_sum(d + 1, cn);
   cmc_memory_allocate((void **) &(m->c), status, sizeof(int) * m_c_size);
@@ -303,7 +322,8 @@ void mesh_file_scan_tess_with_options(
     cmc_error_message_memory_allocate("m->c");
     goto cf_a4_free;
   }
-  cmc_memory_free(cf_2_subfaces_mixed);
+  cmc_memory_free(cf_2_1);
+  cmc_memory_free(cf_2_0);
   cmc_memory_free(cfn_2_1);
   cmc_memory_free(cf_1_0);
 
@@ -332,8 +352,10 @@ cf_free:
   cmc_memory_free(cf);
 boundary_values_2_free:
   cmc_memory_free(boundary_values_2);
-cf_2_subfaces_mixed_free:
-  cmc_memory_free(cf_2_subfaces_mixed);
+cf_2_1_free:
+  cmc_memory_free(cf_2_1);
+cf_2_0_free:
+  cmc_memory_free(cf_2_0);
 cfn_2_1_free:
   cmc_memory_free(cfn_2_1);
 boundary_values_1_free:
