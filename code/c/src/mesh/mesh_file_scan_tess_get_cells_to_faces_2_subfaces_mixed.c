@@ -76,16 +76,12 @@ void mesh_file_scan_tess_get_cells_to_faces_2_subfaces_mixed(
       ++index;
     }
 
-    for (j = 0; j < 9; ++j)
+    mesh_file_scan_tess_skip_garbage_face_values(in, status, i);
+    if (*status)
     {
-      double_file_scan(in);
-      if (errno)
-      {
-        cmc_error_message_position_in_code(__FILE__, __LINE__);
-        fprintf(stderr, "unable to skip garbage value[%d]\n", j);
-        *status = errno;
-        return;
-      }
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
+      fprintf(stderr, "cannot skip garbage values for cell %d\n", i);
+      return;
     }
   }
 }

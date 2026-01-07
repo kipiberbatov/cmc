@@ -25,6 +25,9 @@ void mesh_file_scan_tess_get_cells_to_faces_1_0(
 
 void mesh_file_scan_tess_check_text_for_face(FILE * in, int * status);
 
+void mesh_file_scan_tess_skip_garbage_face_values(FILE * in, int * status,
+  int i);
+
 int mesh_file_scan_tess_get_cells_number_2(FILE * in, int * status);
 
 void mesh_file_scan_tess_get_cells_to_faces_number_2_1(
