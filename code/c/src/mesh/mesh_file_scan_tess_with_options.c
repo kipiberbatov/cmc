@@ -13,10 +13,10 @@ void mesh_file_scan_tess_with_options(
   mesh_and_boundary ** m_and_bd, FILE * in, int * status, int has_boundary)
 {
   int offset;
-  int cfn_2_1_total, d, m_c_size, position;
+  int c_size, cfn_2_1_total, d, position;
   int cf_a2_size, cf_a3_size, cf_a4_size;
-  int * cn = NULL, * cf_1_0 = NULL, * cf_2_0 = NULL, * cf_2_1 = NULL,
-      * cfn_2_1 = NULL;
+  int * c = NULL, * cn = NULL, * cf_1_0 = NULL, * cf_2_0 = NULL,
+      * cf_2_1 = NULL, * cfn_2_1 = NULL;
   double * boundary_values_1 = NULL, * boundary_values_2 = NULL,
          * coordinates = NULL;
   double ** boundary_values = NULL;
@@ -183,12 +183,21 @@ void mesh_file_scan_tess_with_options(
     goto boundary_values_1_free;
   }
 
+  c_size = int_array_total_sum(d + 1, cn);
+  cmc_memory_allocate((void **) &c, status, sizeof(int) * c_size);
+  if (*status)
+  {
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
+    cmc_error_message_memory_allocate("m->c");
+    goto boundary_values_1_free;
+  }
+
   cmc_memory_allocate((void **) &cfn_2_1, status, sizeof(int) * cn[2]);
   if (*status)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     cmc_error_message_memory_allocate("cfn_2_1");
-    goto boundary_values_1_free;
+    goto c_free;
   }
 
   position = ftell(in);
@@ -330,14 +339,6 @@ void mesh_file_scan_tess_with_options(
   /* put cf_2_1 into cf->a4 */
   memcpy(cf->a4 + offset, cf_2_1, sizeof(int) * cfn_2_1_total);
 
-  m_c_size = int_array_total_sum(d + 1, cn);
-  cmc_memory_allocate((void **) &(m->c), status, sizeof(int) * m_c_size);
-  if (*status)
-  {
-    cmc_error_message_position_in_code(__FILE__, __LINE__);
-    cmc_error_message_memory_allocate("m->c");
-    goto cf_a4_free;
-  }
   cmc_memory_free(cf_2_1);
   cmc_memory_free(cf_2_0);
   cmc_memory_free(cfn_2_1);
@@ -347,7 +348,7 @@ void mesh_file_scan_tess_with_options(
   m->dim_embedded = d;
   m->coord = coordinates;
   m->cn = cn;
-  mesh_c(m->c, d, cn);
+  m->c = c;
   m->cf = cf;
   m->fc = NULL;
   (*m_and_bd)->_mesh = m;
@@ -355,8 +356,6 @@ void mesh_file_scan_tess_with_options(
   goto end;
 
   /* cleaning if an error occurs */
-  cmc_memory_free(m->c);
-cf_a4_free:
   cmc_memory_free(cf->a4);
 cf_a3_free:
   cmc_memory_free(cf->a3);
@@ -374,6 +373,8 @@ cf_2_0_free:
   cmc_memory_free(cf_2_0);
 cfn_2_1_free:
   cmc_memory_free(cfn_2_1);
+c_free:
+  cmc_memory_free(c);
 boundary_values_1_free:
   cmc_memory_free(boundary_values_1);
 boundary_values_free:
