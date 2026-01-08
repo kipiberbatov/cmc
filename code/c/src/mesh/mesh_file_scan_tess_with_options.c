@@ -12,9 +12,8 @@
 void mesh_file_scan_tess_with_options(
   mesh_and_boundary ** m_and_bd, FILE * in, int * status, int has_boundary)
 {
-  int offset;
-  int c_size, cfn_2_1_total, d, position;
-  int cf_a2_size, cf_a3_size, cf_a4_size;
+  int c_size, cf_a2_size, cf_a3_size, cf_a4_size, cfn_2_1_total, d, offset;
+  long position;
   int * c = NULL, * cn = NULL, * cf_1_0 = NULL, * cf_2_0 = NULL,
       * cf_2_1 = NULL, * cfn_2_1 = NULL;
   double * boundary_values_1 = NULL, * boundary_values_2 = NULL,
