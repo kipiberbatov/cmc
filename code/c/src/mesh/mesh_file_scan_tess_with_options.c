@@ -12,6 +12,7 @@
 void mesh_file_scan_tess_with_options(
   mesh_and_boundary ** m_and_bd, FILE * in, int * status, int has_boundary)
 {
+  int offset;
   int cfn_2_1_total, d, m_c_size, position;
   int cf_a2_size, cf_a3_size, cf_a4_size;
   int * cn = NULL, * cf_1_0 = NULL, * cf_2_0 = NULL, * cf_2_1 = NULL,
@@ -297,9 +298,17 @@ void mesh_file_scan_tess_with_options(
     cmc_error_message_memory_allocate("cf->a3");
     goto cf_a2_free;
   }
+
+  /* put cfn_1_0 into cf->a3 */
   int_array_assign_constant(cf->a3, cn[1], 2);
-  memcpy(cf->a3 + cn[1], cfn_2_1, sizeof(int) * cn[2]);
-  memcpy(cf->a3 + cn[1] + cn[2], cfn_2_1, sizeof(int) * cn[2]);
+  offset = cn[1];
+
+  /* put cfn_2_0 into cf->a3 */
+  memcpy(cf->a3 + offset, cfn_2_1, sizeof(int) * cn[2]);
+  offset += cn[2];
+
+  /* put cfn_2_1 into cf->a3 */
+  memcpy(cf->a3 + offset, cfn_2_1, sizeof(int) * cn[2]);
 
   cf_a4_size = int_array_total_sum(cf_a3_size, cf->a3);
   cmc_memory_allocate((void **) &(cf->a4), status, sizeof(int) * cf_a4_size);
@@ -309,10 +318,17 @@ void mesh_file_scan_tess_with_options(
     cmc_error_message_memory_allocate("cf->a4");
     goto cf_a3_free;
   }
+
+  /* put cf_1_0 into cf->a4 */
   memcpy(cf->a4, cf_1_0, sizeof(int) * 2 * cn[1]);
-  memcpy(cf->a4 + 2 * cn[1], cf_2_0, sizeof(int) * cfn_2_1_total);
-  memcpy(cf->a4 + 2 * cn[1] + cfn_2_1_total,
-    cf_2_1, sizeof(int) * cfn_2_1_total);
+  offset = 2 * cn[1];
+
+  /* put cf_2_0 into cf->a4 */
+  memcpy(cf->a4 + offset, cf_2_0, sizeof(int) * cfn_2_1_total);
+  offset += cfn_2_1_total;
+
+  /* put cf_2_1 into cf->a4 */
+  memcpy(cf->a4 + offset, cf_2_1, sizeof(int) * cfn_2_1_total);
 
   m_c_size = int_array_total_sum(d + 1, cn);
   cmc_memory_allocate((void **) &(m->c), status, sizeof(int) * m_c_size);
