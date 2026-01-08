@@ -30,7 +30,8 @@ void cmc_animation_read_and_apply_backends(
     goto end;
   }
 
-  animation->draw_functions = (const void *) cmc_dynamic_library_get_symbol_address(lib_canvas, canvas_backend);
+  *(void **) (&(animation->draw_functions))
+  = cmc_dynamic_library_get_symbol_address(lib_canvas, canvas_backend);
   error = cmc_dynamic_library_error();
   if (error)
   {
@@ -50,7 +51,8 @@ void cmc_animation_read_and_apply_backends(
     goto lib_canvas_close;
   }
 
-  *(void **) (&render) = cmc_dynamic_library_get_symbol_address(lib_animation, animation_backend);
+  *(void **) (&render)
+  = cmc_dynamic_library_get_symbol_address(lib_animation, animation_backend);
   error = cmc_dynamic_library_error();
   if (error)
   {

@@ -139,7 +139,8 @@ int main(int argc, char ** argv)
   /* clear any existing errors */
   cmc_dynamic_library_error();
 
-  *(const void **) (&data_continuous) = cmc_dynamic_library_get_symbol_address(lib_handle, data_continuous_name);
+  *(const void **) (&data_continuous)
+  = cmc_dynamic_library_get_symbol_address(lib_handle, data_continuous_name);
   error = cmc_dynamic_library_error();
   if (error)
   {
