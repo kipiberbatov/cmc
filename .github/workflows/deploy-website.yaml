@@ -6,6 +6,7 @@ on:
 jobs:
   deploy-website:
     name: Deploy to GitHub Pages
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     permissions:
       pages: write
       id-token: write
