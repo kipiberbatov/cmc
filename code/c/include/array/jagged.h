@@ -73,18 +73,6 @@ We calculate the maximal among n_i for i in $a
 */
 int jagged2_subset_maximal_size(const jagged1 * subset, const jagged2 * arr);
 
-/*
-Utility useful for mesh topology.
-Assume we know the relations from x to y, and those from y to z.
-This functions finds the relations from x to z.
-For meshes:
-  if we know topology from p-cells to q-cells, and from q-cells to r-cells,
-  we can determine the topology from p-cells to r-cells.
-*/
-void jagged2_topology_transitive(
-  jagged2 ** x_to_z_, int * status,
-  const jagged2 * x_to_y, const jagged2 * y_to_z);
-
 void jagged2_node_neighbors(
   int * node_neighbors,
   const jagged2 * edges_to_nodes,

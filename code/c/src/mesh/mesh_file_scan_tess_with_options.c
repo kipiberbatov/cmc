@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <string.h>
 
 #include "cmc_error_message.h"
@@ -9,22 +10,150 @@
 #include "mesh_private.h"
 #include "string_private.h"
 
+typedef struct non_flattened_jagged2
+{
+  int a0;
+  int * a1;
+  int ** a2;
+} non_flattened_jagged2;
+
+static void non_flattened_jagged2_free(non_flattened_jagged2 * x)
+{
+  int_array2_free(x->a2, x->a0);
+  free(x->a1);
+  free(x);
+}
+
+static int find_total_max(
+  int cn_p, const int * cfn_p_q, const int * cf_p_q, const int * cfn_q_r)
+{
+  int cfn_p_q_i, i, j, j_local, position, total, total_max;
+  const int * cf_p_q_i;
+
+  total_max = 0;
+  position = 0;
+  for (i = 0; i < cn_p; ++i)
+  {
+    cfn_p_q_i = cfn_p_q[i];
+    cf_p_q_i = cf_p_q + position;
+    position += cfn_p_q_i;
+    total = 0;
+    for (j_local = 0; j_local < cfn_p_q_i; ++j_local)
+    {
+      j = cf_p_q_i[j_local];
+      total += cfn_q_r[j];
+    }
+    if (total_max < total)
+      total_max = total;
+  }
+  return total_max / 2;
+}
+
+static void find_union(
+  int * cf_p_r_i, int * cfn_p_r_i_address,
+  int i, int cfn_p_q_i, const int * cf_p_q_i,
+  const int * cfn_q_r, const int * cf_q_r)
+{
+  int cfn_p_r_i, j, j_local, k, k_local, q_r_index, value;
+
+  cfn_p_r_i = 0;
+  for (j_local = 0; j_local < cfn_p_q_i; ++j_local)
+  {
+    j = cf_p_q_i[j_local];
+    q_r_index = int_array_total_sum(j, cfn_q_r);
+    for (k_local = 0; k_local < cfn_q_r[j]; ++k_local)
+    {
+      k = q_r_index + k_local;
+      value = cf_q_r[k];
+      if (!int_array_member(cfn_p_r_i, cf_p_r_i, value))
+      {
+        cf_p_r_i[cfn_p_r_i] = value;
+        ++cfn_p_r_i;
+      }
+    }
+  }
+  *cfn_p_r_i_address = cfn_p_r_i;
+}
+
+static non_flattened_jagged2 * poset_transitive(
+  int cn_p,
+  const int * cfn_p_q,
+  const int * cf_p_q,
+  const int * cfn_q_r,
+  const int * cf_q_r)
+{
+  int cfn_p_r_i, cfn_p_q_i, i, position, total_max;
+  const int * cf_p_q_i;
+  int * a1, * a2_i, * cf_p_r_i;
+  int ** a2;
+  non_flattened_jagged2 * result;
+
+  result = (non_flattened_jagged2 *) malloc(sizeof(non_flattened_jagged2));
+  if (result == NULL)
+    goto end;
+  a1 = (int *) malloc(sizeof(int) * cn_p);
+  if (a1 == NULL)
+    goto result_free;
+  a2 = (int **) malloc(sizeof(int *) * cn_p);
+  if (a2 == NULL)
+    goto a1_free;
+
+  total_max = find_total_max(cn_p, cfn_p_q, cf_p_q, cfn_q_r);
+
+  i = 0;
+  cf_p_r_i = (int *) malloc(sizeof(int) * total_max);
+  if (cf_p_r_i == NULL)
+    goto a2_free;
+
+  position = 0;
+  for (i = 0; i < cn_p; ++i)
+  {
+    cf_p_q_i = cf_p_q + position;
+    cfn_p_q_i = cfn_p_q[i];
+    find_union(cf_p_r_i, &cfn_p_r_i, i, cfn_p_q_i, cf_p_q_i, cfn_q_r, cf_q_r);
+    a2_i = (int *) malloc(sizeof(int) * cfn_p_r_i);
+    if (a2_i == NULL)
+      goto cf_p_r_i_free;
+    memcpy(a2_i, cf_p_r_i, sizeof(int) * cfn_p_r_i);
+    a1[i] = cfn_p_r_i;
+    a2[i] = a2_i;
+    position += cfn_p_q_i;
+  }
+  free(cf_p_r_i);
+
+  result->a0 = cn_p;
+  result->a1 = a1;
+  result->a2 = a2;
+  return result;
+
+  /* cleaning if an error occurs */
+cf_p_r_i_free:
+  free(cf_p_r_i);
+a2_free:
+  int_array2_free(a2, i);
+a1_free:
+  free(a1);
+result_free:
+  free(result);
+end:
+  return NULL;
+}
+
 void mesh_file_scan_tess_with_options(
   mesh_and_boundary ** m_and_bd, FILE * in, int * status, int has_boundary)
 {
-  int c_size, d, d_equals_3, offset_cfn, offset_cf,
+  int c_size, d, offset_cfn, offset_cf,
       cf_a2_size, cf_a3_size, cf_a4_size,
-      cfn_2_1_total, cfn_3_0_total = 0, cfn_3_1_total = 0, cfn_3_2_total = 0;
+      cfn_2_1_total, cfn_3_0_total, cfn_3_1_total, cfn_3_2_total, i, pos_i;
   long position;
   int * c, * cn,
-      * cf_1_0, * cf_2_0, * cf_2_1, * cf_3_0 = NULL, * cf_3_1 = NULL, * cf_3_2, 
-      * cfn_2_1, * cfn_3_0 = NULL, * cfn_3_1 = NULL, * cfn_3_2;
+      * cf_1_0, * cf_2_0, * cf_2_1, * cf_3_0, * cf_3_1, * cf_3_2, 
+      * cfn_2_1, * cfn_3_0, * cfn_3_1, * cfn_3_2;
   double * boundary_values_1 = NULL, * boundary_values_2 = NULL,
          * boundary_values_3 = NULL, * coordinates;
   double ** boundary_values;
+  non_flattened_jagged2 * tmp;
   mesh * m;
-  jagged2 topology_2_0, topology_2_1, topology_3_2;
-  jagged2 * topology_3_0 = NULL, * topology_3_1 = NULL;
   jagged4 * cf;
 
   mesh_file_scan_tess_check_preamble(in, status);
@@ -42,8 +171,6 @@ void mesh_file_scan_tess_with_options(
     fputs("cannot scan dimension\n", stderr);
     goto end;
   }
-
-  d_equals_3 = (d == 3);
 
   mesh_file_scan_tess_check_text_for_cell(in, status);
   if (*status)
@@ -68,6 +195,8 @@ void mesh_file_scan_tess_with_options(
     cmc_error_message_memory_allocate("m");
     goto m_and_bd_free;
   }
+
+  m->dim = d;
 
   cmc_memory_allocate((void **) &cn, status, sizeof(int) * (d + 1));
   if (*status)
@@ -234,9 +363,6 @@ void mesh_file_scan_tess_with_options(
     goto cf_2_0_free;
   }
   fseek(in, position, SEEK_SET);
-  topology_2_0.a0 = cn[3];
-  topology_2_0.a1 = cfn_2_1;
-  topology_2_0.a2 = cf_2_0;
 
   cmc_memory_allocate((void **) &cf_2_1, status, sizeof(int) * cfn_2_1_total);
   if (*status)
@@ -256,9 +382,6 @@ void mesh_file_scan_tess_with_options(
     goto cf_2_1_free;
   }
   fseek(in, position, SEEK_SET);
-  topology_2_1.a0 = cn[3];
-  topology_2_1.a1 = cfn_2_1;
-  topology_2_1.a2 = cf_2_1;
 
   if (has_boundary)
   {
@@ -330,7 +453,10 @@ void mesh_file_scan_tess_with_options(
   memcpy(cf->a3 + offset_cfn, cfn_2_1, sizeof(int) * cn[2]);
   offset_cfn += cn[2];
 
-  if (d_equals_3)
+  cfn_3_0_total=0;
+  cfn_3_1_total=0;
+  cfn_3_2_total=0;
+  if (d == 3)
   {
     mesh_file_scan_tess_check_text_for_polyhedron(in, status);
     if (*status)
@@ -386,33 +512,66 @@ void mesh_file_scan_tess_with_options(
       goto cf_3_2_free;
     }
     fseek(in, position, SEEK_SET);
-    topology_3_2.a0 = cn[3];
-    topology_3_2.a1 = cfn_3_2;
-    topology_3_2.a2 = cf_3_2;
 
-    jagged2_topology_transitive(
-      &topology_3_0, status, &topology_3_2, &topology_2_0);
+    cmc_memory_allocate((void **) &cfn_3_0, status, sizeof(int) * cn[3]);
     if (*status)
     {
       cmc_error_message_position_in_code(__FILE__, __LINE__);
-      fputs("cannot calculate topology_3_0\n", stderr);
+      cmc_error_message_memory_allocate("cfn_3_0");
       goto cf_3_2_free;
     }
-    cfn_3_0 = topology_3_0->a1;
-    cf_3_0 = topology_3_0->a2;
-    cfn_3_0_total = int_array_total_sum(cn[3], cfn_3_0);
 
-    jagged2_topology_transitive(
-      &topology_3_1, status, &topology_3_2, &topology_2_1);
+    tmp = poset_transitive(cn[3], cfn_3_2, cf_3_2, cfn_2_1, cf_2_0);
+    if (tmp == NULL)
+      goto cf_3_2_free;
+    memcpy(cfn_3_0, tmp->a1, sizeof(int) * cn[3]);
+    cfn_3_0_total = int_array_total_sum(cn[3], cfn_3_0);
+    cmc_memory_allocate(
+      (void **) &cf_3_0, status, sizeof(int) * cfn_3_0_total);
     if (*status)
     {
       cmc_error_message_position_in_code(__FILE__, __LINE__);
-      fputs("cannot calculate topology_3_1\n", stderr);
-      goto topology_3_0_free;
+      cmc_error_message_memory_allocate("cfn_3_0");
+      non_flattened_jagged2_free(tmp);
+      goto cfn_3_0_free;
     }
-    cfn_3_1 = topology_3_1->a1;
-    cf_3_1 = topology_3_1->a2;
+    pos_i = 0;
+    for (i = 0; i < cn[3]; ++i)
+    {
+      memcpy(cf_3_0 + pos_i, tmp->a2[i], sizeof(int) * tmp->a1[i]);
+      pos_i += tmp->a1[i];
+    }
+    non_flattened_jagged2_free(tmp);
+
+    cmc_memory_allocate((void **) &cfn_3_1, status, sizeof(int) * cn[3]);
+    if (*status)
+    {
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
+      cmc_error_message_memory_allocate("cfn_3_1");
+      goto cf_3_0_free;
+    }
+
+    tmp = poset_transitive(cn[3], cfn_3_2, cf_3_2, cfn_2_1, cf_2_1);
+    if (tmp == NULL)
+      goto cf_3_0_free;
+    memcpy(cfn_3_1, tmp->a1, sizeof(int) * cn[3]);
     cfn_3_1_total = int_array_total_sum(cn[3], cfn_3_1);
+    cmc_memory_allocate(
+      (void **) &cf_3_1, status, sizeof(int) * cfn_3_1_total);
+    if (*status)
+    {
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
+      cmc_error_message_memory_allocate("cfn_3_0");
+      non_flattened_jagged2_free(tmp);
+      goto cfn_3_1_free;
+    }
+    pos_i = 0;
+    for (i = 0; i < cn[3]; ++i)
+    {
+      memcpy(cf_3_1 + pos_i, tmp->a2[i], sizeof(int) * tmp->a1[i]);
+      pos_i += tmp->a1[i];
+    }
+    non_flattened_jagged2_free(tmp);
 
     /* put cfn_3_0 into cf->a3 */
     memcpy(cf->a3 + offset_cfn, cfn_3_0, sizeof(int) * cn[3]);
@@ -434,7 +593,7 @@ void mesh_file_scan_tess_with_options(
       {
         cmc_error_message_position_in_code(__FILE__, __LINE__);
         cmc_error_message_memory_allocate("boundary_values_2");
-        goto  topology_3_1_free;
+        goto cf_3_1_free;
       }
       mesh_file_scan_tess_get_boundary_values_3(boundary_values_3, in, cn[3]);
       boundary_values[2] = boundary_values_3;
@@ -462,7 +621,7 @@ void mesh_file_scan_tess_with_options(
   memcpy(cf->a4 + offset_cf, cf_2_1, sizeof(int) * cfn_2_1_total);
   offset_cf += cfn_2_1_total;
 
-  if (d_equals_3)
+  if (d == 3)
   {
     /* put cf_3_0 into cf->a4 */
     memcpy(cf->a4 + offset_cf, cf_3_0, sizeof(int) * cfn_3_0_total);
@@ -475,8 +634,10 @@ void mesh_file_scan_tess_with_options(
     /* put cf_3_2 into cf->a4 */
     memcpy(cf->a4 + offset_cf, cf_3_2, sizeof(int) * cfn_3_2_total);
 
-    jagged2_free(topology_3_1);
-    jagged2_free(topology_3_0);
+    cmc_memory_free(cf_3_1);
+    cmc_memory_free(cfn_3_1);
+    cmc_memory_free(cf_3_0);
+    cmc_memory_free(cfn_3_0);
     cmc_memory_free(cf_3_2);
     cmc_memory_free(cfn_3_2);
   }
@@ -501,10 +662,14 @@ void mesh_file_scan_tess_with_options(
   cmc_memory_free(cf->a4);
 boundary_values_3_free:
   cmc_memory_free(boundary_values_3);
-topology_3_1_free:
-  jagged2_free(topology_3_1);
-topology_3_0_free:
-  jagged2_free(topology_3_0);
+cf_3_1_free:
+  cmc_memory_free(cf_3_1);
+cfn_3_1_free:
+  cmc_memory_free(cfn_3_1);
+cf_3_0_free:
+  cmc_memory_free(cf_3_0);
+cfn_3_0_free:
+  cmc_memory_free(cfn_3_0);
 cf_3_2_free:
   cmc_memory_free(cf_3_2);
 cfn_3_2_free:
