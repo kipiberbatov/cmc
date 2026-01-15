@@ -3,3 +3,6 @@
 
 # Ignore build directory
 build/**
+
+# Assets downloaded from data repositories are not tracked
+assets/**
