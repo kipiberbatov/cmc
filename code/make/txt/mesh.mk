@@ -29,7 +29,8 @@ build/$(MODE)/txt/mesh: | build/$(MODE)/txt
 -include code/make/txt/mesh/square_pyramid.mk
 -include code/make/txt/mesh/brick_4d_2.mk
 -include code/make/txt/mesh/high_dimensions.mk # not used in default build
-	
+-include code/make/txt/mesh/sandstone_3062_grains.mk
+
 _txt_mesh_brick_2d:=\
   $(_txt_mesh_brick_2d_1)\
   $(_txt_mesh_brick_2d_2)\
@@ -114,6 +115,7 @@ _txt_mesh :=\
   $(_txt_mesh_disk_polar)\
   $(_txt_mesh_hemisphere_polar)\
   $(_txt_mesh_square_pyramid)\
+  $(_txt_mesh_sandstone_3062_grains)\
 
 txt_mesh: bin_mesh $(_txt_mesh)
 
