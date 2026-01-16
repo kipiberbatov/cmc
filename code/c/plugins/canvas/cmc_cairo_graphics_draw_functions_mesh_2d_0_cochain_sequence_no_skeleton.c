@@ -11,7 +11,7 @@ static void do_nothing(
   void (*draw_curve)(void *, int *, const void *))
 {}
 
-static void (*draw_curves[1])(void *, int *, const void *) = 
+static void (*draw_curves[1])(void *, int *, const void *) =
 {
   (void (*)(void *, int *, const void *)) cmc_cairo_graphics_2d_line_draw
 };

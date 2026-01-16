@@ -129,7 +129,7 @@ diffusion_steady_state_continuous_2d_d04_p02_exact_flow_rate_hemisphere_polar(
   phi_1   = (2. * M_PI) / (double) na;
 
   index = 0;
-  
+
   /* edges to nodes -> all parallels are "even" */
   for (i = 1; i <= nd / 2; ++i)
   {

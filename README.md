@@ -133,7 +133,7 @@ demos and GTK animations, you need the following software
 - Cairo
 - GTK+ 3
 
-To build the documentation, you need the LaTeX compiler **pdflatex**. 
+To build the documentation, you need the LaTeX compiler **pdflatex**.
 
 On MacOS git, Clang and GNU make should be shipped with
 [command line tools for XCode](https://developer.apple.com/xcode/resources/).

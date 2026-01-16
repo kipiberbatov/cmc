@@ -43,7 +43,7 @@ void mesh_boundary_dm1(
   int d, m_boundary_dm1_a0;
   int * m_boundary_dm1_a1;
   struct jagged2 m_fc_dm1_d;
-  
+
   d = m->dim;
   mesh_fc_part2(&m_fc_dm1_d, m, d - 1, d);
 

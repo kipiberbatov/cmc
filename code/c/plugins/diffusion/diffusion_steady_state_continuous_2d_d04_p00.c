@@ -141,7 +141,7 @@ diffusion_steady_state_continuous_2d_d04_p00_exact_flow_rate_hemisphere_polar(
   c_p = KAPPA * sin(phi);
 
   index = 0;
-  
+
   /* edges to nodes -> all parallels are "even" */
   for (i = 0; i < nd / 2; ++i)
   {

@@ -2,7 +2,7 @@
 
 #include "cmc_rectangle.h"
 
-/* 
+/*
 Average value of Gaussian numerical integration on a rectangle with 2 * 2 points
 (the images of {(s_x / sqrt(3), s_y / sqrt(3)) | s_x, s_y in {-1, 1}} when they
 are located on the rectangle [-1, 1] * [-1, 1])

@@ -7,7 +7,7 @@ void cmc_rgb_set_from_scheme_rainbow_no_checks(
   struct cmc_rgb * color, int i, int n)
 {
   int k_n, k_i, k;
-  
+
   k_n = n / cmc_rgb_color_scheme_rainbow_regions_size;
   k_i = i % k_n;
   k = i / k_n;

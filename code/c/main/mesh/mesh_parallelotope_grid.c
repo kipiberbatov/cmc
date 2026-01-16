@@ -114,7 +114,7 @@ int main(int argc, char ** argv)
       3 + n + n * d + d, argv[0], d, n, n, d, n, d);
     return errno;
   }
-  
+
   index = 3;
   for (s = 0; s < n; ++s)
   {

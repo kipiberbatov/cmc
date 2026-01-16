@@ -17,7 +17,7 @@ void mesh_file_scan_tess_with_options(
       cfn_2_1_total, cfn_3_0_total = 0, cfn_3_1_total = 0, cfn_3_2_total = 0;
   long position;
   int * c, * cn,
-      * cf_1_0, * cf_2_0, * cf_2_1, * cf_3_0 = NULL, * cf_3_1 = NULL, * cf_3_2, 
+      * cf_1_0, * cf_2_0, * cf_2_1, * cf_3_0 = NULL, * cf_3_1 = NULL, * cf_3_2,
       * cfn_2_1, * cfn_3_0 = NULL, * cfn_3_1 = NULL, * cfn_3_2;
   double * boundary_values_1 = NULL, * boundary_values_2 = NULL,
          * boundary_values_3 = NULL, * coordinates;

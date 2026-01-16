@@ -27,7 +27,7 @@ int main(int argc, char ** argv)
   struct diffusion_steady_state_discrete * data_discrete;
   const struct diffusion_steady_state_discrete_pre_processing * pre_processing;
 
-  cmc_command_line option_data_continuous_name, option_lib_name, 
+  cmc_command_line option_data_continuous_name, option_lib_name,
     option_mesh_format, option_mesh_name, option_no_positional_arguments,
     option_pre_processing_name, option_m_vol_format, option_m_vol_name,
     option_output_format, option_output_name;

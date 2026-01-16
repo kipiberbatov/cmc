@@ -17,20 +17,20 @@ static void de_rham_2_of_faces_to_nodes_in_inner_circle(
   factor = r_squared * theta_1 * phi_1;
   theta_half = 0.5 * theta_1;
   theta_one_and_half = 1.5 * theta_1;
-  
+
   _index = *index;
   for (j = 0; j < na / 2; ++j)
   {
     /* [0, theta_1] x [phi_{2 j}, phi_{2 j + 2}] */
     point[0] = theta_half;
     point[1] = (2 * j + 1) * phi_1;
-    x[_index + 0] = 2 * factor * f(point);  
-    
+    x[_index + 0] = 2 * factor * f(point);
+
     /* [theta_1, theta_2] x [phi_{2 j}, phi_{2 j + 1}] */
     point[0] = theta_one_and_half;
     point[1] = (2 * j + 0.5) * phi_1;
     x[_index + 1] = factor * f(point);
-    
+
     /* [theta_1, theta_2] x [phi_{2 j + 1}, phi_{2 j + 2}] */
     point[1] = (2 * j + 1.5) * phi_1;
     x[_index + 2] = factor * f(point);
@@ -74,7 +74,7 @@ static void de_rham_2_of_faces_to_nodes_in_outer_circles(
       /* [theta_{2 i}, theta_{2 i + 1}] x [phi_{2 j + 1}, phi_{2j + 2}] */
       point[0] = theta_i0;
       x[_index + 3] = factor * f(point);
-      
+
       _index += 4;
     }
   }

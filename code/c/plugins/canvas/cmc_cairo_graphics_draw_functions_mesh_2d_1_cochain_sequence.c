@@ -6,7 +6,7 @@
 #include "cmc_graphics_mesh_2d_1_cochain_sequence_draw_functions.h"
 #include "cmc_rgb.h"
 
-static void (*draw_curves[1])(void *, int *, const void *) = 
+static void (*draw_curves[1])(void *, int *, const void *) =
 {
   (void (*)(void *, int *, const void *)) cmc_cairo_graphics_2d_line_draw
 };

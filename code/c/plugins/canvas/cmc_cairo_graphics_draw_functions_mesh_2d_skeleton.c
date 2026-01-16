@@ -2,7 +2,7 @@
 #include "cmc_graphics_mesh_2d_skeleton.h"
 #include "cmc_graphics_mesh_2d_skeleton_draw_functions.h"
 
-static void (*draw_curves[1])(void *, int *, const void *) = 
+static void (*draw_curves[1])(void *, int *, const void *) =
 {
   (void (*)(void *, int *, const void *)) cmc_cairo_graphics_2d_line_draw
 };

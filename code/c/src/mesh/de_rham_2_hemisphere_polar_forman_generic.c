@@ -15,7 +15,7 @@ static void de_rham_2_of_faces_to_nodes_in_inner_circle(
 
   factor = r_squared * theta_1 * phi_1;
   theta_2 = 2 * theta_1;
-  
+
   _index = *index;
   for (j = 0; j < na / 2; ++j)
   {
@@ -29,15 +29,15 @@ static void de_rham_2_of_faces_to_nodes_in_inner_circle(
     rectangle.y0 = phi_j0;
     rectangle.y1 = phi_j2;
     value = average_value((const void *) &rectangle, f);
-    x[_index + 0] = 2 * factor * value;  
-    
+    x[_index + 0] = 2 * factor * value;
+
     /* [theta_1, theta_2] x [phi_{2 j}, phi_{2 j + 1}] */
     rectangle.x0 = theta_1;
     rectangle.x1 = theta_2;
     rectangle.y1 = phi_j1;
     value = average_value((const void *) &rectangle, f);
     x[_index + 1] = factor * value;
-    
+
     /* [theta_1, theta_2] x [phi_{2 j + 1}, phi_{2 j + 2}] */
     rectangle.y0 = phi_j1;
     rectangle.y1 = phi_j2;
@@ -98,7 +98,7 @@ static void de_rham_2_of_faces_to_nodes_in_outer_circles(
       rectangle.x1 = theta_i1;
       value = average_value((const void *) &rectangle, f);
       x[_index + 3] = factor * value;
-      
+
       _index += 4;
     }
   }

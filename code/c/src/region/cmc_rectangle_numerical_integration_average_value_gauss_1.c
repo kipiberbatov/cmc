@@ -1,6 +1,6 @@
 #include "cmc_rectangle.h"
 
-/* 
+/*
 Average value of Gaussian numerical integration on a rectangle with a single
 point (the centre)
 */
