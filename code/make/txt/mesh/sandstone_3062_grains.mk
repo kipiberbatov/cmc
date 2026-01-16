@@ -6,10 +6,10 @@ _txt_mesh_sandstone_3062_grains :=\
   build/$(MODE)/txt/mesh/sandstone_3062_grains_forman.txt\
   build/$(MODE)/txt/mesh/sandstone_3062_grains_forman_cbd.txt\
   build/$(MODE)/txt/mesh/sandstone_3062_grains_forman_vol.txt\
-  build/$(MODE)/txt/mesh/sandstone_3062_grains_forman_inner.txt\
-  build/$(MODE)/txt/mesh/sandstone_3062_grains_forman_cbd_star.txt\
-  build/$(MODE)/txt/mesh/sandstone_3062_grains_forman_hodge_coeff.txt\
-  build/$(MODE)/txt/mesh/sandstone_3062_grains_forman_hodge.txt\
+  # build/$(MODE)/txt/mesh/sandstone_3062_grains_forman_inner.txt\
+  # build/$(MODE)/txt/mesh/sandstone_3062_grains_forman_cbd_star.txt\
+  # build/$(MODE)/txt/mesh/sandstone_3062_grains_forman_hodge_coeff.txt\
+  # build/$(MODE)/txt/mesh/sandstone_3062_grains_forman_hodge.txt\
 
 assets/mesh/sandstone_3062_grains.tess: | assets/mesh
 	curl https://zenodo.org/records/18248963/files/sandstone_3062_grains.tess > $@
