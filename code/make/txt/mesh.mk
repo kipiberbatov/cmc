@@ -17,6 +17,7 @@ build/$(MODE)/txt/mesh: | build/$(MODE)/txt
 -include code/make/txt/mesh/2d_10_grains.mk
 -include code/make/txt/mesh/3d_1_grain.mk
 -include code/make/txt/mesh/3d_10_grains.mk
+-include code/make/txt/mesh/3d_100_grains.mk
 -include code/make/txt/mesh/disk_polar_4_3.mk
 -include code/make/txt/mesh/disk_polar_18_10.mk
 -include code/make/txt/mesh/hemisphere_polar_4_3.mk
@@ -112,6 +113,7 @@ _txt_mesh :=\
   $(_txt_mesh_2d_10_grains)\
   $(_txt_mesh_3d_1_grain)\
   $(_txt_mesh_3d_10_grains)\
+  $(_txt_mesh_3d_100_grains)\
   $(_txt_mesh_disk_polar)\
   $(_txt_mesh_hemisphere_polar)\
   $(_txt_mesh_square_pyramid)\
