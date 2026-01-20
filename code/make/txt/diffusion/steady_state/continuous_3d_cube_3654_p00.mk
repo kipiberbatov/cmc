@@ -9,24 +9,24 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00:\
 _txt_diffusion_steady_state_continuous_3d_cube_3654_p00 :=\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/exact_sandstone_3062_grains_forman_potential.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/exact_sandstone_3062_grains_forman_potential_norm_2.txt\
-  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_input.txt\
-  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_potential.txt\
-  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_flow_rate.txt\
-  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_potential_difference_with_exact.txt\
-  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_potential_difference_with_exact_norm_2.txt\
-  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_potential_relative_error_with_exact_norm_2.txt\
-  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_weak_cochain_sandstone_3062_grains_forman_input.txt\
-  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_weak_cochain_sandstone_3062_grains_forman_potential.txt\
-  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_weak_cochain_sandstone_3062_grains_forman_flow_rate.txt\
-  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_weak_cochain_sandstone_3062_grains_forman_potential_difference_with_exact.txt\
-  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_weak_cochain_sandstone_3062_grains_forman_potential_difference_with_exact_norm_2.txt\
-  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_weak_cochain_sandstone_3062_grains_forman_potential_relative_error_with_exact_norm_2.txt\
-  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/mixed_weak_cochain_sandstone_3062_grains_forman_input.txt\
-  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/mixed_weak_cochain_sandstone_3062_grains_forman_solution.txt\
-  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/mixed_weak_cochain_sandstone_3062_grains_forman_potential.txt\
-  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/mixed_weak_cochain_sandstone_3062_grains_forman_potential_difference_with_exact.txt\
-  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/mixed_weak_cochain_sandstone_3062_grains_forman_potential_difference_with_exact_norm_2.txt\
-  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/mixed_weak_cochain_sandstone_3062_grains_forman_potential_relative_error_with_exact_norm_2.txt\
+  # build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_input.txt\
+  # build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_potential.txt\
+  # build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_flow_rate.txt\
+  # build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_potential_difference_with_exact.txt\
+  # build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_potential_difference_with_exact_norm_2.txt\
+  # build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_potential_relative_error_with_exact_norm_2.txt\
+  # build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_weak_cochain_sandstone_3062_grains_forman_input.txt\
+  # build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_weak_cochain_sandstone_3062_grains_forman_potential.txt\
+  # build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_weak_cochain_sandstone_3062_grains_forman_flow_rate.txt\
+  # build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_weak_cochain_sandstone_3062_grains_forman_potential_difference_with_exact.txt\
+  # build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_weak_cochain_sandstone_3062_grains_forman_potential_difference_with_exact_norm_2.txt\
+  # build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_weak_cochain_sandstone_3062_grains_forman_potential_relative_error_with_exact_norm_2.txt\
+  # build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/mixed_weak_cochain_sandstone_3062_grains_forman_input.txt\
+  # build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/mixed_weak_cochain_sandstone_3062_grains_forman_solution.txt\
+  # build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/mixed_weak_cochain_sandstone_3062_grains_forman_potential.txt\
+  # build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/mixed_weak_cochain_sandstone_3062_grains_forman_potential_difference_with_exact.txt\
+  # build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/mixed_weak_cochain_sandstone_3062_grains_forman_potential_difference_with_exact_norm_2.txt\
+  # build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/mixed_weak_cochain_sandstone_3062_grains_forman_potential_relative_error_with_exact_norm_2.txt\
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/exact_sandstone_3062_grains_forman_potential.txt:\
   build/$(MODE)/bin/diffusion_steady_state_continuous_exact_potential$(.EXE)\
