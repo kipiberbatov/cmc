@@ -23,6 +23,7 @@ include code/make/txt/diffusion/steady_state/continuous_2d_d04_p03.mk
 include code/make/txt/diffusion/steady_state/continuous_2d_parallelogram_20_15_degrees_45_p00.mk
 include code/make/txt/diffusion/steady_state/continuous_3d_d00_p00.mk
 include code/make/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman.mk
+include code/make/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_100_grains_forman.mk
 include code/make/txt/diffusion/steady_state/continuous_3d_d00_p01.mk
 
 _txt_diffusion_steady_state :=\
@@ -44,6 +45,7 @@ _txt_diffusion_steady_state :=\
   $(_txt_diffusion_steady_state_continuous_2d_parallelogram_20_15_degrees_45_p00)\
   $(_txt_diffusion_steady_state_continuous_3d_d00_p00)\
   $(_txt_diffusion_steady_state_continuous_3d_d00_p00_3d_10_grains_forman)\
+  $(_txt_diffusion_steady_state_continuous_3d_d00_p00_3d_100_grains_forman)\
   $(_txt_diffusion_steady_state_continuous_3d_d00_p01)\
 
 txt_diffusion_steady_state: $(_txt_diffusion_steady_state)
