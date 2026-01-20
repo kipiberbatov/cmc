@@ -12,6 +12,9 @@ _txt_diffusion_steady_state_continuous_3d_cube_3654_p00 :=\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_input.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_potential.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_flow_rate.txt\
+  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_potential_difference_with_exact.txt\
+  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_potential_difference_with_exact_norm_2.txt\
+  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_potential_relative_error_with_exact_norm_2.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_weak_cochain_sandstone_3062_grains_forman_input.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_weak_cochain_sandstone_3062_grains_forman_potential.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_weak_cochain_sandstone_3062_grains_forman_flow_rate.txt\
@@ -85,6 +88,36 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_stro
   --steady-state-primal-strong-raw $(word 4, $^)\
   --raw $(word 5, $^)\
   --raw > $@
+
+build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_potential_difference_with_exact.txt:\
+  build/$(MODE)/bin/double_array_subtract$(.EXE)\
+  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_potential.txt\
+  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/exact_sandstone_3062_grains_forman_potential.txt\
+  | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00
+	$(INTERPRETER) $<\
+  --size=73581\
+  --minuend=$(word 2, $^)\
+  --subtrahend=$(word 3, $^)\
+  --output=$@
+
+build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_potential_difference_with_exact_norm_2.txt:\
+  build/$(MODE)/bin/double_array_lebesgue_norm$(.EXE)\
+  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_potential_difference_with_exact.txt\
+  | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00
+	$(INTERPRETER) $<\
+  --size=73581\
+  --vector=$(word 2, $^)\
+  --output=$@
+
+build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_potential_relative_error_with_exact_norm_2.txt:\
+  build/$(MODE)/bin/double_divide$(.EXE)\
+  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_strong_cochain_sandstone_3062_grains_forman_potential_difference_with_exact_norm_2.txt\
+  build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/exact_sandstone_3062_grains_forman_potential_norm_2.txt\
+  | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00
+	$(INTERPRETER) $<\
+  --numerator=$(word 2, $^)\
+  --denominator=$(word 3, $^)\
+  --output=$@
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_3d_cube_3654_p00/primal_weak_cochain_sandstone_3062_grains_forman_input.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_primal_weak_from_continuous$(.EXE)\
