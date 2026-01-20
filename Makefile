@@ -18,6 +18,13 @@ build/$(MODE): | build
 ############### generating object files, libraries and binaries ################
 -include code/make/c_compile.mk
 
+########################## preparing assets directory ##########################
+assets/mesh: | assets
+	mkdir -p $@
+
+assets:
+	mkdir -p $@
+
 ######################## running text-outputting demos #########################
 -include code/make/txt.mk
 

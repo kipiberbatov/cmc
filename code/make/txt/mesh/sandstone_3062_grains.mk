@@ -26,12 +26,6 @@ assets/mesh/sandstone_3062_grains_vpore.csv: | assets/mesh
 assets/mesh/sandstone_3062_grains_fpore.csv: | assets/mesh
 	curl https://zenodo.org/records/18248963/files/sandstone_3062_grains_fpore.csv > $@
 
-assets/mesh: | assets
-	mkdir -p $@
-
-assets:
-	mkdir -p $@
-
 build/$(MODE)/txt/mesh/sandstone_3062_grains.txt:\
   build/$(MODE)/bin/mesh_and_boundary_file_scan$(.EXE)\
   assets/mesh/sandstone_3062_grains.tess\
