@@ -12,12 +12,28 @@ static int matrix_sparse_cols_total_possible(
   int i;
 
   if (a_cols_total[0] != 0)
+  {
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
+    fprintf(stderr, "a_cols_total[0] = %d but must be 0\n", a_cols_total[0]);
     return 0;
-  if (a_cols_total[n] > m * n)
+  }
+  if (a_cols_total[n] / m >= n && a_cols_total[n] % m != 0)
+  {
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
+    fprintf(stderr,
+      "a_cols_total[%d] = %d which is more than rows * cols, %d * %d = %d\n",
+      n, a_cols_total[n], m, n, m * n);
     return 0;
+  }
   for (i = 0; i < n; ++i)
     if (a_cols_total[i + 1] < a_cols_total[i])
+    {
+      cmc_error_message_position_in_code(__FILE__, __LINE__);
+      fprintf(stderr,
+        "a_cols_total[%d] = %d must not be bigger than a_cols_total[%d] = %d\n",
+        i, a_cols_total[i], i + 1, a_cols_total[i + 1]);
       return 0;
+    }
   return 1;
 }
 
