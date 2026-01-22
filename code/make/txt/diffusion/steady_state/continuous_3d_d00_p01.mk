@@ -41,7 +41,7 @@ _txt_diffusion_steady_state_continuous_3d_d00_p01 :=\
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/exact_brick_3d_2_forman_potential.txt:\
   build/$(MODE)/bin/diffusion_steady_state_continuous_exact_potential$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_3d_2_forman.txt\
+  build/$(MODE)/txt/mesh/brick_3d_2/forman.txt\
   build/$(MODE)/obj/plugins/diffusion_steady_state_continuous_3d_d00_p01$(.OBJ)\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -53,7 +53,7 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/exact_brick_3d_2_
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/exact_brick_3d_2_forman_flow_rate.txt:\
   build/$(MODE)/bin/diffusion_steady_state_continuous_exact_flow_rate$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_3d_2_forman.txt\
+  build/$(MODE)/txt/mesh/brick_3d_2/forman.txt\
   build/$(MODE)/obj/plugins/diffusion_steady_state_continuous_3d_d00_p01$(.OBJ)\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -83,7 +83,7 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/exact_brick_3d_2_
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/primal_strong_cochain_brick_3d_2_forman_input.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_primal_strong_from_continuous$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_3d_2_forman.txt\
+  build/$(MODE)/txt/mesh/brick_3d_2/forman.txt\
   build/$(MODE)/obj/plugins/diffusion_steady_state_continuous_3d_d00_p01$(.OBJ)\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -95,9 +95,9 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/primal_strong_coc
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/primal_strong_cochain_brick_3d_2_forman_potential.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_primal_strong_solve$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_3d_2_forman.txt\
-  build/$(MODE)/txt/mesh/brick_3d_2_forman_cbd.txt\
-  build/$(MODE)/txt/mesh/brick_3d_2_forman_cbd_star.txt\
+  build/$(MODE)/txt/mesh/brick_3d_2/forman.txt\
+  build/$(MODE)/txt/mesh/brick_3d_2/forman_cbd.txt\
+  build/$(MODE)/txt/mesh/brick_3d_2/forman_cbd_star.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/primal_strong_cochain_brick_3d_2_forman_input.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01
 	$(INTERPRETER) $<\
@@ -109,8 +109,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/primal_strong_coc
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/primal_strong_cochain_brick_3d_2_forman_flow_rate.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_flow_rate_from_potential$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_3d_2_forman.txt\
-  build/$(MODE)/txt/mesh/brick_3d_2_forman_hodge.txt\
+  build/$(MODE)/txt/mesh/brick_3d_2/forman.txt\
+  build/$(MODE)/txt/mesh/brick_3d_2/forman_hodge.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/primal_strong_cochain_brick_3d_2_forman_input.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/primal_strong_cochain_brick_3d_2_forman_potential.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01
@@ -183,8 +183,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/primal_strong_coc
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/primal_weak_cochain_brick_3d_2_forman_input.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_primal_weak_from_continuous$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_3d_2_forman.txt\
-  build/$(MODE)/txt/mesh/brick_3d_2_forman_vol.txt\
+  build/$(MODE)/txt/mesh/brick_3d_2/forman.txt\
+  build/$(MODE)/txt/mesh/brick_3d_2/forman_vol.txt\
   build/$(MODE)/obj/plugins/diffusion_steady_state_continuous_3d_d00_p01$(.OBJ)\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -197,8 +197,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/primal_weak_cocha
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/primal_weak_cochain_brick_3d_2_forman_potential.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_primal_weak_solve$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_3d_2_forman.txt\
-  build/$(MODE)/txt/mesh/brick_3d_2_forman_inner.txt\
+  build/$(MODE)/txt/mesh/brick_3d_2/forman.txt\
+  build/$(MODE)/txt/mesh/brick_3d_2/forman_inner.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/primal_weak_cochain_brick_3d_2_forman_input.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01
 	$(INTERPRETER) $<\
@@ -209,8 +209,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/primal_weak_cocha
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/primal_weak_cochain_brick_3d_2_forman_flow_rate.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_flow_rate_from_potential$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_3d_2_forman.txt\
-  build/$(MODE)/txt/mesh/brick_3d_2_forman_hodge.txt\
+  build/$(MODE)/txt/mesh/brick_3d_2/forman.txt\
+  build/$(MODE)/txt/mesh/brick_3d_2/forman_hodge.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/primal_weak_cochain_brick_3d_2_forman_input.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/primal_weak_cochain_brick_3d_2_forman_potential.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01
@@ -283,8 +283,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/primal_weak_cocha
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/mixed_weak_cochain_brick_3d_2_forman_input.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_mixed_weak_from_continuous$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_3d_2_forman.txt\
-  build/$(MODE)/txt/mesh/brick_3d_2_forman_vol.txt\
+  build/$(MODE)/txt/mesh/brick_3d_2/forman.txt\
+  build/$(MODE)/txt/mesh/brick_3d_2/forman_vol.txt\
   build/$(MODE)/obj/plugins/diffusion_steady_state_continuous_3d_d00_p01$(.OBJ)\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -297,8 +297,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/mixed_weak_cochai
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/mixed_weak_cochain_brick_3d_2_forman_solution.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_mixed_weak_solve$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_3d_2_forman.txt\
-  build/$(MODE)/txt/mesh/brick_3d_2_forman_inner.txt\
+  build/$(MODE)/txt/mesh/brick_3d_2/forman.txt\
+  build/$(MODE)/txt/mesh/brick_3d_2/forman_inner.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/mixed_weak_cochain_brick_3d_2_forman_input.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01
 	$(INTERPRETER) $<\
@@ -309,8 +309,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/mixed_weak_cochai
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/mixed_weak_cochain_brick_3d_2_forman_potential.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_mixed_weak_potential$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_3d_2_forman.txt\
-  build/$(MODE)/txt/mesh/brick_3d_2_forman_vol.txt\
+  build/$(MODE)/txt/mesh/brick_3d_2/forman.txt\
+  build/$(MODE)/txt/mesh/brick_3d_2/forman_vol.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/mixed_weak_cochain_brick_3d_2_forman_input.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01/mixed_weak_cochain_brick_3d_2_forman_solution.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p01
