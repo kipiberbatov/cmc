@@ -26,7 +26,7 @@ _txt_diffusion_steady_state_continuous_2d_d03_p00 :=\
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00/exact_disk_polar_4_3_forman_potential.txt:\
   build/$(MODE)/bin/diffusion_steady_state_continuous_exact_potential$(.EXE)\
-  build/$(MODE)/txt/mesh/disk_polar_4_3_forman.txt\
+  build/$(MODE)/txt/mesh/disk_polar_4_3/forman.txt\
   build/$(MODE)/obj/plugins/diffusion_steady_state_continuous_2d_d03_p00$(.OBJ)\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -38,7 +38,7 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00/exact_disk_polar_
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00/exact_disk_polar_4_3_forman_flow_rate.txt:\
   build/$(MODE)/bin/diffusion_steady_state_continuous_exact_flow_rate$(.EXE)\
-  build/$(MODE)/txt/mesh/disk_polar_4_3_forman.txt\
+  build/$(MODE)/txt/mesh/disk_polar_4_3/forman.txt\
   build/$(MODE)/obj/plugins/diffusion_steady_state_continuous_2d_d03_p00$(.OBJ)\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -50,8 +50,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00/exact_disk_polar_
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00/primal_weak_cochain_disk_polar_4_3_forman_input.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_primal_weak_from_continuous$(.EXE)\
-  build/$(MODE)/txt/mesh/disk_polar_4_3_forman.txt\
-  build/$(MODE)/txt/mesh/disk_polar_4_3_forman_vol.txt\
+  build/$(MODE)/txt/mesh/disk_polar_4_3/forman.txt\
+  build/$(MODE)/txt/mesh/disk_polar_4_3/forman_vol.txt\
   build/$(MODE)/obj/plugins/diffusion_steady_state_continuous_2d_d03_p00$(.OBJ)\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -64,8 +64,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00/primal_weak_cocha
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00/primal_weak_cochain_disk_polar_4_3_forman_potential.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_primal_weak_solve$(.EXE)\
-  build/$(MODE)/txt/mesh/disk_polar_4_3_forman.txt\
-  build/$(MODE)/txt/mesh/disk_polar_4_3_forman_inner.txt\
+  build/$(MODE)/txt/mesh/disk_polar_4_3/forman.txt\
+  build/$(MODE)/txt/mesh/disk_polar_4_3/forman_inner.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00/primal_weak_cochain_disk_polar_4_3_forman_input.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00
 	$(INTERPRETER) $<\
@@ -76,8 +76,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00/primal_weak_cocha
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00/primal_weak_cochain_disk_polar_4_3_forman_flow_rate.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_flow_rate_from_potential$(.EXE)\
-  build/$(MODE)/txt/mesh/disk_polar_4_3_forman.txt\
-  build/$(MODE)/txt/mesh/disk_polar_4_3_forman_hodge.txt\
+  build/$(MODE)/txt/mesh/disk_polar_4_3/forman.txt\
+  build/$(MODE)/txt/mesh/disk_polar_4_3/forman_hodge.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00/primal_weak_cochain_disk_polar_4_3_forman_input.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00/primal_weak_cochain_disk_polar_4_3_forman_potential.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00
@@ -90,8 +90,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00/primal_weak_cocha
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00/mixed_weak_cochain_disk_polar_4_3_forman_input.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_mixed_weak_from_continuous$(.EXE)\
-  build/$(MODE)/txt/mesh/disk_polar_4_3_forman.txt\
-  build/$(MODE)/txt/mesh/disk_polar_4_3_forman_vol.txt\
+  build/$(MODE)/txt/mesh/disk_polar_4_3/forman.txt\
+  build/$(MODE)/txt/mesh/disk_polar_4_3/forman_vol.txt\
   build/$(MODE)/obj/plugins/diffusion_steady_state_continuous_2d_d03_p00$(.OBJ)\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -104,8 +104,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00/mixed_weak_cochai
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00/mixed_weak_cochain_disk_polar_4_3_forman_solution.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_mixed_weak_solve$(.EXE)\
-  build/$(MODE)/txt/mesh/disk_polar_4_3_forman.txt\
-  build/$(MODE)/txt/mesh/disk_polar_4_3_forman_inner.txt\
+  build/$(MODE)/txt/mesh/disk_polar_4_3/forman.txt\
+  build/$(MODE)/txt/mesh/disk_polar_4_3/forman_inner.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00/mixed_weak_cochain_disk_polar_4_3_forman_input.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00
 	$(INTERPRETER) $<\
@@ -116,8 +116,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00/mixed_weak_cochai
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00/mixed_weak_cochain_disk_polar_4_3_forman_potential.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_mixed_weak_potential$(.EXE)\
-  build/$(MODE)/txt/mesh/disk_polar_4_3_forman.txt\
-  build/$(MODE)/txt/mesh/disk_polar_4_3_forman_vol.txt\
+  build/$(MODE)/txt/mesh/disk_polar_4_3/forman.txt\
+  build/$(MODE)/txt/mesh/disk_polar_4_3/forman_vol.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00/mixed_weak_cochain_disk_polar_4_3_forman_input.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00/mixed_weak_cochain_disk_polar_4_3_forman_solution.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d03_p00
