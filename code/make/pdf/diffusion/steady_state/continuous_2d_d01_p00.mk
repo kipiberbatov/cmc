@@ -18,7 +18,7 @@ _pdf_diffusion_steady_state_continuous_2d_d01_p00 :=\
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d01_p00/exact_square_8_potential.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_0_cochain_sequence$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/exact_square_8_potential.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
@@ -37,7 +37,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d01_p00/exact_square_8_po
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d01_p00/exact_square_8_flow_rate.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_1_cochain_sequence$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/exact_square_8_flow_rate.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
@@ -56,7 +56,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d01_p00/exact_square_8_fl
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d01_p00/primal_strong_cochain_square_8_potential.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_0_cochain_sequence$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/primal_strong_cochain_square_8_potential.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
@@ -75,7 +75,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d01_p00/primal_strong_coc
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d01_p00/primal_strong_cochain_square_8_flow_rate.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_1_cochain_sequence$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/primal_strong_cochain_square_8_flow_rate.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
@@ -94,7 +94,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d01_p00/primal_strong_coc
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d01_p00/primal_weak_cochain_square_8_potential.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_0_cochain_sequence$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/primal_weak_cochain_square_8_potential.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
@@ -113,7 +113,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d01_p00/primal_weak_cocha
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d01_p00/primal_weak_cochain_square_8_flow_rate.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_1_cochain_sequence$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/primal_weak_cochain_square_8_flow_rate.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
@@ -132,7 +132,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d01_p00/primal_weak_cocha
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d01_p00/mixed_weak_cochain_square_8_potential.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_0_cochain_sequence$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/mixed_weak_cochain_square_8_potential.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
@@ -151,7 +151,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d01_p00/mixed_weak_cochai
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d01_p00/mixed_weak_cochain_square_8_flow_rate.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_1_cochain_sequence$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/mixed_weak_cochain_square_8_solution.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\

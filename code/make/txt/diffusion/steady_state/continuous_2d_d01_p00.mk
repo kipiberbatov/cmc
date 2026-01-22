@@ -21,7 +21,7 @@ _txt_diffusion_steady_state_continuous_2d_d01_p00 :=\
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/exact_square_8_potential.txt:\
   build/$(MODE)/bin/diffusion_steady_state_continuous_exact_potential$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
   build/$(MODE)/obj/plugins/diffusion_steady_state_continuous_2d_d01_p00$(.OBJ)\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -33,7 +33,7 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/exact_square_8_po
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/exact_square_8_flow_rate.txt:\
   build/$(MODE)/bin/diffusion_steady_state_continuous_exact_flow_rate$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
   build/$(MODE)/obj/plugins/diffusion_steady_state_continuous_2d_d01_p00$(.OBJ)\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -45,7 +45,7 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/exact_square_8_fl
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/primal_strong_cochain_square_8_input.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_primal_strong_from_continuous$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
   build/$(MODE)/obj/plugins/diffusion_steady_state_continuous_2d_d01_p00$(.OBJ)\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -57,9 +57,9 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/primal_strong_coc
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/primal_strong_cochain_square_8_potential.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_primal_strong_solve$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
-  build/$(MODE)/txt/mesh/square_8_cbd.txt\
-  build/$(MODE)/txt/mesh/square_8_cbd_star.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
+  build/$(MODE)/txt/mesh/square/8_cbd.txt\
+  build/$(MODE)/txt/mesh/square/8_cbd_star.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/primal_strong_cochain_square_8_input.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00
 	$(INTERPRETER) $<\
@@ -71,8 +71,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/primal_strong_coc
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/primal_strong_cochain_square_8_flow_rate.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_flow_rate_from_potential$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
-  build/$(MODE)/txt/mesh/square_8_hodge.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
+  build/$(MODE)/txt/mesh/square/8_hodge.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/primal_strong_cochain_square_8_input.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/primal_strong_cochain_square_8_potential.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00
@@ -85,8 +85,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/primal_strong_coc
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/primal_weak_cochain_square_8_input.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_primal_weak_from_continuous$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
-  build/$(MODE)/txt/mesh/square_8_vol.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
+  build/$(MODE)/txt/mesh/square/8_vol.txt\
   build/$(MODE)/obj/plugins/diffusion_steady_state_continuous_2d_d01_p00$(.OBJ)\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -99,8 +99,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/primal_weak_cocha
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/primal_weak_cochain_square_8_potential.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_primal_weak_solve$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
-  build/$(MODE)/txt/mesh/square_8_inner.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
+  build/$(MODE)/txt/mesh/square/8_inner.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/primal_weak_cochain_square_8_input.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00
 	$(INTERPRETER) $<\
@@ -111,8 +111,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/primal_weak_cocha
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/primal_weak_cochain_square_8_flow_rate.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_flow_rate_from_potential$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
-  build/$(MODE)/txt/mesh/square_8_hodge.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
+  build/$(MODE)/txt/mesh/square/8_hodge.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/primal_weak_cochain_square_8_input.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/primal_weak_cochain_square_8_potential.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00
@@ -125,8 +125,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/primal_weak_cocha
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/mixed_weak_cochain_square_8_input.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_mixed_weak_from_continuous$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
-  build/$(MODE)/txt/mesh/square_8_vol.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
+  build/$(MODE)/txt/mesh/square/8_vol.txt\
   build/$(MODE)/obj/plugins/diffusion_steady_state_continuous_2d_d01_p00$(.OBJ)\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -139,8 +139,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/mixed_weak_cochai
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/mixed_weak_cochain_square_8_solution.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_mixed_weak_solve$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
-  build/$(MODE)/txt/mesh/square_8_inner.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
+  build/$(MODE)/txt/mesh/square/8_inner.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/mixed_weak_cochain_square_8_input.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00
 	$(INTERPRETER) $<\
@@ -151,8 +151,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/mixed_weak_cochai
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/mixed_weak_cochain_square_8_potential.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_mixed_weak_potential$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
-  build/$(MODE)/txt/mesh/square_8_vol.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
+  build/$(MODE)/txt/mesh/square/8_vol.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/mixed_weak_cochain_square_8_input.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00/mixed_weak_cochain_square_8_solution.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d01_p00

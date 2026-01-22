@@ -266,7 +266,7 @@ build/$(MODE)/pdf/mesh/square_edge_skeleton.pdf:\
 
 build/$(MODE)/pdf/mesh/square_2_edge_skeleton.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
-  build/$(MODE)/txt/mesh/square_2.txt\
+  build/$(MODE)/txt/mesh/square/2.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
   | build/$(MODE)/pdf/mesh\
@@ -282,7 +282,7 @@ build/$(MODE)/pdf/mesh/square_2_edge_skeleton.pdf:\
 
 build/$(MODE)/pdf/mesh/square_4_edge_skeleton.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
-  build/$(MODE)/txt/mesh/square_4.txt\
+  build/$(MODE)/txt/mesh/square/4.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
   | build/$(MODE)/pdf/mesh\
@@ -298,7 +298,7 @@ build/$(MODE)/pdf/mesh/square_4_edge_skeleton.pdf:\
 
 build/$(MODE)/pdf/mesh/square_8_edge_skeleton.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
   | build/$(MODE)/pdf/mesh\

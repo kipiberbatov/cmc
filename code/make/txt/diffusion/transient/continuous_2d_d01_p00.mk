@@ -19,7 +19,7 @@ _txt_diffusion_transient_continuous_2d_d01_p00 :=\
 
 build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/primal_strong_cochain_square_8_input.txt:\
   build/$(MODE)/bin/diffusion_transient_discrete_primal_strong_from_continuous$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
   build/$(MODE)/obj/plugins/diffusion_transient_continuous_2d_d01_p00$(.OBJ)\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -31,9 +31,9 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/primal_strong_cochai
 
 build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/primal_strong_cochain_square_8_trapezoidal_0p05_1000_potential.txt:\
   build/$(MODE)/bin/diffusion_transient_discrete_primal_strong_solve_trapezoidal$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
-  build/$(MODE)/txt/mesh/square_8_cbd.txt\
-  build/$(MODE)/txt/mesh/square_8_cbd_star.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
+  build/$(MODE)/txt/mesh/square/8_cbd.txt\
+  build/$(MODE)/txt/mesh/square/8_cbd_star.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/primal_strong_cochain_square_8_input.txt\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00
 	$(INTERPRETER) $<\
@@ -47,8 +47,8 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/primal_strong_cochai
 
 build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/primal_strong_cochain_square_8_trapezoidal_0p05_1000_flow_rate.txt:\
   build/$(MODE)/bin/diffusion_transient_discrete_flow_rate_from_potential$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
-  build/$(MODE)/txt/mesh/square_8_hodge.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
+  build/$(MODE)/txt/mesh/square/8_hodge.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/primal_strong_cochain_square_8_input.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/primal_strong_cochain_square_8_trapezoidal_0p05_1000_potential.txt\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00
@@ -63,8 +63,8 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/primal_strong_cochai
 
 build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/primal_weak_cochain_square_8_input.txt:\
   build/$(MODE)/bin/diffusion_transient_discrete_primal_weak_from_continuous$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
-  build/$(MODE)/txt/mesh/square_8_vol.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
+  build/$(MODE)/txt/mesh/square/8_vol.txt\
   build/$(MODE)/obj/plugins/diffusion_transient_continuous_2d_d01_p00$(.OBJ)\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -77,8 +77,8 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/primal_weak_cochain_
 
 build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/primal_weak_cochain_square_8_trapezoidal_0p05_1000_potential.txt:\
   build/$(MODE)/bin/diffusion_transient_discrete_primal_weak_solve_trapezoidal$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
-  build/$(MODE)/txt/mesh/square_8_inner.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
+  build/$(MODE)/txt/mesh/square/8_inner.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/primal_weak_cochain_square_8_input.txt\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00
 	$(INTERPRETER) $<\
@@ -91,8 +91,8 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/primal_weak_cochain_
 
 build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/primal_weak_cochain_square_8_trapezoidal_0p05_1000_flow_rate.txt:\
   build/$(MODE)/bin/diffusion_transient_discrete_flow_rate_from_potential$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
-  build/$(MODE)/txt/mesh/square_8_hodge.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
+  build/$(MODE)/txt/mesh/square/8_hodge.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/primal_weak_cochain_square_8_input.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/primal_weak_cochain_square_8_trapezoidal_0p05_1000_potential.txt\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00
@@ -107,9 +107,9 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/primal_weak_cochain_
 
 build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/mixed_weak_cochain_square_8_input.txt:\
   build/$(MODE)/bin/diffusion_transient_discrete_mixed_weak_from_continuous$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
-  build/$(MODE)/txt/mesh/square_8_hodge_corrected.txt\
-  build/$(MODE)/txt/mesh/square_8_vol.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
+  build/$(MODE)/txt/mesh/square/8_hodge_corrected.txt\
+  build/$(MODE)/txt/mesh/square/8_vol.txt\
   build/$(MODE)/obj/plugins/diffusion_transient_continuous_2d_d01_p00$(.OBJ)\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -123,8 +123,8 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/mixed_weak_cochain_s
 
 build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/mixed_weak_cochain_square_8_trapezoidal_0p05_1000_solution.txt:\
   build/$(MODE)/bin/diffusion_transient_discrete_mixed_weak_solve_trapezoidal$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
-  build/$(MODE)/txt/mesh/square_8_inner_corrected.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
+  build/$(MODE)/txt/mesh/square/8_inner_corrected.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/mixed_weak_cochain_square_8_input.txt\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00
 	$(INTERPRETER) $<\
@@ -137,8 +137,8 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/mixed_weak_cochain_s
 
 build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/mixed_weak_cochain_square_8_trapezoidal_0p05_1000_potential.txt:\
   build/$(MODE)/bin/diffusion_transient_discrete_mixed_weak_potential$(.EXE)\
-  build/$(MODE)/txt/mesh/square_8.txt\
-  build/$(MODE)/txt/mesh/square_8_vol.txt\
+  build/$(MODE)/txt/mesh/square/8.txt\
+  build/$(MODE)/txt/mesh/square/8_vol.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/mixed_weak_cochain_square_8_input.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00/mixed_weak_cochain_square_8_trapezoidal_0p05_1000_solution.txt\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d01_p00
