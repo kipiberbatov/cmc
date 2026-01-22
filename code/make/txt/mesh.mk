@@ -81,7 +81,7 @@ txt_mesh_brick_3d: $(_txt_mesh_brick_3d)
 txt_mesh_brick_3d_clean:
 	-$(RM) $(_txt_mesh_brick_3d)
 
-_txt_mesh_brick_regular_4d := $(_txt_mesh_brick_regular_4d_2)
+_txt_mesh_brick_4d := $(_txt_mesh_brick_4d_2)
 
 .PHONY: txt_mesh_brick_4d txt_mesh_brick_4d_clean
 
