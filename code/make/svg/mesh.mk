@@ -104,7 +104,7 @@ build/$(MODE)/svg/mesh/brick_2d_2_forman_edge_skeleton.svg:\
 
 build/$(MODE)/svg/mesh/brick_2d_4_edge_skeleton.svg:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_2d_4.txt\
+  build/$(MODE)/txt/mesh/brick_2d_4/data.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_svg_animation$(.OBJ)\
   | build/$(MODE)/svg/mesh\
