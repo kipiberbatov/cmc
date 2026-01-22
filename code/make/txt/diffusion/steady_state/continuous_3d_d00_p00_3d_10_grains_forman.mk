@@ -30,7 +30,7 @@ _txt_diffusion_steady_state_continuous_3d_d00_p00_3d_10_grains_forman :=\
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman/exact_potential.txt:\
   build/$(MODE)/bin/diffusion_steady_state_continuous_exact_potential$(.EXE)\
-  build/$(MODE)/txt/mesh/3d_10_grains_forman.txt\
+  build/$(MODE)/txt/mesh/3d_10_grains/forman.txt\
   build/$(MODE)/obj/plugins/diffusion_steady_state_continuous_3d_d00_p00$(.OBJ)\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -51,7 +51,7 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_form
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman/primal_strong_cochain_input.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_primal_strong_from_continuous$(.EXE)\
-  build/$(MODE)/txt/mesh/3d_10_grains_forman.txt\
+  build/$(MODE)/txt/mesh/3d_10_grains/forman.txt\
   build/$(MODE)/obj/plugins/diffusion_steady_state_continuous_3d_d00_p00$(.OBJ)\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -63,9 +63,9 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_form
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman/primal_strong_cochain_potential.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_primal_strong_solve$(.EXE)\
-  build/$(MODE)/txt/mesh/3d_10_grains_forman.txt\
-  build/$(MODE)/txt/mesh/3d_10_grains_forman_cbd.txt\
-  build/$(MODE)/txt/mesh/3d_10_grains_forman_cbd_star.txt\
+  build/$(MODE)/txt/mesh/3d_10_grains/forman.txt\
+  build/$(MODE)/txt/mesh/3d_10_grains/forman_cbd.txt\
+  build/$(MODE)/txt/mesh/3d_10_grains/forman_cbd_star.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman/primal_strong_cochain_input.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman
 	$(INTERPRETER) $<\
@@ -77,8 +77,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_form
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman/primal_strong_cochain_flow_rate.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_flow_rate_from_potential$(.EXE)\
-  build/$(MODE)/txt/mesh/3d_10_grains_forman.txt\
-  build/$(MODE)/txt/mesh/3d_10_grains_forman_hodge.txt\
+  build/$(MODE)/txt/mesh/3d_10_grains/forman.txt\
+  build/$(MODE)/txt/mesh/3d_10_grains/forman_hodge.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman/primal_strong_cochain_input.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman/primal_strong_cochain_potential.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman
@@ -121,8 +121,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_form
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman/primal_weak_cochain_input.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_primal_weak_from_continuous$(.EXE)\
-  build/$(MODE)/txt/mesh/3d_10_grains_forman.txt\
-  build/$(MODE)/txt/mesh/3d_10_grains_forman_vol.txt\
+  build/$(MODE)/txt/mesh/3d_10_grains/forman.txt\
+  build/$(MODE)/txt/mesh/3d_10_grains/forman_vol.txt\
   build/$(MODE)/obj/plugins/diffusion_steady_state_continuous_3d_d00_p00$(.OBJ)\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -135,8 +135,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_form
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman/primal_weak_cochain_potential.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_primal_weak_solve$(.EXE)\
-  build/$(MODE)/txt/mesh/3d_10_grains_forman.txt\
-  build/$(MODE)/txt/mesh/3d_10_grains_forman_inner.txt\
+  build/$(MODE)/txt/mesh/3d_10_grains/forman.txt\
+  build/$(MODE)/txt/mesh/3d_10_grains/forman_inner.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman/primal_weak_cochain_input.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman
 	$(INTERPRETER) $<\
@@ -147,8 +147,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_form
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman/primal_weak_cochain_flow_rate.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_flow_rate_from_potential$(.EXE)\
-  build/$(MODE)/txt/mesh/3d_10_grains_forman.txt\
-  build/$(MODE)/txt/mesh/3d_10_grains_forman_hodge.txt\
+  build/$(MODE)/txt/mesh/3d_10_grains/forman.txt\
+  build/$(MODE)/txt/mesh/3d_10_grains/forman_hodge.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman/primal_weak_cochain_input.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman/primal_weak_cochain_potential.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman
@@ -191,8 +191,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_form
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman/mixed_weak_cochain_input.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_mixed_weak_from_continuous$(.EXE)\
-  build/$(MODE)/txt/mesh/3d_10_grains_forman.txt\
-  build/$(MODE)/txt/mesh/3d_10_grains_forman_vol.txt\
+  build/$(MODE)/txt/mesh/3d_10_grains/forman.txt\
+  build/$(MODE)/txt/mesh/3d_10_grains/forman_vol.txt\
   build/$(MODE)/obj/plugins/diffusion_steady_state_continuous_3d_d00_p00$(.OBJ)\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -205,8 +205,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_form
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman/mixed_weak_cochain_solution.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_mixed_weak_solve$(.EXE)\
-  build/$(MODE)/txt/mesh/3d_10_grains_forman.txt\
-  build/$(MODE)/txt/mesh/3d_10_grains_forman_inner.txt\
+  build/$(MODE)/txt/mesh/3d_10_grains/forman.txt\
+  build/$(MODE)/txt/mesh/3d_10_grains/forman_inner.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman/mixed_weak_cochain_input.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman
 	$(INTERPRETER) $<\
@@ -217,8 +217,8 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_form
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman/mixed_weak_cochain_potential.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_mixed_weak_potential$(.EXE)\
-  build/$(MODE)/txt/mesh/3d_10_grains_forman.txt\
-  build/$(MODE)/txt/mesh/3d_10_grains_forman_vol.txt\
+  build/$(MODE)/txt/mesh/3d_10_grains/forman.txt\
+  build/$(MODE)/txt/mesh/3d_10_grains/forman_vol.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman/mixed_weak_cochain_input.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman/mixed_weak_cochain_solution.txt\
   | build/$(MODE)/txt/diffusion/steady_state/continuous_3d_d00_p00_3d_10_grains_forman
