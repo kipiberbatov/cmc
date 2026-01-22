@@ -394,7 +394,7 @@ build/$(MODE)/svg/mesh/triangle_and_square_edge_skeleton.svg:\
 
 build/$(MODE)/svg/mesh/triangle_and_square_forman_edge_skeleton.svg:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
-  build/$(MODE)/txt/mesh/triangle_and_square_forman.txt\
+  build/$(MODE)/txt/mesh/triangle_and_square/forman.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_svg_animation$(.OBJ)\
   | build/$(MODE)/svg/mesh\
