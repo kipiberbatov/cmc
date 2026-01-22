@@ -137,7 +137,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p02/mixed_weak_cochai
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p02/exact_hemisphere_polar_6_6_forman_potential.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_0_cochain_sequence$(.EXE)\
-  build/$(MODE)/txt/mesh/hemisphere_polar_6_6_forman.txt\
+  build/$(MODE)/txt/mesh/hemisphere_polar_6_6/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d04_p02/exact_hemisphere_polar_6_6_forman_potential.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence_polar_forman$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
@@ -156,7 +156,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p02/exact_hemisphere_
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p02/exact_hemisphere_polar_6_6_forman_flow_rate.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_1_cochain_sequence$(.EXE)\
-  build/$(MODE)/txt/mesh/hemisphere_polar_6_6_forman.txt\
+  build/$(MODE)/txt/mesh/hemisphere_polar_6_6/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d04_p02/exact_hemisphere_polar_6_6_forman_flow_rate.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence_polar_forman$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
@@ -175,7 +175,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p02/exact_hemisphere_
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p02/primal_weak_cochain_hemisphere_polar_6_6_forman_potential.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_0_cochain_sequence$(.EXE)\
-  build/$(MODE)/txt/mesh/hemisphere_polar_6_6_forman.txt\
+  build/$(MODE)/txt/mesh/hemisphere_polar_6_6/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d04_p02/primal_weak_cochain_hemisphere_polar_6_6_forman_potential.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence_polar_forman$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
@@ -194,7 +194,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p02/primal_weak_cocha
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p02/primal_weak_cochain_hemisphere_polar_6_6_forman_flow_rate.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_1_cochain_sequence$(.EXE)\
-  build/$(MODE)/txt/mesh/hemisphere_polar_6_6_forman.txt\
+  build/$(MODE)/txt/mesh/hemisphere_polar_6_6/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d04_p02/primal_weak_cochain_hemisphere_polar_6_6_forman_flow_rate.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence_polar_forman$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
@@ -213,7 +213,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p02/primal_weak_cocha
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p02/mixed_weak_cochain_hemisphere_polar_6_6_forman_potential.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_0_cochain_sequence$(.EXE)\
-  build/$(MODE)/txt/mesh/hemisphere_polar_6_6_forman.txt\
+  build/$(MODE)/txt/mesh/hemisphere_polar_6_6/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d04_p02/mixed_weak_cochain_hemisphere_polar_6_6_forman_potential.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence_polar_forman$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
@@ -232,7 +232,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p02/mixed_weak_cochai
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p02/mixed_weak_cochain_hemisphere_polar_6_6_forman_flow_rate.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_1_cochain_sequence$(.EXE)\
-  build/$(MODE)/txt/mesh/hemisphere_polar_6_6_forman.txt\
+  build/$(MODE)/txt/mesh/hemisphere_polar_6_6/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d04_p02/mixed_weak_cochain_hemisphere_polar_6_6_forman_solution.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence_polar_forman$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\

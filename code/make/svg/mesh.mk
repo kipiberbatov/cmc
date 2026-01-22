@@ -539,7 +539,7 @@ build/$(MODE)/svg/mesh/hemisphere_polar_4_3_forman_edge_skeleton.svg:\
 
 build/$(MODE)/svg/mesh/hemisphere_polar_6_6_edge_skeleton.svg:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
-  build/$(MODE)/txt/mesh/hemisphere_polar_6_6.txt\
+  build/$(MODE)/txt/mesh/hemisphere_polar_6_6/data.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton_polar$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_svg_animation$(.OBJ)\
   | build/$(MODE)/svg/mesh\
@@ -555,7 +555,7 @@ build/$(MODE)/svg/mesh/hemisphere_polar_6_6_edge_skeleton.svg:\
 
 build/$(MODE)/svg/mesh/hemisphere_polar_6_6_forman_edge_skeleton.svg:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
-  build/$(MODE)/txt/mesh/hemisphere_polar_6_6_forman.txt\
+  build/$(MODE)/txt/mesh/hemisphere_polar_6_6/forman.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton_polar_forman$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_svg_animation$(.OBJ)\
   | build/$(MODE)/svg/mesh\
