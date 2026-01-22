@@ -72,7 +72,7 @@ build/$(MODE)/svg/mesh/brick_2d_1_forman_edge_skeleton.svg:\
 
 build/$(MODE)/svg/mesh/brick_2d_2_edge_skeleton.svg:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_2d_2.txt\
+  build/$(MODE)/txt/mesh/brick_2d_2/data.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_svg_animation$(.OBJ)\
   | build/$(MODE)/svg/mesh\
@@ -88,7 +88,7 @@ build/$(MODE)/svg/mesh/brick_2d_2_edge_skeleton.svg:\
 
 build/$(MODE)/svg/mesh/brick_2d_2_forman_edge_skeleton.svg:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_2d_2_forman.txt\
+  build/$(MODE)/txt/mesh/brick_2d_2/forman.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_svg_animation$(.OBJ)\
   | build/$(MODE)/svg/mesh\
