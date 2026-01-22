@@ -475,7 +475,7 @@ build/$(MODE)/svg/mesh/disk_polar_4_3_forman_edge_skeleton.svg:\
 
 build/$(MODE)/svg/mesh/disk_polar_18_10_edge_skeleton.svg:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
-  build/$(MODE)/txt/mesh/disk_polar_18_10.txt\
+  build/$(MODE)/txt/mesh/disk_polar_18_10/data.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton_polar$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_svg_animation$(.OBJ)\
   | build/$(MODE)/svg/mesh\
@@ -491,7 +491,7 @@ build/$(MODE)/svg/mesh/disk_polar_18_10_edge_skeleton.svg:\
 
 build/$(MODE)/svg/mesh/disk_polar_18_10_forman_edge_skeleton.svg:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
-  build/$(MODE)/txt/mesh/disk_polar_18_10_forman.txt\
+  build/$(MODE)/txt/mesh/disk_polar_18_10/forman.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton_polar_forman$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_svg_animation$(.OBJ)\
   | build/$(MODE)/svg/mesh\
