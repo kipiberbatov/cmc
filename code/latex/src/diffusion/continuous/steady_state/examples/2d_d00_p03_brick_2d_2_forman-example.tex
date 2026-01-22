@@ -1,32 +1,32 @@
 \begin{example}
-  \label{cmc/diffusion/continuous/steady_state/examples/2d_d00_p01-example}
+  \label{cmc/diffusion/continuous/steady_state/examples/2d_d00_p03-example}
   Consider the steady-state continuous heat transport problem
   (\Cref{cmc/diffusion/continuous/steady_state/primal_strong-formulation},
    \Cref{cmc/diffusion/continuous/steady_state/primal_weak-formulation},
    \Cref{cmc/diffusion/continuous/steady_state/mixed_weak-formulation})
-  with input data \verb|2d_d00_p01| in the nomenclature of the C codebase.
+  with input data \verb|2d_d00_p03| in the nomenclature of the C codebase.
 
   Concretely,
     $X = [0, 1]^2$,
     $\tilde{\kappa} \equiv 1$,
-    $f \equiv 0$,
+    $f = -2 \, d x \wedge d y$,
     $G_D = \{0, 1\} \times [0, 1]$,
     $G_N = [0, 1] \times \{0, 1\}$,
-    $g_D(x, y) = \begin{cases} -100, & x = 0 \\ 100, & x = 1 \end{cases}$,
+    $g_D \equiv 0$,
     $g_N \equiv 0$.
 
   This problem has the following exact solution:
   \begin{subequations}
     \begin{alignat}{3}
-      & u(x, y) && = && 100 (2 x - 1), \\
-      & q(x, y) && = && - 200\, d y.
+      & u(x, y) && = && x (x - 1), \\
+      & q(x, y) && = && - (2 x - 1)\, d y.
     \end{alignat}
   \end{subequations}
   Consider a mesh $M$ for $X$ consisting of $2 \times 2$ squares (each axis is
   divided into $2$ segments) with Forman subdivision $K$ ($4 \times 4$ squares).
   Its potential and flow rate on $K$ consisting of the exact solution and the
   $3$ discussed cochain methods are shown on
-  \Cref{figure:cmc/diffusion/steady_state/continuous_2d_d00_p01/brick_2d_2_forman_potential}
+  \Cref{figure:cmc/diffusion/steady_state/continuous_2d_d00_p03_brick_2d_2_forman/potential}
   and
-  \Cref{figure:cmc/diffusion/steady_state/continuous_2d_d00_p01/brick_2d_2_forman_flow_rate}.
+  \Cref{figure:cmc/diffusion/steady_state/continuous_2d_d00_p03_brick_2d_2_forman/flow_rate}.
 \end{example}
