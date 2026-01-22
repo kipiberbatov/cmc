@@ -271,7 +271,7 @@ Hence, MinGW and Wine need to be installed.
 With Homebrew this is achieved by running
 ```bash
 brew install mingw-w64
-brew innstall --cask wine-stable
+brew install --cask wine-stable
 ```
 (Note that `wine-stable` is built for the x86_64 architecture.
 Hence, it requires Rosetta 2 in order to run on Apple silicon.)
