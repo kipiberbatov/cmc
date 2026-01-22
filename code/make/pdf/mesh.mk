@@ -362,7 +362,7 @@ build/$(MODE)/pdf/mesh/two_triangles_edge_skeleton.pdf:\
 
 build/$(MODE)/pdf/mesh/two_triangles_forman_edge_skeleton.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
-  build/$(MODE)/txt/mesh/two_triangles_forman.txt\
+  build/$(MODE)/txt/mesh/two_triangles/forman.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
   | build/$(MODE)/pdf/mesh\
