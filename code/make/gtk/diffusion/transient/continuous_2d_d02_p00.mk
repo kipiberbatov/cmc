@@ -16,7 +16,7 @@ _gtk_diffusion_transient_continuous_2d_d02_p00 :=\
 
 build/$(MODE)/gtk/diffusion/transient/continuous_2d_d02_p00/primal_strong_cochain_2d_10_grains_forman_trapezoidal_0p05_1000_potential.log:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_0_cochain_sequence$(.EXE)\
-  build/$(MODE)/txt/mesh/2d_10_grains_forman.txt\
+  build/$(MODE)/txt/mesh/2d_10_grains/forman.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d02_p00/primal_strong_cochain_2d_10_grains_forman_trapezoidal_0p05_1000_potential.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_gtk_animation$(.OBJ)\
@@ -38,7 +38,7 @@ build/$(MODE)/gtk/diffusion/transient/continuous_2d_d02_p00/primal_strong_cochai
 
 build/$(MODE)/gtk/diffusion/transient/continuous_2d_d02_p00/primal_strong_cochain_2d_10_grains_forman_trapezoidal_0p05_1000_flow_rate.log:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_1_cochain_sequence$(.EXE)\
-  build/$(MODE)/txt/mesh/2d_10_grains_forman.txt\
+  build/$(MODE)/txt/mesh/2d_10_grains/forman.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d02_p00/primal_strong_cochain_2d_10_grains_forman_trapezoidal_0p05_1000_flow_rate.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_gtk_animation$(.OBJ)\
@@ -60,7 +60,7 @@ build/$(MODE)/gtk/diffusion/transient/continuous_2d_d02_p00/primal_strong_cochai
 
 build/$(MODE)/gtk/diffusion/transient/continuous_2d_d02_p00/primal_weak_cochain_2d_10_grains_forman_trapezoidal_0p05_1000_potential.log:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_0_cochain_sequence$(.EXE)\
-  build/$(MODE)/txt/mesh/2d_10_grains_forman.txt\
+  build/$(MODE)/txt/mesh/2d_10_grains/forman.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d02_p00/primal_weak_cochain_2d_10_grains_forman_trapezoidal_0p05_1000_potential.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_gtk_animation$(.OBJ)\
@@ -82,7 +82,7 @@ build/$(MODE)/gtk/diffusion/transient/continuous_2d_d02_p00/primal_weak_cochain_
 
 build/$(MODE)/gtk/diffusion/transient/continuous_2d_d02_p00/primal_weak_cochain_2d_10_grains_forman_trapezoidal_0p05_1000_flow_rate.log:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_1_cochain_sequence$(.EXE)\
-  build/$(MODE)/txt/mesh/2d_10_grains_forman.txt\
+  build/$(MODE)/txt/mesh/2d_10_grains/forman.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d02_p00/primal_weak_cochain_2d_10_grains_forman_trapezoidal_0p05_1000_flow_rate.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_gtk_animation$(.OBJ)\
@@ -104,7 +104,7 @@ build/$(MODE)/gtk/diffusion/transient/continuous_2d_d02_p00/primal_weak_cochain_
 
 build/$(MODE)/gtk/diffusion/transient/continuous_2d_d02_p00/mixed_weak_cochain_2d_10_grains_forman_trapezoidal_0p05_1000_potential.log:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_0_cochain_sequence$(.EXE)\
-  build/$(MODE)/txt/mesh/2d_10_grains_forman.txt\
+  build/$(MODE)/txt/mesh/2d_10_grains/forman.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d02_p00/mixed_weak_cochain_2d_10_grains_forman_trapezoidal_0p05_1000_potential.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_gtk_animation$(.OBJ)\
@@ -126,7 +126,7 @@ build/$(MODE)/gtk/diffusion/transient/continuous_2d_d02_p00/mixed_weak_cochain_2
 
 build/$(MODE)/gtk/diffusion/transient/continuous_2d_d02_p00/mixed_weak_cochain_2d_10_grains_forman_trapezoidal_0p05_1000_flow_rate.log:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_1_cochain_sequence$(.EXE)\
-  build/$(MODE)/txt/mesh/2d_10_grains_forman.txt\
+  build/$(MODE)/txt/mesh/2d_10_grains/forman.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d02_p00/mixed_weak_cochain_2d_10_grains_forman_trapezoidal_0p05_1000_solution.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_gtk_animation$(.OBJ)\

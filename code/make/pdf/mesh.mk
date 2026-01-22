@@ -427,7 +427,7 @@ build/$(MODE)/pdf/mesh/2d_10_grains_edge_skeleton.pdf:\
 
 build/$(MODE)/pdf/mesh/2d_10_grains_forman_edge_skeleton.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
-  build/$(MODE)/txt/mesh/2d_10_grains_forman.txt\
+  build/$(MODE)/txt/mesh/2d_10_grains/forman.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
   | build/$(MODE)/pdf/mesh\
