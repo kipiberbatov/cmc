@@ -19,7 +19,7 @@ _txt_diffusion_transient_continuous_2d_d00_p02 :=\
 
 build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/primal_strong_cochain_brick_2d_5_forman_input.txt:\
   build/$(MODE)/bin/diffusion_transient_discrete_primal_strong_from_continuous$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_2d_5_forman.txt\
+  build/$(MODE)/txt/mesh/brick_2d_5/forman.txt\
   build/$(MODE)/obj/plugins/diffusion_transient_continuous_2d_d00_p02$(.OBJ)\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -31,9 +31,9 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/primal_strong_cochai
 
 build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/primal_strong_cochain_brick_2d_5_forman_trapezoidal_0p001_1000_potential.txt:\
   build/$(MODE)/bin/diffusion_transient_discrete_primal_strong_solve_trapezoidal$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_2d_5_forman.txt\
-  build/$(MODE)/txt/mesh/brick_2d_5_forman_cbd.txt\
-  build/$(MODE)/txt/mesh/brick_2d_5_forman_cbd_star.txt\
+  build/$(MODE)/txt/mesh/brick_2d_5/forman.txt\
+  build/$(MODE)/txt/mesh/brick_2d_5/forman_cbd.txt\
+  build/$(MODE)/txt/mesh/brick_2d_5/forman_cbd_star.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/primal_strong_cochain_brick_2d_5_forman_input.txt\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02
 	$(INTERPRETER) $<\
@@ -47,8 +47,8 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/primal_strong_cochai
 
 build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/primal_strong_cochain_brick_2d_5_forman_trapezoidal_0p001_1000_flow_rate.txt:\
   build/$(MODE)/bin/diffusion_transient_discrete_flow_rate_from_potential$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_2d_5_forman.txt\
-  build/$(MODE)/txt/mesh/brick_2d_5_forman_hodge.txt\
+  build/$(MODE)/txt/mesh/brick_2d_5/forman.txt\
+  build/$(MODE)/txt/mesh/brick_2d_5/forman_hodge.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/primal_strong_cochain_brick_2d_5_forman_input.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/primal_strong_cochain_brick_2d_5_forman_trapezoidal_0p001_1000_potential.txt\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02
@@ -63,8 +63,8 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/primal_strong_cochai
 
 build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/primal_weak_cochain_brick_2d_5_forman_input.txt:\
   build/$(MODE)/bin/diffusion_transient_discrete_primal_weak_from_continuous$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_2d_5_forman.txt\
-  build/$(MODE)/txt/mesh/brick_2d_5_forman_vol.txt\
+  build/$(MODE)/txt/mesh/brick_2d_5/forman.txt\
+  build/$(MODE)/txt/mesh/brick_2d_5/forman_vol.txt\
   build/$(MODE)/obj/plugins/diffusion_transient_continuous_2d_d00_p02$(.OBJ)\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -77,8 +77,8 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/primal_weak_cochain_
 
 build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/primal_weak_cochain_brick_2d_5_forman_trapezoidal_0p001_1000_potential.txt:\
   build/$(MODE)/bin/diffusion_transient_discrete_primal_weak_solve_trapezoidal$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_2d_5_forman.txt\
-  build/$(MODE)/txt/mesh/brick_2d_5_forman_inner.txt\
+  build/$(MODE)/txt/mesh/brick_2d_5/forman.txt\
+  build/$(MODE)/txt/mesh/brick_2d_5/forman_inner.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/primal_weak_cochain_brick_2d_5_forman_input.txt\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02
 	$(INTERPRETER) $<\
@@ -91,8 +91,8 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/primal_weak_cochain_
 
 build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/primal_weak_cochain_brick_2d_5_forman_trapezoidal_0p001_1000_flow_rate.txt:\
   build/$(MODE)/bin/diffusion_transient_discrete_flow_rate_from_potential$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_2d_5_forman.txt\
-  build/$(MODE)/txt/mesh/brick_2d_5_forman_hodge.txt\
+  build/$(MODE)/txt/mesh/brick_2d_5/forman.txt\
+  build/$(MODE)/txt/mesh/brick_2d_5/forman_hodge.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/primal_weak_cochain_brick_2d_5_forman_input.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/primal_weak_cochain_brick_2d_5_forman_trapezoidal_0p001_1000_potential.txt\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02
@@ -107,9 +107,9 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/primal_weak_cochain_
 
 build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/mixed_weak_cochain_brick_2d_5_forman_input.txt:\
   build/$(MODE)/bin/diffusion_transient_discrete_mixed_weak_from_continuous$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_2d_5_forman.txt\
-  build/$(MODE)/txt/mesh/brick_2d_5_forman_hodge_corrected.txt\
-  build/$(MODE)/txt/mesh/brick_2d_5_forman_vol.txt\
+  build/$(MODE)/txt/mesh/brick_2d_5/forman.txt\
+  build/$(MODE)/txt/mesh/brick_2d_5/forman_hodge_corrected.txt\
+  build/$(MODE)/txt/mesh/brick_2d_5/forman_vol.txt\
   build/$(MODE)/obj/plugins/diffusion_transient_continuous_2d_d00_p02$(.OBJ)\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02\
     build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
@@ -123,8 +123,8 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/mixed_weak_cochain_b
 
 build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/mixed_weak_cochain_brick_2d_5_forman_trapezoidal_0p001_1000_solution.txt:\
   build/$(MODE)/bin/diffusion_transient_discrete_mixed_weak_solve_trapezoidal$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_2d_5_forman.txt\
-  build/$(MODE)/txt/mesh/brick_2d_5_forman_inner_corrected.txt\
+  build/$(MODE)/txt/mesh/brick_2d_5/forman.txt\
+  build/$(MODE)/txt/mesh/brick_2d_5/forman_inner_corrected.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/mixed_weak_cochain_brick_2d_5_forman_input.txt\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02
 	$(INTERPRETER) $<\
@@ -137,8 +137,8 @@ build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/mixed_weak_cochain_b
 
 build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/mixed_weak_cochain_brick_2d_5_forman_trapezoidal_0p001_1000_potential.txt:\
   build/$(MODE)/bin/diffusion_transient_discrete_mixed_weak_potential$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_2d_5_forman.txt\
-  build/$(MODE)/txt/mesh/brick_2d_5_forman_vol.txt\
+  build/$(MODE)/txt/mesh/brick_2d_5/forman.txt\
+  build/$(MODE)/txt/mesh/brick_2d_5/forman_vol.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/mixed_weak_cochain_brick_2d_5_forman_input.txt\
   build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02/mixed_weak_cochain_brick_2d_5_forman_trapezoidal_0p001_1000_solution.txt\
   | build/$(MODE)/txt/diffusion/transient/continuous_2d_d00_p02

@@ -120,7 +120,7 @@ build/$(MODE)/pdf/mesh/brick_2d_4_edge_skeleton.pdf:\
 
 build/$(MODE)/pdf/mesh/brick_2d_5_edge_skeleton.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_2d_5.txt\
+  build/$(MODE)/txt/mesh/brick_2d_5/data.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
   | build/$(MODE)/pdf/mesh\
@@ -136,7 +136,7 @@ build/$(MODE)/pdf/mesh/brick_2d_5_edge_skeleton.pdf:\
 
 build/$(MODE)/pdf/mesh/brick_2d_5_forman_edge_skeleton.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
-  build/$(MODE)/txt/mesh/brick_2d_5_forman.txt\
+  build/$(MODE)/txt/mesh/brick_2d_5/forman.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
   | build/$(MODE)/pdf/mesh\
