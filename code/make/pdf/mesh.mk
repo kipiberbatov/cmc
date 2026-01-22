@@ -507,7 +507,7 @@ build/$(MODE)/pdf/mesh/disk_polar_18_10_forman_edge_skeleton.pdf:\
 
 build/$(MODE)/pdf/mesh/hemisphere_polar_4_3_edge_skeleton.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
-  build/$(MODE)/txt/mesh/hemisphere_polar_4_3.txt\
+  build/$(MODE)/txt/mesh/hemisphere_polar_4_3/data.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton_polar$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
   | build/$(MODE)/pdf/mesh\
@@ -523,7 +523,7 @@ build/$(MODE)/pdf/mesh/hemisphere_polar_4_3_edge_skeleton.pdf:\
 
 build/$(MODE)/pdf/mesh/hemisphere_polar_4_3_forman_edge_skeleton.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
-  build/$(MODE)/txt/mesh/hemisphere_polar_4_3_forman.txt\
+  build/$(MODE)/txt/mesh/hemisphere_polar_4_3/forman.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton_polar_forman$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
   | build/$(MODE)/pdf/mesh\
