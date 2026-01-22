@@ -216,7 +216,7 @@ build/$(MODE)/svg/mesh/rectangle_20_15_brick_5_3_forman_edge_skeleton.svg:\
 
 build/$(MODE)/svg/mesh/parallelogram_20_15_degrees_45_grid_5_3_edge_skeleton.svg:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
-  build/$(MODE)/txt/mesh/parallelogram_20_15_degrees_45_grid_5_3.txt\
+  build/$(MODE)/txt/mesh/parallelogram_20_15_degrees_45_grid_5_3/data.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_svg_animation$(.OBJ)\
   | build/$(MODE)/svg/mesh\
@@ -233,7 +233,7 @@ build/$(MODE)/svg/mesh/parallelogram_20_15_degrees_45_grid_5_3_edge_skeleton.svg
 
 build/$(MODE)/svg/mesh/parallelogram_20_15_degrees_45_grid_5_3_forman_edge_skeleton.svg:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
-  build/$(MODE)/txt/mesh/parallelogram_20_15_degrees_45_grid_5_3_forman.txt\
+  build/$(MODE)/txt/mesh/parallelogram_20_15_degrees_45_grid_5_3/forman.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton$(.OBJ)\
   build/$(MODE)/obj/plugins/cmc_cairo_svg_animation$(.OBJ)\
   | build/$(MODE)/svg/mesh\
