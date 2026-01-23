@@ -26,7 +26,7 @@ assets/mesh/sandstone_3062_grains_vpore.csv: | assets/mesh
 assets/mesh/sandstone_3062_grains_fpore.csv: | assets/mesh
 	curl https://zenodo.org/records/18248963/files/sandstone_3062_grains_fpore.csv > $@
 
-build/$(MODE)/txt/mesh/sandstone_3062_grains: | build/$(MODE)/txt/mesh/sandstone_3062_grains
+build/$(MODE)/txt/mesh/sandstone_3062_grains: | build/$(MODE)/txt/mesh
 	mkdir -p $@
 
 build/$(MODE)/txt/mesh/sandstone_3062_grains/data.txt:\
