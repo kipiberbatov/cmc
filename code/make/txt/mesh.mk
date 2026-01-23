@@ -3,34 +3,34 @@
 build/$(MODE)/txt/mesh: | build/$(MODE)/txt
 	mkdir -p $@
 
--include code/make/txt/mesh/brick_2d_1.mk
--include code/make/txt/mesh/brick_2d_2.mk
--include code/make/txt/mesh/brick_2d_4.mk
--include code/make/txt/mesh/brick_2d_5.mk
--include code/make/txt/mesh/brick_2d_10.mk
--include code/make/txt/mesh/rectangle_20_15_brick_5_3.mk
--include code/make/txt/mesh/parallelogram_20_15_degrees_45_grid_5_3.mk
--include code/make/txt/mesh/two_triangles.mk
--include code/make/txt/mesh/triangle_and_square.mk
--include code/make/txt/mesh/pentagon.mk
--include code/make/txt/mesh/square.mk
--include code/make/txt/mesh/2d_10_grains.mk
--include code/make/txt/mesh/3d_1_grain.mk
--include code/make/txt/mesh/3d_10_grains.mk
--include code/make/txt/mesh/3d_100_grains.mk
--include code/make/txt/mesh/disk_polar_4_3.mk
--include code/make/txt/mesh/disk_polar_18_10.mk
--include code/make/txt/mesh/hemisphere_polar_4_3.mk
--include code/make/txt/mesh/hemisphere_polar_6_6.mk
--include code/make/txt/mesh/brick_3d_1.mk
--include code/make/txt/mesh/brick_3d_2.mk
--include code/make/txt/mesh/brick_3d_5.mk
--include code/make/txt/mesh/brick_3d_10.mk
--include code/make/txt/mesh/brick_3d_25.mk # not used in default build
--include code/make/txt/mesh/square_pyramid.mk
--include code/make/txt/mesh/brick_4d_2.mk
--include code/make/txt/mesh/high_dimensions.mk # not used in default build
--include code/make/txt/mesh/sandstone_3062_grains.mk
+include code/make/txt/mesh/brick_2d_1.mk
+include code/make/txt/mesh/brick_2d_2.mk
+include code/make/txt/mesh/brick_2d_4.mk
+include code/make/txt/mesh/brick_2d_5.mk
+include code/make/txt/mesh/brick_2d_10.mk
+include code/make/txt/mesh/rectangle_20_15_brick_5_3.mk
+include code/make/txt/mesh/parallelogram_20_15_degrees_45_grid_5_3.mk
+include code/make/txt/mesh/two_triangles.mk
+include code/make/txt/mesh/triangle_and_square.mk
+include code/make/txt/mesh/pentagon.mk
+include code/make/txt/mesh/square.mk
+include code/make/txt/mesh/2d_10_grains.mk
+include code/make/txt/mesh/3d_1_grain.mk
+include code/make/txt/mesh/3d_10_grains.mk
+include code/make/txt/mesh/3d_100_grains.mk
+include code/make/txt/mesh/disk_polar_4_3.mk
+include code/make/txt/mesh/disk_polar_18_10.mk
+include code/make/txt/mesh/hemisphere_polar_4_3.mk
+include code/make/txt/mesh/hemisphere_polar_6_6.mk
+include code/make/txt/mesh/brick_3d_1.mk
+include code/make/txt/mesh/brick_3d_2.mk
+include code/make/txt/mesh/brick_3d_5.mk
+include code/make/txt/mesh/brick_3d_10.mk
+include code/make/txt/mesh/brick_3d_25.mk # not used in default build
+include code/make/txt/mesh/square_pyramid.mk
+include code/make/txt/mesh/brick_4d_2.mk
+include code/make/txt/mesh/high_dimensions.mk # not used in default build
+include code/make/txt/mesh/sandstone_3062_grains.mk
 
 _txt_mesh_brick_2d:=\
   $(_txt_mesh_brick_2d_1)\
