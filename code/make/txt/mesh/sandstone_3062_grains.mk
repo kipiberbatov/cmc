@@ -43,7 +43,14 @@ build/$(MODE)/txt/mesh/sandstone_3062_grains/kappa.txt:\
   assets/mesh/sandstone_3062_grains_vpore.csv\
   assets/mesh/sandstone_3062_grains_fpore.csv\
   | build/$(MODE)/txt/mesh/sandstone_3062_grains
-	$(INTERPRETER) $< --raw $(word 2, $^) $(word 3, $^) $(word 4, $^) $(word 5, $^) $(word 6, $^) 0.0651 74 6526 > $@
+	$(INTERPRETER) $< \
+  --raw $(word 2, $^) \
+  $(word 3, $^) \
+  $(word 4, $^) \
+  $(word 5, $^) \
+  $(word 6, $^) \
+  0.0651 74 6526 1 \
+  > $@
 
 build/$(MODE)/txt/mesh/sandstone_3062_grains/forman.txt:\
   build/$(MODE)/bin/forman_boundary$(.EXE)\

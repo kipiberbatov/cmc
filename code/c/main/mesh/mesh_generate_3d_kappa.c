@@ -113,7 +113,8 @@ double mesh_generate_3d_kappa_get_distance_cell_to_edge_3_1(
   int p_id,
   int e_id);
 double mesh_generate_3d_kappa_get_cell_model_volume(const mesh *m);
-int mesh_generate_3d_kappa_private(const mesh *m, struct mesh_3d_kappa_in *in);
+int mesh_generate_3d_kappa_private(const mesh *m, struct mesh_3d_kappa_in *in,
+  unsigned long long * seed);
 void mesh_generate_3d_kappa_get_cells_and_faces_from_vpore(
   int *cells_ids,
   int *face_ids_used,
@@ -138,7 +139,8 @@ void mesh_generate_3d_kappa_get_cells_from_fpore_and_assign(
   double *stface_data,
   double a,
   double b,
-  double module_volumes);
+  double module_volumes,
+  unsigned long long * seed);
 #else
 void mesh_generate_3d_kappa_get_cells_from_fpore_and_assign(
   double *thickness,
@@ -154,7 +156,8 @@ void mesh_generate_3d_kappa_get_cells_from_fpore_and_assign(
   double *stface_data,
   double a,
   double b,
-  double module_volumes);
+  double module_volumes,
+  unsigned long long * seed);
 #endif
 void mesh_generate_3d_kappa_assign_thickness_from_vpore(
   double *thickness,
@@ -197,12 +200,13 @@ void mesh_generate_3d_kappa_merge_kappa(
 ------------------------------------------------------------------------------*/
 int main(int argc, char **argv)
 {
+  unsigned long long seed;
   char *m_format, *m_name;
   FILE *m_file;
   mesh *m;
   struct mesh_3d_kappa_in input;
 
-  if (argc != 10)
+  if (argc != 11)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr,
@@ -221,6 +225,7 @@ int main(int argc, char **argv)
   input.a = atof(argv[7]);
   input.vpore_size = atoi(argv[8]);
   input.fpore_size = atoi(argv[9]);
+  seed = atoll(argv[10]);
 
   m_file = fopen(m_name, "r");
   if (m_file == NULL)
@@ -251,7 +256,7 @@ int main(int argc, char **argv)
 
   fclose(m_file);
 
-  mesh_generate_3d_kappa_private(m, &input);
+  mesh_generate_3d_kappa_private(m, &input, &seed);
 
 m_free:
   mesh_free(m);
@@ -262,7 +267,8 @@ end:
 /*------------------------------------------------------------------------------
                                   src
 ------------------------------------------------------------------------------*/
-int mesh_generate_3d_kappa_private(const mesh *m, struct mesh_3d_kappa_in *in)
+int mesh_generate_3d_kappa_private(const mesh *m, struct mesh_3d_kappa_in *in,
+  unsigned long long * seed)
 {
 /* init log */
 #ifdef ENABLE_LOG
@@ -490,7 +496,8 @@ int mesh_generate_3d_kappa_private(const mesh *m, struct mesh_3d_kappa_in *in)
     stface_data,
     in->a,
     b,
-    module_volumes);
+    module_volumes,
+    seed);
 #else
   mesh_generate_3d_kappa_get_cells_from_fpore_and_assign(
     thickness,
@@ -507,9 +514,10 @@ int mesh_generate_3d_kappa_private(const mesh *m, struct mesh_3d_kappa_in *in)
     stface_data,
     in->a,
     b,
-    module_volumes);
+    module_volumes,
+    seed);
 #endif
-if (errno)
+  if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
     fprintf(stderr, "error in func %s: %s\n", "mesh_generate_3d_kappa_assign_thickness_edge_from_vpore", strerror(errno));
@@ -1482,17 +1490,34 @@ void get_special_fpore_volume(
   }
 }
 
+/* Use the Donald Knuth's MMIX version of the Linear Congruential Generator */
+/* https://en.wikipedia.org/wiki/Linear_congruential_generator */
+void cmc_linear_congruential_generator_mmix(
+  unsigned long long * seed,
+  unsigned int * random_value)
+{
+  const unsigned long long a = 6364136223846793005ULL;
+  const unsigned long long c = 1442695040888963407ULL;
+  unsigned long long seed_next;
+  
+  seed_next = *seed * a + c;
+  *seed = seed_next;
+  *random_value = (unsigned int) (seed_next >> 32);
+}
+
 void get_special_fpore_face(
   int *select_face_id, int *face_ids_used,
   int *curr_face_id, const mesh *m,
   double fpore_volume, double **fpore,
-  double *stface_data)
+  double *stface_data,
+  unsigned long long * seed)
 {
   double upper_limit = (M_PI / 4) * pow((20 * fpore_volume / M_PI), 2 / 3.0);
   double lower_limit = (M_PI / 4) * pow((5 * fpore_volume / M_PI), 2 / 3.0);
 
   *select_face_id = -1;
   int rand_count = 0;
+  unsigned int random_value;
   for (int j = 0;;)
   {
     rand_count++;
@@ -1511,7 +1536,8 @@ void get_special_fpore_face(
     }
     else
     {
-      j = rand() % m->cn[2];
+      cmc_linear_congruential_generator_mmix(seed, &random_value);
+      j = random_value % m->cn[2];
     }
 
     int is_same = 0;
@@ -1553,7 +1579,8 @@ void mesh_generate_3d_kappa_get_cells_from_fpore_and_assign(
   double *stface_data,
   double a,
   double b,
-  double module_volumes)
+  double module_volumes,
+  unsigned long long * seed)
 #else
 void mesh_generate_3d_kappa_get_cells_from_fpore_and_assign(
   double *thickness,
@@ -1569,12 +1596,12 @@ void mesh_generate_3d_kappa_get_cells_from_fpore_and_assign(
   double *stface_data,
   double a,
   double b,
-  double module_volumes)
+  double module_volumes,
+  unsigned long long * seed)
 #endif
 {
   double volumes = 0.0;
-  unsigned int seed=1;
-  srand(seed);
+  unsigned int random_value;
 
   *fpore_used_sum = 0;
   double c = 0;
@@ -1582,7 +1609,8 @@ void mesh_generate_3d_kappa_get_cells_from_fpore_and_assign(
   for (; c + b < a;)
   {
     int scale = 1 / ((1 - 0.3) / (fpore_size + 0.4));
-    double random_fpore_i = (rand() % scale) / (scale * 1.0);
+    cmc_linear_congruential_generator_mmix(seed, &random_value);
+    double random_fpore_i = (random_value % scale) / (scale * 1.0);
     double fpore_volume = 0.0;
 
     if (random_fpore_i >= 1)
@@ -1616,7 +1644,8 @@ void mesh_generate_3d_kappa_get_cells_from_fpore_and_assign(
       curr_face_id, m,
       fpore_volume,
       fpore,
-      stface_data);
+      stface_data,
+      seed);
 
     if (select_face_id == -1)
       continue;
