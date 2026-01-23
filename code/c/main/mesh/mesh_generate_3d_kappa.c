@@ -68,10 +68,14 @@ void mesh_generate_3d_kappa_init_kappa_out(
 void mesh_generate_3d_kappa_free_kappa_out(struct mesh_3d_kappa_out *out);
 #endif
 /* function declaration */
-void mesh_generate_3d_kappa_scan_stcell(double* stcell_volumes,int n, const char *m_name);
-void mesh_generate_3d_kappa_scan_stface(double* stface_data, int n, const char *m_name);
-void mesh_generate_3d_kappa_scan_vpore(double * vpore_volumes,int n, const char *m_name);
-void mesh_generate_3d_kappa_scan_fpore(double ** fpore,int n, const char *m_name);
+void mesh_generate_3d_kappa_scan_stcell(
+  double* stcell_volumes,int n, const char *m_name);
+void mesh_generate_3d_kappa_scan_stface(
+  double* stface_data, int n, const char *m_name);
+void mesh_generate_3d_kappa_scan_vpore(
+  double * vpore_volumes,int n, const char *m_name);
+void mesh_generate_3d_kappa_scan_fpore(
+  double ** fpore,int n, const char *m_name);
 int mesh_generate_3d_kappa_get_cfn_3_i(const mesh *m, int i, int p_id);
 int mesh_generate_3d_kappa_get_cfn_3_2(const mesh *m, int p_id);
 int mesh_generate_3d_kappa_get_cfn_3_1(const mesh *m, int p_id);
@@ -123,42 +127,25 @@ void mesh_generate_3d_kappa_get_cells_and_faces_from_vpore(
   double *vpore_volumes,
   double *stcell_volumes,
   int vpore_size);
+void mesh_generate_3d_kappa_get_cells_from_fpore_and_assign(
+  double *thickness,
+  double *thickness_edge,
+  double *fpore_used,
+  double *fpore_volume_used,
+  int *fpore_used_sum,
+  int *face_ids_used,
+  int *curr_face_id,
 #ifdef ENABLE_LOG
-void mesh_generate_3d_kappa_get_cells_from_fpore_and_assign(
-  double *thickness,
-  double *thickness_edge,
-  double *fpore_used,
-  double *fpore_volume_used,
-  int *fpore_used_sum,
-  int *face_ids_used,
-  int *curr_face_id,
   struct mesh_3d_kappa_out *out,
-  const mesh *m,
-  double **fpore,
-  int fpore_size,
-  double *stface_data,
-  double a,
-  double b,
-  double module_volumes,
-  unsigned long long * seed);
-#else
-void mesh_generate_3d_kappa_get_cells_from_fpore_and_assign(
-  double *thickness,
-  double *thickness_edge,
-  double *fpore_used,
-  double *fpore_volume_used,
-  int *fpore_used_sum,
-  int *face_ids_used,
-  int *curr_face_id,
-  const mesh *m,
-  double **fpore,
-  int fpore_size,
-  double *stface_data,
-  double a,
-  double b,
-  double module_volumes,
-  unsigned long long * seed);
 #endif
+  const mesh *m,
+  double **fpore,
+  int fpore_size,
+  double *stface_data,
+  double a,
+  double b,
+  double module_volumes,
+  unsigned long long * seed);
 void mesh_generate_3d_kappa_assign_thickness_from_vpore(
   double *thickness,
   const mesh *m,
@@ -277,7 +264,8 @@ int mesh_generate_3d_kappa_private(const mesh *m, struct mesh_3d_kappa_in *in,
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fprintf(stderr, "error in func %s: %s\n", "mesh_generate_3d_kappa_init_kappa_out", strerror(errno));
+    fprintf(stderr, "error in function %s: %s\n",
+      "mesh_generate_3d_kappa_init_kappa_out", strerror(errno));
     goto end;
   }
 #endif
@@ -318,7 +306,8 @@ int mesh_generate_3d_kappa_private(const mesh *m, struct mesh_3d_kappa_in *in,
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fprintf(stderr, "error in func %s: %s\n", "mesh_generate_3d_kappa_scan_vpore", strerror(errno));
+    fprintf(stderr, "error in function %s: %s\n",
+      "mesh_generate_3d_kappa_scan_vpore", strerror(errno));
     goto free_vpore;
   }
 
@@ -358,18 +347,21 @@ int mesh_generate_3d_kappa_private(const mesh *m, struct mesh_3d_kappa_in *in,
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fprintf(stderr, "error in func %s: %s\n", "mesh_generate_3d_kappa_scan_fpore", strerror(errno));
+    fprintf(stderr, "error in function %s: %s\n",
+      "mesh_generate_3d_kappa_scan_fpore", strerror(errno));
     goto free_fpore;
   }
 
   /* 4.Read stcell，denoted as stcell_volumes */
   double *stcell_volumes = (double*)malloc(sizeof(double)*m->cn[3]);
   memset(stcell_volumes, 0, sizeof(double) * m->cn[3]);
-  mesh_generate_3d_kappa_scan_stcell(stcell_volumes,m->cn[3],in->stcell_filepath);
+  mesh_generate_3d_kappa_scan_stcell(
+    stcell_volumes, m->cn[3], in->stcell_filepath);
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fprintf(stderr, "error in func %s: %s\n", "mesh_generate_3d_kappa_scan_stcell", strerror(errno));
+    fprintf(stderr, "error in function %s: %s\n",
+      "mesh_generate_3d_kappa_scan_stcell", strerror(errno));
     goto free_fpore;
   }
 
@@ -404,7 +396,8 @@ int mesh_generate_3d_kappa_private(const mesh *m, struct mesh_3d_kappa_in *in,
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fprintf(stderr, "error in func %s: %s\n", "mesh_generate_3d_kappa_get_cells_and_faces_from_vpore", strerror(errno));
+    fprintf(stderr, "error in function %s: %s\n",
+      "mesh_generate_3d_kappa_get_cells_and_faces_from_vpore", strerror(errno));
     goto free_face_ids_used;
   }
   
@@ -417,7 +410,8 @@ int mesh_generate_3d_kappa_private(const mesh *m, struct mesh_3d_kappa_in *in,
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fprintf(stderr, "error in func %s: %s\n", "mesh_generate_3d_kappa_assign_thickness_from_vpore", strerror(errno));
+    fprintf(stderr, "error in function %s: %s\n",
+      "mesh_generate_3d_kappa_assign_thickness_from_vpore", strerror(errno));
     goto free_face_ids_used;
   }
 
@@ -429,7 +423,9 @@ int mesh_generate_3d_kappa_private(const mesh *m, struct mesh_3d_kappa_in *in,
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fprintf(stderr, "error in func %s: %s\n", "mesh_generate_3d_kappa_assign_thickness_edge_from_vpore", strerror(errno));
+    fprintf(stderr, "error in function %s: %s\n",
+      "mesh_generate_3d_kappa_assign_thickness_edge_from_vpore",
+      strerror(errno));
     goto free_face_ids_used;
   }
 
@@ -439,14 +435,16 @@ int mesh_generate_3d_kappa_private(const mesh *m, struct mesh_3d_kappa_in *in,
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fprintf(stderr, "error in func %s: %s\n", "mesh_generate_3d_kappa_get_cell_model_volume", strerror(errno));
+    fprintf(stderr, "error in function %s: %s\n",
+      "mesh_generate_3d_kappa_get_cell_model_volume", strerror(errno));
     goto free_face_ids_used;
   }
   double b = volumes / module_volumes;
 
   /* print module volume & b */
 #ifdef ENABLE_LOG
-  fprintf(out.log_out, "vpore volumes : %lf, vpore module volumes : %lf\n", volumes, module_volumes);
+  fprintf(out.log_out, "vpore volumes : %lf, vpore module volumes : %lf\n",
+    volumes, module_volumes);
   fprintf(out.log_out, "b=%lf\n", b);
 #endif
 
@@ -461,7 +459,8 @@ int mesh_generate_3d_kappa_private(const mesh *m, struct mesh_3d_kappa_in *in,
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    cmc_error_message_malloc(sizeof(double) * in->fpore_size, "fpore_volume_used");
+    cmc_error_message_malloc(sizeof(double) * in->fpore_size,
+      "fpore_volume_used");
     goto free_fpore_used;
   }
 
@@ -473,14 +472,14 @@ int mesh_generate_3d_kappa_private(const mesh *m, struct mesh_3d_kappa_in *in,
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fprintf(stderr, "error in func %s: %s\n", "mesh_generate_3d_kappa_scan_stface", strerror(errno));
+    fprintf(stderr, "error in function %s: %s\n",
+      "mesh_generate_3d_kappa_scan_stface", strerror(errno));
     goto free_fpore_volume_used;
   }
   int fpore_used_sum;
   /* calculate thickness_edge by vpore */
   /* 8. Select fpore volume by  generating a random number from 0 to 1 and
         using this number to map cdf to volume.*/
-#ifdef ENABLE_LOG
   mesh_generate_3d_kappa_get_cells_from_fpore_and_assign(
     thickness,
     thickness_edge,
@@ -489,38 +488,23 @@ int mesh_generate_3d_kappa_private(const mesh *m, struct mesh_3d_kappa_in *in,
     &fpore_used_sum,
     face_ids_used,
     &curr_face_id,
+#ifdef ENABLE_LOG
     &out,
-    m,
-    fpore,
-    in->fpore_size,
-    stface_data,
-    in->a,
-    b,
-    module_volumes,
-    seed);
-#else
-  mesh_generate_3d_kappa_get_cells_from_fpore_and_assign(
-    thickness,
-    thickness_edge,
-    fpore_used,
-    fpore_volume_
-    used,
-    &fpore_used_sum,
-    face_ids_used,
-    &curr_face_id,
-    m,
-    fpore,
-    in->fpore_size,
-    stface_data,
-    in->a,
-    b,
-    module_volumes,
-    seed);
 #endif
+    m,
+    fpore,
+    in->fpore_size,
+    stface_data,
+    in->a,
+    b,
+    module_volumes,
+    seed);
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fprintf(stderr, "error in func %s: %s\n", "mesh_generate_3d_kappa_assign_thickness_edge_from_vpore", strerror(errno));
+    fprintf(stderr, "error in function %s: %s\n",
+      "mesh_generate_3d_kappa_assign_thickness_edge_from_vpore",
+      strerror(errno));
     goto free_stface;
   }
 
@@ -549,12 +533,13 @@ int mesh_generate_3d_kappa_private(const mesh *m, struct mesh_3d_kappa_in *in,
   /* kappa1, size is m->cn[1] * 2 */
   int kappa1_size = m->cn[1] * 2;
   double *kappa1 = (double *)malloc(sizeof(double) * kappa1_size);
-  memset(kappa1, 0, sizeof(double) * kappa1_size);
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(double) * kappa1_size, "kappa2");
     goto free_stface;
   }
+  memset(kappa1, 0, sizeof(double) * kappa1_size);
   
   mesh_generate_3d_kappa_calculate_1(kappa1, m, thickness_edge);
 
@@ -564,6 +549,7 @@ int mesh_generate_3d_kappa_private(const mesh *m, struct mesh_3d_kappa_in *in,
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(double) * cfn_2_1_total, "kappa2");
     goto free_kappa1;
   }
   memset(kappa2, 0, sizeof(double) * cfn_2_1_total);
@@ -581,6 +567,7 @@ int mesh_generate_3d_kappa_private(const mesh *m, struct mesh_3d_kappa_in *in,
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(double) * cfn_3_2_total, "kappa3");
     goto free_kappa2;
   }
   memset(kappa3, 0, sizeof(double) * cfn_3_2_total);
@@ -590,6 +577,12 @@ int mesh_generate_3d_kappa_private(const mesh *m, struct mesh_3d_kappa_in *in,
   /* kappa */
   int kappa_size = m->cn[1] * 2 + cfn_2_1_total + cfn_3_2_total;
   double *kappa = (double *)malloc(sizeof(double) * kappa_size);
+  if (errno)
+  {
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
+    cmc_error_message_malloc(sizeof(double) * kappa_size, "kappa");
+    goto free_kappa3;
+  }
   memset(kappa, 0, sizeof(double) * kappa_size);
   mesh_generate_3d_kappa_merge_kappa(
     kappa,
@@ -600,11 +593,6 @@ int mesh_generate_3d_kappa_private(const mesh *m, struct mesh_3d_kappa_in *in,
     m->cn[1] * 2,
     cfn_2_1_total,
     cfn_3_2_total);
-  if (errno)
-  {
-    cmc_error_message_position_in_code(__FILE__, __LINE__);
-    goto free_kappa3;
-  }
 
   /* print */
   double_array_file_print(stdout, kappa_size, kappa, "--raw");
@@ -616,16 +604,9 @@ int mesh_generate_3d_kappa_private(const mesh *m, struct mesh_3d_kappa_in *in,
   double_array_file_print(out.log_out, kappa2_n, kappa2, "--raw");
   fprintf(out.log_out, "kappa3 : ");
   double_array_file_print(out.log_out, kappa3_n, kappa3, "--raw");
-
   mesh_generate_3d_kappa_free_kappa_out(&out);
-  if (errno)
-  {
-    cmc_error_message_position_in_code(__FILE__, __LINE__);
-    goto free_kappa;
-  }
 #endif
 
-free_kappa:
   free(kappa);
 
 free_kappa3:
@@ -787,7 +768,8 @@ void mesh_generate_3d_kappa_init_kappa_out(struct mesh_3d_kappa_out *out,
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fprintf(stderr, "cannot open log file %s: %s\n", log_file_path, strerror(errno));
+    fprintf(stderr, "cannot open log file %s: %s\n", log_file_path,
+      strerror(errno));
     return;
   }
 
@@ -796,7 +778,8 @@ void mesh_generate_3d_kappa_init_kappa_out(struct mesh_3d_kappa_out *out,
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fprintf(stderr, "cannot open log file %s: %s\n", used_fpore_file_path, strerror(errno));
+    fprintf(stderr, "cannot open log file %s: %s\n", used_fpore_file_path,
+      strerror(errno));
     return;
   }
 
@@ -804,7 +787,8 @@ void mesh_generate_3d_kappa_init_kappa_out(struct mesh_3d_kappa_out *out,
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fprintf(stderr, "cannot open log file %s: %s\n", thickness_file_path, strerror(errno));
+    fprintf(stderr, "cannot open log file %s: %s\n", thickness_file_path,
+      strerror(errno));
     return;
   }
 
@@ -812,7 +796,8 @@ void mesh_generate_3d_kappa_init_kappa_out(struct mesh_3d_kappa_out *out,
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fprintf(stderr, "cannot open log file %s: %s\n", thickness_edge_file_path, strerror(errno));
+    fprintf(stderr, "cannot open log file %s: %s\n", thickness_edge_file_path,
+      strerror(errno));
     return;
   }
 }
@@ -829,14 +814,16 @@ void mesh_generate_3d_kappa_free_kappa_out(struct mesh_3d_kappa_out *out)
 }
 #endif
 
-void mesh_generate_3d_kappa_scan_stcell(double* stcell_volumes,int n, const char *m_name)
+void mesh_generate_3d_kappa_scan_stcell(
+  double * stcell_volumes, int n, const char * m_name)
 {
   FILE *in;
   in = fopen(m_name, "r");
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fprintf(stderr, "cannot open stcell file %s: %s\n", m_name, strerror(errno));
+    fprintf(stderr, "cannot open stcell file %s: %s\n", m_name,
+      strerror(errno));
     return;
   }
 
@@ -848,14 +835,16 @@ void mesh_generate_3d_kappa_scan_stcell(double* stcell_volumes,int n, const char
   fclose(in);
 }
 
-void mesh_generate_3d_kappa_scan_stface(double *stface_data,int n, const char *m_name)
+void mesh_generate_3d_kappa_scan_stface(
+  double * stface_data, int n, const char * m_name)
 {
   FILE *in;
   in = fopen(m_name, "r");
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fprintf(stderr, "cannot open stface file %s: %s\n", m_name, strerror(errno));
+    fprintf(stderr, "cannot open stface file %s: %s\n", m_name,
+      strerror(errno));
     return;
   }
 
@@ -867,7 +856,8 @@ void mesh_generate_3d_kappa_scan_stface(double *stface_data,int n, const char *m
   fclose(in);
 }
 
-void mesh_generate_3d_kappa_scan_vpore(double* vpore_volumes,int n, const char *m_name)
+void mesh_generate_3d_kappa_scan_vpore(
+  double * vpore_volumes, int n, const char * m_name)
 {
   FILE *in;
   in = fopen(m_name, "r");
@@ -887,7 +877,8 @@ void mesh_generate_3d_kappa_scan_vpore(double* vpore_volumes,int n, const char *
   fclose(in);
 }
 
-void mesh_generate_3d_kappa_scan_fpore(double ** fpore,int n, const char *m_name)
+void mesh_generate_3d_kappa_scan_fpore(
+  double ** fpore, int n, const char * m_name)
 {
   FILE *in;
   in = fopen(m_name, "r");
@@ -1265,7 +1256,8 @@ double mesh_generate_3d_kappa_get_distance_cell_to_face_3_2(
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    cmc_error_message_malloc(sizeof(double) * m->dim, "polyhedron_center_coord");
+    cmc_error_message_malloc(sizeof(double) * m->dim,
+      "polyhedron_center_coord");
     return 0.0;
   }
   double *face_center_coord = (double *)malloc(sizeof(double) * m->dim);
@@ -1300,7 +1292,8 @@ double mesh_generate_3d_kappa_get_distance_cell_to_edge_3_1(
   if (errno)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    cmc_error_message_malloc(sizeof(double) * m->dim, "polyhedron_center_coord");
+    cmc_error_message_malloc(sizeof(double) * m->dim,
+      "polyhedron_center_coord");
     return 0.0;
   }
   double *edge_center_coord = (double *)malloc(sizeof(double) * m->dim);
@@ -1564,32 +1557,18 @@ void get_special_fpore_face(
   }
 }
 
+
+void mesh_generate_3d_kappa_get_cells_from_fpore_and_assign(
+  double *thickness,
+  double *thickness_edge,
+  double *fpore_used,
+  double *fpore_volume_used,
+  int *fpore_used_sum,
+  int *face_ids_used,
+  int *curr_face_id,
 #ifdef ENABLE_LOG
-void mesh_generate_3d_kappa_get_cells_from_fpore_and_assign(
-  double *thickness,
-  double *thickness_edge,
-  double *fpore_used,
-  double *fpore_volume_used,
-  int *fpore_used_sum,
-  int *face_ids_used,
-  int *curr_face_id,
   struct mesh_3d_kappa_out *out,
-  const mesh *m, double **fpore,
-  int fpore_size,
-  double *stface_data,
-  double a,
-  double b,
-  double module_volumes,
-  unsigned long long * seed)
-#else
-void mesh_generate_3d_kappa_get_cells_from_fpore_and_assign(
-  double *thickness,
-  double *thickness_edge,
-  double *fpore_used,
-  double *fpore_volume_used,
-  int *fpore_used_sum,
-  int *face_ids_used,
-  int *curr_face_id,
+#endif
   const mesh *m,
   double **fpore,
   int fpore_size,
@@ -1598,7 +1577,6 @@ void mesh_generate_3d_kappa_get_cells_from_fpore_and_assign(
   double b,
   double module_volumes,
   unsigned long long * seed)
-#endif
 {
   double volumes = 0.0;
   unsigned int random_value;
@@ -1868,7 +1846,8 @@ void mesh_generate_3d_kappa_calculate_3(
     /* if selected */
     for (int k = kappa3_index; k < *kappa3_n; k++)
     {
-      kappa3[k] = (stface_data[cf_3_2[k - kappa3_index]] / M_PI) / (8 * pow(10, -3));
+      kappa3[k] = (stface_data[cf_3_2[k - kappa3_index]] / M_PI)
+                  / (8 * pow(10, -3));
     }
     kappa3_index += cfn_3_2;
     free(cf_3_2);
