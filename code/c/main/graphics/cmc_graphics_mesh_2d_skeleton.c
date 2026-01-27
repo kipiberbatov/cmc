@@ -1,6 +1,7 @@
 /* system headers */
 #include <errno.h>
 #include <stdlib.h>
+#include <math.h>
 
 /* internal headers */
 #include "cmc_error_message.h"
@@ -199,8 +200,11 @@ int main(int argc, char ** argv)
     }
     for (i = 0; i < m->cn[0]; ++i)
     {
-      m_coord_2d[2 * i] = m->coord[3 * i];
-      m_coord_2d[2 * i + 1] = m->coord[3 * i + 1];
+      m_coord_2d[2 * i] = (sqrt(3) / 2 * (m->coord[3 * i] - m->coord[3 * i + 1]))
+                          + i * 1e-12;
+      m_coord_2d[2 * i + 1] = (m->coord[3 * i + 2] + 1.0 
+                              / 2 * (m->coord[3 * i] + m->coord[3 * i + 1]))
+                              + i * 1e-12;
     }
     frame_internal_info_for_set_of_points(
       &data,

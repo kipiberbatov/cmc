@@ -37,6 +37,12 @@ _pdf_mesh :=\
   build/$(MODE)/pdf/mesh/hemisphere_polar_4_3_forman_edge_skeleton.pdf\
   build/$(MODE)/pdf/mesh/hemisphere_polar_6_6_edge_skeleton.pdf\
   build/$(MODE)/pdf/mesh/hemisphere_polar_6_6_forman_edge_skeleton.pdf\
+  build/$(MODE)/pdf/mesh/sandstone_3062_grains_edge_skeleton.pdf\
+  build/$(MODE)/pdf/mesh/sandstone_3062_grains_forman_edge_skeleton.pdf\
+  build/$(MODE)/pdf/mesh/3d_100_grains_edge_skeleton.pdf\
+  build/$(MODE)/pdf/mesh/3d_100_grains_forman_edge_skeleton.pdf\
+  build/$(MODE)/pdf/mesh/3d_1_grain_edge_skeleton.pdf\
+  build/$(MODE)/pdf/mesh/3d_1_grain_forman_edge_skeleton.pdf\
 
 build/$(MODE)/pdf/mesh/brick_2d_1_edge_skeleton.pdf:\
   build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
@@ -565,6 +571,102 @@ build/$(MODE)/pdf/mesh/hemisphere_polar_6_6_forman_edge_skeleton.pdf:\
   --mesh=$(word 2, $^)\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton_polar_forman\
+  --animation-library=$(word 3, $|)\
+  --animation-backend=cmc_cairo_pdf_animation\
+  --output=$@
+
+build/$(MODE)/pdf/mesh/sandstone_3062_grains_edge_skeleton.pdf:\
+  build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
+  build/$(MODE)/txt/mesh/sandstone_3062_grains/data.txt\
+  build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  | build/$(MODE)/pdf/mesh\
+    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
+    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+	$(INTERPRETER) $< \
+  --mesh=$(word 2, $^)\
+  --canvas-library=$(word 2, $|)\
+  --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
+  --animation-library=$(word 3, $|)\
+  --animation-backend=cmc_cairo_pdf_animation\
+  --output=$@
+
+build/$(MODE)/pdf/mesh/sandstone_3062_grains_forman_edge_skeleton.pdf:\
+  build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
+  build/$(MODE)/txt/mesh/sandstone_3062_grains/forman.txt\
+  build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  | build/$(MODE)/pdf/mesh\
+    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
+    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+	$(INTERPRETER) $< \
+  --mesh=$(word 2, $^)\
+  --canvas-library=$(word 2, $|)\
+  --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
+  --animation-library=$(word 3, $|)\
+  --animation-backend=cmc_cairo_pdf_animation\
+  --output=$@
+
+build/$(MODE)/pdf/mesh/3d_100_grains_edge_skeleton.pdf:\
+  build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
+  build/$(MODE)/txt/mesh/3d_100_grains/data.txt\
+  build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  | build/$(MODE)/pdf/mesh\
+    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
+    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+	$(INTERPRETER) $< \
+  --mesh=$(word 2, $^)\
+  --canvas-library=$(word 2, $|)\
+  --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
+  --animation-library=$(word 3, $|)\
+  --animation-backend=cmc_cairo_pdf_animation\
+  --output=$@
+
+build/$(MODE)/pdf/mesh/3d_100_grains_forman_edge_skeleton.pdf:\
+  build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
+  build/$(MODE)/txt/mesh/3d_100_grains/forman.txt\
+  build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  | build/$(MODE)/pdf/mesh\
+    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
+    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+	$(INTERPRETER) $< \
+  --mesh=$(word 2, $^)\
+  --canvas-library=$(word 2, $|)\
+  --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
+  --animation-library=$(word 3, $|)\
+  --animation-backend=cmc_cairo_pdf_animation\
+  --output=$@
+
+build/$(MODE)/pdf/mesh/3d_1_grain_edge_skeleton.pdf:\
+  build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
+  build/$(MODE)/txt/mesh/3d_1_grain/data.txt\
+  build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  | build/$(MODE)/pdf/mesh\
+    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
+    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+	$(INTERPRETER) $< \
+  --mesh=$(word 2, $^)\
+  --canvas-library=$(word 2, $|)\
+  --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
+  --animation-library=$(word 3, $|)\
+  --animation-backend=cmc_cairo_pdf_animation\
+  --output=$@
+
+build/$(MODE)/pdf/mesh/3d_1_grain_forman_edge_skeleton.pdf:\
+  build/$(MODE)/bin/cmc_graphics_mesh_2d_skeleton$(.EXE)\
+  build/$(MODE)/txt/mesh/3d_1_grain/forman.txt\
+  build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_skeleton$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  | build/$(MODE)/pdf/mesh\
+    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
+    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+	$(INTERPRETER) $< \
+  --mesh=$(word 2, $^)\
+  --canvas-library=$(word 2, $|)\
+  --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_skeleton\
   --animation-library=$(word 3, $|)\
   --animation-backend=cmc_cairo_pdf_animation\
   --output=$@
