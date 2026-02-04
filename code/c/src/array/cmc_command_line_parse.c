@@ -380,8 +380,7 @@ cmc_command_line_set_default(cmc_command_line ** options, int size)
   {
     option_j = options[j];
     if (option_j->number_of_arguments == 0 &&
-        option_j->maximal_number_of_arguments == 1 &&
-        option_j->default_argument != NULL)
+        option_j->maximal_number_of_arguments == 1)
     {
       option_j->set_default(option_j->arguments, option_j->default_argument);
     }
