@@ -52,7 +52,9 @@ int main(void)
           stderr);
         fprintf(stdout, "p = %d, %d |-> %g\n\n", p, j, values[j]);
         matrix_sparse_file_print(stdout, product, "--raw");
-        return 1;
+        matrix_sparse_free(product);
+        errno = 1;
+        goto m_bd_free;
       }
     }
     matrix_sparse_free(product);
