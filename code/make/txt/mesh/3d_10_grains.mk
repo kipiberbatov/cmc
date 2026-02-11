@@ -2,6 +2,7 @@
 
 _txt_mesh_3d_10_grains :=\
   build/$(MODE)/txt/mesh/3d_10_grains/data.txt\
+  build/$(MODE)/txt/mesh/3d_10_grains/D_g.txt\
   build/$(MODE)/txt/mesh/3d_10_grains/check_boundary_products.txt\
   build/$(MODE)/txt/mesh/3d_10_grains/forman.txt\
   build/$(MODE)/txt/mesh/3d_10_grains/forman_check_boundary_products.txt\
@@ -20,6 +21,12 @@ build/$(MODE)/txt/mesh/3d_10_grains/data.txt:\
   data/mesh/3d_10_grains.tess\
   | build/$(MODE)/txt/mesh/3d_10_grains
 	$(INTERPRETER) $< --mesh-format=tess $(word 2, $^) > $@
+
+build/$(MODE)/txt/mesh/3d_10_grains/D_g.txt:\
+  build/$(MODE)/bin/mesh_generate_diffusivity_metal$(.EXE)\
+  data/mesh/3d_10_grains.tess\
+  | build/$(MODE)/txt/mesh/3d_10_grains
+	$(INTERPRETER) $^ 1.9e-4 285000 1273.15 > $@
 
 build/$(MODE)/txt/mesh/3d_10_grains/check_boundary_products.txt:\
   build/$(MODE)/bin/mesh_boundary_chain_complex_check$(.EXE)\
