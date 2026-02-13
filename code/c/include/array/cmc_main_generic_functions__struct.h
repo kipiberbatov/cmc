@@ -9,4 +9,4 @@ struct cmc_main_generic_functions
   void (*free_arguments)(void *);
 };
 
-#endif
+#endif /* _cmc_main_generic_functions__struct_h */
