@@ -63,6 +63,11 @@ typedef struct cmc_command_line
   void * arguments;
 } cmc_command_line;
 
+void cmc_command_line_bind(
+  cmc_command_line ** options,
+  cmc_command_line * options_list,
+  int size);
+
 void cmc_command_line_parse(
   cmc_command_line ** options, int * status,
   int size, int argc, char ** argv);
