@@ -3,14 +3,13 @@
 #include "cmc_main_compute_and_print_run_one_pass_compute_data.h"
 
 void cmc_main_compute_and_print_run_one_pass_compute_data(
-  void ** data,
+  void * input,
+  void * data,
   int * status,
   const void * arguments,
   const struct cmc_main_compute_and_print_functions_one_pass * one_pass)
 {
-  void * input;
-
-  one_pass->scan_input(&input, status, arguments);
+  one_pass->scan_input(input, status, arguments);
   if (*status)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);

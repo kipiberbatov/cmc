@@ -2,6 +2,9 @@ struct cmc_main_compute_and_print_functions_one_pass;
 
 void cmc_main_compute_and_print_run_one_pass(
   void * out,
+  void * input,
+  void * data,
   int * status,
   const void * arguments,
+  const char * format,
   const struct cmc_main_compute_and_print_functions_one_pass * one_pass);

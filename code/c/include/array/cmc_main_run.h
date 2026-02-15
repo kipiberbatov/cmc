@@ -1,9 +1,7 @@
-struct cmc_main_generic_functions;
-struct cmc_main_compute_and_print;
+struct cmc_main;
 
 void cmc_main_run(
+  struct cmc_main * runner,
   int * status,
   int argc,
-  char ** argv,
-  const struct cmc_main_generic_functions * generic,
-  const struct cmc_main_compute_and_print * compute_and_print);
+  char ** argv);

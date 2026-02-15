@@ -5,14 +5,15 @@
 
 void cmc_main_compute_and_print_run_one_pass(
   void * out,
+  void * input,
+  void * data,
   int * status,
   const void * arguments,
+  const char * format,
   const struct cmc_main_compute_and_print_functions_one_pass * one_pass)
 {
-  void * data;
-
   cmc_main_compute_and_print_run_one_pass_compute_data(
-    &data, status, arguments, one_pass);
+    input, data, status, arguments, one_pass);
   if (*status)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
@@ -20,7 +21,7 @@ void cmc_main_compute_and_print_run_one_pass(
     goto end;
   }
 
-  one_pass->print_data(out, status, data);
+  one_pass->print_data(out, status, data, format);
   if (*status)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);

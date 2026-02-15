@@ -1,0 +1,4 @@
+struct cmc_diffusion_steady_state_discrete_flow_rate_primal;
+
+void cmc_diffusion_steady_state_discrete_flow_rate_primal_free_values(
+  struct cmc_diffusion_steady_state_discrete_flow_rate_primal * input);

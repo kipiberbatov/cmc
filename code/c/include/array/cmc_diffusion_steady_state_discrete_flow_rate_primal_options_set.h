@@ -1,0 +1,7 @@
+struct cmc_diffusion_steady_state_discrete_flow_rate_primal_arguments;
+struct cmc_diffusion_steady_state_discrete_flow_rate_primal_options;
+
+void cmc_diffusion_steady_state_discrete_flow_rate_primal_options_set(
+  struct cmc_diffusion_steady_state_discrete_flow_rate_primal_options * options,
+  struct cmc_diffusion_steady_state_discrete_flow_rate_primal_arguments *
+    arguments);

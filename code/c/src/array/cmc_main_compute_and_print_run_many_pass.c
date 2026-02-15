@@ -4,13 +4,14 @@
 
 void cmc_main_compute_and_print_run_many_pass(
   void * out,
+  void * input,
+  void * data,
   int * status,
   const void * arguments,
+  const char * format,
   const struct cmc_main_compute_and_print_functions_many_pass * many_pass)
 {
-  void * input;
-
-  many_pass->scan_input(&input, status, arguments);
+  many_pass->scan_input(input, status, arguments);
   if (*status)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
@@ -18,7 +19,8 @@ void cmc_main_compute_and_print_run_many_pass(
     goto end;
   }
 
-  many_pass->compute_print_and_free_data_in_loop(out, status, arguments);
+  many_pass->compute_print_and_free_data_in_loop(
+    out, data, status, input, format);
   if (*status)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
