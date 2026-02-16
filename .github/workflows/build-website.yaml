@@ -38,10 +38,10 @@ jobs:
           echo "$TEXLIVE_BIN_DIR" >> $GITHUB_PATH
 
       - name: Build website (do not build already downloaded PDF images)
-        run: make website -o build/.pdf
+        run: make website -o build/release/empty/docs_pdf_dependencies.empty
 
       - name: Upload website
         uses: actions/upload-pages-artifact@v4
         with:
-          path: build/website
+          path: build/release/website
           retention-days: ${{ github.event.repository.private && 1 || 7 }}

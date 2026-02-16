@@ -1,27 +1,36 @@
 .PHONY: website website_fast website_clean
 
-build/website: | build
+build/$(MODE)/website: | build
 	mkdir -p $@
 
-website: build/website/index.html build/website/style.css build/website/main.pdf
+_website_resources := \
+  build/$(MODE)/website/index.html \
+  build/$(MODE)/website/style.css \
 
-build/website/index.html: code/html/index.html | build/website
+build/$(MODE)/website/index.html: code/html/index.html | build/$(MODE)/website
 	cp $< $|
 
-build/website/style.css: code/css/style.css | build/website
+build/$(MODE)/website/style.css: code/css/style.css | build/$(MODE)/website
 	cp $< $|
 
-build/website/main.pdf: build/docs/main.pdf | build/website
-	cp $< $|
-	touch build/.website_fast
+website_fast: build/$(MODE)/empty/website_fast.empty
+website: build/$(MODE)/empty/website.empty
 
-website_fast: build/.website_fast
+build/$(MODE)/empty/website_fast.empty: $(_website_resources) \
+  build/$(MODE)/empty/docs_main_fast.empty
+	cp build/$(MODE)/docs/main.pdf build/$(MODE)/website
+	touch $@
 
-build/.website_fast: build/website/index.html build/website/style.css\
-  build/.docs_fast | build/docs build/website
-	cp $(word 1, $|)/main.pdf $(word 2, $|)
-	echo $^ > $@
+build/$(MODE)/empty/website.empty: $(_website_resources) \
+  build/$(MODE)/empty/docs_main.empty
+	cp build/$(MODE)/docs/main.pdf build/$(MODE)/website
+	touch build/$(MODE)/empty/website_fast.empty
+	touch $@
+
+_website_empty := \
+  build/$(MODE)/empty/website_fast.empty \
+  build/$(MODE)/empty/website.empty \
 
 website_clean:
-	-$(RM) -r build/website
-	-$(RM) build/.website_fast
+	-$(RM) -r build/$(MODE)/website
+	-$(RM) $(_website_empty)
