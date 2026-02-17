@@ -9,15 +9,15 @@ _svg_filled_window :=\
 build/$(MODE)/svg/filled_window/rainbow_100.svg:\
   build/$(MODE)/bin/cmc_graphics_filled_window$(.EXE)\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_filled_window$(.OBJ)\
-  build/$(MODE)/obj/plugins/cmc_cairo_svg_animation$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_animation_svg$(.OBJ)\
   | build/$(MODE)/svg/filled_window\
-    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
-    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+    build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)\
+    build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 	$(INTERPRETER) $<\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_filled_window\
   --animation-library=$(word 3, $|)\
-  --animation-backend=cmc_cairo_svg_animation\
+  --animation-backend=cmc_cairo_animation_svg\
   --output=$@
 
 svg_filled_window: $(_svg_filled_window)

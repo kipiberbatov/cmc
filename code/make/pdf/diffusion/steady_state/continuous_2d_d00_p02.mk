@@ -21,10 +21,10 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02/exact_brick_2d_10
   build/$(MODE)/txt/mesh/brick_2d_10/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p02/exact_brick_2d_10_forman_potential.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence$(.OBJ)\
-  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_animation_pdf$(.OBJ)\
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02\
-    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
-    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+    build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)\
+    build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
@@ -32,7 +32,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02/exact_brick_2d_10
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence\
   --animation-library=$(word 3, $|)\
-  --animation-backend=cmc_cairo_pdf_animation\
+  --animation-backend=cmc_cairo_animation_pdf\
   --output=$@
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02/exact_brick_2d_10_forman_flow_rate.pdf:\
@@ -40,10 +40,10 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02/exact_brick_2d_10
   build/$(MODE)/txt/mesh/brick_2d_10/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p02/exact_brick_2d_10_forman_flow_rate.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence$(.OBJ)\
-  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_animation_pdf$(.OBJ)\
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02\
-    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
-    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+    build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)\
+    build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
@@ -51,7 +51,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02/exact_brick_2d_10
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence\
   --animation-library=$(word 3, $|)\
-  --animation-backend=cmc_cairo_pdf_animation\
+  --animation-backend=cmc_cairo_animation_pdf\
   --output=$@
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02/primal_strong_cochain_brick_2d_10_forman_potential.pdf:\
@@ -59,10 +59,10 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02/primal_strong_coc
   build/$(MODE)/txt/mesh/brick_2d_10/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p02/primal_strong_cochain_brick_2d_10_forman_potential.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence$(.OBJ)\
-  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_animation_pdf$(.OBJ)\
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02\
-    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
-    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+    build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)\
+    build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
@@ -70,7 +70,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02/primal_strong_coc
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence\
   --animation-library=$(word 3, $|)\
-  --animation-backend=cmc_cairo_pdf_animation\
+  --animation-backend=cmc_cairo_animation_pdf\
   --output=$@
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02/primal_strong_cochain_brick_2d_10_forman_flow_rate.pdf:\
@@ -78,10 +78,10 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02/primal_strong_coc
   build/$(MODE)/txt/mesh/brick_2d_10/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p02/primal_strong_cochain_brick_2d_10_forman_flow_rate.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence$(.OBJ)\
-  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_animation_pdf$(.OBJ)\
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02\
-    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
-    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+    build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)\
+    build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
@@ -89,7 +89,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02/primal_strong_coc
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence\
   --animation-library=$(word 3, $|)\
-  --animation-backend=cmc_cairo_pdf_animation\
+  --animation-backend=cmc_cairo_animation_pdf\
   --output=$@
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02/primal_weak_cochain_brick_2d_10_forman_potential.pdf:\
@@ -97,10 +97,10 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02/primal_weak_cocha
   build/$(MODE)/txt/mesh/brick_2d_10/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p02/primal_weak_cochain_brick_2d_10_forman_potential.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence$(.OBJ)\
-  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_animation_pdf$(.OBJ)\
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02\
-    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
-    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+    build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)\
+    build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
@@ -108,7 +108,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02/primal_weak_cocha
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence\
   --animation-library=$(word 3, $|)\
-  --animation-backend=cmc_cairo_pdf_animation\
+  --animation-backend=cmc_cairo_animation_pdf\
   --output=$@
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02/primal_weak_cochain_brick_2d_10_forman_flow_rate.pdf:\
@@ -116,10 +116,10 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02/primal_weak_cocha
   build/$(MODE)/txt/mesh/brick_2d_10/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p02/primal_weak_cochain_brick_2d_10_forman_flow_rate.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence$(.OBJ)\
-  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_animation_pdf$(.OBJ)\
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02\
-    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
-    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+    build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)\
+    build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
@@ -127,7 +127,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02/primal_weak_cocha
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence\
   --animation-library=$(word 3, $|)\
-  --animation-backend=cmc_cairo_pdf_animation\
+  --animation-backend=cmc_cairo_animation_pdf\
   --output=$@
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02/mixed_weak_cochain_brick_2d_10_forman_potential.pdf:\
@@ -135,10 +135,10 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02/mixed_weak_cochai
   build/$(MODE)/txt/mesh/brick_2d_10/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p02/mixed_weak_cochain_brick_2d_10_forman_potential.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence$(.OBJ)\
-  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_animation_pdf$(.OBJ)\
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02\
-    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
-    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+    build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)\
+    build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
@@ -146,7 +146,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02/mixed_weak_cochai
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence\
   --animation-library=$(word 3, $|)\
-  --animation-backend=cmc_cairo_pdf_animation\
+  --animation-backend=cmc_cairo_animation_pdf\
   --output=$@
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02/mixed_weak_cochain_brick_2d_10_forman_flow_rate.pdf:\
@@ -154,10 +154,10 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02/mixed_weak_cochai
   build/$(MODE)/txt/mesh/brick_2d_10/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p02/mixed_weak_cochain_brick_2d_10_forman_solution.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence$(.OBJ)\
-  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_animation_pdf$(.OBJ)\
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02\
-    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
-    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+    build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)\
+    build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
@@ -166,7 +166,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d00_p02/mixed_weak_cochai
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence\
   --animation-library=$(word 3, $|)\
-  --animation-backend=cmc_cairo_pdf_animation\
+  --animation-backend=cmc_cairo_animation_pdf\
   --output=$@
 
 pdf_diffusion_steady_state_continuous_2d_d00_p02:\

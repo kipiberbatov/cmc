@@ -2,27 +2,26 @@
 #include <stdio.h>
 
 #include "cmc_error_message.h"
-#include "cmc_cairo.h"
-#include "cmc_graphics_rectangle.h"
+#include "cmc_cairo_graphics.h"
+#include "cmc_graphics_mesh_2d_node.h"
 #include "cmc_rgb.h"
 
 /* must use get_color along with cmc_rgb */
-void cmc_cairo_graphics_rectangle_draw(
-  cairo_t * cr, int * status, const struct cmc_graphics_rectangle * rectangle,
+void cmc_cairo_graphics_mesh_2d_node_draw(
+  cairo_t * cr, int * status, const struct cmc_graphics_mesh_2d_node * node,
   void (*get_color)(struct cmc_rgb *, const void *))
 {
-  double height, width, x, y;
+  double r;
+  double * x;
   struct cmc_rgb color;
 
-  x = rectangle->x;
-  y = rectangle->y;
-  width = rectangle->width;
-  height = rectangle->height;
-  get_color(&color, rectangle->color);
+  r = node->size;
+  x = node->coordinates;
+  get_color(&color, node->color);
 
   cairo_save(cr);
   cairo_set_source_rgb(cr, color.red, color.green, color.blue);
-  cairo_rectangle(cr, x, y, width, height);
+  cairo_arc(cr, x[0], x[1], r, 0, 2 * M_PI);
   cairo_fill(cr);
   cairo_stroke(cr);
   cairo_restore(cr);

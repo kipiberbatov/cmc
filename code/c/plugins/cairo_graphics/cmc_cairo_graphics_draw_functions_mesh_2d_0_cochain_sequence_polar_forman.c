@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "cmc_cairo.h"
+#include "cmc_cairo_graphics.h"
 #include "cmc_graphics_mesh_2d_skeleton.h"
 #include "cmc_graphics_mesh_2d_0_cochain_sequence.h"
 #include "cmc_graphics_mesh_2d_0_cochain_sequence_draw_functions.h"
@@ -17,7 +17,7 @@ cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence_polar_forman =
 {
   (void (*)(void **, int *)) cmc_rgb_allocate_color,
   free,
-  (void (*)(void *, int *)) cmc_cairo_paint_white,
+  (void (*)(void *, int *)) cmc_cairo_graphics_paint_white,
   cmc_graphics_mesh_2d_0_cochain_sequence_draw_values,
   cmc_rgb_check_color_scheme_rainbow,
   (void (*)(void *, int , int)) cmc_rgb_set_from_scheme_rainbow_no_checks,

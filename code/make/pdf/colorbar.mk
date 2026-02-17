@@ -10,10 +10,10 @@ _pdf_colorbar :=\
 build/$(MODE)/pdf/colorbar/rainbow_100_horizontal_500_50.pdf:\
   build/$(MODE)/bin/cmc_graphics_colorbar$(.EXE)\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_colorbar$(.OBJ)\
-  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_animation_pdf$(.OBJ)\
   | build/$(MODE)/pdf/colorbar\
-    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
-    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+    build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)\
+    build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 	$(INTERPRETER) $<\
   --total-colors=100\
   --direction=horizontal\
@@ -22,16 +22,16 @@ build/$(MODE)/pdf/colorbar/rainbow_100_horizontal_500_50.pdf:\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_colorbar\
   --animation-library=$(word 3, $|)\
-  --animation-backend=cmc_cairo_pdf_animation\
+  --animation-backend=cmc_cairo_animation_pdf\
   --output=$@
 
 build/$(MODE)/pdf/colorbar/rainbow_100_vertical_50_500.pdf:\
   build/$(MODE)/bin/cmc_graphics_colorbar$(.EXE)\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_colorbar$(.OBJ)\
-  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_animation_pdf$(.OBJ)\
   | build/$(MODE)/pdf/colorbar\
-    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
-    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+    build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)\
+    build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 	$(INTERPRETER) $<\
   --total-colors=100\
   --direction=vertical\
@@ -40,7 +40,7 @@ build/$(MODE)/pdf/colorbar/rainbow_100_vertical_50_500.pdf:\
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_colorbar\
   --animation-library=$(word 3, $|)\
-  --animation-backend=cmc_cairo_pdf_animation\
+  --animation-backend=cmc_cairo_animation_pdf\
   --output=$@
 
 pdf_colorbar: $(_pdf_colorbar)

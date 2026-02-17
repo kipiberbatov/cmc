@@ -38,15 +38,15 @@ jobs:
           ./.github/scripts/sub-steps.sh make txt_diffusion_transient
           ./.github/scripts/sub-steps.sh make txt_graphics
 
-      - name: Install gtk+-3.0
-        run: sudo apt-get install -y libgtk-3-dev
+      - name: Install Cairo
+        run: sudo apt-get install -y libcairo2-dev
 
-      - name: Compile and link plugins
+      - name: Compile and link plugins depending on Cairo
         run: |
-          ./.github/scripts/sub-steps.sh make obj_plugins_animation
-          ./.github/scripts/sub-steps.sh make obj_plugins_canvas
-          ./.github/scripts/sub-steps.sh make lib_plugins_animation
-          ./.github/scripts/sub-steps.sh make lib_plugins_canvas
+          ./.github/scripts/sub-steps.sh make obj_plugins_cairo_animation
+          ./.github/scripts/sub-steps.sh make obj_plugins_cairo_graphics
+          ./.github/scripts/sub-steps.sh make lib_plugins_cairo_animation
+          ./.github/scripts/sub-steps.sh make lib_plugins_cairo_graphics
 
       - name: Run PDF-outputting demos
         run: |
@@ -58,6 +58,14 @@ jobs:
 
       - name: Run SVG-outputting demos
         run: make svg
+
+      - name: Install GTK+ 3
+        run: sudo apt-get install -y libgtk-3-dev
+
+      - name: Compile and link plugins depending on GTK
+        run: |
+          ./.github/scripts/sub-steps.sh make obj_plugins_gtk_animation
+          ./.github/scripts/sub-steps.sh make lib_plugins_gtk_animation
 
       - name: Upload release directory
         uses: actions/upload-artifact@v6

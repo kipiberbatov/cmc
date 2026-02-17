@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 #include "cmc_error_message.h"
-#include "cmc_cairo.h"
+#include "cmc_cairo_graphics.h"
 #include "cmc_graphics_mesh_2d_edge.h"
 #include "cmc_rgb.h"
 #include "line_2d.h"

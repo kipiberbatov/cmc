@@ -119,35 +119,50 @@ graphics_clean: obj_graphics_clean
 graphics_distclean: graphics_clean lib_graphics_clean bin_graphics_clean\
   txt_graphics_clean
 
-# animation
-.PHONY: obj_animation_clean
-obj_animation_clean:
-	-$(RM) $(_obj_src_animation)
+# gtk_animation
+.PHONY: obj_gtk_animation_clean
+obj_gtk_animation_clean:
+	-$(RM) $(_obj_src_gtk_animation)
 
-.PHONY: lib_animation_clean
-lib_animation_clean:
-	-$(RM) build/$(MODE)/lib/plugins/libanimation$(.DLL)
+.PHONY: lib_gtk_animation_clean
+lib_gtk_animation_clean:
+	-$(RM) build/$(MODE)/lib/plugins/libgtk_animation$(.DLL)
 
 .PHONY: animation_clean
-animation_clean: obj_animation_clean
+animation_clean: obj_gtk_animation_clean
 
-.PHONY: animation_distclean
-animation_distclean: animation_clean lib_animation_clean
+.PHONY: gtk_animation_distclean
+gtk_animation_distclean: gtk_animation_clean lib_gtk_animation_clean
 
-# canvas
-.PHONY: obj_canvas_clean
-obj_canvas_clean:
-	-$(RM) $(_obj_plugins_canvas)
+# cairo_animation
+.PHONY: obj_cairo_animation_clean
+obj_cairo_animation_clean:
+	-$(RM) $(_obj_src_cairo_animation)
 
-.PHONY: lib_canvas_clean
-lib_canvas_clean:
-	-$(RM) build/$(MODE)/lib/plugins/libcanvas$(.DLL)
+.PHONY: lib_cairo_animation_clean
+lib_cairo_animation_clean:
+	-$(RM) build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 
-.PHONY: canvas_clean
-canvas_clean: obj_canvas_clean
+.PHONY: animation_clean
+animation_clean: obj_cairo_animation_clean
 
-.PHONY: canvas_distclean
-canvas_distclean: canvas_clean lib_canvas_clean
+.PHONY: cairo_animation_distclean
+cairo_animation_distclean: cairo_animation_clean lib_cairo_animation_clean
+
+# cairo_graphics
+.PHONY: obj_cairo_graphics_clean
+obj_cairo_graphics_clean:
+	-$(RM) $(_obj_plugins_cairo_graphics)
+
+.PHONY: lib_cairo_graphics_clean
+lib_cairo_graphics_clean:
+	-$(RM) build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)
+
+.PHONY: cairo_graphics_clean
+cairo_graphics_clean: obj_cairo_graphics_clean
+
+.PHONY: cairo_graphics_distclean
+cairo_graphics_distclean: cairo_graphics_clean lib_cairo_graphics_clean
 
 # all
 .PHONY: obj_clean

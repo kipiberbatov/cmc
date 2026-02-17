@@ -1,4 +1,4 @@
-#include "cmc_cairo.h"
+#include "cmc_cairo_graphics.h"
 #include "cmc_graphics_mesh_2d_skeleton.h"
 #include "cmc_graphics_mesh_2d_skeleton_draw_functions.h"
 

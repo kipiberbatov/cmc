@@ -115,9 +115,9 @@ selected at runtime according to the command line arguments);
 ## Plugins
 - diffusion: problem data and exact solutions to transient and steady-state
 continuous diffusion problems;
-- canvas: procedures for drawing shapes on a canvas, currently with Cairo;
-- animation: procedures for producing animations based on the canvas data;
-PDF, SVG and GTK animation backends are supported via the Cairo canvas backend.
+- cairo_graphics: procedures for drawing shapes on a Cairo canvas;
+- cairo_animation: produces PDF and SVG animations via the Cairo canvas backend;
+- gtk_animation: procedures GTK animations via the Cairo canvas backend.
 
 ## Dependencies
 
@@ -129,9 +129,9 @@ build the project and run the text-outputting demos:
 
 In order to build the canvas and animation plugins, run PDF- and SVG-outputting
 demos and GTK animations, you need the following software
-- pkg-config
-- Cairo
-- GTK+ 3
+- pkg-config (needed for both Cairo and GTK headers and libraries)
+- Cairo (needed for cairo_graphics and cairo_animation)
+- GTK+ 3 (needed for gtk_animation)
 
 To build the documentation, you need the LaTeX compiler **pdflatex**.
 

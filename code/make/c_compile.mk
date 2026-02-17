@@ -27,7 +27,7 @@ endif
 
 ###################### modules, plugins and dependencies #######################
 MODULES := array algebra region mesh diffusion graphics
-PLUGINS := diffusion animation canvas
+PLUGINS := diffusion gtk_animation pdf_animation cairo_graphics
 # array:
 # algebra: array
 # region: array
@@ -36,7 +36,7 @@ PLUGINS := diffusion animation canvas
 # graphics: mesh (dynamically on plugins/diffusion, and hence, on diffusion)
 
 # plugins/diffusion: mesh (+ diffusion headers)
-# canvas: [Cairo] (+ animation headers)
+# cairo_graphics: [Cairo] (+ animation headers)
 # animation: graphics Cairo GTK3
 
 ############################ names of source files #############################
@@ -57,8 +57,9 @@ _main_graphics := $(wildcard code/c/main/graphics/*.c)
 
 ############################ names of plugin files #############################
 _plugins_diffusion := $(wildcard code/c/plugins/diffusion/*.c)
-_plugins_animation := $(wildcard code/c/plugins/animation/*.c)
-_plugins_canvas := $(wildcard code/c/plugins/canvas/*.c)
+_plugins_gtk_animation := $(wildcard code/c/plugins/gtk_animation/*.c)
+_plugins_cairo_animation := $(wildcard code/c/plugins/cairo_animation/*.c)
+_plugins_cairo_graphics := $(wildcard code/c/plugins/cairo_graphics/*.c)
 
 ######################### names of source object files #########################
 _obj_src_array := $(patsubst code/c/src/array/%.c,\
@@ -102,11 +103,14 @@ _obj_main_graphics := $(patsubst code/c/main/graphics/%.c,\
 _obj_plugins_diffusion := $(patsubst code/c/plugins/diffusion/%.c,\
   build/$(MODE)/obj/plugins/%$(.OBJ), $(_plugins_diffusion))
 
-_obj_plugins_animation := $(patsubst code/c/plugins/animation/%.c,\
-  build/$(MODE)/obj/plugins/%$(.OBJ), $(_plugins_animation))
+_obj_plugins_gtk_animation := $(patsubst code/c/plugins/gtk_animation/%.c,\
+  build/$(MODE)/obj/plugins/%$(.OBJ), $(_plugins_gtk_animation))
 
-_obj_plugins_canvas := $(patsubst code/c/plugins/canvas/%.c,\
-  build/$(MODE)/obj/plugins/%$(.OBJ), $(_plugins_canvas))
+_obj_plugins_cairo_animation := $(patsubst code/c/plugins/cairo_animation/%.c,\
+  build/$(MODE)/obj/plugins/%$(.OBJ), $(_plugins_cairo_animation))
+
+_obj_plugins_cairo_graphics := $(patsubst code/c/plugins/cairo_graphics/%.c,\
+  build/$(MODE)/obj/plugins/%$(.OBJ), $(_plugins_cairo_graphics))
 
 ########################## names of executable files ###########################
 _bin_array := $(patsubst code/c/main/array/%.c,\
@@ -148,10 +152,12 @@ _include_src_graphics := $(_include_main_graphics) -iquote code/c/src/graphics
 
 ################ include directories for compiling plugin files ################
 _include_plugins_diffusion := $(_include_main_diffusion)
-_include_plugins_animation := $(_include_main_graphics)\
-  -iquote code/c/plugins/animation
-_include_plugins_canvas := $(_include_main_graphics)\
-  -iquote code/c/include/animation -iquote code/c/plugins/canvas
+_include_plugins_gtk_animation := $(_include_main_graphics)\
+  -iquote code/c/plugins/gtk_animation
+_include_plugins_cairo_animation := $(_include_main_graphics)\
+  -iquote code/c/plugins/cairo_animation
+_include_plugins_cairo_graphics := $(_include_main_graphics)\
+  -iquote code/c/include/animation -iquote code/c/plugins/cairo_graphics
 
 ############################# library dependencies #############################
 _libs_src_array := build/$(MODE)/lib/src/libarray$(.LIB)
@@ -192,8 +198,9 @@ obj_main_graphics: $(_obj_main_graphics)
 .PHONY: $(patsubst %, obj_plugins_%, $(PLUGINS))
 obj_plugins: $(patsubst %, obj_plugins_%, $(PLUGINS))
 obj_plugins_diffusion: $(_obj_plugins_diffusion)
-obj_plugins_animation: $(_obj_plugins_animation)
-obj_plugins_canvas: $(_obj_plugins_canvas)
+obj_plugins_gtk_animation: $(_obj_plugins_gtk_animation)
+obj_plugins_cairo_animation: $(_obj_plugins_cairo_animation)
+obj_plugins_cairo_graphics: $(_obj_plugins_cairo_graphics)
 
 ############################### library targets ################################
 .PHONY: lib lib_src lib_plugins
@@ -213,8 +220,9 @@ lib_src_graphics: build/$(MODE)/lib/src/libgraphics$(.LIB)
 .PHONY: $(patsubst %, lib_plugins_%, $(PLUGINS))
 lib_plugins: obj_plugins $(patsubst %, lib_plugins_%, $(PLUGINS))
 lib_plugins_diffusion: build/$(MODE)/lib/plugins/libdiffusion$(.DLL)
-lib_plugins_animation: build/$(MODE)/lib/plugins/libanimation$(.DLL)
-lib_plugins_canvas: build/$(MODE)/lib/plugins/libcanvas$(.DLL)
+lib_plugins_gtk_animation: build/$(MODE)/lib/plugins/libgtk_animation$(.DLL)
+lib_plugins_cairo_animation: build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
+lib_plugins_cairo_graphics: build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)
 
 ############################## executable targets ##############################
 .PHONY: $(patsubst %, bin_%, $(MODULES))
@@ -236,8 +244,9 @@ diffusion: $(patsubst %, %_diffusion, obj_src obj_main lib_src bin txt)
 graphics: $(patsubst %, %_graphics, obj_src obj_main lib_src bin txt)
 
 diffusion: obj_plugins_diffusion lib_plugins_diffusion
-animation: obj_plugins_animation lib_plugins_animation
-canvas: obj_plugins_canvas lib_plugins_canvas
+gtk_animation: obj_plugins_gtk_animation lib_plugins_gtk_animation
+cairo_animation: obj_plugins_cairo_animation lib_plugins_cairo_animation
+cairo_graphics: obj_plugins_cairo_graphics lib_plugins_cairo_graphics
 
 ######################### preprocessing and compiling ##########################
 build/$(MODE)/obj: | build/$(MODE)
@@ -338,17 +347,23 @@ $(_obj_plugins_diffusion): build/$(MODE)/obj/plugins/%$(.OBJ):\
   build/$(MODE)/dep/plugins
 	$(call compile,$@,$<,$(_include_plugins_diffusion) -iquote code/c/include)
 
-$(_obj_plugins_animation): build/$(MODE)/obj/plugins/%$(.OBJ):\
-  code/c/plugins/animation/%.c | build/$(MODE)/obj/plugins\
-                                 build/$(MODE)/dep/plugins
-	$(call compile,$@,$<,$(_include_plugins_animation) -iquote code/c/include\
-		             $(shell pkg-config --cflags gtk+-3.0))
+$(_obj_plugins_gtk_animation): build/$(MODE)/obj/plugins/%$(.OBJ):\
+  code/c/plugins/gtk_animation/%.c\
+  | build/$(MODE)/obj/plugins build/$(MODE)/dep/plugins
+	$(call compile,$@,$<,$(_include_plugins_gtk_animation)\
+  -iquote code/c/include $(shell pkg-config --cflags gtk+-3.0))
 
-$(_obj_plugins_canvas): build/$(MODE)/obj/plugins/%$(.OBJ):\
-  code/c/plugins/canvas/%.c | build/$(MODE)/obj/plugins\
+$(_obj_plugins_cairo_animation): build/$(MODE)/obj/plugins/%$(.OBJ):\
+  code/c/plugins/cairo_animation/%.c\
+  | build/$(MODE)/obj/plugins build/$(MODE)/dep/plugins
+	$(call compile,$@,$<,$(_include_plugins_cairo_animation)\
+  -iquote code/c/include $(shell pkg-config --cflags cairo))
+
+$(_obj_plugins_cairo_graphics): build/$(MODE)/obj/plugins/%$(.OBJ):\
+  code/c/plugins/cairo_graphics/%.c | build/$(MODE)/obj/plugins\
                               build/$(MODE)/dep/plugins
-	$(call compile,$@,$<,$(_include_plugins_canvas) -iquote code/c/include\
-		             $(shell pkg-config --cflags cairo))
+	$(call compile,$@,$<,$(_include_plugins_cairo_graphics) -iquote code/c/include\
+  $(shell pkg-config --cflags cairo))
 
 # include header dependencies for object files from code/c/plugins
 -include build/$(MODE)/dep/plugins/*$(.DEP)
@@ -416,13 +431,20 @@ build/$(MODE)/lib/plugins/libdiffusion$(.DLL): $(_obj_plugins_diffusion)\
   | build/$(MODE)/lib/plugins
 	$(CC) -o $@ -fPIC -shared $^ $(LDLIBS)
 
-build/$(MODE)/lib/plugins/libanimation$(.DLL): $(_obj_plugins_animation)\
+build/$(MODE)/lib/plugins/libgtk_animation$(.DLL):\
+  $(_obj_plugins_gtk_animation)\
   build/$(MODE)/obj/src/cmc_error_message_position_in_code$(.OBJ)\
   | build/$(MODE)/lib/plugins
-	$(CC) -o $@ -fPIC -shared $^\
-	  $(shell pkg-config --libs gtk+-3.0) $(LDLIBS)
+	$(CC) -o $@ -fPIC -shared $^ $(shell pkg-config --libs gtk+-3.0) $(LDLIBS)
 
-build/$(MODE)/lib/plugins/libcanvas$(.DLL): $(_obj_plugins_canvas)\
+build/$(MODE)/lib/plugins/libcairo_animation$(.DLL):\
+  $(_obj_plugins_cairo_animation)\
+  build/$(MODE)/obj/src/cmc_error_message_position_in_code$(.OBJ)\
+  | build/$(MODE)/lib/plugins
+	$(CC) -o $@ -fPIC -shared $^ $(shell pkg-config --libs cairo) $(LDLIBS)
+
+build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL):\
+  $(_obj_plugins_cairo_graphics)\
   build/$(MODE)/obj/src/cmc_rgb_allocate_color$(.OBJ)\
   build/$(MODE)/obj/src/cmc_rgb_check_color_scheme_rainbow$(.OBJ)\
   build/$(MODE)/obj/src/cmc_rgb_color_scheme_rainbow$(.OBJ)\
@@ -448,8 +470,7 @@ build/$(MODE)/lib/plugins/libcanvas$(.DLL): $(_obj_plugins_canvas)\
   build/$(MODE)/obj/src/cmc_error_message_malloc$(.OBJ)\
   build/$(MODE)/obj/src/cmc_error_message_position_in_code$(.OBJ)\
   | build/$(MODE)/lib/plugins
-	$(CC) -o $@ -fPIC -shared $^\
-	  $(shell pkg-config --libs cairo) $(LDLIBS)
+	$(CC) -o $@ -fPIC -shared $^ $(shell pkg-config --libs cairo) $(LDLIBS)
 
 ################################### linking ####################################
 build/$(MODE)/bin: | build/$(MODE)

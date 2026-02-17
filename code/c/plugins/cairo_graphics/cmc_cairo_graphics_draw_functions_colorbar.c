@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "cmc_cairo.h"
+#include "cmc_cairo_graphics.h"
 #include "cmc_graphics_colorbar.h"
 #include "cmc_graphics_colorbar_draw_functions.h"
 #include "cmc_rgb.h"

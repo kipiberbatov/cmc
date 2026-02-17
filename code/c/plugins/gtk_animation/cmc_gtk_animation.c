@@ -8,7 +8,7 @@
 #include "cmc_animation.h"
 #include "cmc_animation_generic_data.h"
 
-struct cmc_cairo_gtk_animation_input
+struct cmc_gtk_animation_input
 {
   GtkWidget * drawing_area;
   struct cmc_animation * animation;
@@ -20,7 +20,7 @@ struct cmc_cairo_gtk_animation_input
 static int on_draw_event(
   GtkWidget * widget,
   cairo_t * cr,
-  struct cmc_cairo_gtk_animation_input * input)
+  struct cmc_gtk_animation_input * input)
 {
   int new_index, total_steps;
   struct cmc_animation_generic_data * generic_data;
@@ -59,7 +59,7 @@ static int on_draw_event(
   return TRUE;
 }
 
-static int on_timeout(struct cmc_cairo_gtk_animation_input * input)
+static int on_timeout(struct cmc_gtk_animation_input * input)
 {
   int new_index, total_steps;
   struct cmc_animation * animation;
@@ -87,12 +87,12 @@ static void on_window_destroy(GtkWidget *widget, int * to_be_closed)
   *to_be_closed = 1;
 }
 
-static void cmc_cairo_gtk_animation_run(
+static void cmc_gtk_animation_run(
   struct cmc_animation * animation,
   int * status)
 {
   int height, width;
-  struct cmc_cairo_gtk_animation_input input;
+  struct cmc_gtk_animation_input input;
   GtkWidget * window;
 
   input.animation = animation;
@@ -146,7 +146,7 @@ static void cmc_program_log(FILE * out, int argc, char ** argv, int status)
   fprintf(out, "Exit status: %d\n", status);
 }
 
-static void cmc_cairo_gtk_animation_log(
+static void cmc_gtk_animation_log(
   FILE * out, int argc, char ** argv, int index, int total_steps, int status)
 {
   cmc_program_log(out, argc, argv, status);
@@ -154,7 +154,7 @@ static void cmc_cairo_gtk_animation_log(
   fprintf(out, "Total range of iterations: i = 0 to i = %d\n", total_steps - 1);
 }
 
-static void cmc_cairo_gtk_animation_log_by_name(
+static void cmc_gtk_animation_log_by_name(
   int * status, int argc, char ** argv, int index, int total_steps,
   const char * output)
 {
@@ -162,7 +162,7 @@ static void cmc_cairo_gtk_animation_log_by_name(
 
   if (output == NULL)
   {
-    cmc_cairo_gtk_animation_log(stdout, argc, argv, index, total_steps, *status);
+    cmc_gtk_animation_log(stdout, argc, argv, index, total_steps, *status);
     return;
   }
 
@@ -176,11 +176,11 @@ static void cmc_cairo_gtk_animation_log_by_name(
     *status = errno;
     return;
   }
-  cmc_cairo_gtk_animation_log(out, argc, argv, index, total_steps, *status);
+  cmc_gtk_animation_log(out, argc, argv, index, total_steps, *status);
   fclose(out);
 }
 
-void cmc_cairo_gtk_animation(
+void cmc_gtk_animation(
   struct cmc_animation * animation,
   int * status,
   int argc,
@@ -189,7 +189,7 @@ void cmc_cairo_gtk_animation(
 {
   int index, total_steps;
 
-  cmc_cairo_gtk_animation_run(animation, status);
+  cmc_gtk_animation_run(animation, status);
   if (*status)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
@@ -199,7 +199,7 @@ void cmc_cairo_gtk_animation(
   total_steps = animation->generic_data->total_steps;
   index = animation->generic_data->old_index;
 
-  cmc_cairo_gtk_animation_log_by_name(
+  cmc_gtk_animation_log_by_name(
     status, argc, argv, index, total_steps, output);
   if (*status)
   {

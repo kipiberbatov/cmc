@@ -1,4 +1,4 @@
-#include "cmc_cairo.h"
+#include "cmc_cairo_graphics.h"
 #include "line_2d.h"
 
 void cmc_cairo_graphics_2d_line_draw(

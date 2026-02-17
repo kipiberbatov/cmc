@@ -10,10 +10,10 @@ struct cmc_graphics_rectangle;
 struct cmc_rgb;
 struct line_2d;
 
-void cmc_cairo_paint_white(cairo_t * cr, int * status);
+void cmc_cairo_graphics_paint_white(cairo_t * cr, int * status);
 
 void
-cmc_cairo_paint_rgb(cairo_t * cr, int * status, const struct cmc_rgb * color);
+cmc_cairo_graphics_paint_rgb(cairo_t * cr, int * status, const struct cmc_rgb * color);
 
 void cmc_cairo_graphics_2d_line_draw(
   cairo_t * cr, int * status, const struct line_2d * line);

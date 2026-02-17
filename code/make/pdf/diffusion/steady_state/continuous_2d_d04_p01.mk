@@ -25,10 +25,10 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/exact_hemisphere_
   build/$(MODE)/txt/mesh/hemisphere_polar_4_3/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d04_p01/exact_hemisphere_polar_4_3_forman_potential.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence_polar_forman$(.OBJ)\
-  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_animation_pdf$(.OBJ)\
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01\
-    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
-    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+    build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)\
+    build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
@@ -36,7 +36,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/exact_hemisphere_
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence_polar_forman\
   --animation-library=$(word 3, $|)\
-  --animation-backend=cmc_cairo_pdf_animation\
+  --animation-backend=cmc_cairo_animation_pdf\
   --output=$@
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/exact_hemisphere_polar_4_3_forman_flow_rate.pdf:\
@@ -44,10 +44,10 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/exact_hemisphere_
   build/$(MODE)/txt/mesh/hemisphere_polar_4_3/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d04_p01/exact_hemisphere_polar_4_3_forman_flow_rate.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence_polar_forman$(.OBJ)\
-  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_animation_pdf$(.OBJ)\
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01\
-    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
-    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+    build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)\
+    build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
@@ -55,7 +55,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/exact_hemisphere_
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence_polar_forman\
   --animation-library=$(word 3, $|)\
-  --animation-backend=cmc_cairo_pdf_animation\
+  --animation-backend=cmc_cairo_animation_pdf\
   --output=$@
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/primal_weak_cochain_hemisphere_polar_4_3_forman_potential.pdf:\
@@ -63,10 +63,10 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/primal_weak_cocha
   build/$(MODE)/txt/mesh/hemisphere_polar_4_3/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d04_p01/primal_weak_cochain_hemisphere_polar_4_3_forman_potential.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence_polar_forman$(.OBJ)\
-  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_animation_pdf$(.OBJ)\
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01\
-    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
-    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+    build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)\
+    build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
@@ -74,7 +74,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/primal_weak_cocha
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence_polar_forman\
   --animation-library=$(word 3, $|)\
-  --animation-backend=cmc_cairo_pdf_animation\
+  --animation-backend=cmc_cairo_animation_pdf\
   --output=$@
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/primal_weak_cochain_hemisphere_polar_4_3_forman_flow_rate.pdf:\
@@ -82,10 +82,10 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/primal_weak_cocha
   build/$(MODE)/txt/mesh/hemisphere_polar_4_3/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d04_p01/primal_weak_cochain_hemisphere_polar_4_3_forman_flow_rate.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence_polar_forman$(.OBJ)\
-  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_animation_pdf$(.OBJ)\
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01\
-    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
-    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+    build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)\
+    build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
@@ -93,7 +93,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/primal_weak_cocha
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence_polar_forman\
   --animation-library=$(word 3, $|)\
-  --animation-backend=cmc_cairo_pdf_animation\
+  --animation-backend=cmc_cairo_animation_pdf\
   --output=$@
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/mixed_weak_cochain_hemisphere_polar_4_3_forman_potential.pdf:\
@@ -101,10 +101,10 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/mixed_weak_cochai
   build/$(MODE)/txt/mesh/hemisphere_polar_4_3/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d04_p01/mixed_weak_cochain_hemisphere_polar_4_3_forman_potential.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence_polar_forman$(.OBJ)\
-  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_animation_pdf$(.OBJ)\
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01\
-    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
-    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+    build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)\
+    build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
@@ -112,7 +112,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/mixed_weak_cochai
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence_polar_forman\
   --animation-library=$(word 3, $|)\
-  --animation-backend=cmc_cairo_pdf_animation\
+  --animation-backend=cmc_cairo_animation_pdf\
   --output=$@
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/mixed_weak_cochain_hemisphere_polar_4_3_forman_flow_rate.pdf:\
@@ -120,10 +120,10 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/mixed_weak_cochai
   build/$(MODE)/txt/mesh/hemisphere_polar_4_3/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d04_p01/mixed_weak_cochain_hemisphere_polar_4_3_forman_solution.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence_polar_forman$(.OBJ)\
-  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_animation_pdf$(.OBJ)\
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01\
-    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
-    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+    build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)\
+    build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
@@ -132,7 +132,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/mixed_weak_cochai
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence_polar_forman\
   --animation-library=$(word 3, $|)\
-  --animation-backend=cmc_cairo_pdf_animation\
+  --animation-backend=cmc_cairo_animation_pdf\
   --output=$@
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/exact_hemisphere_polar_6_6_forman_potential.pdf:\
@@ -140,10 +140,10 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/exact_hemisphere_
   build/$(MODE)/txt/mesh/hemisphere_polar_6_6/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d04_p01/exact_hemisphere_polar_6_6_forman_potential.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence_polar_forman$(.OBJ)\
-  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_animation_pdf$(.OBJ)\
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01\
-    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
-    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+    build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)\
+    build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
@@ -151,7 +151,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/exact_hemisphere_
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence_polar_forman\
   --animation-library=$(word 3, $|)\
-  --animation-backend=cmc_cairo_pdf_animation\
+  --animation-backend=cmc_cairo_animation_pdf\
   --output=$@
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/exact_hemisphere_polar_6_6_forman_flow_rate.pdf:\
@@ -159,10 +159,10 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/exact_hemisphere_
   build/$(MODE)/txt/mesh/hemisphere_polar_6_6/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d04_p01/exact_hemisphere_polar_6_6_forman_flow_rate.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence_polar_forman$(.OBJ)\
-  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_animation_pdf$(.OBJ)\
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01\
-    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
-    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+    build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)\
+    build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
@@ -170,7 +170,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/exact_hemisphere_
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence_polar_forman\
   --animation-library=$(word 3, $|)\
-  --animation-backend=cmc_cairo_pdf_animation\
+  --animation-backend=cmc_cairo_animation_pdf\
   --output=$@
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/primal_weak_cochain_hemisphere_polar_6_6_forman_potential.pdf:\
@@ -178,10 +178,10 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/primal_weak_cocha
   build/$(MODE)/txt/mesh/hemisphere_polar_6_6/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d04_p01/primal_weak_cochain_hemisphere_polar_6_6_forman_potential.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence_polar_forman$(.OBJ)\
-  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_animation_pdf$(.OBJ)\
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01\
-    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
-    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+    build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)\
+    build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
@@ -189,7 +189,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/primal_weak_cocha
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence_polar_forman\
   --animation-library=$(word 3, $|)\
-  --animation-backend=cmc_cairo_pdf_animation\
+  --animation-backend=cmc_cairo_animation_pdf\
   --output=$@
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/primal_weak_cochain_hemisphere_polar_6_6_forman_flow_rate.pdf:\
@@ -197,10 +197,10 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/primal_weak_cocha
   build/$(MODE)/txt/mesh/hemisphere_polar_6_6/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d04_p01/primal_weak_cochain_hemisphere_polar_6_6_forman_flow_rate.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence_polar_forman$(.OBJ)\
-  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_animation_pdf$(.OBJ)\
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01\
-    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
-    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+    build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)\
+    build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
@@ -208,7 +208,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/primal_weak_cocha
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence_polar_forman\
   --animation-library=$(word 3, $|)\
-  --animation-backend=cmc_cairo_pdf_animation\
+  --animation-backend=cmc_cairo_animation_pdf\
   --output=$@
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/mixed_weak_cochain_hemisphere_polar_6_6_forman_potential.pdf:\
@@ -216,10 +216,10 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/mixed_weak_cochai
   build/$(MODE)/txt/mesh/hemisphere_polar_6_6/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d04_p01/mixed_weak_cochain_hemisphere_polar_6_6_forman_potential.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence_polar_forman$(.OBJ)\
-  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_animation_pdf$(.OBJ)\
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01\
-    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
-    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+    build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)\
+    build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
@@ -227,7 +227,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/mixed_weak_cochai
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_0_cochain_sequence_polar_forman\
   --animation-library=$(word 3, $|)\
-  --animation-backend=cmc_cairo_pdf_animation\
+  --animation-backend=cmc_cairo_animation_pdf\
   --output=$@
 
 build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/mixed_weak_cochain_hemisphere_polar_6_6_forman_flow_rate.pdf:\
@@ -235,10 +235,10 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/mixed_weak_cochai
   build/$(MODE)/txt/mesh/hemisphere_polar_6_6/forman.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d04_p01/mixed_weak_cochain_hemisphere_polar_6_6_forman_solution.txt\
   build/$(MODE)/obj/plugins/cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence_polar_forman$(.OBJ)\
-  build/$(MODE)/obj/plugins/cmc_cairo_pdf_animation$(.OBJ)\
+  build/$(MODE)/obj/plugins/cmc_cairo_animation_pdf$(.OBJ)\
   | build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01\
-    build/$(MODE)/lib/plugins/libcanvas$(.DLL)\
-    build/$(MODE)/lib/plugins/libanimation$(.DLL)
+    build/$(MODE)/lib/plugins/libcairo_graphics$(.DLL)\
+    build/$(MODE)/lib/plugins/libcairo_animation$(.DLL)
 	$(INTERPRETER) $<\
   --mesh=$(word 2, $^)\
   --number-of-time-steps=0\
@@ -247,7 +247,7 @@ build/$(MODE)/pdf/diffusion/steady_state/continuous_2d_d04_p01/mixed_weak_cochai
   --canvas-library=$(word 2, $|)\
   --canvas-backend=cmc_cairo_graphics_draw_functions_mesh_2d_1_cochain_sequence_polar_forman\
   --animation-library=$(word 3, $|)\
-  --animation-backend=cmc_cairo_pdf_animation\
+  --animation-backend=cmc_cairo_animation_pdf\
   --output=$@
 
 pdf_diffusion_steady_state_continuous_2d_d04_p01:\
