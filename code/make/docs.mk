@@ -14,7 +14,8 @@ build/$(MODE)/empty: | build/$(MODE)
 docs_fast: build/$(MODE)/empty/docs_main_fast.empty
 docs: build/$(MODE)/empty/docs_main.empty
 
-build/$(MODE)/empty/docs_pdf_dependencies.empty: $(_docs_pdf_dependencies)
+build/$(MODE)/empty/docs_pdf_dependencies.empty: $(_docs_pdf_dependencies)\
+  build/$(MODE)/empty
 	touch $@
 
 build/$(MODE)/docs: | build/$(MODE)
@@ -27,8 +28,8 @@ build/$(MODE)/empty/docs_main_fast.empty: code/latex/main.tex $(_latex_src) \
 	touch $@
 
 build/$(MODE)/empty/docs_main.empty: build/$(MODE)/empty/docs_main_fast.empty \
-  | build/$(MODE)/docs
-	$(LATEX_COMPILER) -output-directory=$| code/latex/main.tex
+  | build/$(MODE)/docs build/$(MODE)/empty
+	$(LATEX_COMPILER) -output-directory=$(word 1, $|) code/latex/main.tex
 	touch $@
 
 _docs_empty := \
