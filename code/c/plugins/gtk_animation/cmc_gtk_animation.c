@@ -102,7 +102,13 @@ static void cmc_gtk_animation_run(
   width = (int) animation->generic_data->width;
   height = (int) animation->generic_data->height;
 
-  gtk_init(NULL, NULL);
+  *status = !gtk_init_check(NULL, NULL);
+  if (*status)
+  {
+    cmc_error_message_position_in_code(__FILE__, __LINE__);
+    fputs("cannot initialize GTK 3\n", stderr);
+    return;
+  }
 
   window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
   input.drawing_area = gtk_drawing_area_new();

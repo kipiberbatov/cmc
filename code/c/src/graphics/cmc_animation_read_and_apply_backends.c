@@ -66,7 +66,10 @@ void cmc_animation_read_and_apply_backends(
   if (*status)
   {
     cmc_error_message_position_in_code(__FILE__, __LINE__);
-    fputs("cannot draw animation\n", stderr);
+    fprintf(stderr,
+      "cannot draw animation with animation backend %s%s%s on canvas %s%s%s\n",
+      color_variable, animation_backend, color_none,
+      color_variable, canvas_backend, color_none);
     goto lib_animation_close;
   }
 
