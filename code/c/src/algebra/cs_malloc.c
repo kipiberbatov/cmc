@@ -33,7 +33,7 @@ void *cs_realloc (void *p, csi n, size_t size, csi *ok)
     *ok = (pnew != NULL) ;                  /* realloc fails if pnew is NULL */
     return pnew;
     /* remove the below code because gcc complained
-     * "pointer ‘p’ may be used after ‘realloc’ [-Werror=use-after-free]"
+     * "pointer `p` may be used after `realloc` [-Werror=use-after-free]"
      */
 #if 0
     return ((*ok) ? pnew : p) ;             /* return original p if failure */

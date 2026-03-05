@@ -36,7 +36,7 @@ void cmc_main_run(
     cmc_error_message_string("cannot parse command line options\n");
     goto end;
   }
-  
+
   name = type->get_output_channel_name(arguments);
   type->open_output_channel(&out, status, name);
   if (*status)
@@ -45,8 +45,8 @@ void cmc_main_run(
     cmc_error_message_string("cannot open output channel\n");
     goto arguments_free;
   }
- 
-  format = type->get_output_channel_format(arguments); 
+
+  format = type->get_output_channel_format(arguments);
   cmc_main_compute_and_print_run(
     out,
     input,
