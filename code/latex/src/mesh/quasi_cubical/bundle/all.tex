@@ -2,8 +2,10 @@
   Let $X$ and $Y$ be sets, $f \colon X \to Y$.
   Then
   \begin{equation}
-    X \simeq \coprod_{y \in Y} f^{-1}[\{x\}].
+    X = \coprod_{y \in Y} f^{-1}[\{y\}].
   \end{equation}
+  (Here, we mean a intrinsic disjoint union, i.e., a union of mutually exclusive
+  subsets.)
 \end{proposition}
 \begin{definition}
   Let $\mathcal{K}$ be a quasi-cubical mesh.
@@ -33,27 +35,28 @@
 \begin{definition}
   Let $\mathcal{K}$ be a quasi-cubical mesh,
   ${\bf E} = (E, \pi, \mathcal{K})$ be a discrete vector bundle.
-  Define the triple ${\bf E}^* := (E', \pi', \mathcal{K})$ as follows.
+  Denote
   \begin{equation}
-    E' := \coprod_{\mathcal{N} \in \mathcal{K}_0} \restrict{E'}{\mathcal{N}}
+    E^*
+    := \coprod_{\mathcal{N} \in \mathcal{K}_0} (\restrict{E}{\mathcal{N}})^*,
   \end{equation}
-  and $\pi'$ is the disjoint union projection.
-  We call ${\bf E}^*$  (or simply $E^*$) the \textbf{dual bundle}.
+  and let $\pi^* \colon E^* \to \mathcal{K}$ be the disjoint union projection.
+  We call the bundle ${\bf E}^* := (E^*, \pi^*, \mathcal{K})$ (or simply $E^*$)
+  the \textbf{dual bundle} of ${\bf E}$.
 \end{definition}
 \begin{definition}
   Let $\mathcal{K}$ be a quasi-cubical mesh,
   ${\bf E} = (E, \pi_E, \mathcal{K})$ and ${\bf F} = (F, \pi_F, \mathcal{K})$
   be discrete vector bundles.
-  Define the triple ${\bf E} \oplus {\bf F}:= (G, \pi_G, \mathcal{K})$
-  as follows.
+  Denote 
   \begin{equation}
     G :=
     \coprod_{\mathcal{N} \in \mathcal{K}_0}
-      \restrict{E}{\mathcal{N}} \oplus \restrict{F}{\mathcal{N}}
+      \restrict{E}{\mathcal{N}} \oplus \restrict{F}{\mathcal{N}},
   \end{equation}
-  and $\pi_G$ is the disjoint union projection.
-  We call ${\bf E} \oplus {\bf F}$ (or simply $E \oplus F$) the
-  \textbf{direct sum bundle}.
+  and let $\pi_G \colon G \to \mathcal{K}$ be the disjoint union projection.
+  We call the bundle ${\bf E} \oplus {\bf F} := (G, \pi_G, \mathcal{K})$
+  (or simply $E \oplus F$) the \textbf{direct sum bundle}.
 
   In a similar way, we define the \textbf{tensor product bundle}
   ${\bf E} \otimes {\bf F}$ (or simply $E \otimes F$)
