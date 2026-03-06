@@ -56,7 +56,7 @@
   which we will stick.
   We will show that under mild assumptions the integral formulation gives rise
   locally to a contraction operator to which the Banach fixed point theorem
-  applies.
+  (\Cref{theorem:banach_fixed_point}) applies.
 \end{discussion}
 \begin{definition}
   Let
@@ -101,6 +101,7 @@
   \end{equation}
 \end{notation}
 \begin{proposition}
+  \label{proposition:picard_lindelof_preparation}
   Let
     $t_0 \in \R$,
     $n \in \N^+$,
@@ -210,7 +211,7 @@
       be the spatial differential (the differential when time is fixed),
     $i_u \colon C^{k - 1}(U, V \times (\R^n)^*) \to C^{k - 1}(U, V)$
       be the contraction with the flow field.
-  The material derivative on $V$-valued functions is defined by
+  The \textbf{material derivative} on $V$-valued functions is defined by
   \begin{equation}
     \frac{D}{D t} \colon C^k(U, V) \to C^{k - 1}(U, V),\
     \frac{D}{D t} := \partial_t + i_u \circ d_x.
@@ -231,6 +232,7 @@
   \end{equation}
 \end{proposition}
 \begin{proposition}
+  \label{proposition:material_derivative_property}
   Let
     $I$ be an interval,
     $n \in \N^+$,
@@ -240,7 +242,7 @@
     $u \in C^{k - 1}(U, \R^n)$ (usually a flow velocity),
     $x \colon I \to \R^n$ be an integral curve of $u$,
     $\tilde{x} := \id_I \odot x \colon I \to I \times \R^n$,
-    $g \in C^k(I, \R^n)$.
+    $g \in C^k(I \times \R^n, \R^n)$.
   Then
   \begin{equation}
     \frac{d (g \circ \tilde{x})}{d t} = \frac{D g}{D t} \circ \tilde{x}.
@@ -275,14 +277,15 @@
     $u \in C^{k - 1}(U, \R^n)$ (usually a flow velocity),
     $x \colon I \to \R^n$ be an integral curve of $u$,
     $\tilde{x} := \id_I \odot x \colon I \to I \times \R^n$,
-    $g \in C^k(I, \R^n)$.
+    $g \in C^k(I \times \R^n, \R^n)$.
+  Then
   \begin{equation}
     \frac{d^k (g \circ \tilde{x})}{d t^k} = \frac{D^k g}{D t^k} \circ \tilde{x}.
   \end{equation}
 \end{corollary}
 \begin{proof}
   We proceed by the induction.
-  In the base case $k = 0$ noth sides equal to $g \circ \tilde{x}$
+  In the base case $k = 0$ both sides equal to $g \circ \tilde{x}$.
   For the induction step assume the proposition is true for the integer $k$.
   Then for $k + 1$ we get
   \begin{equation}
@@ -293,7 +296,7 @@
       & = \frac{d}{d t}\left(\frac{D^k g}{D^k t} \circ \tilde{x}\right)
       & \qquad (\text{Induction hypothesis}) \\
       & = \frac{D}{D t}\left(\frac{D^k g}{D^k t}\right) \circ \tilde{x}
-      & \qquad (\text{Pevious proposition}) \\
+      & \qquad (\text{\Cref{{proposition:material_derivative_property}}}) \\
       & = \frac{D^{k + 1} g}{D t^{k + 1}} \circ \tilde{x}
       & \qquad (\text{Definition of operator power}).
     \end{split}
@@ -324,15 +327,14 @@
      u := \restrict{F}{I \times V} \in C^k(I \times V, \R^n).
    \end{equation}
   Let $q \in [0, 1)$ be arbitrary.
-  Take (from the proof of the previous proposition) $\tau, h \in \R^+$ such that
-  the operator $T$ defined on
-  $C^0(I, V)$ in
+  Take (from the proof of \Cref{proposition:picard_lindelof_preparation})
+  $\tau, h \in \R^+$ such that the operator $T$ defined on $C^0(I, V)$ in
   \Cref{equation:ordinary_differential_equation/initial_value_problem/operator}
   is a contraction with Lipschitz constant $q$.
-  According to the Banach fixed point theorem, since $C^0$ spaces between closed
-  subsets of Euclidean spaces are complete, there exists a unique
-  $x \in C^0(I, V)$ that is a fixed point
-  of $T$.
+  According to the Banach fixed point theorem
+  (\Cref{theorem:banach_fixed_point}), since $C^0$ spaces between closed
+  subsets of Euclidean spaces are complete, then there exists a unique
+  $x \in C^0(I, V)$ that is a fixed point of $T$.
   We need to show that the solution $x$ is in fact of class $C^{k + 1}$, not
   merely continuous.
   First we use the fact that
@@ -348,7 +350,7 @@
     \end{alignat}
   \end{subequations}
   so that $\dot{x} = u \circ \tilde{x}$.
-  From the previous propoition it follows that $u$ is $k$ time differentiable
+  From the previous propoition it follows that $u$ is $k$ times differentiable
   and
   \begin{equation}
     \frac{d^{k + 1} x}{d t^{k + 1}}
