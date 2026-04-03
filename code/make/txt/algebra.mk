@@ -1,4 +1,4 @@
-.PHONY: txt_algebra txt_algebra_clean txt_algeba_distclean
+.PHONY: txt_algebra txt_algebra_clean txt_algebra_distclean
 
 build/$(MODE)/txt/algebra: | build/$(MODE)/txt
 	mkdir -p $@
