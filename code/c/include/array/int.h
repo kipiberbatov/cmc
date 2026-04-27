@@ -14,6 +14,8 @@ void int_file_print_void(FILE * out, const void * x);
 
 void int_set_default_void(void * argument, const void * default_argument);
 
+int int_greatest_common_divisor(int m, int n);
+
 int int_power(int a, int n);
 
 int int_factorial(int n);

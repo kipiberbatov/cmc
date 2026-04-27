@@ -1,12 +1,18 @@
 #include "int.h"
 
-int int_binomial(int n, int k)
+int int_binomial(int m, int n)
 {
-  int i, k1, res;
+  int a_m, a_n, d, i_m, i_n, result;
 
-  k1 = (n >= 2 * k ? k : n - k);
-  res = 1;
-  for (i = 1; i <= k1; ++i)
-    res = (res * (n - i + 1)) / i;
-  return res;
+  n = (m >= 2 * n ? n : m - n);
+  result = 1;
+  for (i_n = 1; i_n <= n; ++i_n)
+  {
+    i_m = m + 1 - i_n;
+    d = int_greatest_common_divisor(i_m, i_n);
+    a_m = i_m / d;
+    a_n = i_n / d;
+    result = (result / a_n) * a_m;
+  }
+  return result;
 }

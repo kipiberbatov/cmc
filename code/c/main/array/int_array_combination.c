@@ -6,10 +6,8 @@
 
 static void int_array_combination_file_print(FILE * out, int m, int n)
 {
-  int prod, i;
   int * a;
 
-  prod = int_binomial(m, n);
   a = (int *) malloc(sizeof(int) * n);
   if (a == NULL)
   {
@@ -18,12 +16,10 @@ static void int_array_combination_file_print(FILE * out, int m, int n)
     return;
   }
   int_array_assign_identity(a, n);
-  i = 0;
-  while(i < prod - 1)
+  while(a[0] < m - n)
   {
     int_array_file_print(out, n, a, "--raw");
     int_array_combination_next(a, m, n);
-    ++i;
   }
   int_array_file_print(out, n, a, "--raw");
   free(a);
