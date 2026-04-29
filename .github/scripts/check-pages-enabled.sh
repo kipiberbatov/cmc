@@ -1,15 +1,31 @@
-#!/bin/bash
+echo "Checking GitHub Pages configuration..."
 
-echo "Checking for existence of environment: 'github-pages'"
+API_URL="https://api.github.com/repos/$GITHUB_REPOSITORY/pages"
 
-HTTP_STATUS=$(curl --write-out "%{http_code}" --silent --output /dev/null \
-  --header "Accept: application/vnd.github.v3+json" \
-  "https://api.github.com/repos/$GITHUB_REPOSITORY/environments/github-pages")
+HTTP_STATUS=$(curl \
+  --silent \
+  --write-out "%{http_code}" \
+  --output response.json \
+  -H "Authorization: Bearer $GITHUB_TOKEN" \
+  -H "Accept: application/vnd.github+json" \
+  "https://api.github.com/repos/$GITHUB_REPOSITORY/pages")
 
-if [[ "$HTTP_STATUS" -eq 200 ]]; then
-  echo "Environment 'github-pages' found."
+echo "HTTP status: $HTTP_STATUS"
+
+if [[ "$HTTP_STATUS" -ne 200 ]]; then
+  echo "Pages API not accessible."
+  echo "enabled=false" >> "$GITHUB_OUTPUT"
+  exit 0
+fi
+
+BUILD_TYPE=$(jq -r '.build_type' response.json)
+
+echo "build_type=$BUILD_TYPE"
+
+if [[ "$BUILD_TYPE" == "workflow" ]]; then
+  echo "GitHub Pages is deployed via GitHub Actions."
   echo "enabled=true" >> "$GITHUB_OUTPUT"
 else
-  echo "Environment 'github-pages' does not exist (HTTP status: $HTTP_STATUS)."
+  echo "GitHub Pages is deployed from branch."
   echo "enabled=false" >> "$GITHUB_OUTPUT"
 fi
