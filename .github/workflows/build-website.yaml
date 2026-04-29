@@ -18,7 +18,7 @@ jobs:
         run: mkdir -p build/release
 
       - name: Download artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: linux-release
           path: build/release
@@ -41,7 +41,7 @@ jobs:
         run: make website -o build/release/empty/docs_pdf_dependencies.empty
 
       - name: Upload website
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
           path: build/release/website
           retention-days: ${{ github.event.repository.private && 1 || 7 }}
