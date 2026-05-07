@@ -109,48 +109,31 @@ jagged1 * mesh_qc_boundary_layer_0_1_nodes(
 
 /************ vectors and matrices for discrete weak formulations *************/
 
-/* calculate vector f, f_i := (N^i \_/ sigma^d)[M] */
 void mesh_qc_vector_from_integral_of_basis_0_cup_d_cochain(
   double * f,
   const mesh_qc * m,
-  const double * coefficients_d);
+  const double * source);
 
-/*
-calculate nonzero values of sparse vector g,
-g_i := (N^i \_/ g_{gamma}^{d - 1})[gamma]
-*/
 void mesh_qc_vector_from_boundary_integral_of_basis_0_cup_dm1_cochain(
   double * g,
   const mesh_qc * m,
-  const jagged1 * boundary_hyperfaces,
-  const double * coefficients_dm1);
+  const jagged1 * boundary_neumann_dm1,
+  const double * g_neumann);
 
-/*
-calculate nonzero values of sparse vector g,
-g_i := (c{d - 1, i} \_/ g_{gamma}^0)[gamma]
-*/
 void mesh_qc_vector_from_boundary_integral_of_basis_dm1_cup_0_cochain(
   double * g,
   const mesh_qc * m,
   const matrix_sparse * m_bd_d,
-  const jagged1 * boundary_dm1,
-  const double * coefficients_0);
+  const jagged1 * boundary_dirichlet_dm1,
+  const double * g_dirichlet);
 
-/*
-calculate nonzero values of sparse vector g,
-g_i := (c{d - 1, i} \_/ g_{gamma}^0)[gamma]
-*/
-void mesh_qc_vector_from_inner_of_basis_d_cup_d_cochain(
+void mesh_qc_vector_from_inner_of_basis_d_cochain_with_d_cochain(
   double * f,
   const mesh_qc * m,
   const double * m_inner_d,
-  const double * coefficients_d);
+  const double * source);
 
-/*
-calculate diagonal matrix a,
-a_{i, j} := <c^{d - 1, j}, pi_{d - 1}^{-1} c^{d - 1 i}>
-*/
-void mesh_qc_matrix_diagonal_from_inner_of_basis_dm1_cup_inverse_pi_2_basis_dm1(
+void mesh_qc_matrix_diagonal_from_inner_of_basis_dm1_cup_inverse_kappa_dm1_basis_dm1(
   double * a,
   const mesh_qc * m,
   const double * m_inner_dm1,
@@ -162,17 +145,12 @@ void mesh_qc_matrix_diagonal_from_inner_of_basis_0_cup_pi_0_basis_0(
   const double * m_inner_0,
   const double * pi_0);
 
-/* calculate sparse matrix a, a_{i, j} := <delta N^j, kappa_1 (delta N^i)> */
 matrix_sparse *
 mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_cup_kappa_1_delta_basis_0(
   const mesh_qc * m,
   const double * m_inner_1,
   const double * kappa_1);
 
-/*
-calculate sparse matrix b,
-b_{i, k} := (N^k \_/ delta c^{d - 1, i})[M]
-*/
 matrix_sparse *
 mesh_qc_matrix_sparse_from_integral_of_basis_0_cup_delta_basis_dm1(
   const mesh_qc * m,

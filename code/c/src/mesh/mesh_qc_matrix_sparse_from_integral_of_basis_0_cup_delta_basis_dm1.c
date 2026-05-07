@@ -5,16 +5,24 @@
 /*
 ********************************* declaration **********************************
 Let
-  . $d$ be a natural number,
-  . $M$ be an oriented quasi-cubical mesh of dimension $d$
+  . d be a natural number,
+  . M be an oriented quasi-cubical mesh of dimension d
     with fundamental class [M].
-In the mixed formulation for heat equation we have the operator
-$b: C^{d - 1} M * C^0 M -> R$
-defined by
-$b(y^{d - 1}, x^0) := $(x^0 \_/ delta_{d - 1} y^{d - 1})[K]$.
-We are going to calculate the matrix $B$ of $b$
-with respect to the standard bases of $C^0 M$ and $C^{d - 1} M$, i.e.,
-$b_{i, j} := $b(c^{d - 1, i}, c^{0, j})$.
+In the mixed formulation for diffusion we have the operator
+B: C^{d - 1} M * C^0 M -> R,
+B(r, w) := $(w \_/ delta_{d - 1} q)[M].
+We are calculating its matrix
+b in M_{cn[0] * cn_[d - 1]}(R)
+in the standard bases, that is,
+b_{i, j} := (N^j \_/ delta_{d - 1} c^{d - 1, i})[M].
+          = sum_{c_{d, k} > c_{d - 1, i}}
+              epsilon(c_{d, k}, c_{d - 1, i}) * (N^j \_/ c^{d, k})[M]
+          = sum_{c_{d, k} > c_{d - 1, i} and c_{d, k} > N_j}
+              epsilon(c_{d, k}, c_{d - 1, i}) / 2^d.
+
+Note!!!
+What follows is a wrong implementation.
+Fortunately, it is not used anywhere.
 
 ********************************** definition **********************************
 take a node N_j
@@ -136,7 +144,6 @@ mesh_qc_matrix_sparse_from_integral_of_basis_0_cup_delta_basis_dm1_values(
   m_cn_dm1 = m->cn[d - 1];
   mesh_fc_part2(&m_fc_dm1_d, m, d - 1, d);
   m_cbd_dm1_cols_total = m_cbd_dm1->cols_total;
-  // m_cbd_dm1_row_indices = m_cbd_dm1->row_indices;
   m_cbd_dm1_values = m_cbd_dm1->values;
 
   index = 0;
@@ -144,7 +151,6 @@ mesh_qc_matrix_sparse_from_integral_of_basis_0_cup_delta_basis_dm1_values(
   {
     jagged2_part1(&m_fc_dm1_d_i, &m_fc_dm1_d, i);
     m_cbd_dm1_columns_i = m_cbd_dm1_cols_total[i];
-    // m_cbd_dm1_rows_i = m_cbd_dm1_row_indices + m_cbd_dm1_columns_i;
     m_cbd_dm1_values_i = m_cbd_dm1_values + m_cbd_dm1_columns_i;
     if (m_fc_dm1_d_i.a0 == 1) /* boundary hyperface */
     {

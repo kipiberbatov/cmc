@@ -4,6 +4,23 @@
 #include "cmc_error_message.h"
 #include "mesh_qc.h"
 
+/*
+Consider the bilinear form
+B: C^d M * C^{d - 1} M -> R,
+B(w, r) := <delta_{d - 1} r, w>.
+We are calculating its matrix
+b in M_{cn[d] * cn[d - 1]}(R)
+in the standard bases, that is,
+b_{k, i} := <delta c^{d - 1, i}, c^{d, k}>.
+This means that
+b_{k, i} is nonzero whenever c_{d - 1, i} < c_{d, k} in which case
+b_{k, i} = epsilon(c_{d, k}, c_{d - 1, i}) * <c^{d, k}, c^{d, k}>.
+
+In the implementation we start with signs given by the operator delta_{d - 1}.
+We then multiply it with the values
+of the array of inner products of basis (d - 1)-cells.
+*/
+
 static void
 update_values(matrix_sparse * b, const double * m_inner_d)
 {

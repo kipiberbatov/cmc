@@ -3,11 +3,25 @@
 
 #include "mesh_qc.h"
 
-/* calculate vector f, f_i := (N^i \_/ sigma^d)[M]*/
+/*
+Consider the linear form
+F: C^0 M -> R,
+F(w) := (w \_/ source)[M].
+We are calculating its vector
+f in R^{cn[0]}
+in the standard basis, that is,
+f_i := (N^i \_/ source)[M]
+     = sum_{c_{d, j} > N_i} source[j] (N^i \_/ c^{d, j})[M]
+     = sum_{c_{d, j} > N_i} source[j] / 2^d.
+
+Here, we work with a preallocated array f in R^{cn[0]}.
+*/
+
+/* Calculate the preallocated vector f, f_i := (N^i \_/ sigma^d)[M]. */
 void mesh_qc_vector_from_integral_of_basis_0_cup_d_cochain(
   double * f,
   const mesh_qc * m,
-  const double * coefficients_d)
+  const double * source)
 {
   int d, i, j, j_local, m_cn_0;
   double f_i, pow_2_d;
@@ -26,7 +40,7 @@ void mesh_qc_vector_from_integral_of_basis_0_cup_d_cochain(
     for (j_local = 0; j_local < m_fc_0_d_i.a0; ++j_local)
     {
       j = m_fc_0_d_i.a1[j_local];
-      f_i += coefficients_d[j];
+      f_i += source[j];
     }
     f[i] = f_i / pow_2_d;
   }

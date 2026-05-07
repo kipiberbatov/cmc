@@ -3,6 +3,21 @@
 #include "cmc_error_message.h"
 #include "mesh_qc.h"
 
+/*
+Consider the bilinear form
+A: C^0 M * C^0 M -> R,
+A(u, w) := <delta_0 w, kappa_1 (delta_0 u)>.
+We are calculating its matrix
+a in M_{cn[0] * cn_[0]}(R)
+in the standard bases, that is,
+a_{i, j} := <delta_0 N^j, kappa_1 (delta_0 N^i)>.
+We have two cases, i == j and i != j.
+If i == j, then
+a_{i, i} = sum_{E_k > N_i} kappa_1[k] <E^k, E^k>.
+When i != j we must have N_i and N_j part of a common edge E_k, in which case
+a_{i, j} = - kappa_1[k] <E^k, E^k>.
+*/
+
 static void
 mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_cup_kappa_1_delta_basis_0_cols_total(
   int * a_cols_total,
@@ -84,7 +99,6 @@ mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_cup_kappa_1_delta_basis_0_valu
   }
 }
 
-/* calculate sparse matrix a, a_{i, j} := <delta N^j, kappa_1 (delta N^i)> */
 matrix_sparse *
 mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_cup_kappa_1_delta_basis_0(
   const mesh_qc * m,
