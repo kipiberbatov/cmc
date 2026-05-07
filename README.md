@@ -69,7 +69,8 @@ Changhao's code is available at <https://github.com/changhaoliu-UOM/flow_2024>.
 
 Our most recent article, "Variational formulations of transport on combinatorial
 meshes", is available as a preprint at <https://arxiv.org/abs/2505.09443>,
-and is under revision for publication in a scientific journal.
+and as a publication at
+<https://www.sciencedirect.com/science/article/pii/S0377042726003808>.
 There we describe transport phenomena in continuous media in terms of smooth
 differential forms, and in discrete media in terms of combinatorial differential
 forms (cochains in the Forman subdivision), both with mixed boundary conditions.
