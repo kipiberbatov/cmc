@@ -11,7 +11,7 @@ f_i := <source, c^{d, i}> = <c^{d, i}, c^{d, i}> * source[i].
 
 Here, we work with a preallocated array f in R^{cn[d]}.
 */
-void mesh_qc_vector_from_inner_of_basis_d_cochain_with_d_cochain(
+void mesh_qc_vector_from_inner_of_basis_d_cochain_and_d_cochain(
   double * f,
   const mesh_qc * m,
   const double * m_inner_d,

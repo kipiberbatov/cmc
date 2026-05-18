@@ -44,7 +44,7 @@ update_values(matrix_sparse * b, const double * m_inner_d)
 }
 
 matrix_sparse *
-mesh_qc_matrix_sparse_from_inner_of_basis_d_cup_delta_basis_dm1(
+mesh_qc_matrix_sparse_from_inner_of_basis_d_and_delta_basis_dm1(
   const matrix_sparse * m_cbd_dm1,
   const double * m_inner_d)
 {

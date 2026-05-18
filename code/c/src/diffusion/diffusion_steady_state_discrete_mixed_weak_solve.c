@@ -30,10 +30,10 @@ void diffusion_steady_state_discrete_mixed_weak_solve(
     cmc_error_message_malloc(sizeof(double) * m->cn[d - 1], "a");
     return;
   }
-  mesh_qc_matrix_diagonal_from_inner_of_basis_dm1_cup_inverse_kappa_dm1_basis_dm1(
+  mesh_qc_matrix_diagonal_from_inner_of_basis_dm1_and_inverse_kappa_dm1_basis_dm1(
     a, m, m_inner_dm1, data->kappa_dm1);
 
-  b = mesh_qc_matrix_sparse_from_inner_of_basis_d_cup_delta_basis_dm1(
+  b = mesh_qc_matrix_sparse_from_inner_of_basis_d_and_delta_basis_dm1(
     m_cbd_dm1, m_inner_d);
   if (b == NULL)
   {
@@ -69,7 +69,7 @@ void diffusion_steady_state_discrete_mixed_weak_solve(
     cmc_error_message_malloc(sizeof(double) * m->cn[d], "f");
     goto g_free;
   }
-  mesh_qc_vector_from_inner_of_basis_d_cochain_with_d_cochain(
+  mesh_qc_vector_from_inner_of_basis_d_cochain_and_d_cochain(
     f, m, m_inner_d, data->source_d);
 
   /* temporary hack to patch the wrong orientation coming from discretizing

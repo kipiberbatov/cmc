@@ -14,7 +14,8 @@ a_{i, i} = <N^i, pi_0 N^i> = <N^i, N^i> * pi_0[i].
 For the actual implementation we only calculate and store the diagonal values
 in a preallocated array a of size cn[0].
 */
-void mesh_qc_matrix_diagonal_from_inner_of_basis_0_cup_pi_0_basis_0(
+
+void mesh_qc_matrix_diagonal_from_inner_of_basis_0_and_pi_0_basis_0(
   double * a,
   const mesh * m,
   const double * m_inner_0,

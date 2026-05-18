@@ -187,7 +187,7 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
     goto input_free;
   }
 
-  b = mesh_qc_matrix_sparse_from_inner_of_basis_d_cup_delta_basis_dm1(
+  b = mesh_qc_matrix_sparse_from_inner_of_basis_d_and_delta_basis_dm1(
     m_cbd_dm1, m_inner_d);
   if (b == NULL)
   {
@@ -250,7 +250,7 @@ diffusion_transient_discrete_mixed_weak_trapezoidal_loop_data_initialize(
   double_array_pointwise_multiply(p_bar, m_cn_dm1_bar, a_bar_inverse);
 
   f = v_tau; /* share memory */
-  mesh_qc_vector_from_inner_of_basis_d_cochain_with_d_cochain(
+  mesh_qc_vector_from_inner_of_basis_d_cochain_and_d_cochain(
     f, m, m_inner_d, data->source);
   f_tilde = f;
   double_array_multiply_with(f_tilde, m_cn_d, 2.);

@@ -15,7 +15,9 @@ a_{i, i} = <c^{d - 1, i}, kappa_{d - 1}^{-1} c^{d - 1, i}>
 For the actual implementation we only calculate and store the diagonal values
 in a preallocated array a of size cn[d - 1].
 */
-void mesh_qc_matrix_diagonal_from_inner_of_basis_dm1_cup_inverse_kappa_dm1_basis_dm1(
+
+void
+mesh_qc_matrix_diagonal_from_inner_of_basis_dm1_and_inverse_kappa_dm1_basis_dm1(
   double * a,
   const mesh * m,
   const double * m_inner_dm1,

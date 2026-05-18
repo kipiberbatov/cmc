@@ -19,7 +19,7 @@ a_{i, j} = - kappa_1[k] <E^k, E^k>.
 */
 
 static void
-mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_cup_kappa_1_delta_basis_0_cols_total(
+mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_and_kappa_1_delta_basis_0_cols_total(
   int * a_cols_total,
   const mesh_qc * m)
 {
@@ -34,7 +34,7 @@ mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_cup_kappa_1_delta_basis_0_cols
 }
 
 static void
-mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_cup_kappa_1_delta_basis_0_row_indices(
+mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_and_kappa_1_delta_basis_0_row_indices(
   int * a_row_indices,
   const mesh_qc * m)
 {
@@ -66,7 +66,7 @@ mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_cup_kappa_1_delta_basis_0_row_
 }
 
 static void
-mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_cup_kappa_1_delta_basis_0_values(
+mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_and_kappa_1_delta_basis_0_values(
   double * a_values,
   const mesh_qc * m,
   const double * m_inner_1,
@@ -100,7 +100,7 @@ mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_cup_kappa_1_delta_basis_0_valu
 }
 
 matrix_sparse *
-mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_cup_kappa_1_delta_basis_0(
+mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_and_kappa_1_delta_basis_0(
   const mesh_qc * m,
   const double * m_inner_1,
   const double * kappa_1)
@@ -130,7 +130,7 @@ mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_cup_kappa_1_delta_basis_0(
       sizeof(int) * (a->cols + 1));
     goto a_free;
   }
-  mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_cup_kappa_1_delta_basis_0_cols_total(
+  mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_and_kappa_1_delta_basis_0_cols_total(
     a->cols_total, m);
 
   nonzero_max = a->cols_total[a->cols];
@@ -144,7 +144,7 @@ mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_cup_kappa_1_delta_basis_0(
       sizeof(int) * nonzero_max);
     goto a_cols_total_free;
   }
-  mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_cup_kappa_1_delta_basis_0_row_indices(
+  mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_and_kappa_1_delta_basis_0_row_indices(
     a->row_indices, m);
 
   a->values = (double *) malloc(sizeof(double) * nonzero_max);
@@ -156,7 +156,7 @@ mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_cup_kappa_1_delta_basis_0(
       sizeof(double) * nonzero_max);
     goto a_row_indices_free;
   }
-  mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_cup_kappa_1_delta_basis_0_values(
+  mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_and_kappa_1_delta_basis_0_values(
     a->values, m, m_inner_1, kappa_1);
 
   return a;

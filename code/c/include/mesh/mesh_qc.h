@@ -127,26 +127,27 @@ void mesh_qc_vector_from_boundary_integral_of_basis_dm1_cup_0_cochain(
   const jagged1 * boundary_dirichlet_dm1,
   const double * g_dirichlet);
 
-void mesh_qc_vector_from_inner_of_basis_d_cochain_with_d_cochain(
+void mesh_qc_vector_from_inner_of_basis_d_cochain_and_d_cochain(
   double * f,
   const mesh_qc * m,
   const double * m_inner_d,
   const double * source);
 
-void mesh_qc_matrix_diagonal_from_inner_of_basis_dm1_cup_inverse_kappa_dm1_basis_dm1(
+void
+mesh_qc_matrix_diagonal_from_inner_of_basis_dm1_and_inverse_kappa_dm1_basis_dm1(
   double * a,
   const mesh_qc * m,
   const double * m_inner_dm1,
   const double * kappa_dm1);
 
-void mesh_qc_matrix_diagonal_from_inner_of_basis_0_cup_pi_0_basis_0(
+void mesh_qc_matrix_diagonal_from_inner_of_basis_0_and_pi_0_basis_0(
   double * a,
   const mesh_qc * m,
   const double * m_inner_0,
   const double * pi_0);
 
 matrix_sparse *
-mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_cup_kappa_1_delta_basis_0(
+mesh_qc_matrix_sparse_from_inner_of_delta_basis_0_and_kappa_1_delta_basis_0(
   const mesh_qc * m,
   const double * m_inner_1,
   const double * kappa_1);
@@ -157,7 +158,7 @@ mesh_qc_matrix_sparse_from_integral_of_basis_0_cup_delta_basis_dm1(
   const matrix_sparse * m_cbd_dm1);
 
 matrix_sparse *
-mesh_qc_matrix_sparse_from_inner_of_basis_d_cup_delta_basis_dm1(
+mesh_qc_matrix_sparse_from_inner_of_basis_d_and_delta_basis_dm1(
   const matrix_sparse * m_bd_d,
   const double * m_inner_d);
 
