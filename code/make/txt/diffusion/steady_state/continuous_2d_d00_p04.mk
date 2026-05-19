@@ -9,6 +9,7 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p04:\
 _txt_diffusion_steady_state_continuous_2d_d00_p04 :=\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p04/exact_brick_2d_5_forman_potential.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p04/exact_brick_2d_5_forman_flow_rate.txt\
+  build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p04/exact_brick_2d_5_forman_test_a_advective.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p04/primal_strong_cochain_brick_2d_5_forman_input.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p04/primal_strong_cochain_brick_2d_5_forman_potential.txt\
   build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p04/primal_strong_cochain_brick_2d_5_forman_flow_rate.txt\
@@ -42,6 +43,19 @@ build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p04/exact_brick_2d_5_
   $(word 2, $|)\
   diffusion_steady_state_continuous_2d_d00_p04_flow_rate\
   --raw > $@
+
+build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p04/exact_brick_2d_5_forman_test_a_advective.txt:\
+  build/$(MODE)/bin/cmc_diffusion_discrete_primal_weak_a_advective$(.EXE)\
+  build/$(MODE)/txt/mesh/brick_2d_5/forman.txt\
+  build/$(MODE)/txt/mesh/brick_2d_5/forman_cbd.txt\
+  build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p04/exact_brick_2d_5_forman_potential.txt\
+  build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p04/exact_brick_2d_5_forman_flow_rate.txt
+	$(INTERPRETER) $<\
+  --mesh=$(word 2, $^)\
+  --coboundary-dm1=$(word 3, $^)\
+  --dual-capacity=$(word 4, $^)\
+  --volumetric-flow-rate=$(word 5, $^)\
+  --output=$@
 
 build/$(MODE)/txt/diffusion/steady_state/continuous_2d_d00_p04/primal_strong_cochain_brick_2d_5_forman_input.txt:\
   build/$(MODE)/bin/diffusion_steady_state_discrete_primal_strong_from_continuous$(.EXE)\

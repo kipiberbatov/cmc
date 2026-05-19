@@ -48,6 +48,7 @@ double * mesh_qc_inner_direct_p(
 );
 
 double ** mesh_qc_inner_direct(const mesh_qc * m);
+
 /************************** mesh_qc_coboundary_star ***************************/
 /* q = p - 1 */
 matrix_sparse * mesh_qc_coboundary_star_p(
@@ -76,6 +77,13 @@ void mesh_qc_hodge_star_d(
   const mesh * m,
   const double * m_vol_d,
   const double * cochain_d);
+
+/*************************** mesh_qc_perpendicular ****************************/
+void mesh_qc_perpendicular_dm1(
+  int * nodes, int * nodes_opposite, int * perpendiculars,
+  const int * cf_1_0_a2,
+  int d_times_power_2_dm1, const int * cf_d_1_k_a1,
+  int power_2_dm1, const int * cf_dm1_0_i_a1);
 
 /******************************************************************************/
 /*                                 miscelaneous                               */

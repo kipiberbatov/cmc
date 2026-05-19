@@ -48,6 +48,8 @@ int int_array_total_sum(int n, const int * a);
 
 int int_array_total_product(int n, const int * a);
 
+int int_array_member_index(int n, const int * a, int element);
+
 int int_array_member(int n, const int * a, int element);
 
 int int_array_flatten_index(int d, const int * dimensions, const int * indices);
